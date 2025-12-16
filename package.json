@@ -1,0 +1,17 @@
+{
+  "name": "nodakmesh-website",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "NodakMesh - North Dakota's community mesh network website",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.16.6",
+    "tailwindcss": "^4.1.18"
+  }
+}

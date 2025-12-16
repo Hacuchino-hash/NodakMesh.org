@@ -1,0 +1,131 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Network Analyzer - NodakMesh">
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16">
+    <!-- Hero -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <a href="/meshcore" class="inline-flex items-center gap-2 text-[--color-accent] hover:underline mb-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              Back to MeshCore
+            </a>
+            <h1 class="text-3xl sm:text-4xl font-bold text-[--color-text-primary]">
+              <span class="gradient-text">Network</span> Analyzer
+            </h1>
+            <p class="text-[--color-text-secondary] mt-2">
+              Live network data from the Fargo region MeshCore network.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Analyzer Cards Section -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Channel Analyzer Card -->
+          <div class="card p-8 text-center">
+            <div class="w-16 h-16 rounded-full bg-[--color-accent]/10 flex items-center justify-center mx-auto mb-5">
+              <svg class="w-8 h-8 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <h2 class="text-xl font-bold text-[--color-text-primary] mb-3">
+              Channel Analyzer
+            </h2>
+            <p class="text-[--color-text-secondary] text-sm mb-6">
+              View active channels, network statistics, and channel activity for the Fargo region.
+            </p>
+            <a
+              href="https://analyzer.letsme.sh/channels?region=FAR"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary inline-flex items-center gap-2"
+            >
+              Open Channels
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Packet Analyzer Card -->
+          <div class="card p-8 text-center">
+            <div class="w-16 h-16 rounded-full bg-[--color-accent]/10 flex items-center justify-center mx-auto mb-5">
+              <svg class="w-8 h-8 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h2 class="text-xl font-bold text-[--color-text-primary] mb-3">
+              Packet Analyzer
+            </h2>
+            <p class="text-[--color-text-secondary] text-sm mb-6">
+              View real-time packet traffic, message activity, and network diagnostics for the Fargo region.
+            </p>
+            <a
+              href="https://analyzer.letsme.sh/packets?region=FAR"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary inline-flex items-center gap-2"
+            >
+              Open Packets
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <p class="text-xs text-[--color-text-muted] text-center mt-6">
+          Powered by <a href="https://analyzer.letsme.sh" target="_blank" class="text-[--color-accent] hover:underline">analyzer.letsme.sh</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="card p-6">
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-3">About the Analyzers</h3>
+            <p class="text-[--color-text-secondary] text-sm">
+              <strong>Channel Analyzer:</strong> View active channels, network statistics, and overall channel activity.<br><br>
+              <strong>Packet Analyzer:</strong> See real-time message traffic, packet flow, and detailed network diagnostics.
+            </p>
+          </div>
+          <div class="card p-6">
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-3">Other Regions</h3>
+            <p class="text-[--color-text-secondary] text-sm mb-4">
+              The analyzer supports multiple regions. Visit the full analyzer to explore
+              data from other MeshCore networks around the world.
+            </p>
+            <a
+              href="https://analyzer.letsme.sh"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[--color-accent] hover:underline text-sm inline-flex items-center gap-1"
+            >
+              Explore all regions
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>

@@ -1,0 +1,180 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const howItWorks = [
+  'Uses LoRa radios (typically 915 MHz in the US, 868 MHz in EU)',
+  'Devices form a self-healing mesh',
+  'Messages hop from node to node until they reach their destination',
+  'Encrypted end-to-end using modern cryptography',
+  'Managed via mobile apps (Android/iOS) or desktop clients',
+];
+
+const useCases = [
+  { title: 'Emergency Communications', description: '。。。' },
+  { title: 'Outdoor Recreation', description: 'Hiking, hunting, off-roading' },
+  { title: 'Rural Messaging', description: 'Remote area connectivity' },
+  { title: 'Community Networks', description: 'Resilience and preparedness' },
+];
+
+const strengths = [
+  'Extremely low power consumption',
+  'Long communication range (miles, line-of-sight)',
+  'Mature ecosystem and active community',
+  'Wide hardware support (Heltec, RAK, LilyGO, etc.)',
+  'Strong encryption and privacy',
+];
+
+const limitations = [
+  'Low bandwidth (text and small data only)',
+  'Not designed for high-speed or real-time data',
+  'Performance depends on node density and terrain',
+];
+---
+
+<Layout title="What is Meshtastic - NoDak Mesh">
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16">
+    <!-- Hero -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-6">
+            What is Meshtastic?
+          </h1>
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview -->
+    <section class="py-12 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h2 class="text-2xl font-bold text-[--color-text-primary] mb-6">Overview</h2>
+          <p class="text-[--color-text-secondary] text-lg leading-relaxed mb-6">
+            Meshtastic is an open-source, decentralized communication system that uses LoRa (Long Range)
+            radio to create off-grid mesh networks. It allows devices to exchange messages, location data,
+            and telemetry without relying on cellular service, Wi-Fi, or the internet.
+          </p>
+          <p class="text-[--color-text-secondary] text-lg leading-relaxed">
+            Meshtastic is designed for resilience. Each node can relay messages for others, allowing the
+            network to grow organically and continue functioning even if individual nodes fail.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h2 class="text-2xl font-bold text-[--color-text-primary] mb-6">How It Works</h2>
+          <ul class="space-y-4">
+            {howItWorks.map((item) => (
+              <li class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span class="text-[--color-text-secondary] text-lg">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Common Use Cases -->
+    <section class="py-12 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h2 class="text-2xl font-bold text-[--color-text-primary] mb-6">Common Use Cases</h2>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="card p-5">
+              <h3 class="font-semibold text-[--color-text-primary] mb-2">Emergency & Disaster Communications</h3>
+              <p class="text-[--color-text-secondary] text-sm">When traditional infrastructure fails</p>
+            </div>
+            <div class="card p-5">
+              <h3 class="font-semibold text-[--color-text-primary] mb-2">Outdoor Recreation</h3>
+              <p class="text-[--color-text-secondary] text-sm">Hiking, hunting, off-roading</p>
+            </div>
+            <div class="card p-5">
+              <h3 class="font-semibold text-[--color-text-primary] mb-2">Rural & Remote Messaging</h3>
+              <p class="text-[--color-text-secondary] text-sm">Areas without cell coverage</p>
+            </div>
+            <div class="card p-5">
+              <h3 class="font-semibold text-[--color-text-primary] mb-2">Community Resilience Networks</h3>
+              <p class="text-[--color-text-secondary] text-sm">Tactical, preparedness, and hobbyist projects</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strengths & Limitations -->
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl">
+          <div class="grid md:grid-cols-2 gap-12">
+            <!-- Strengths -->
+            <div>
+              <h2 class="text-2xl font-bold text-[--color-text-primary] mb-6">Strengths</h2>
+              <ul class="space-y-3">
+                {strengths.map((item) => (
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-[--color-success] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-[--color-text-secondary]">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Limitations -->
+            <div>
+              <h2 class="text-2xl font-bold text-[--color-text-primary] mb-6">Limitations</h2>
+              <ul class="space-y-3">
+                {limitations.map((item) => (
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-[--color-warning] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <span class="text-[--color-text-secondary]">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-12 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-4">
+          Get Started with Meshtastic
+        </h2>
+        <p class="text-[--color-text-secondary] text-lg mb-8 max-w-2xl mx-auto">
+          View the live mesh map to see nodes in North Dakota and around the world,
+          or check out our getting started guide.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/meshtastic/map" class="btn-primary inline-flex items-center gap-2">
+            View Mesh Map
+          </a>
+          <a href="/meshtastic/getting-started" class="btn-secondary inline-flex items-center gap-2">
+            Getting Started
+          </a>
+          <a href="/meshtastic/devices" class="btn-secondary inline-flex items-center gap-2">
+            Recommended Devices
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>

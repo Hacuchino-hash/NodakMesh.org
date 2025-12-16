@@ -1,0 +1,654 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Meshtastic vs MeshCore - NodakMesh">
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16">
+    <!-- Hero -->
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-6">
+            Understanding <span class="gradient-text">Mesh Protocols</span>
+          </h1>
+          <p class="text-xl text-[--color-text-secondary] leading-relaxed">
+            Both Meshtastic and MeshCore enable off-grid communication using LoRa radios.
+            They share the same purpose but take different approaches. NodakMesh supports both.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Summary Cards -->
+    <section class="py-8 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-8 text-center">At a Glance</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Meshtastic Summary -->
+          <div class="card p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 rounded-full bg-[--color-accent]/10 flex items-center justify-center">
+                <svg class="w-6 h-6 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-[--color-text-primary]">Meshtastic</h3>
+            </div>
+            <p class="text-[--color-text-secondary] mb-4">
+              The established choice. Simple, plug-and-play mesh networking where every device can relay messages.
+              Great for beginners, small groups, and ad-hoc situations.
+            </p>
+            <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Established since 2019, large community
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Free, open-source apps (Android/iOS)
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                No setup required - devices auto-connect
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Wide device support and documentation
+              </li>
+            </ul>
+            <div class="mt-6 pt-4 border-t border-[--color-border]">
+              <p class="text-sm text-[--color-text-muted]">
+                <strong class="text-[--color-text-secondary]">Best for:</strong> Beginners, hiking groups, casual use, small networks
+              </p>
+            </div>
+          </div>
+
+          <!-- MeshCore Summary -->
+          <div class="card p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 rounded-full bg-[--color-accent]/10 flex items-center justify-center">
+                <svg class="w-6 h-6 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-[--color-text-primary]">MeshCore</h3>
+            </div>
+            <p class="text-[--color-text-secondary] mb-4">
+              The newer, more efficient option. Uses dedicated repeaters for smarter routing and better scalability.
+              Ideal for larger networks and planned deployments.
+            </p>
+            <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Launched 2025, rapidly evolving
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                More efficient routing, less network chatter
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Supports up to 64 hops (vs 7 for Meshtastic)
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Confirmed message delivery feedback
+              </li>
+            </ul>
+            <div class="mt-6 pt-4 border-t border-[--color-border]">
+              <p class="text-sm text-[--color-text-muted]">
+                <strong class="text-[--color-text-secondary]">Best for:</strong> Large networks, planned deployments, tech enthusiasts
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Comparison Table -->
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-8 text-center">Quick Comparison</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full max-w-4xl mx-auto">
+            <thead>
+              <tr class="border-b border-[--color-border]">
+                <th class="text-left py-4 px-4 text-[--color-text-primary] font-semibold">Feature</th>
+                <th class="text-center py-4 px-4 text-[--color-text-primary] font-semibold">Meshtastic</th>
+                <th class="text-center py-4 px-4 text-[--color-text-primary] font-semibold">MeshCore</th>
+              </tr>
+            </thead>
+            <tbody class="text-[--color-text-secondary]">
+              <tr class="border-b border-[--color-border]">
+                <td class="py-4 px-4">Routing Method</td>
+                <td class="py-4 px-4 text-center">Flood (all nodes relay)</td>
+                <td class="py-4 px-4 text-center">Structured (dedicated repeaters)</td>
+              </tr>
+              <tr class="border-b border-[--color-border]">
+                <td class="py-4 px-4">Max Hops</td>
+                <td class="py-4 px-4 text-center">7</td>
+                <td class="py-4 px-4 text-center">64</td>
+              </tr>
+              <tr class="border-b border-[--color-border]">
+                <td class="py-4 px-4">Setup Complexity</td>
+                <td class="py-4 px-4 text-center">Very Easy</td>
+                <td class="py-4 px-4 text-center">Moderate</td>
+              </tr>
+              <tr class="border-b border-[--color-border]">
+                <td class="py-4 px-4">Mobile App</td>
+                <td class="py-4 px-4 text-center">Free, open-source</td>
+                <td class="py-4 px-4 text-center">~$10 license</td>
+              </tr>
+              <tr class="border-b border-[--color-border]">
+                <td class="py-4 px-4">Community Size</td>
+                <td class="py-4 px-4 text-center">Large</td>
+                <td class="py-4 px-4 text-center">Growing</td>
+              </tr>
+              <tr class="border-b border-[--color-border]">
+                <td class="py-4 px-4">Network Scalability</td>
+                <td class="py-4 px-4 text-center">Good (small-medium)</td>
+                <td class="py-4 px-4 text-center">Excellent (large)</td>
+              </tr>
+              <tr class="border-b border-[--color-border]">
+                <td class="py-4 px-4">Delivery Confirmation</td>
+                <td class="py-4 px-4 text-center">Basic</td>
+                <td class="py-4 px-4 text-center">Detailed</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Meshtastic Deep Dive -->
+    <section id="meshtastic" class="py-12 bg-[--color-bg-secondary]">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-[--color-text-primary] mb-8">
+          Meshtastic: The Details
+        </h2>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">What is Meshtastic?</h3>
+            <p class="text-[--color-text-secondary] mb-4">
+              Meshtastic is an open-source project that uses small, low-cost LoRa radios to create a decentralized,
+              off-grid communication network. It lets you send short text messages and share GPS locations without
+              any cell service or internet. Messages hop directly from device to device over long-range radio, so you
+              can stay in touch during outdoor adventures, emergencies, or anywhere regular networks don't reach.
+            </p>
+            <p class="text-[--color-text-secondary]">
+              Think of it as your own private walkie-talkie text network - free to use once you have the devices,
+              and supported by a friendly community of users and developers worldwide.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">How Meshtastic Works</h3>
+
+            <h4 class="text-lg font-medium text-[--color-text-primary] mb-2">Mesh Networking</h4>
+            <p class="text-[--color-text-secondary] mb-4">
+              Meshtastic devices form a mesh network, meaning each device (or "node") can talk to other nearby nodes
+              and can pass messages along for others. Unlike cell phones that rely on towers, a mesh has no central
+              infrastructure - every node is both a sender and a relay.
+            </p>
+            <p class="text-[--color-text-secondary] mb-4">
+              If you send a message and the recipient is out of your direct radio range, intermediate Meshtastic
+              nodes will automatically forward the message until it reaches its destination. Meshtastic uses a
+              "managed flooding" approach to routing: when a node receives a new message, it rebroadcasts it
+              unless it has already seen that message before. Each message only gets forwarded a limited number
+              of times (a hop limit), so the network doesn't get stuck in an endless loop.
+            </p>
+
+            <h4 class="text-lg font-medium text-[--color-text-primary] mb-2">LoRa Radio Technology</h4>
+            <p class="text-[--color-text-secondary] mb-4">
+              The magic behind Meshtastic's range is LoRa ("Long Range") radio. LoRa is a low-power wireless
+              protocol that operates on license-free radio bands (915 MHz in the US or 868 MHz in Europe).
+              These radios can send data for several kilometers - often 2-5 km in typical conditions, and much
+              farther (tens of kilometers) with line-of-sight and good antennas.
+            </p>
+            <p class="text-[--color-text-secondary] mb-4">
+              LoRa's data rate is very low compared to Wi-Fi or cellular, so Meshtastic is limited to text
+              messages and GPS locations (no photos or big files), and messages have a maximum length of
+              around 200+ characters. This is plenty for short communications like "I'm at the campsite"
+              or emergency signals.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">Hardware</h3>
+            <p class="text-[--color-text-secondary] mb-4">
+              One of the great things about Meshtastic is that it runs on affordable, off-the-shelf hardware.
+              Most Meshtastic nodes use an ESP32 or similar microcontroller paired with a LoRa radio module,
+              plus optionally a GPS receiver. Popular choices include:
+            </p>
+            <ul class="list-disc list-inside text-[--color-text-secondary] mb-4 space-y-1">
+              <li>LILYGO T-Beam (ESP32 with LoRa and built-in GPS)</li>
+              <li>LILYGO T-Echo (nRF52-based with e-ink screen)</li>
+              <li>Heltec WiFi LoRa boards</li>
+              <li>RAK Wireless modules</li>
+            </ul>
+            <p class="text-[--color-text-secondary]">
+              These boards typically cost $30-$50, making it practical to get a few for your group.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">The Meshtastic App</h3>
+            <p class="text-[--color-text-secondary] mb-4">
+              Using Meshtastic is designed to be beginner-friendly. There's a free official Meshtastic companion
+              app for Android and iOS that pairs with your device via Bluetooth or Wi-Fi. Once connected, the
+              app provides a chat interface very similar to a messaging app.
+            </p>
+            <p class="text-[--color-text-secondary] mb-4">
+              The mobile app also shows a map with GPS locations of your team - super useful for hiking or
+              search & rescue, as you can see where all your Meshtastic-equipped friends are on a map.
+            </p>
+            <p class="text-[--color-text-secondary]">
+              Meshtastic supports encryption so your messages aren't readable by others outside your group.
+              You can set your own channel name and encryption key to create a private network. The communications
+              use strong AES encryption.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">Common Use Cases</h3>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="bg-[--color-bg-primary] rounded-lg p-4">
+                <h4 class="font-medium text-[--color-text-primary] mb-2">Emergency Communication</h4>
+                <p class="text-sm text-[--color-text-secondary]">
+                  When disasters strike and cell towers go down, Meshtastic serves as a backup network for
+                  first responders and communities.
+                </p>
+              </div>
+              <div class="bg-[--color-bg-primary] rounded-lg p-4">
+                <h4 class="font-medium text-[--color-text-primary] mb-2">Outdoor Adventures</h4>
+                <p class="text-sm text-[--color-text-secondary]">
+                  Hikers, campers, and skiers can stay in contact over many kilometers of terrain where
+                  there's no cell service.
+                </p>
+              </div>
+              <div class="bg-[--color-bg-primary] rounded-lg p-4">
+                <h4 class="font-medium text-[--color-text-primary] mb-2">Group Events</h4>
+                <p class="text-sm text-[--color-text-secondary]">
+                  At festivals or large gatherings where cellular networks are overloaded, Meshtastic
+                  provides reliable local communication.
+                </p>
+              </div>
+              <div class="bg-[--color-bg-primary] rounded-lg p-4">
+                <h4 class="font-medium text-[--color-text-primary] mb-2">Rural Living</h4>
+                <p class="text-sm text-[--color-text-secondary]">
+                  Neighbors on distant farms can install nodes to create a local messaging network
+                  spanning their area.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">Strengths & Limitations</h3>
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-medium text-[--color-success] mb-2">Strengths</h4>
+                <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-success] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Free and open-source
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-success] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Very user-friendly for beginners
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-success] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Large community and documentation
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-success] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Self-organizing network
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-[--color-warning] mb-2">Limitations</h4>
+                <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-warning] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    Text only (no voice or images)
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-warning] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    Can get congested in very large networks
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-warning] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    Limited to 7 hops maximum
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-warning] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    More network chatter due to flooding
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MeshCore Deep Dive -->
+    <section id="meshcore" class="py-12">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-[--color-text-primary] mb-8">
+          MeshCore: The Details
+        </h2>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">What is MeshCore?</h3>
+            <p class="text-[--color-text-secondary] mb-4">
+              MeshCore is a recent open-source project focused on LoRa mesh networking, launched in early 2025
+              as an alternative to Meshtastic. Like Meshtastic, MeshCore enables off-grid text messaging and
+              data sharing over long-range LoRa radios without any internet or cell towers.
+            </p>
+            <p class="text-[--color-text-secondary]">
+              However, MeshCore takes a different approach: it was designed from scratch to be a lightweight,
+              scalable mesh system with more structured routing and control. The goal is to support larger
+              and more efficient networks by making the mesh itself smarter and more organized, rather than
+              relying on all nodes flooding messages.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">How MeshCore Works</h3>
+
+            <h4 class="text-lg font-medium text-[--color-text-primary] mb-2">Structured Routing</h4>
+            <p class="text-[--color-text-secondary] mb-4">
+              MeshCore does not have every device blindly repeat messages. Instead, it introduces the concept
+              of dedicated repeaters and end devices. A typical MeshCore network has a few infrastructure nodes
+              (repeaters) placed in strategic locations, and the regular user devices (companions) connect
+              through those repeaters. Companion nodes do not rebroadcast every message they hear - they leave
+              that job to the designated repeater nodes.
+            </p>
+            <p class="text-[--color-text-secondary] mb-4">
+              When you send a message on MeshCore, it typically goes from your device to a repeater, then
+              maybe to another repeater, and so on, until it reaches a repeater near the destination, which
+              then delivers it to the recipient's device. Think of the repeaters as a backbone or "postal route"
+              for messages.
+            </p>
+
+            <h4 class="text-lg font-medium text-[--color-text-primary] mb-2">Intelligent Path Learning</h4>
+            <p class="text-[--color-text-secondary] mb-4">
+              MeshCore nodes actually learn routes: the first time a message to a new destination is sent,
+              it may flood minimally to discover a path, and then that path is used for subsequent messages.
+              This makes MeshCore stateful - nodes keep tables of which neighbor leads to which part of
+              the network.
+            </p>
+
+            <h4 class="text-lg font-medium text-[--color-text-primary] mb-2">Reduced Network Traffic</h4>
+            <p class="text-[--color-text-secondary]">
+              By not having every node repeat everything, MeshCore greatly cuts down on background "chatter."
+              A repeater might send an occasional brief advertisement so companions know it's there, but
+              these are infrequent. This lean communication means the radio channel stays clearer for
+              actual messages, leading to faster and more reliable message delivery as the network grows.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">Device Roles</h3>
+            <div class="grid sm:grid-cols-3 gap-4">
+              <div class="bg-[--color-bg-secondary] rounded-lg p-4">
+                <h4 class="font-medium text-[--color-text-primary] mb-2">Companion</h4>
+                <p class="text-sm text-[--color-text-secondary]">
+                  Your personal device that pairs with your phone. Does not relay messages for others.
+                </p>
+              </div>
+              <div class="bg-[--color-bg-secondary] rounded-lg p-4">
+                <h4 class="font-medium text-[--color-text-primary] mb-2">Repeater</h4>
+                <p class="text-sm text-[--color-text-secondary]">
+                  Infrastructure node that forwards traffic. Place these in strategic elevated locations.
+                </p>
+              </div>
+              <div class="bg-[--color-bg-secondary] rounded-lg p-4">
+                <h4 class="font-medium text-[--color-text-primary] mb-2">Room Server</h4>
+                <p class="text-sm text-[--color-text-secondary]">
+                  Stores messages when recipients are offline and forwards them when they return.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">Hardware & Software</h3>
+            <p class="text-[--color-text-secondary] mb-4">
+              MeshCore runs on similar devices as Meshtastic - Heltec WiFi LoRa, RAK Wireless modules,
+              LILYGO T-Beam and T-Echo, the T-Deck, and more. If you have a device that works for
+              Meshtastic, it can likely be flashed with MeshCore firmware too.
+            </p>
+            <p class="text-[--color-text-secondary] mb-4">
+              MeshCore's team provides a web-based Flasher Tool that makes it easy to select your board
+              model and flash the appropriate firmware. The MeshCore firmware itself is open-source
+              (MIT License) and is built as a modular C++ library.
+            </p>
+            <p class="text-[--color-text-secondary]">
+              The MeshCore mobile app (Android/iOS) requires a small one-time purchase (about $10) to
+              unlock all features. The app lets you see network topology, delivery confirmations, and
+              even set specific routes for messages.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">Ideal Use Cases</h3>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="bg-[--color-bg-secondary] rounded-lg p-4">
+                <h4 class="font-medium text-[--color-text-primary] mb-2">Wide-Area Networks</h4>
+                <p class="text-sm text-[--color-text-secondary]">
+                  Covering an entire town or city with LoRa mesh messaging. Set up repeaters on rooftops
+                  and hills to create a backbone.
+                </p>
+              </div>
+              <div class="bg-[--color-bg-secondary] rounded-lg p-4">
+                <h4 class="font-medium text-[--color-text-primary] mb-2">Industrial & IoT</h4>
+                <p class="text-sm text-[--color-text-secondary]">
+                  Connecting lots of sensors on a farm, factory, or large property where efficiency matters.
+                </p>
+              </div>
+              <div class="bg-[--color-bg-secondary] rounded-lg p-4">
+                <h4 class="font-medium text-[--color-text-primary] mb-2">Mission-Critical Comms</h4>
+                <p class="text-sm text-[--color-text-secondary]">
+                  Emergency operations where knowing for sure if a message got through is essential.
+                </p>
+              </div>
+              <div class="bg-[--color-bg-secondary] rounded-lg p-4">
+                <h4 class="font-medium text-[--color-text-primary] mb-2">Tech Enthusiasts</h4>
+                <p class="text-sm text-[--color-text-secondary]">
+                  Those who love to tinker and want more control over network behavior and routing.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">Strengths & Limitations</h3>
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-medium text-[--color-success] mb-2">Strengths</h4>
+                <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-success] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Scales to large networks efficiently
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-success] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Confirmed delivery feedback
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-success] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Up to 64 hops supported
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-success] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Less network chatter, faster delivery
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-[--color-warning] mb-2">Limitations</h4>
+                <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-warning] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    Newer project, smaller community
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-warning] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    Requires planning repeater placement
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-warning] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    App requires paid license (~$10)
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-[--color-warning] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    Less ad-hoc flexibility
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Which Should You Choose -->
+    <section class="py-12 bg-[--color-bg-secondary]">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-[--color-text-primary] mb-8 text-center">
+          Which Should You Choose?
+        </h2>
+
+        <div class="space-y-6">
+          <div class="card p-6">
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-3">Choose Meshtastic if...</h3>
+            <ul class="space-y-2 text-[--color-text-secondary]">
+              <li>• You're new to mesh networking and want the easiest setup</li>
+              <li>• You need quick, ad-hoc communication (hiking, camping, events)</li>
+              <li>• You have a small group (under 20 nodes) in a localized area</li>
+              <li>• You prefer completely free, open-source software</li>
+              <li>• You want access to extensive documentation and community support</li>
+            </ul>
+          </div>
+
+          <div class="card p-6">
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-3">Choose MeshCore if...</h3>
+            <ul class="space-y-2 text-[--color-text-secondary]">
+              <li>• You're building a larger, planned network (town or regional coverage)</li>
+              <li>• You need reliable delivery confirmation for critical messages</li>
+              <li>• You can place dedicated repeater infrastructure</li>
+              <li>• You want more control over network routing and behavior</li>
+              <li>• You enjoy being an early adopter and helping shape new technology</li>
+            </ul>
+          </div>
+
+          <div class="bg-[--color-bg-primary] rounded-xl p-6 border border-[--color-border]">
+            <p class="text-[--color-text-secondary] text-center">
+              <strong class="text-[--color-text-primary]">Good news:</strong> The same hardware works for both!
+              You can flash devices with either firmware and switch between them. Many enthusiasts keep
+              some nodes on Meshtastic and some on MeshCore for different projects.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Important Note -->
+    <section class="py-12">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="card p-6 border-l-4 border-[--color-warning]">
+          <h3 class="text-lg font-semibold text-[--color-text-primary] mb-3">Important: Not Compatible</h3>
+          <p class="text-[--color-text-secondary]">
+            Meshtastic and MeshCore are <strong>not compatible</strong> with each other. A Meshtastic node
+            cannot talk to a MeshCore node directly - they use different protocols and encryption.
+            All participants in a mesh network must use the same system. NodakMesh supports both protocols,
+            but you'll need to choose one for your group or deployment.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-12 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-4">
+          Ready to Get Started?
+        </h2>
+        <p class="text-[--color-text-secondary] text-lg mb-8 max-w-2xl mx-auto">
+          Check out our getting started guides for step-by-step setup instructions.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/meshtastic/getting-started" class="btn-primary inline-flex items-center gap-2">
+            Meshtastic Guide
+          </a>
+          <a href="/meshcore/getting-started" class="btn-primary inline-flex items-center gap-2">
+            MeshCore Guide
+          </a>
+          <a href="/community" class="btn-secondary inline-flex items-center gap-2">
+            Join Our Discord
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>

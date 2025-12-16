@@ -1,0 +1,86 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Meshtastic Devices - NodakMesh">
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16">
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <a href="/meshtastic" class="inline-flex items-center gap-2 text-[--color-secondary] hover:underline mb-4">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Meshtastic
+        </a>
+        <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-6">
+          Meshtastic <span class="text-[--color-secondary]">Devices</span>
+        </h1>
+        <p class="text-xl text-[--color-text-secondary] leading-relaxed max-w-3xl">
+          Meshtastic and MeshCore run on the same hardware. Check out our
+          <a href="/meshcore/devices" class="text-[--color-accent] hover:underline">device recommendations</a>
+          page for detailed hardware information.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="card p-8 text-center">
+          <svg class="w-16 h-16 text-[--color-accent] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+          <h2 class="text-2xl font-bold text-[--color-text-primary] mb-4">Same Hardware, Different Firmware</h2>
+          <p class="text-[--color-text-secondary] mb-6 max-w-2xl mx-auto">
+            The great thing about LoRa mesh devices is that they're firmware-agnostic.
+            You can flash Meshtastic or MeshCore on the same hardware. Our device recommendations
+            apply to both protocols.
+          </p>
+          <a href="/meshcore/devices" class="btn-primary inline-flex items-center gap-2">
+            View Device Recommendations
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-6">Quick Device List</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="card p-4">
+            <h3 class="font-semibold text-[--color-text-primary]">Heltec V3</h3>
+            <p class="text-sm text-[--color-text-secondary]">Budget-friendly starter device</p>
+          </div>
+          <div class="card p-4">
+            <h3 class="font-semibold text-[--color-text-primary]">LilyGo T-Beam</h3>
+            <p class="text-sm text-[--color-text-secondary]">GPS included, great for tracking</p>
+          </div>
+          <div class="card p-4">
+            <h3 class="font-semibold text-[--color-text-primary]">RAK WisBlock</h3>
+            <p class="text-sm text-[--color-text-secondary]">Modular, perfect for solar builds</p>
+          </div>
+          <div class="card p-4">
+            <h3 class="font-semibold text-[--color-text-primary]">Station G2</h3>
+            <p class="text-sm text-[--color-text-secondary]">Premium build quality</p>
+          </div>
+          <div class="card p-4">
+            <h3 class="font-semibold text-[--color-text-primary]">Heltec Tracker</h3>
+            <p class="text-sm text-[--color-text-secondary]">Compact with GPS</p>
+          </div>
+          <div class="card p-4">
+            <h3 class="font-semibold text-[--color-text-primary]">LilyGo T-Echo</h3>
+            <p class="text-sm text-[--color-text-secondary]">E-ink display, best battery life</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>

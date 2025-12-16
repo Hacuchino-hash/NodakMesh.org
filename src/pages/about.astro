@@ -1,0 +1,180 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="About - NodakMesh">
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16">
+    <!-- Hero -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-6">
+            About <span class="gradient-text">NodakMesh</span>
+          </h1>
+          <p class="text-xl text-[--color-text-secondary] leading-relaxed">
+            Building North Dakota's off-grid communication network, one node at a time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="py-16 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-3xl font-bold text-[--color-text-primary] mb-6">
+              Our Mission
+            </h2>
+            <p class="text-[--color-text-secondary] mb-4">
+              NodakMesh is a community-driven initiative to build resilient, off-grid communication
+              infrastructure across North Dakota. In a state known for vast distances and harsh weather,
+              reliable communication is essential.
+            </p>
+            <p class="text-[--color-text-secondary] mb-4">
+              We believe everyone should have access to communication tools that don't depend on
+              cell towers, internet service, or commercial infrastructure. Using LoRa mesh technology,
+              we're creating a network that works when traditional systems fail.
+            </p>
+            <p class="text-[--color-text-secondary]">
+              Whether you're a farmer needing to coordinate across your land, an outdoor enthusiast
+              exploring the Badlands, or someone who values emergency preparedness, NodakMesh is here
+              to help you stay connected.
+            </p>
+          </div>
+          <div class="card p-8">
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-6">What We Do</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-full bg-[--color-accent]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <span class="font-medium text-[--color-text-primary]">Deploy Network Infrastructure</span>
+                  <p class="text-sm text-[--color-text-secondary]">We help establish repeater nodes across ND to extend coverage</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-full bg-[--color-accent]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <span class="font-medium text-[--color-text-primary]">Educate & Support</span>
+                  <p class="text-sm text-[--color-text-secondary]">We provide guides, tools, and community support for newcomers</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-full bg-[--color-accent]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <svg class="w-4 h-4 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <span class="font-medium text-[--color-text-primary]">Build Community</span>
+                  <p class="text-sm text-[--color-text-secondary]">We connect mesh enthusiasts through Discord, meetups, and events</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Mesh -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-[--color-text-primary] mb-12 text-center">
+          Why Mesh Networking in North Dakota?
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="card p-6 text-center">
+            <div class="w-16 h-16 rounded-full bg-[--color-accent]/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">Rural Coverage Gaps</h3>
+            <p class="text-[--color-text-secondary] text-sm">
+              North Dakota ranks among the most rural states. Cell coverage is spotty at best in many areas.
+              Mesh fills the gaps.
+            </p>
+          </div>
+
+          <div class="card p-6 text-center">
+            <div class="w-16 h-16 rounded-full bg-[--color-accent]/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">Extreme Weather</h3>
+            <p class="text-[--color-text-secondary] text-sm">
+              Blizzards, floods, and severe storms can knock out traditional communications.
+              Mesh networks keep working.
+            </p>
+          </div>
+
+          <div class="card p-6 text-center">
+            <div class="w-16 h-16 rounded-full bg-[--color-accent]/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">Zero Monthly Cost</h3>
+            <p class="text-[--color-text-secondary] text-sm">
+              After initial equipment cost, mesh communication is free. No subscriptions, no cell bills,
+              no internet required.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Get Involved -->
+    <section class="py-16 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-[--color-text-primary] mb-4">
+          Get Involved
+        </h2>
+        <p class="text-[--color-text-secondary] text-lg mb-8 max-w-2xl mx-auto">
+          NodakMesh is powered by volunteers and community members. Here's how you can help:
+        </p>
+        <div class="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
+          <div class="card p-6">
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">Run a Node</h3>
+            <p class="text-sm text-[--color-text-secondary]">
+              Set up a node at your location to extend coverage and help the network grow.
+            </p>
+          </div>
+          <div class="card p-6">
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">Host a Repeater</h3>
+            <p class="text-sm text-[--color-text-secondary]">
+              Have a tall building or tower? Host a solar-powered repeater for maximum coverage.
+            </p>
+          </div>
+          <div class="card p-6">
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">Spread the Word</h3>
+            <p class="text-sm text-[--color-text-secondary]">
+              Tell friends, family, and neighbors about mesh networking. More nodes = better network.
+            </p>
+          </div>
+        </div>
+        <a href="/community" class="btn-primary inline-flex items-center gap-2">
+          Join Our Community
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>

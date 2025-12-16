@@ -1,0 +1,306 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const devices = [
+  {
+    name: 'Heltec V3',
+    image: '/images/devices/heltec-v3.png',
+    price: '$20-30',
+    features: ['ESP32-S3 + SX1262', '0.96" OLED display', 'WiFi & Bluetooth', 'Li-Po battery support'],
+    best: 'Best for beginners',
+    link: 'https://heltec.org/project/wifi-lora-32-v3/',
+  },
+  {
+    name: 'Heltec V4',
+    image: '/images/devices/heltec-v4.png',
+    price: '$25-35',
+    features: ['28dBm high power output', 'Built-in 2.4G antenna', 'Protected OLED', 'Solar panel interface'],
+    best: 'Best power output',
+    link: 'https://heltec.org/project/wifi-lora-32-v4/',
+  },
+  {
+    name: 'LilyGo T-Beam',
+    image: '/images/devices/t-beam.jpg',
+    price: '$35-45',
+    features: ['Built-in GPS', '18650 battery holder', 'ESP32 + SX1276/SX1262', 'Expandable design'],
+    best: 'Best for tracking',
+    link: 'https://lilygo.cc/products/t-beam',
+  },
+  {
+    name: 'LilyGo T-Deck',
+    image: '/images/devices/t-deck.jpg',
+    price: '$43-53',
+    features: ['QWERTY keyboard', '2.8" IPS touchscreen', 'Trackball navigation', 'Speaker & microphone'],
+    best: 'Best keyboard device',
+    link: 'https://lilygo.cc/products/t-deck',
+  },
+  {
+    name: 'LilyGo T-Deck Plus',
+    image: '/images/devices/t-deck-plus.jpg',
+    price: '$65-85',
+    features: ['GPS included', '2000mAh battery', 'Full QWERTY keyboard', 'Pre-flashed Meshtastic'],
+    best: 'Best all-in-one',
+    link: 'https://lilygo.cc/products/t-deck-plus-meshtastic',
+  },
+  {
+    name: 'LilyGo T-Pager',
+    image: '/images/devices/t-pager.jpg',
+    price: '$80-90',
+    features: ['Compact pager form factor', '2.33" display', 'QWERTY + scroll wheel', 'GPS, NFC, IMU sensors'],
+    best: 'Best pocket device',
+    link: 'https://lilygo.cc/products/t-lora-pager-meshtastic',
+  },
+  {
+    name: 'LilyGo T-Echo',
+    image: '/images/devices/t-echo.jpg',
+    price: '$50-65',
+    features: ['E-ink display', 'nRF52840 ultra low power', 'GPS included', 'NFC capable'],
+    best: 'Best battery life',
+    link: 'https://lilygo.cc/products/t-echo-meshtastic',
+  },
+  {
+    name: 'Heltec T114',
+    image: '/images/devices/heltec-t114.png',
+    price: '$30-45',
+    features: ['nRF52840 + SX1262', '1.14" TFT display', 'GPS module option', 'Solar panel ready'],
+    best: 'Best low power tracker',
+    link: 'https://heltec.org/project/mesh-node-t114/',
+  },
+  {
+    name: 'Seeed Wio Tracker L1 Pro',
+    image: '/images/devices/wio-tracker.jpg',
+    price: '$50-70',
+    features: ['Rugged enclosed design', 'Built-in battery', 'OLED display', 'GPS included'],
+    best: 'Best rugged option',
+    link: 'https://www.seeedstudio.com/Wio-Tracker-L1-Pro-p-6454.html',
+  },
+  {
+    name: 'RAK WisBlock',
+    image: '/images/devices/rak-wisblock.png',
+    price: '$30-50',
+    features: ['Modular design', 'nRF52840 low power', 'Solar compatible', 'Professional quality'],
+    best: 'Best for repeaters',
+    link: 'https://store.rakwireless.com/products/wisblock-meshtastic-starter-kit',
+  },
+];
+
+const accessories = [
+  {
+    name: '915MHz Antenna',
+    description: 'High-gain antenna for extended range. Essential upgrade from stock antennas.',
+    price: '$10-25',
+  },
+  {
+    name: '18650 Batteries',
+    description: 'Rechargeable lithium batteries. Get quality cells from reputable brands.',
+    price: '$5-15 each',
+  },
+  {
+    name: 'Solar Panel (6W)',
+    description: 'For solar-powered repeater builds. Pair with charge controller.',
+    price: '$15-30',
+  },
+  {
+    name: 'Weatherproof Enclosure',
+    description: 'IP65+ rated case for outdoor installations.',
+    price: '$10-20',
+  },
+];
+---
+
+<Layout title="MeshCore Devices - NodakMesh">
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16">
+    <!-- Hero -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <a href="/meshcore" class="inline-flex items-center gap-2 text-[--color-accent] hover:underline mb-4">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to MeshCore
+          </a>
+          <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-6">
+            Recommended <span class="gradient-text">Devices</span>
+          </h1>
+          <p class="text-xl text-[--color-text-secondary] leading-relaxed">
+            Hardware recommendations for the NodakMesh MeshCore network. All devices use LoRa 915 MHz for US operation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Important Note -->
+    <section class="py-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-[--color-accent]/10 border border-[--color-accent]/20 rounded-lg p-4">
+          <div class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <h3 class="font-semibold text-[--color-text-primary] mb-1">Important: Get the Right Frequency</h3>
+              <p class="text-[--color-text-secondary] text-sm">
+                For North Dakota and the US, make sure to purchase the <strong>915 MHz (US)</strong> version of any device.
+                The 868 MHz (EU) version will not work properly with the NodakMesh network.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Devices Grid -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-8">Devices</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {devices.map((device) => (
+            <div class="card p-6">
+              <div class="flex items-start justify-between mb-4">
+                <div>
+                  <span class="text-xs text-[--color-accent] font-medium">{device.best}</span>
+                  <h3 class="text-xl font-semibold text-[--color-text-primary]">{device.name}</h3>
+                </div>
+                <span class="text-[--color-secondary] font-bold">{device.price}</span>
+              </div>
+
+              <div class="aspect-video bg-[--color-bg-tertiary] rounded-lg mb-4 overflow-hidden">
+                <img
+                  src={device.image}
+                  alt={device.name}
+                  class="w-full h-full object-contain p-2"
+                  loading="lazy"
+                />
+              </div>
+
+              <ul class="text-sm text-[--color-text-secondary] space-y-1 mb-4">
+                {device.features.map((feature) => (
+                  <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[--color-accent] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={device.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block w-full text-center py-2 px-4 bg-[--color-accent]/10 hover:bg-[--color-accent]/20 text-[--color-accent] rounded-lg text-sm font-medium transition-colors"
+              >
+                View Product →
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Accessories -->
+    <section class="py-16 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-8">Recommended Accessories</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {accessories.map((item) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">{item.name}</h3>
+              <p class="text-sm text-[--color-text-secondary] mb-3">{item.description}</p>
+              <span class="text-[--color-accent] font-medium">{item.price}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Buying Tips -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-8">Buying Tips</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="card p-6">
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-4">Where to Buy</h3>
+            <ul class="space-y-3 text-[--color-text-secondary]">
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                <span><strong>Amazon</strong> - Fast shipping, easy returns, but prices may be higher</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                <span><strong>AliExpress</strong> - Best prices, but 2-4 week shipping from China</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                <span><strong>Rokland</strong> - US-based, good selection, mesh-focused</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                <span><strong>Manufacturer Direct</strong> - RAK, LilyGo, Heltec official stores</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card p-6">
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-4">What to Avoid</h3>
+            <ul class="space-y-3 text-[--color-text-secondary]">
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-error] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span>868 MHz (EU) versions - won't work in US</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-error] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span>Unknown brand clones - often poor quality radios</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-error] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span>Devices without SX1262/SX1276 LoRa chips</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-error] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span>Used devices without testing (LoRa chips can degrade)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-[--color-text-secondary] mb-4">
+          Have questions about which device to buy? Ask in our Discord!
+        </p>
+        <a href="/community" class="btn-secondary inline-flex items-center gap-2">
+          Join the Community
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>

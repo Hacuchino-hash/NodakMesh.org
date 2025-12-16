@@ -1,0 +1,387 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const faqs = [
+  {
+    question: "What exactly would be installed on my property?",
+    answer: "A mesh node consists of a small, weatherproof enclosure (typically 4-6 inches) containing a low-power radio, a compact antenna, and usually a small solar panel for power. The entire setup weighs less than 2 pounds and is smaller than a typical bird feeder."
+  },
+  {
+    question: "How is the equipment mounted?",
+    answer: "We use non-invasive mounting methods that don't require drilling or permanent modifications. Common approaches include magnetic mounts, U-bolts on existing poles, hose clamps, or temporary brackets. When we leave, there's no damage to your property."
+  },
+  {
+    question: "Does it need power or internet?",
+    answer: "No external power or internet connection is needed. Nodes are typically solar-powered and completely self-sufficient. The radio communicates directly with other mesh nodes - it doesn't use your WiFi, cell service, or any other infrastructure."
+  },
+  {
+    question: "Will it interfere with my existing electronics?",
+    answer: "No. Mesh nodes operate on the 915 MHz ISM band - a completely different frequency than WiFi, cell phones, TV, radio, or any other common electronics. The power output is extremely low (less than 1 watt), far lower than a typical cell phone. It's FCC-compliant technology that won't interfere with anything."
+  },
+  {
+    question: "Is there any ongoing maintenance required?",
+    answer: "Very little. Solar-powered nodes run autonomously most of the time, but we do perform annual maintenance visits to check equipment, update firmware, and optimize antenna positioning. We'll always coordinate with you before any visits."
+  },
+  {
+    question: "How long would the equipment stay?",
+    answer: "That's entirely up to you. We're flexible and can work with any timeframe - whether that's a few months or many years. If you ever want the equipment removed, we'll take it down promptly with no questions asked and no damage left behind."
+  },
+  {
+    question: "Do I need any permits?",
+    answer: "Typically no. Small antennas under certain heights (usually 12 feet above the roofline) don't require permits in most jurisdictions. However, if you're in an HOA community, we recommend checking your covenants. We're happy to provide documentation to HOAs explaining the project."
+  },
+  {
+    question: "What's in it for me?",
+    answer: "By hosting a node, you become part of North Dakota's emergency communication backbone. In return, you get free access to the mesh network - meaning you and your family can communicate even when cell towers are down during storms, outages, or emergencies. You're also helping your community build resilient infrastructure."
+  },
+  {
+    question: "Who else hosts these nodes?",
+    answer: "Across the country, mesh nodes are hosted by businesses, farms, schools, churches, fire stations, government buildings, and private homes. Anywhere with elevation and a clear view of the horizon is valuable. In North Dakota, grain elevators, water towers, and hilltop properties are especially helpful."
+  }
+];
+---
+
+<Layout title="Partner With Us - NodakMesh">
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16">
+    <!-- Hero Section -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[--color-accent]/10 border border-[--color-accent]/20 mb-4">
+            <span class="text-[--color-accent] text-sm font-medium">Partnership Opportunity</span>
+          </div>
+          <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-6">
+            Help Connect <span class="gradient-text">North Dakota</span>
+          </h1>
+          <p class="text-xl text-[--color-text-secondary] leading-relaxed mb-8">
+            NodakMesh is building a statewide mesh communication network - and we need your help.
+            By hosting a small, solar-powered radio node on your property, you can help provide
+            emergency communication capabilities to communities across the Peace Garden State.
+          </p>
+          <a href="#contact" class="btn-primary inline-flex items-center gap-2">
+            Get In Touch
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Mission -->
+    <section class="py-16 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-3xl font-bold text-[--color-text-primary] mb-6">
+              Our Mission
+            </h2>
+            <p class="text-[--color-text-secondary] mb-6">
+              North Dakota faces unique communication challenges. With vast rural areas, extreme weather,
+              and limited cell coverage in many regions, our communities are vulnerable when traditional
+              infrastructure fails. Winter blizzards, summer storms, and power outages can leave people
+              isolated without any way to call for help.
+            </p>
+            <p class="text-[--color-text-secondary] mb-6">
+              NodakMesh is building a mesh network that works independently of cell towers, internet,
+              and power grids. Using low-cost LoRa radio technology, we're creating a web of interconnected
+              nodes that can relay messages across dozens of miles - ensuring North Dakotans can always
+              communicate, even when everything else goes down.
+            </p>
+            <p class="text-[--color-text-secondary]">
+              <strong class="text-[--color-text-primary]">Our goal: Complete coverage across all 53 counties.</strong>
+              To achieve this, we need strategic node placements on elevated locations throughout the state.
+              That's where you come in.
+            </p>
+          </div>
+          <div class="card p-8">
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-6">Why This Matters</h3>
+            <div class="space-y-4">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-[--color-accent]/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-[--color-text-primary]">Emergency Communication</h4>
+                  <p class="text-sm text-[--color-text-secondary]">When cell towers fail during disasters, mesh networks keep working.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-[--color-accent]/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-[--color-text-primary]">Rural Connectivity</h4>
+                  <p class="text-sm text-[--color-text-secondary]">Extend communication to areas with no cell service.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-[--color-accent]/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-[--color-text-primary]">Community Resilience</h4>
+                  <p class="text-sm text-[--color-text-secondary]">Build infrastructure that belongs to North Dakotans, not corporations.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's Involved -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl font-bold text-[--color-text-primary] mb-4">
+            What Hosting a Node Involves
+          </h2>
+          <p class="text-[--color-text-secondary]">
+            We make it easy to participate. Here's what you can expect as a node host.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+          <div class="card p-6 text-center">
+            <div class="w-16 h-16 rounded-full bg-[--color-accent]/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">Small Equipment</h3>
+            <p class="text-[--color-text-secondary] text-sm">
+              A compact weatherproof box smaller than a shoebox, a lightweight antenna, and a small
+              solar panel. Total weight under 2 pounds.
+            </p>
+          </div>
+
+          <div class="card p-6 text-center">
+            <div class="w-16 h-16 rounded-full bg-[--color-accent]/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">Solar Powered</h3>
+            <p class="text-[--color-text-secondary] text-sm">
+              No electricity needed. The small solar panel keeps the node running indefinitely,
+              even through North Dakota's cloudy winter days.
+            </p>
+          </div>
+
+          <div class="card p-6 text-center">
+            <div class="w-16 h-16 rounded-full bg-[--color-accent]/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">Minimal Maintenance</h3>
+            <p class="text-[--color-text-secondary] text-sm">
+              Nodes run autonomously most of the year. We perform annual check-ups to update
+              firmware and optimize performance, always coordinating with you first.
+            </p>
+          </div>
+        </div>
+
+        <!-- Example Installation Images -->
+        <div class="bg-[--color-bg-secondary] rounded-2xl p-8">
+          <h3 class="text-xl font-semibold text-[--color-text-primary] mb-2 text-center">
+            What Installed Nodes Look Like
+          </h3>
+          <p class="text-center text-[--color-text-secondary] mb-6">
+            Compact, weatherproof, and designed to blend with their surroundings.
+          </p>
+          <div class="grid sm:grid-cols-3 gap-6">
+            <div class="text-center">
+              <div class="bg-[--color-bg-tertiary] rounded-xl p-4 mb-3 overflow-hidden">
+                <img src="/images/installations/wismesh-repeater.webp" alt="RAK WisMesh Repeater professional solar node" class="w-full h-48 object-contain rounded-lg mx-auto" />
+              </div>
+              <p class="text-sm text-[--color-text-secondary]">Professional-grade solar repeater</p>
+            </div>
+            <div class="text-center">
+              <div class="bg-[--color-bg-tertiary] rounded-xl p-4 mb-3 overflow-hidden">
+                <img src="/images/installations/wismesh-mini.webp" alt="RAK WisMesh Mini compact solar node" class="w-full h-48 object-contain rounded-lg mx-auto" />
+              </div>
+              <p class="text-sm text-[--color-text-secondary]">Compact all-in-one solar node</p>
+            </div>
+            <div class="text-center">
+              <div class="bg-[--color-bg-tertiary] rounded-xl p-4 mb-3 overflow-hidden">
+                <img src="/images/installations/node-outdoor.webp" alt="Outdoor mesh node with solar panel installed" class="w-full h-48 object-cover rounded-lg mx-auto" />
+              </div>
+              <p class="text-sm text-[--color-text-secondary]">Deployed outdoor installation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ideal Locations -->
+    <section class="py-16 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl font-bold text-[--color-text-primary] mb-4">
+            Ideal Node Locations
+          </h2>
+          <p class="text-[--color-text-secondary]">
+            The best locations have elevation and clear sightlines. If you can see for miles from your property, it's probably a great spot.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="card p-6">
+            <svg class="w-10 h-10 text-[--color-accent] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">Grain Elevators</h3>
+            <p class="text-[--color-text-secondary] text-sm">
+              Perfect height and often located in areas needing coverage.
+            </p>
+          </div>
+
+          <div class="card p-6">
+            <svg class="w-10 h-10 text-[--color-accent] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+            </svg>
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">Commercial Buildings</h3>
+            <p class="text-[--color-text-secondary] text-sm">
+              Rooftops of stores, offices, and warehouses work great.
+            </p>
+          </div>
+
+          <div class="card p-6">
+            <svg class="w-10 h-10 text-[--color-accent] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">Hilltop Properties</h3>
+            <p class="text-[--color-text-secondary] text-sm">
+              Homes and farms with elevation provide excellent range.
+            </p>
+          </div>
+
+          <div class="card p-6">
+            <svg class="w-10 h-10 text-[--color-accent] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+            </svg>
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">Water Towers</h3>
+            <p class="text-[--color-text-secondary] text-sm">
+              Municipal water towers offer unmatched height and visibility.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-8 p-6 bg-[--color-bg-primary] rounded-xl border border-[--color-border]">
+          <p class="text-[--color-text-secondary] text-center">
+            <span class="text-[--color-text-primary] font-semibold">Don't have an elevated location?</span>
+            Even a standard rooftop or tall pole in a strategic area can be valuable. We'll work with you to determine if your location would benefit the network.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl font-bold text-[--color-text-primary] mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-[--color-text-secondary]">
+            Everything you need to know about hosting a mesh node.
+          </p>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq) => (
+            <div class="card p-6">
+              <h3 class="text-lg font-semibold text-[--color-text-primary] mb-3">
+                {faq.question}
+              </h3>
+              <p class="text-[--color-text-secondary]">
+                {faq.answer}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Current Partners -->
+    <section class="py-16 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+          <h2 class="text-3xl font-bold text-[--color-text-primary] mb-4">
+            Join Growing Networks Nationwide
+          </h2>
+          <p class="text-[--color-text-secondary]">
+            Mesh networks are being built by communities across America. Organizations of all types
+            are participating in this grassroots infrastructure movement.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+          <div class="p-6">
+            <div class="text-4xl font-bold text-[--color-accent] mb-2">Schools</div>
+            <p class="text-[--color-text-secondary] text-sm">Educational institutions providing campus coverage</p>
+          </div>
+          <div class="p-6">
+            <div class="text-4xl font-bold text-[--color-accent] mb-2">Farms</div>
+            <p class="text-[--color-text-secondary] text-sm">Agricultural operations with strategic elevation</p>
+          </div>
+          <div class="p-6">
+            <div class="text-4xl font-bold text-[--color-accent] mb-2">Businesses</div>
+            <p class="text-[--color-text-secondary] text-sm">Companies with rooftop access in key locations</p>
+          </div>
+          <div class="p-6">
+            <div class="text-4xl font-bold text-[--color-accent] mb-2">Churches</div>
+            <p class="text-[--color-text-secondary] text-sm">Places of worship serving their communities</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section id="contact" class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl font-bold text-[--color-text-primary] mb-4">
+            Let's Talk
+          </h2>
+          <p class="text-[--color-text-secondary] text-lg mb-8">
+            Interested in hosting a node or want to learn more? We'd love to hear from you.
+            Reach out and we'll discuss how your property could help connect North Dakota.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="https://discord.gg/JUBrZepkaM" target="_blank" rel="noopener" class="btn-primary inline-flex items-center gap-2">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+              </svg>
+              Join Our Discord
+            </a>
+            <a href="mailto:partner@nodakmesh.org" class="btn-secondary inline-flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Email Us
+            </a>
+          </div>
+          <p class="mt-6 text-sm text-[--color-text-muted]">
+            We respond to all inquiries within 48 hours.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>
