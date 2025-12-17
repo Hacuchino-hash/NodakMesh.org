@@ -1,0 +1,548 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const wikiPages = [
+  { name: 'Home', slug: 'Home' },
+  { name: 'FAQ', slug: 'FAQ' },
+  { name: 'Companion Radio Protocol', slug: 'Companion-Radio-Protocol' },
+  { name: 'Repeater & Room Server CLI', slug: 'Repeater-&-Room-Server-CLI-Reference' },
+  { name: 'Terminal Chat Reference', slug: 'Terminal-Chat-Reference' },
+];
+---
+
+<Layout title="MeshCore Wiki - NodakMesh">
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16 docs-bg">
+
+    <section class="py-8 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+          <div class="flex items-center gap-2 text-[--color-text-muted] text-sm mb-4">
+            <a href="/meshcore/getting-started" class="hover:text-[--color-accent]">MeshCore</a>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <span>Wiki</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-bold text-[--color-text-primary] mb-2">
+            MeshCore <span class="gradient-text">Wiki</span>
+          </h1>
+          <p class="text-[--color-text-secondary]">
+            Official documentation from the MeshCore GitHub wiki, styled for easier reading.
+          </p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex flex-col lg:flex-row gap-8">
+          <!-- Sidebar -->
+          <aside class="lg:w-64 flex-shrink-0">
+            <div class="card p-4 sticky top-24">
+              <h3 class="text-sm font-semibold text-[--color-text-primary] mb-3 uppercase tracking-wider">Pages</h3>
+              <nav class="space-y-1">
+                {wikiPages.map((page) => (
+                  <button
+                    data-page={page.slug}
+                    class="wiki-nav-btn w-full text-left px-3 py-2 rounded-lg text-sm transition-colors text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]"
+                  >
+                    {page.name}
+                  </button>
+                ))}
+              </nav>
+              <div class="mt-4 pt-4 border-t border-[--color-border]">
+                <a
+                  href="https://github.com/meshcore-dev/MeshCore/wiki"
+                  target="_blank"
+                  class="text-xs text-[--color-text-muted] hover:text-[--color-accent] flex items-center gap-1"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  View all on GitHub
+                </a>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Wiki Content -->
+          <main class="flex-1 min-w-0">
+            <div class="card p-6 lg:p-8">
+              <!-- View Original Button -->
+              <div id="view-original" class="hidden mb-4 pb-4 border-b border-[--color-border]">
+                <a
+                  id="original-link"
+                  href="#"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 text-sm text-[--color-text-muted] hover:text-[--color-accent] transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  View original on GitHub
+                </a>
+              </div>
+
+              <!-- Loading State -->
+              <div id="wiki-loading" class="flex items-center justify-center py-12">
+                <div class="flex items-center gap-3 text-[--color-text-muted]">
+                  <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <span>Loading wiki content...</span>
+                </div>
+              </div>
+
+              <!-- Error State -->
+              <div id="wiki-error" class="hidden py-12 text-center">
+                <svg class="w-12 h-12 text-[--color-error] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <p class="text-[--color-text-secondary] mb-2">Failed to load wiki content</p>
+                <p class="text-[--color-text-muted] text-sm mb-4">This page may not be available or the path may have changed.</p>
+                <div class="flex gap-3 justify-center">
+                  <button id="retry-btn" class="btn-secondary">Try Again</button>
+                  <a id="error-original-link" href="#" target="_blank" class="btn-primary">View on GitHub</a>
+                </div>
+              </div>
+
+              <!-- Wiki Content -->
+              <div id="wiki-content" class="wiki-content hidden"></div>
+
+              <!-- Load Time -->
+              <div id="load-time" class="hidden mt-6 pt-4 border-t border-[--color-border] text-xs text-[--color-text-muted]">
+                Loaded in <span id="load-time-value">0</span>ms
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>
+
+<style is:global>
+  /* Docs Background */
+  .docs-bg {
+    background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+  }
+
+  /* Wiki Content Styles */
+  .wiki-content h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .wiki-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .wiki-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .wiki-content h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .wiki-content p {
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+
+  .wiki-content a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .wiki-content a:hover {
+    text-decoration: underline;
+  }
+
+  .wiki-content a.internal-wiki-link {
+    cursor: pointer;
+  }
+
+  .wiki-content ul, .wiki-content ol {
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .wiki-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .wiki-content code {
+    background: var(--color-bg-tertiary);
+    color: var(--color-accent);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-family: 'Monaco', 'Menlo', monospace;
+  }
+
+  .wiki-content pre {
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+  }
+
+  .wiki-content pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--color-text-secondary);
+  }
+
+  .wiki-content blockquote {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .wiki-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+
+  .wiki-content th, .wiki-content td {
+    border: 1px solid var(--color-border);
+    padding: 0.75rem;
+    text-align: left;
+  }
+
+  .wiki-content th {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .wiki-content td {
+    color: var(--color-text-secondary);
+  }
+
+  .wiki-content img {
+    max-width: 100%;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .wiki-content hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 2rem 0;
+  }
+
+  /* Active nav button */
+  .wiki-nav-btn.active {
+    background: var(--color-accent-subtle);
+    color: var(--color-accent);
+  }
+</style>
+
+<script>
+  // Load marked.js from CDN
+  const markedScript = document.createElement('script');
+  markedScript.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+  document.head.appendChild(markedScript);
+
+  const WIKI_BASE = 'https://raw.githubusercontent.com/wiki/meshcore-dev/MeshCore';
+  const DOCS_BASE = 'https://raw.githubusercontent.com/ripplebiz/MeshCore/main/docs';
+  const GITHUB_WIKI_URL = 'https://github.com/meshcore-dev/MeshCore/wiki';
+  let currentPage = 'Home';
+
+  // Known wiki pages for link detection
+  const knownPages = ['Home', 'FAQ', 'Companion-Radio-Protocol', 'Repeater-&-Room-Server-CLI-Reference', 'Terminal-Chat-Reference'];
+
+  const loadingEl = document.getElementById('wiki-loading');
+  const errorEl = document.getElementById('wiki-error');
+  const contentEl = document.getElementById('wiki-content');
+  const loadTimeEl = document.getElementById('load-time');
+  const loadTimeValueEl = document.getElementById('load-time-value');
+  const retryBtn = document.getElementById('retry-btn');
+  const viewOriginalEl = document.getElementById('view-original');
+  const originalLinkEl = document.getElementById('original-link');
+  const errorOriginalLinkEl = document.getElementById('error-original-link');
+
+  // Get GitHub URL for current page
+  function getOriginalUrl(slug: string): string {
+    if (slug === 'FAQ') {
+      return 'https://github.com/ripplebiz/MeshCore/blob/main/docs/faq.md';
+    }
+    return `${GITHUB_WIKI_URL}/${slug}`;
+  }
+
+  function showLoading() {
+    loadingEl?.classList.remove('hidden');
+    errorEl?.classList.add('hidden');
+    contentEl?.classList.add('hidden');
+    loadTimeEl?.classList.add('hidden');
+    viewOriginalEl?.classList.add('hidden');
+  }
+
+  function showError() {
+    loadingEl?.classList.add('hidden');
+    errorEl?.classList.remove('hidden');
+    contentEl?.classList.add('hidden');
+    loadTimeEl?.classList.add('hidden');
+    viewOriginalEl?.classList.add('hidden');
+
+    if (errorOriginalLinkEl) {
+      errorOriginalLinkEl.setAttribute('href', getOriginalUrl(currentPage));
+    }
+  }
+
+  function showContent(html: string, loadTime: number) {
+    loadingEl?.classList.add('hidden');
+    errorEl?.classList.add('hidden');
+    contentEl?.classList.remove('hidden');
+    loadTimeEl?.classList.remove('hidden');
+    viewOriginalEl?.classList.remove('hidden');
+
+    if (contentEl) contentEl.innerHTML = html;
+    if (loadTimeValueEl) loadTimeValueEl.textContent = loadTime.toString();
+    if (originalLinkEl) {
+      originalLinkEl.setAttribute('href', getOriginalUrl(currentPage));
+    }
+
+    // Add click handlers to internal wiki links
+    setupInternalLinks();
+  }
+
+  // Process wiki markdown to convert internal links
+  function processWikiLinks(markdown: string): string {
+    // Handle GitHub wiki [[Page-Name]] syntax
+    markdown = markdown.replace(/\[\[([^\]]+)\]\]/g, (match, pageName) => {
+      // Convert page name to slug format
+      const slug = pageName.replace(/\s+/g, '-');
+      return `<a href="#" class="internal-wiki-link" data-slug="${slug}">${pageName}</a>`;
+    });
+
+    // Handle markdown links to wiki pages [text](Page-Name) - only if it looks like a wiki page
+    markdown = markdown.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, href) => {
+      // Skip external links (http, https, mailto, etc.)
+      if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('/')) {
+        return match;
+      }
+
+      // Handle anchor links within the same page - keep them as regular anchor links
+      if (href.startsWith('#')) {
+        // These are section anchors - let them work normally for scrolling
+        return `<a href="${href}" class="anchor-link">${text}</a>`;
+      }
+
+      // Check if this looks like a wiki page reference (possibly with anchor)
+      const [pagePart, anchorPart] = href.split('#');
+      const slug = pagePart.replace(/\.md$/, '');
+
+      if (slug && (knownPages.includes(slug) || !pagePart.includes('.'))) {
+        // Wiki page link, possibly with anchor
+        const dataAnchor = anchorPart ? ` data-anchor="${anchorPart}"` : '';
+        return `<a href="#" class="internal-wiki-link" data-slug="${slug}"${dataAnchor}>${text}</a>`;
+      }
+
+      return match;
+    });
+
+    // Handle relative links to other wiki pages ../Page-Name or ./Page-Name
+    markdown = markdown.replace(/\[([^\]]+)\]\(\.\.\/?([^)]+)\)/g, (match, text, href) => {
+      if (href.startsWith('http')) return match;
+      const slug = href.replace(/\.md$/, '').replace(/\s+/g, '-');
+      return `<a href="#" class="internal-wiki-link" data-slug="${slug}">${text}</a>`;
+    });
+
+    return markdown;
+  }
+
+  function setupInternalLinks() {
+    // Handle wiki page links
+    document.querySelectorAll('.internal-wiki-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const slug = (link as HTMLElement).getAttribute('data-slug');
+        const anchor = (link as HTMLElement).getAttribute('data-anchor');
+        if (slug) {
+          loadWikiPage(slug, anchor || undefined);
+          // Update URL without navigation
+          const urlHash = anchor ? `${slug}#${anchor}` : slug;
+          window.history.pushState({ slug, anchor }, '', `#${urlHash}`);
+        }
+      });
+    });
+
+    // Handle anchor links (scroll within page)
+    document.querySelectorAll('.anchor-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = (link as HTMLAnchorElement).getAttribute('href');
+        if (href && href.startsWith('#')) {
+          const targetId = href.slice(1);
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Update URL to include anchor
+            window.history.pushState({ slug: currentPage, anchor: targetId }, '', `#${currentPage}#${targetId}`);
+          }
+        }
+      });
+    });
+  }
+
+  // Add IDs to headings for anchor navigation
+  function addHeadingIds(html: string): string {
+    // Add IDs to h1-h6 tags based on their text content
+    return html.replace(/<(h[1-6])>([^<]+)<\/\1>/g, (match, tag, text) => {
+      // Generate ID from heading text (lowercase, replace spaces with hyphens, remove special chars)
+      const id = text
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+      return `<${tag} id="${id}">${text}</${tag}>`;
+    });
+  }
+
+  async function loadWikiPage(slug: string, anchor?: string) {
+    showLoading();
+    currentPage = slug;
+
+    // Update active nav button
+    document.querySelectorAll('.wiki-nav-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-page') === slug);
+    });
+
+    const startTime = performance.now();
+
+    try {
+      // FAQ has moved to the main docs folder
+      let url: string;
+      if (slug === 'FAQ') {
+        url = `${DOCS_BASE}/faq.md`;
+      } else {
+        url = `${WIKI_BASE}/${slug}.md`;
+      }
+
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      let markdown = await response.text();
+
+      // Process wiki links before parsing
+      markdown = processWikiLinks(markdown);
+
+      const loadTime = Math.round(performance.now() - startTime);
+
+      // Wait for marked to load
+      const waitForMarked = () => {
+        return new Promise<void>((resolve) => {
+          const check = () => {
+            if ((window as any).marked) {
+              resolve();
+            } else {
+              setTimeout(check, 50);
+            }
+          };
+          check();
+        });
+      };
+
+      await waitForMarked();
+      let html = (window as any).marked.parse(markdown);
+
+      // Add IDs to headings for anchor navigation
+      html = addHeadingIds(html);
+
+      showContent(html, loadTime);
+
+      // Scroll to anchor if provided, otherwise scroll to top
+      if (anchor) {
+        // Small delay to ensure DOM is updated
+        setTimeout(() => {
+          const targetEl = document.getElementById(anchor);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      } else {
+        contentEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+    } catch (error) {
+      console.error('Failed to load wiki:', error);
+      showError();
+    }
+  }
+
+  // Handle back/forward navigation
+  window.addEventListener('popstate', (e) => {
+    if (e.state?.slug) {
+      loadWikiPage(e.state.slug, e.state.anchor);
+    }
+  });
+
+  // Parse hash to extract page slug and optional anchor
+  function parseHash(hash: string): { slug: string; anchor?: string } {
+    if (!hash) return { slug: 'Home' };
+
+    // Hash format can be: "PageName" or "PageName#anchor"
+    const parts = hash.split('#');
+    return {
+      slug: parts[0] || 'Home',
+      anchor: parts[1]
+    };
+  }
+
+  // Initialize when marked is loaded
+  markedScript.onload = () => {
+    // Check if there's a hash in the URL
+    const hash = window.location.hash.slice(1);
+    const { slug, anchor } = parseHash(hash);
+    loadWikiPage(slug, anchor);
+  };
+
+  // Nav button clicks
+  document.querySelectorAll('.wiki-nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const page = btn.getAttribute('data-page');
+      if (page) {
+        loadWikiPage(page);
+        window.history.pushState({ slug: page }, '', `#${page}`);
+      }
+    });
+  });
+
+  // Retry button
+  retryBtn?.addEventListener('click', () => loadWikiPage(currentPage));
+</script>
