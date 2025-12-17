@@ -122,15 +122,21 @@ import Footer from '../../components/Footer.astro';
 
               <!-- Channel Settings Card -->
               <div class="bg-[--color-bg-tertiary] rounded-lg p-6 mb-6">
-                <h3 class="font-semibold text-[--color-text-primary] mb-4">NoDak-Mesh Channel Settings</h3>
-                <div class="grid sm:grid-cols-2 gap-4 text-sm mb-4">
-                  <div>
-                    <span class="text-[--color-text-muted]">Channel Name:</span>
-                    <span class="text-[--color-text-primary] ml-2 font-mono">NoDak-Mesh</span>
-                  </div>
+                <h3 class="font-semibold text-[--color-text-primary] mb-4">NoDak-Mesh Hashtag Channel</h3>
+                <p class="text-[--color-text-secondary] text-sm mb-4">
+                  Join the official NodakMesh hashtag channel to connect with the community:
+                </p>
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-2xl font-bold text-[--color-accent] font-mono">#nodakmesh</span>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4 text-sm">
                   <div>
                     <span class="text-[--color-text-muted]">Frequency:</span>
                     <span class="text-[--color-text-primary] ml-2 font-mono">910.525 MHz</span>
+                  </div>
+                  <div>
+                    <span class="text-[--color-text-muted]">Band:</span>
+                    <span class="text-[--color-text-primary] ml-2 font-mono">902-928 MHz (USA/Canada)</span>
                   </div>
                   <div>
                     <span class="text-[--color-text-muted]">Bandwidth:</span>
@@ -140,34 +146,6 @@ import Footer from '../../components/Footer.astro';
                     <span class="text-[--color-text-muted]">Spreading Factor:</span>
                     <span class="text-[--color-text-primary] ml-2 font-mono">SF 7</span>
                   </div>
-                  <div>
-                    <span class="text-[--color-text-muted]">Coding Rate:</span>
-                    <span class="text-[--color-text-primary] ml-2 font-mono">CR 5</span>
-                  </div>
-                  <div>
-                    <span class="text-[--color-text-muted]">Band:</span>
-                    <span class="text-[--color-text-primary] ml-2 font-mono">902-928 MHz (USA/Canada)</span>
-                  </div>
-                </div>
-
-                <!-- PSK Section -->
-                <div class="border-t border-[--color-border] pt-4">
-                  <div class="flex flex-col gap-2 mb-2">
-                    <span class="text-[--color-text-muted] text-sm">Channel PSK:</span>
-                    <div class="flex items-center gap-2 flex-wrap">
-                      <code class="bg-[--color-bg-primary] text-[--color-accent] px-3 py-1.5 rounded font-mono text-sm break-all select-all">0df4169bea53bc2013bd80f7ee9d5994</code>
-                      <button
-                        onclick="navigator.clipboard.writeText('0df4169bea53bc2013bd80f7ee9d5994').then(() => { this.innerHTML = '<svg class=\'w-5 h-5 text-green-500\' fill=\'none\' stroke=\'currentColor\' viewBox=\'0 0 24 24\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M5 13l4 4L19 7\'/></svg>'; setTimeout(() => { this.innerHTML = '<svg class=\'w-5 h-5\' fill=\'none\' stroke=\'currentColor\' viewBox=\'0 0 24 24\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z\'/></svg>'; }, 2000); })"
-                        class="p-2 rounded hover:bg-[--color-bg-primary] transition-colors text-[--color-text-muted] hover:text-[--color-accent]"
-                        title="Copy PSK"
-                      >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                  <p class="text-[--color-text-muted] text-xs">Use this PSK (Pre-Shared Key) to join the NoDak-Mesh channel</p>
                 </div>
               </div>
 
@@ -175,22 +153,41 @@ import Footer from '../../components/Footer.astro';
               <div class="bg-[--color-bg-tertiary] rounded-lg p-6 mb-6">
                 <h3 class="font-semibold text-[--color-text-primary] mb-4">Quick Setup with QR Code</h3>
                 <p class="text-[--color-text-secondary] text-sm mb-4">
-                  Scan this QR code with your MeshCore app to import the NoDak-Mesh channel PSK:
+                  Scan this QR code with your MeshCore app to join the #nodakmesh channel:
                 </p>
                 <div class="flex flex-col sm:flex-row items-center gap-6">
                   <div class="bg-white p-4 rounded-lg">
-                    <img src="/images/nodak-mesh-psk-qr.png" alt="NoDak-Mesh PSK QR Code" width="150" height="150" class="block" />
+                    <img src="/images/nodak-mesh-channel-qr.png" alt="NoDak-Mesh Channel QR Code" width="150" height="150" class="block" />
                   </div>
                   <div class="text-sm text-[--color-text-muted]">
                     <p class="mb-2">In the MeshCore app:</p>
                     <ol class="list-decimal list-inside space-y-1">
-                      <li>Open Settings</li>
-                      <li>Tap "Scan QR Code"</li>
-                      <li>Point camera at QR code</li>
-                      <li>Confirm channel settings</li>
+                      <li>Go to the <strong class="text-[--color-text-secondary]">Channels</strong> tab</li>
+                      <li>Tap the <strong class="text-[--color-text-secondary]">three-dot menu</strong> in the upper-right</li>
+                      <li>Select <strong class="text-[--color-text-secondary]">+ Add Channel</strong></li>
+                      <li>Choose <strong class="text-[--color-text-secondary]">Scan a QR Code</strong></li>
+                      <li>Scan the QR code and accept the channel</li>
                     </ol>
                   </div>
                 </div>
+              </div>
+
+              <!-- Manual Add Instructions -->
+              <div class="bg-[--color-bg-tertiary] rounded-lg p-6 mb-6">
+                <h3 class="font-semibold text-[--color-text-primary] mb-4">Join Hashtag Channel Manually</h3>
+                <p class="text-[--color-text-secondary] text-sm mb-4">
+                  If you prefer to add the channel manually:
+                </p>
+                <ol class="list-decimal list-inside space-y-2 text-sm text-[--color-text-muted]">
+                  <li>Open the MeshCore app</li>
+                  <li>Select <strong class="text-[--color-text-secondary]">Add Channel</strong></li>
+                  <li>Choose <strong class="text-[--color-text-secondary]">Join a Hashtag Channel</strong></li>
+                  <li>Enter <code class="bg-[--color-bg-primary] text-[--color-accent] px-2 py-0.5 rounded font-mono">#nodakmesh</code> exactly as shown</li>
+                  <li>Tap <strong class="text-[--color-text-secondary]">Join</strong></li>
+                </ol>
+                <p class="text-[--color-text-muted] text-xs mt-4">
+                  The #nodakmesh channel will be added to your channel list.
+                </p>
               </div>
 
               <a href="/meshcore/map" class="btn-primary inline-flex items-center gap-2">

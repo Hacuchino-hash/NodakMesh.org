@@ -1,6 +1,7 @@
 ---
 const navItems = [
   { name: 'Home', href: '/' },
+  { name: 'Blog', href: '/blog' },
   { name: 'MeshCore vs Meshtastic', href: '/protocols' },
   {
     name: 'MeshCore',
@@ -35,7 +36,19 @@ const currentPath = Astro.url.pathname;
   <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
-      <a href="/" class="flex items-center group">
+      <a href="/" class="flex items-center gap-2 group">
+        <svg class="h-8 w-8 text-[--color-accent]" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Hexagon mesh pattern -->
+          <path d="M16 2L28 9V23L16 30L4 23V9L16 2Z" stroke="currentColor" stroke-width="2" fill="none"/>
+          <path d="M16 2V30M4 9L28 23M28 9L4 23" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="16" cy="2" r="2" fill="currentColor"/>
+          <circle cx="28" cy="9" r="2" fill="currentColor"/>
+          <circle cx="28" cy="23" r="2" fill="currentColor"/>
+          <circle cx="16" cy="30" r="2" fill="currentColor"/>
+          <circle cx="4" cy="23" r="2" fill="currentColor"/>
+          <circle cx="4" cy="9" r="2" fill="currentColor"/>
+          <circle cx="16" cy="16" r="2.5" fill="currentColor"/>
+        </svg>
         <span class="text-xl font-bold text-[--color-text-primary]">NoDak Mesh</span>
       </a>
 

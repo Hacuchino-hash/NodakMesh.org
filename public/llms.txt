@@ -1,0 +1,27 @@
+# NodakMesh
+
+> North Dakota's off-grid mesh networking community. Resources for MeshCore and Meshtastic protocols.
+
+## About
+NodakMesh is a community-driven project building off-grid communication networks across North Dakota using LoRa mesh technology.
+
+## Key Pages
+- [Home](https://nodakmesh.org/)
+- [MeshCore Getting Started](https://nodakmesh.org/meshcore/getting-started)
+- [Meshtastic Getting Started](https://nodakmesh.org/meshtastic/getting-started)
+- [MeshCore vs Meshtastic](https://nodakmesh.org/protocols)
+- [MeshCore Devices](https://nodakmesh.org/meshcore/devices)
+- [Meshtastic Devices](https://nodakmesh.org/meshtastic/devices)
+- [MeshCore Wiki](https://nodakmesh.org/meshcore/wiki)
+- [Meshtastic Docs](https://nodakmesh.org/meshtastic/wiki)
+- [Resources](https://nodakmesh.org/resources)
+- [Community](https://nodakmesh.org/community)
+
+## Topics
+- Mesh networking
+- LoRa radio communication
+- Off-grid communication
+- Emergency preparedness
+- MeshCore protocol
+- Meshtastic protocol
+- North Dakota

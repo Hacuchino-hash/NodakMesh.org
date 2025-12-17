@@ -1,0 +1,77 @@
+---
+import CategoryBadge from './CategoryBadge.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  author: string;
+  category: 'reviews' | 'news' | 'guides' | 'community';
+  slug: string;
+  image?: string;
+  readingTime?: number;
+}
+
+const { title, description, date, author, category, slug, image, readingTime } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric'
+});
+
+// Estimate reading time if not provided (rough estimate)
+const estimatedReadTime = readingTime || 5;
+---
+
+<a href={`/blog/${slug}`} class="card card-shine group block overflow-hidden">
+  <!-- Image or Gradient Placeholder -->
+  <div class="relative h-48 overflow-hidden">
+    {image ? (
+      <img
+        src={image}
+        alt={title}
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+    ) : (
+      <div class="w-full h-full bg-gradient-to-br from-[--color-bg-tertiary] to-[--color-bg-secondary] flex items-center justify-center">
+        <svg class="w-16 h-16 text-[--color-accent]/30" viewBox="0 0 32 32" fill="none">
+          <path d="M16 2L28 9V23L16 30L4 23V9L16 2Z" stroke="currentColor" stroke-width="2" fill="none"/>
+          <path d="M16 2V30M4 9L28 23M28 9L4 23" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="16" cy="16" r="3" fill="currentColor"/>
+        </svg>
+      </div>
+    )}
+    <!-- Category Badge Overlay -->
+    <div class="absolute top-3 left-3">
+      <CategoryBadge category={category} />
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="p-5">
+    <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2 line-clamp-2 group-hover:text-[--color-accent] transition-colors">
+      {title}
+    </h3>
+    <p class="text-sm text-[--color-text-secondary] mb-4 line-clamp-2">
+      {description}
+    </p>
+
+    <!-- Meta -->
+    <div class="flex items-center justify-between text-xs text-[--color-text-muted]">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded-full bg-[--color-accent]/20 flex items-center justify-center">
+          <span class="text-[--color-accent] font-medium text-[10px]">
+            {author.split(' ').map(n => n[0]).join('').slice(0, 2)}
+          </span>
+        </div>
+        <span>{author}</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <time datetime={date.toISOString()}>{formattedDate}</time>
+        <span>·</span>
+        <span>{estimatedReadTime} min</span>
+      </div>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,170 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CategoryBadge from '../../components/blog/CategoryBadge.astro';
+import AuthorInfo from '../../components/blog/AuthorInfo.astro';
+import TableOfContents from '../../components/blog/TableOfContents.astro';
+import PostCard from '../../components/blog/PostCard.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+// Get related posts (same category, excluding current)
+const allPosts = await getCollection('blog');
+const relatedPosts = allPosts
+  .filter(p => p.id !== post.id && p.data.category === post.data.category)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+// Calculate reading time (rough estimate: 200 words per minute)
+const wordCount = post.body?.split(/\s+/).length || 0;
+const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+
+// Article schema data
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": post.data.title,
+  "description": post.data.description,
+  "image": post.data.image ? new URL(post.data.image, Astro.site).href : undefined,
+  "datePublished": post.data.date.toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": post.data.author
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NodakMesh",
+    "url": "https://nodakmesh.org"
+  }
+};
+---
+
+<Layout title={`${post.data.title} | NodakMesh Blog`} description={post.data.description} image={post.data.image}>
+  <Header slot="header" />
+
+  <!-- Article Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  <article class="pt-24 pb-16">
+    <!-- Hero Header -->
+    <header class="py-12 md:py-16 border-b border-[--color-border]">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-sm text-[--color-text-muted] mb-6">
+          <a href="/blog" class="hover:text-[--color-accent] transition-colors">Blog</a>
+          <span>/</span>
+          <a href={`/blog/category/${post.data.category}`} class="hover:text-[--color-accent] transition-colors capitalize">
+            {post.data.category}
+          </a>
+        </nav>
+
+        <div class="mb-4">
+          <CategoryBadge category={post.data.category} size="md" />
+        </div>
+
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[--color-text-primary] mb-6">
+          {post.data.title}
+        </h1>
+
+        <p class="text-xl text-[--color-text-secondary] mb-8">
+          {post.data.description}
+        </p>
+
+        <AuthorInfo
+          author={post.data.author}
+          date={post.data.date}
+          readingTime={readingTime}
+        />
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid lg:grid-cols-[1fr_280px] gap-12">
+        <!-- Main Content -->
+        <div class="prose prose-invert prose-lg max-w-none
+          prose-headings:text-[--color-text-primary] prose-headings:font-bold
+          prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-[--color-border]
+          prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+          prose-p:text-[--color-text-secondary] prose-p:leading-relaxed
+          prose-a:text-[--color-accent] prose-a:no-underline hover:prose-a:underline
+          prose-strong:text-[--color-text-primary]
+          prose-code:text-[--color-accent] prose-code:bg-[--color-bg-tertiary] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
+          prose-pre:bg-[--color-bg-secondary] prose-pre:border prose-pre:border-[--color-border] prose-pre:rounded-lg
+          prose-blockquote:border-l-[--color-accent] prose-blockquote:bg-[--color-bg-tertiary] prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:not-italic
+          prose-img:rounded-lg prose-img:shadow-lg
+          prose-ul:text-[--color-text-secondary] prose-ol:text-[--color-text-secondary]
+          prose-li:marker:text-[--color-accent]
+        ">
+          <Content />
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="hidden lg:block">
+          <TableOfContents headings={headings} />
+        </aside>
+      </div>
+    </div>
+
+    <!-- Tags -->
+    {post.data.tags && post.data.tags.length > 0 && (
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div class="flex flex-wrap gap-2">
+          {post.data.tags.map(tag => (
+            <span class="px-3 py-1 bg-[--color-bg-tertiary] text-[--color-text-secondary] text-sm rounded-full">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Related Posts -->
+    {relatedPosts.length > 0 && (
+      <section class="border-t border-[--color-border] py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-2xl font-bold text-[--color-text-primary] mb-8">Related Posts</h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {relatedPosts.map(relatedPost => (
+              <PostCard
+                title={relatedPost.data.title}
+                description={relatedPost.data.description}
+                date={relatedPost.data.date}
+                author={relatedPost.data.author}
+                category={relatedPost.data.category}
+                slug={relatedPost.id}
+                image={relatedPost.data.image}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Back to Blog -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+      <a
+        href="/blog"
+        class="inline-flex items-center gap-2 text-[--color-text-secondary] hover:text-[--color-accent] transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+        </svg>
+        Back to all posts
+      </a>
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</Layout>

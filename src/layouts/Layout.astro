@@ -4,9 +4,12 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description = "North Dakota's community mesh network using MeshCore and Meshtastic. Connect off-grid across the Peace Garden State." } = Astro.props;
+const { title, description = "North Dakota's community mesh network using MeshCore and Meshtastic. Connect off-grid across the Peace Garden State.", image } = Astro.props;
+const canonicalURL = Astro.url.href;
+const ogImage = image ? new URL(image, Astro.site).href : new URL('/images/og-default.png', Astro.site).href;
 ---
 
 <!doctype html>
@@ -16,12 +19,24 @@ const { title, description = "North Dakota's community mesh network using MeshCo
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="keywords" content="MeshCore, Meshtastic, LoRa, mesh network, North Dakota, off-grid communication, emergency communication" />
+    <meta name="theme-color" content="#16a34a" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://nodakmesh.org" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="NodakMesh" />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -30,6 +45,25 @@ const { title, description = "North Dakota's community mesh network using MeshCo
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "NodakMesh",
+      "url": "https://nodakmesh.org",
+      "description": "North Dakota's community mesh network using MeshCore and Meshtastic. Connect off-grid across the Peace Garden State.",
+      "areaServed": {
+        "@type": "State",
+        "name": "North Dakota",
+        "containedInPlace": {
+          "@type": "Country",
+          "name": "United States"
+        }
+      }
+    }
+    </script>
 
     <title>{title}</title>
   </head>

@@ -1,0 +1,118 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import PostCard from '../../../components/blog/PostCard.astro';
+
+export async function getStaticPaths() {
+  const categories = ['reviews', 'news', 'guides', 'community'] as const;
+  return categories.map(category => ({
+    params: { category },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+
+const categoryInfo = {
+  reviews: {
+    title: 'Reviews',
+    description: 'In-depth reviews of mesh networking devices, comparisons, and recommendations.',
+  },
+  news: {
+    title: 'News',
+    description: 'Latest updates from the mesh networking world, firmware releases, and community announcements.',
+  },
+  guides: {
+    title: 'Guides',
+    description: 'Step-by-step tutorials, setup guides, and how-to articles for Meshtastic and MeshCore.',
+  },
+  community: {
+    title: 'Community',
+    description: 'User stories, network spotlights, and community-driven content from around the world.',
+  },
+};
+
+const info = categoryInfo[category as keyof typeof categoryInfo];
+
+// Get posts for this category
+const allPosts = await getCollection('blog');
+const categoryPosts = allPosts
+  .filter(post => post.data.category === category)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const categories = ['reviews', 'news', 'guides', 'community'] as const;
+---
+
+<Layout title={`${info.title} | NodakMesh Blog`} description={info.description}>
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16">
+    <section class="py-12 md:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+          <h1 class="text-4xl md:text-5xl font-bold text-[--color-text-primary] mb-4">
+            {info.title}
+          </h1>
+          <p class="text-xl text-[--color-text-secondary] max-w-2xl mx-auto">
+            {info.description}
+          </p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12">
+          <a
+            href="/blog"
+            class="px-4 py-2 rounded-full text-sm font-medium border border-[--color-border] text-[--color-text-secondary] hover:border-[--color-accent] hover:text-[--color-accent] transition-all"
+          >
+            All Posts
+          </a>
+          {categories.map(cat => (
+            <a
+              href={`/blog/category/${cat}`}
+              class={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                cat === category
+                  ? 'bg-[--color-accent] text-[--color-bg-primary]'
+                  : 'border border-[--color-border] text-[--color-text-secondary] hover:border-[--color-accent] hover:text-[--color-accent]'
+              }`}
+            >
+              {cat.charAt(0).toUpperCase() + cat.slice(1)}
+            </a>
+          ))}
+        </div>
+
+        <!-- Posts Grid -->
+        {categoryPosts.length > 0 ? (
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {categoryPosts.map(post => (
+              <PostCard
+                title={post.data.title}
+                description={post.data.description}
+                date={post.data.date}
+                author={post.data.author}
+                category={post.data.category}
+                slug={post.id}
+                image={post.data.image}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-16">
+            <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-[--color-bg-tertiary] flex items-center justify-center">
+              <svg class="w-10 h-10 text-[--color-text-muted]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-[--color-text-primary] mb-2">No {info.title.toLowerCase()} yet</h3>
+            <p class="text-[--color-text-secondary] mb-6">Check back soon for new content in this category.</p>
+            <a href="/blog" class="text-[--color-accent] hover:underline">View all posts</a>
+          </div>
+        )}
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>
