@@ -40,12 +40,22 @@ import Footer from '../../components/Footer.astro';
             <div class="flex-1">
               <h2 class="text-2xl font-bold text-[--color-text-primary] mb-4">Get a Compatible Device</h2>
               <p class="text-[--color-text-secondary] mb-4">
-                Meshtastic runs on the same hardware as MeshCore. See our <a href="/meshtastic/devices" class="text-[--color-accent] hover:underline">device recommendations</a>,
-                or check the <a href="https://meshtastic.org/docs/hardware" target="_blank" class="text-[--color-accent] hover:underline">official Meshtastic hardware list</a>.
+                Meshtastic runs on the same hardware as MeshCore. <strong>For US/North Dakota:</strong> Make sure to get the 915 MHz version.
               </p>
-              <p class="text-[--color-text-secondary]">
-                <strong>For US/North Dakota:</strong> Make sure to get the 915 MHz version.
-              </p>
+              <div class="flex flex-wrap gap-3">
+                <a href="/meshtastic/devices" class="btn-secondary inline-flex items-center gap-2">
+                  View device recommendations
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+                <a href="https://meshtastic.org/docs/hardware" target="_blank" class="btn-secondary inline-flex items-center gap-2">
+                  Official hardware list
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
         </div>
