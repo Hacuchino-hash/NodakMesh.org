@@ -1,7 +1,7 @@
 ---
 title: "Repurposing a Harbor Breeze Solar Light into a Solar-Powered RAK WisBlock Mesh Node"
 description: "Transform a $10 Harbor Breeze solar garden light into a weatherproof, self-sustaining LoRa mesh node using RAK WisBlock components."
-date: 2024-12-18
+date: 2025-12-18
 author: "NodakMesh Team"
 category: "guides"
 tags: ["solar", "rak-wisblock", "outdoor", "weatherproofing", "harbor-breeze", "diy", "meshtastic"]
