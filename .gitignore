@@ -47,3 +47,6 @@ ehthumbs.db
 *.bak
 *.tmp
 *.temp
+
+# personal files
+email-signature.html

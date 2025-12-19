@@ -10,7 +10,7 @@ const { title, description, icon, href } = Astro.props;
 const Tag = href ? 'a' : 'div';
 ---
 
-<Tag href={href} class="card card-shine p-6 block group">
+<Tag href={href} class="card card-shine p-6 block group h-full">
   <div class="w-12 h-12 rounded-lg bg-[--color-accent]/10 flex items-center justify-center mb-4 group-hover:bg-[--color-accent]/20 transition-colors icon-glow">
     <Fragment set:html={icon} />
   </div>
