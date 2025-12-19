@@ -92,7 +92,7 @@ We also flashed MeshCore onto the same hardware. The transition was seamless, an
 
 Power performance has been outstanding.
 
-Using four 18650 cells and a 5.5 W solar panel, the base station ran through an entire North Dakota winter with virtually no power concerns. Despite extended overcast conditions and temperatures down to **-17°F**, battery charge never dropped below ~95%.
+Using four 18650 cells and a 5.5 W solar panel, the base station has performed flawlessly through this North Dakota winter so far with virtually no power concerns. Despite extended overcast conditions and temperatures down to **-17°F**, battery charge never dropped below ~95%.
 
 The combination of extremely low power draw from the RAK19003 module and steady solar input made power management a non-issue. Once installed, we didn't need to touch it.
 
