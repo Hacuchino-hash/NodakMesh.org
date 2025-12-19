@@ -1,6 +1,6 @@
 ---
-title: "Yeti Wurks Meshtastic Base Station Review: A Rock-Solid Solar Mesh Node"
-description: "An in-depth review of the Yeti Wurks Meshtastic Base Station after months of real-world winter deployment in North Dakota, testing both Meshtastic and MeshCore firmware."
+title: "Yeti Wurks Meshtastic Base Station Review — Real-World Solar Mesh Performance"
+description: "Hands-on review of the Yeti Wurks Meshtastic Base Station, covering solar power, deployment, build quality, and real-world mesh performance in off-grid conditions."
 date: 2025-12-19
 author: "Josh"
 category: "reviews"
