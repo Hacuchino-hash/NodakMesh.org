@@ -17,7 +17,20 @@ From its real-world range to its rugged construction and hands-off solar operati
 
 ## Overview and Key Features
 
-The Yeti Wurks Meshtastic Base Station is a compact, long-range mesh repeater built around a RAKwireless LoRa module, housed in a durable outdoor-rated enclosure.
+The Yeti Wurks Meshtastic Base Station is a compact, long-range mesh repeater built around a RAK19003 LoRa module, housed in a durable outdoor-rated enclosure.
+
+### Quick Reference
+
+| Specification | Details |
+|---------------|---------|
+| Radio Module | RAK19003 |
+| Frequency | US915 MHz (EU868 configurable) |
+| Antenna | 3 dBi N-type dipole |
+| Power Input | USB-C or 5–24V DC (5.5×2.1mm jack) |
+| Solar Panel | 5.5W (included) |
+| Battery | Up to 4× 18650 cells (not included) |
+| Enclosure | IP65-rated, ~4″ × 6″ × 2.75″ |
+| Firmware | Meshtastic (preloaded), MeshCore compatible |
 
 ![Yeti Wurks enclosure closed](/images/blog/yeti-wurks-base-station/enclosure-closed.png)
 
@@ -37,7 +50,7 @@ The Yeti Wurks Meshtastic Base Station is a compact, long-range mesh repeater bu
 
 - USB-C or external solar input (5–24V via 5.5×2.1 mm DC jack)
 - Designed for continuous off-grid operation
-- 5.5 watt Solar panel
+- 5.5W solar panel (included)
 
 **Battery Backup**
 
@@ -81,7 +94,7 @@ Power performance has been outstanding.
 
 Using four 18650 cells and a 5.5 W solar panel, the base station ran through an entire North Dakota winter with virtually no power concerns. Despite extended overcast conditions and temperatures down to **-17°F**, battery charge never dropped below ~95%.
 
-The combination of extremely low power draw from the RAK LoRa module and steady solar input made power management a non-issue. Once installed, we didn't need to touch it.
+The combination of extremely low power draw from the RAK19003 module and steady solar input made power management a non-issue. Once installed, we didn't need to touch it.
 
 ![Yeti Wurks internals close-up](/images/blog/yeti-wurks-base-station/internals.jpg)
 
