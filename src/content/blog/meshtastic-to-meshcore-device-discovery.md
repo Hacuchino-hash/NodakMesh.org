@@ -12,7 +12,9 @@ When transitioning from Meshtastic to MeshCore (or starting fresh with MeshCore)
 
 Meshtastic is an open-source, off-grid mesh network for LoRa radios, known for its easy setup and community-driven approach. Any Meshtastic device on the same channel (frequency and encryption key) can relay messages to extend range, and they periodically broadcast telemetry (location, battery, etc.) to announce themselves. In contrast, MeshCore is a newer LoRa mesh system focused on efficiency and scalability, using fewer background broadcasts to preserve bandwidth. MeshCore relies on dedicated repeaters for relaying messages, while most user devices (called companions) do not automatically forward others' messages.
 
-**Key difference in philosophy:** Meshtastic assumes "everybody is a repeater" by default, which helps spontaneous ad-hoc networks but can lead to lots of network chatter in dense areas. MeshCore assumes a more structured network where only dedicated repeaters rebroadcast messages, making the network quieter and faster under load. This difference greatly impacts how each system finds and displays other devices on the mesh.
+**Key difference in philosophy:** Meshtastic assumes "everybody is a repeater" by default, which helps spontaneous ad-hoc networks but can lead to lots of network chatter in dense areas. MeshCore assumes a more structured network where only dedicated repeaters rebroadcast messages by default, making the network quieter and faster under load. This difference greatly impacts how each system finds and displays other devices on the mesh.
+
+**Important note:** Meshtastic and MeshCore are **not compatible** with each other. They use different mesh protocols and cannot communicate directly. A Meshtastic device will not see MeshCore nodes, and vice versa. If you want to bridge the two networks, you'd need an external tool like the Akita Meshtastic–MeshCore Bridge. For most users, you'll need to pick one system or run separate devices for each.
 
 ## How Meshtastic Devices Find Each Other
 
@@ -20,7 +22,7 @@ Meshtastic devices automatically discover each other through periodic broadcasts
 
 **Periodic Telemetry:** By default, Meshtastic radios broadcast status data (battery, position, etc.) at set intervals (e.g. location every ~15 minutes, node info every few hours). As meshes grow, the firmware may slow these intervals to reduce congestion.
 
-**Managed Flood Routing:** Every node can forward messages for others. This flood-style routing means even non-dedicated nodes will rebroadcast certain packets, helping spread device announcements further.
+**Managed Flood Routing:** By default, every node can forward messages for others. Modern Meshtastic versions use a managed flood approach with next-hop routing for direct messages, but the general behavior is that non-dedicated nodes will still rebroadcast certain packets, helping spread device announcements further.
 
 **Channels and Keys:** Meshtastic uses channels (with an encryption key or URL). Only devices on the same channel/key will hear each other's announcements. Many public Meshtastic users stick to the default "LongFast" channel, which serves as an open network in some areas. If you join that default channel and others in your area are on it, you might start seeing their nodes populate your app's list after a while.
 
@@ -34,7 +36,7 @@ Ensure your device region and radio preset match what others use in your area (e
 
 ## How MeshCore's Device Discovery Differs
 
-MeshCore approaches discovery very differently. Its philosophy of minimal network chatter means that devices do not automatically broadcast their presence as frequently as Meshtastic nodes do. In MeshCore, a regular end-user device (Companion firmware) will not periodically flood the network with telemetry or node info. Instead, only repeaters (infrastructure nodes) might send out occasional adverts (announcements), and even those are infrequent by default. In fact, a MeshCore repeater's default setting is to advertise its presence only once every 240 minutes (4 hours). This interval can be configured, but the out-of-the-box behavior is to keep the airwaves mostly quiet to preserve capacity for actual messaging.
+MeshCore approaches discovery very differently. Its philosophy of minimal network chatter means that devices do not automatically broadcast their presence as frequently as Meshtastic nodes do. In MeshCore, a regular end-user device (Companion firmware) will not periodically flood the network with telemetry or node info. Instead, only repeaters (infrastructure nodes) might send out occasional adverts (announcements), and even those are infrequent by default. In fact, a MeshCore repeater's default setting is to advertise its presence only once every few hours (often around 4 hours, though this can vary). This interval can be configured, but the out-of-the-box behavior is to keep the airwaves mostly quiet to preserve capacity for actual messaging.
 
 For a user with a MeshCore handheld or paired device, the lack of automatic chatter means you won't see a list of nearby nodes pop up quickly (or at all) unless some specific action occurs. The MeshCore mobile app (or web app) typically has a Contacts or Discover screen where other nodes would appear – but initially this will be empty. In fact, the MeshCore app will explicitly show "No contacts" until discovery happens.
 
@@ -47,7 +49,7 @@ Here are the key differences in MeshCore's discovery:
 
 **"Advertise" vs Automatic:** MeshCore uses an Advert mechanism to share device identity. An advert is essentially a broadcast of your node's info (like a public key or address) to others on the network. Meshtastic's equivalent would be the periodic node info packet. However, MeshCore does not send these adverts on a short timer by default. Often, the user must manually trigger an advert from the app to announce their device (or wait many hours for a repeater's periodic advert).
 
-**No Flooding from Clients:** Regular MeshCore devices (companions) do not forward each other's packets or adverts. Only dedicated MeshCore repeaters rebroadcast across the mesh. This means if your companion device hears another companion's advert, it won't propagate it further. Discovery is mostly direct within radio range, unless a repeater extends the range. (By contrast, in Meshtastic even client nodes will rebroadcast certain discovery packets, helping news of a node travel farther by flood.)
+**No Flooding from Clients (by default):** Regular MeshCore devices (companions) do not forward each other's packets or adverts by default. Only dedicated MeshCore repeaters rebroadcast across the mesh. This means if your companion device hears another companion's advert, it won't propagate it further. Discovery is mostly direct within radio range, unless a repeater extends the range. (By contrast, in Meshtastic even client nodes will rebroadcast certain discovery packets, helping news of a node travel farther by flood.)
 
 **Public Channel vs Direct Peering:** MeshCore has the concept of a public "All" channel for general broadcasts (similar to Meshtastic's default channel, but unencrypted). Out of the box, your MeshCore device can send and receive public messages to any others using the same frequency preset. However, seeing someone on the contacts list (for direct messaging) usually requires exchanging contact info via adverts – essentially a handshake.
 
@@ -63,7 +65,7 @@ It's common for new MeshCore users (especially those coming from Meshtastic) to 
 
 **Rare Adverts:** Other MeshCore users in range might be out there, but if neither you nor they have sent an advert or message, both sides remain invisible. Unlike Meshtastic, turning on a MeshCore radio does not immediately broadcast a presence beacon that guarantees others will notice you. (MeshCore might do a very brief initial advert, but it's easy to miss if timing doesn't line up.)
 
-**Patience Required:** MeshCore repeaters by default advertise only every 4 hours. If the only nearby node is a repeater on that schedule, you could literally wait hours before it announces itself to your device. Likewise, a neighbor's companion device might not send anything unless they actively use it. Essentially, idle MeshCore nodes stay quiet for long stretches.
+**Patience Required:** MeshCore repeaters by default advertise only every few hours. If the only nearby node is a repeater on that schedule, you could literally wait hours before it announces itself to your device. Likewise, a neighbor's companion device might not send anything unless they actively use it. Essentially, idle MeshCore nodes stay quiet for long stretches.
 
 **No Automatic Handshake:** In Meshtastic, if you send a message on the default channel, any node that hears it will at least log your node info (and you'll appear in their node list eventually). In MeshCore, sending a message on the public channel does not automatically exchange identity keys. You might see the message go through if someone receives it, but they still won't appear as a named contact for direct chat without the advert exchange. This can lead to confusion where you know someone else is out there (e.g., they replied on public), yet they're not in your contacts list.
 
