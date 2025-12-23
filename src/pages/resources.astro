@@ -2,10 +2,73 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+// FAQ Schema for SEO
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What's the difference between MeshCore and Meshtastic?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both are mesh networking protocols that run on the same LoRa hardware, but they use different communication protocols and cannot talk to each other. Meshtastic has a larger global community and wider device support, while MeshCore offers improved routing efficiency. NodakMesh supports both protocols equally."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a ham radio license for LoRa mesh networking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No license is required for the standard ISM band frequencies (915 MHz in the US). However, if you want to use higher power levels or certain frequencies, a ham license may be required. Check FCC Part 97 regulations for details."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What range can I expect from a LoRa mesh node?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Range varies greatly based on terrain, antenna, and height. In flat North Dakota terrain, expect 2-10 miles with stock antennas and line-of-sight. With elevated antennas and good equipment, 20+ miles is achievable. The mesh network extends range by hopping through intermediate nodes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does it cost to get started with mesh networking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A basic device like the Heltec V3 costs around $20-30. Better devices with GPS range from $35-100. You may also want a better antenna ($10-25) and battery. Total startup cost is typically $30-100 depending on your needs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use mesh networking for emergency communications?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Mesh networks are excellent for emergency communications because they don't rely on cell towers or internet. They work during power outages, storms, and other emergencies. However, they should supplement (not replace) official emergency communication systems."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is mesh network communication private and encrypted?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Messages are encrypted with AES-256 when using a PSK (Pre-Shared Key). However, the default public channels use a well-known key, so anyone can read them. For private communication, generate a unique PSK for your group using MeshCore's configuration tools."
+      }
+    }
+  ]
+};
 ---
 
-<Layout title="Resources - NodakMesh">
+<Layout
+  title="Resources - NodakMesh"
+  description="Helpful links, documentation, tools, and FAQ for LoRa mesh networking with MeshCore and Meshtastic."
+  keywords="mesh network resources, Meshtastic tools, MeshCore documentation, LoRa FAQ, mesh networking help, off-grid communication tools, RF planning"
+>
   <Header slot="header" />
+
+  <!-- FAQ Schema -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
   <div class="pt-24 pb-16">
     <!-- Hero -->

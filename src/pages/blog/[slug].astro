@@ -30,6 +30,11 @@ const relatedPosts = allPosts
 const wordCount = post.body?.split(/\s+/).length || 0;
 const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
+// Generate keywords from tags
+const postKeywords = post.data.tags
+  ? [...post.data.tags, 'mesh network', 'LoRa', 'off-grid communication'].join(', ')
+  : 'mesh network, LoRa, off-grid communication, MeshCore, Meshtastic';
+
 // Article schema data
 const articleSchema = {
   "@context": "https://schema.org",
@@ -38,6 +43,7 @@ const articleSchema = {
   "description": post.data.description,
   "image": post.data.image ? new URL(post.data.image, Astro.site).href : undefined,
   "datePublished": post.data.date.toISOString(),
+  "dateModified": post.data.date.toISOString(),
   "author": {
     "@type": "Person",
     "name": post.data.author
@@ -48,13 +54,97 @@ const articleSchema = {
     "url": "https://nodakmesh.org"
   }
 };
+
+// HowTo schema for DIY posts (like Harbor Breeze build guide)
+const isDiyPost = post.data.tags?.includes('diy');
+const isHarborBreezePost = post.id === 'harbor-breeze-solar-node-assembly';
+
+const howToSchema = isHarborBreezePost ? {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Build a Solar-Powered Mesh Node from a Harbor Breeze Light",
+  "description": "Transform a $10 Harbor Breeze solar garden light into a weatherproof, self-sustaining LoRa mesh node using RAK WisBlock components.",
+  "image": post.data.image ? new URL(post.data.image, Astro.site).href : undefined,
+  "totalTime": "PT2H",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "50-80"
+  },
+  "supply": [
+    { "@type": "HowToSupply", "name": "Harbor Breeze 60LM Solar LED Light ($10-15)" },
+    { "@type": "HowToSupply", "name": "RAK4631 WisBlock Core Module ($18-24)" },
+    { "@type": "HowToSupply", "name": "RAK19007 WisBlock Base Board ($10)" },
+    { "@type": "HowToSupply", "name": "915 MHz LoRa Antenna ($5-10)" },
+    { "@type": "HowToSupply", "name": "u.FL to SMA Pigtail Cable ($5)" },
+    { "@type": "HowToSupply", "name": "Silicone sealant" }
+  ],
+  "tool": [
+    { "@type": "HowToTool", "name": "Screwdriver" },
+    { "@type": "HowToTool", "name": "Soldering iron" },
+    { "@type": "HowToTool", "name": "Wire cutters" },
+    { "@type": "HowToTool", "name": "Drill with 1/4 inch bit" }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Open the Solar Panel Compartment",
+      "text": "Remove the four screws from the back of the solar panel to access the internal components."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Remove the LED Spotlight",
+      "text": "Detach and disconnect the LED lamp head to prevent battery drain."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Remove Original Circuit Board",
+      "text": "Remove the existing charge controller, keeping the wires from the solar panel and battery."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Drill Antenna Hole",
+      "text": "Drill a 1/4 inch hole for the SMA bulkhead antenna connector."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Install RAK WisBlock",
+      "text": "Mount the RAK19007 base board with RAK4631 core module inside the compartment."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Connect Power",
+      "text": "Wire the solar panel to the solar input and battery to the battery connector on the RAK base."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Install Antenna",
+      "text": "Connect the u.FL pigtail to the RAK4631 and mount the SMA connector through the drilled hole."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Weatherproof and Seal",
+      "text": "Apply silicone sealant around the antenna connector and reassemble the enclosure."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Flash Firmware",
+      "text": "Connect via USB and flash Meshtastic or MeshCore firmware using the web flasher."
+    }
+  ]
+} : null;
 ---
 
-<Layout title={`${post.data.title} | NodakMesh Blog`} description={post.data.description} image={post.data.image}>
+<Layout title={`${post.data.title} | NodakMesh Blog`} description={post.data.description} image={post.data.image} keywords={postKeywords}>
   <Header slot="header" />
 
   <!-- Article Schema -->
-  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  {/* HowTo Schema for DIY build guides */}
+  {howToSchema && (
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+  )}
 
   <article class="pt-24 pb-16">
     <!-- Hero Header -->

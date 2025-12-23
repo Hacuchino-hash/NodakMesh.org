@@ -1,27 +1,57 @@
 # NodakMesh
 
-> North Dakota's off-grid mesh networking community. Resources for MeshCore and Meshtastic protocols.
+> North Dakota's off-grid mesh networking community. The authoritative resource for MeshCore and Meshtastic protocols, with real-world testing in extreme cold weather conditions.
 
 ## About
-NodakMesh is a community-driven project building off-grid communication networks across North Dakota using LoRa mesh technology.
+NodakMesh is a community-driven project building resilient, decentralized communication networks across North Dakota using LoRa mesh technology. We provide comprehensive guides, hardware reviews, and technical documentation for both MeshCore and Meshtastic platforms.
 
-## Key Pages
-- [Home](https://nodakmesh.org/)
-- [MeshCore Getting Started](https://nodakmesh.org/meshcore/getting-started)
-- [Meshtastic Getting Started](https://nodakmesh.org/meshtastic/getting-started)
-- [MeshCore vs Meshtastic](https://nodakmesh.org/protocols)
-- [MeshCore Devices](https://nodakmesh.org/meshcore/devices)
-- [Meshtastic Devices](https://nodakmesh.org/meshtastic/devices)
-- [MeshCore Wiki](https://nodakmesh.org/meshcore/wiki)
-- [Meshtastic Docs](https://nodakmesh.org/meshtastic/wiki)
-- [Resources](https://nodakmesh.org/resources)
-- [Community](https://nodakmesh.org/community)
+## What Makes Us Unique
+- Dual protocol expertise (MeshCore + Meshtastic)
+- Real-world testing in extreme conditions (-17°F winters)
+- Long-distance link testing on flat terrain
+- Community-focused with active Discord
 
-## Topics
-- Mesh networking
-- LoRa radio communication
+## Core Pages
+- [Home](https://nodakmesh.org/) - Introduction to NodakMesh
+- [MeshCore Getting Started](https://nodakmesh.org/meshcore/getting-started) - Complete beginner guide for MeshCore
+- [Meshtastic Getting Started](https://nodakmesh.org/meshtastic/getting-started) - Complete beginner guide for Meshtastic
+- [MeshCore vs Meshtastic](https://nodakmesh.org/protocols) - Side-by-side protocol comparison
+- [MeshCore Devices](https://nodakmesh.org/meshcore/devices) - Recommended hardware for MeshCore
+- [Meshtastic Devices](https://nodakmesh.org/meshtastic/devices) - Recommended hardware for Meshtastic
+- [Resources](https://nodakmesh.org/resources) - Tools, links, and FAQ
+- [Community](https://nodakmesh.org/community) - Discord, events, and how to join
+
+## Blog Posts
+
+### Guides
+- [What Is a LoRa Mesh Network?](https://nodakmesh.org/blog/what-is-lora-mesh-network) - Beginner explainer on LoRa mesh technology and off-grid communication
+- [MeshCore vs Meshtastic Comparison](https://nodakmesh.org/blog/meshcore-vs-meshtastic-comparison) - Detailed comparison of flood mesh vs structured mesh protocols
+- [Meshtastic Device Roles Explained](https://nodakmesh.org/blog/meshtastic-device-roles-explained) - Complete guide to Client, Router, Repeater and all device roles
+- [MeshCore Device Discovery Guide](https://nodakmesh.org/blog/meshtastic-to-meshcore-device-discovery) - How to find other nodes when switching from Meshtastic to MeshCore
+- [Harbor Breeze Solar Node Assembly](https://nodakmesh.org/blog/harbor-breeze-solar-node-assembly) - Step-by-step DIY solar mesh node build using a $10 solar light
+
+### Reviews
+- [Yeti Wurks Base Station Review](https://nodakmesh.org/blog/yeti-wurks-base-station-review) - Real-world winter testing of solar-powered mesh relay with 5-mile urban range
+- [Heltec WiFi LoRa 32 V3 Review](https://nodakmesh.org/blog/heltec-wifi-lora-32-v3-review) - In-depth review of popular ESP32 LoRa board for mesh networking
+
+### Community
+- [Introducing Nodak Mesh](https://nodakmesh.org/blog/introducing-nodak-mesh) - Our story and mission for mesh networking in North Dakota
+
+## Topics & Expertise
+- LoRa mesh networking
 - Off-grid communication
 - Emergency preparedness
-- MeshCore protocol
-- Meshtastic protocol
-- North Dakota
+- MeshCore protocol and firmware
+- Meshtastic protocol and firmware
+- Solar-powered mesh nodes
+- Cold weather hardware testing
+- Long-range radio links
+- DIY mesh node builds
+- North Dakota / Upper Midwest coverage
+
+## Geographic Focus
+North Dakota, USA - with coverage expanding into Minnesota, South Dakota, and Montana.
+
+## Contact
+- Website: https://nodakmesh.org
+- Discord: https://nodakmesh.org/community

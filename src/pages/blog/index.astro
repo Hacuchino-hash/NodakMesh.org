@@ -19,7 +19,11 @@ const remainingPosts = sortedPosts.filter(post => post.id !== featuredPost?.id);
 const categories = ['reviews', 'news', 'guides', 'community'] as const;
 ---
 
-<Layout title="Blog | NodakMesh" description="The latest news, reviews, guides, and community stories from the mesh networking world. Your go-to resource for Meshtastic and MeshCore content.">
+<Layout
+  title="Mesh Network Blog | NodakMesh"
+  description="The latest news, reviews, guides, and community stories from the mesh networking world. Your go-to resource for Meshtastic and MeshCore content."
+  keywords="mesh network blog, Meshtastic reviews, MeshCore guides, LoRa tutorials, mesh networking news, off-grid communication articles, device reviews"
+>
   <Header slot="header" />
 
   <div class="pt-24 pb-16">

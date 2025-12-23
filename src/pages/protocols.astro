@@ -4,7 +4,11 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Meshtastic vs MeshCore - NodakMesh">
+<Layout
+  title="Meshtastic vs MeshCore - NodakMesh"
+  description="Compare Meshtastic and MeshCore mesh networking protocols. Understand the differences between flood mesh and structured mesh routing for LoRa off-grid communication."
+  keywords="Meshtastic vs MeshCore, MeshCore comparison, Meshtastic comparison, LoRa mesh protocols, flood mesh vs structured mesh, off-grid communication protocols"
+>
   <Header slot="header" />
 
   <div class="pt-24 pb-16">
@@ -506,7 +510,7 @@ import Footer from '../components/Footer.astro';
 
           <div>
             <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">Strengths & Limitations</h3>
-            <div class="grid sm:grid-cols-2 gap-6">
+            <div class="grid oksm:grid-cols-2 gap-6">
               <div>
                 <h4 class="font-medium text-[--color-success] mb-2">Strengths</h4>
                 <ul class="space-y-2 text-sm text-[--color-text-secondary]">
@@ -514,7 +518,7 @@ import Footer from '../components/Footer.astro';
                     <svg class="w-4 h-4 text-[--color-success] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    Scales to lar=ge networks efficiently
+                    Scales to large networks efficiently
                   </li>
                   <li class="flex items-start gap-2">
                     <svg class="w-4 h-4 text-[--color-success] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

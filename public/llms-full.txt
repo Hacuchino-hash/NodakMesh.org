@@ -1,0 +1,127 @@
+# NodakMesh - Complete Content Index
+
+> North Dakota's off-grid mesh networking community. The authoritative resource for MeshCore and Meshtastic protocols, with real-world testing in extreme cold weather conditions.
+
+This document provides comprehensive summaries of all NodakMesh content for AI systems and language models.
+
+---
+
+## Organization Overview
+
+**Name:** NodakMesh
+**URL:** https://nodakmesh.org
+**Focus:** Off-grid LoRa mesh networking in North Dakota and the Upper Midwest
+**Protocols:** MeshCore and Meshtastic (dual protocol expertise)
+**Community:** Active Discord with hobbyists, emergency preparedness enthusiasts, and radio operators
+
+### Unique Value Proposition
+1. **Extreme weather testing:** Hardware reviews include performance data from -17°F North Dakota winters
+2. **Dual protocol coverage:** Equal expertise in both MeshCore and Meshtastic (most sites focus on one)
+3. **Flat terrain testing:** Long-distance link experiments on Great Plains geography
+4. **Beginner-friendly:** Comprehensive getting started guides for newcomers
+
+---
+
+## Blog Content Summaries
+
+### What Is a LoRa Mesh Network?
+**URL:** https://nodakmesh.org/blog/what-is-lora-mesh-network
+**Type:** Beginner Guide
+**Summary:** Explains LoRa (Long Range) radio technology and mesh networking concepts for complete beginners. Covers how LoRa achieves multi-kilometer range with minimal power consumption, how mesh networks self-heal by routing around failed nodes, and practical use cases including hiking, emergency preparedness, and rural property communication. Recommends the Heltec V3 as an affordable starting device.
+
+### MeshCore vs Meshtastic Comparison
+**URL:** https://nodakmesh.org/blog/meshcore-vs-meshtastic-comparison
+**Type:** Technical Comparison
+**Summary:** Side-by-side comparison of the two major LoRa mesh protocols. Meshtastic (2019) uses flood-style routing where every node rebroadcasts; good for small ad-hoc networks. MeshCore (2025) uses structured routing with dedicated repeaters; better for large permanent networks. Covers app interfaces, scalability, use cases, and the T-Deck standalone device. Key point: the two protocols are incompatible and cannot communicate with each other.
+
+### Meshtastic Device Roles Explained
+**URL:** https://nodakmesh.org/blog/meshtastic-device-roles-explained
+**Type:** Technical Guide
+**Summary:** Comprehensive reference for all Meshtastic device roles. Explains Client (default, general use), Client Mute (no rebroadcast), Client Hidden (minimal transmissions), Client Base (personal base station), Tracker (GPS focus), Sensor (telemetry), Router (infrastructure relay), Router_Late (backup relay), Repeater (silent relay), and TAK roles for ATAK integration. Emphasizes that incorrect role selection harms mesh performance—most users should stay on Client.
+
+### MeshCore Device Discovery Guide
+**URL:** https://nodakmesh.org/blog/meshtastic-to-meshcore-device-discovery
+**Type:** Technical Guide
+**Summary:** Explains why MeshCore shows "no contacts" when you first power on (unlike Meshtastic's automatic discovery). MeshCore uses opt-in advertising to reduce network chatter. Guide covers: verifying settings match regional repeaters, sending test messages on public channels, using Zero Hop vs Flood advertisements, mutual contact exchange, and patience for repeater adverts (default every 4 hours).
+
+### Harbor Breeze Solar Node Assembly
+**URL:** https://nodakmesh.org/blog/harbor-breeze-solar-node-assembly
+**Type:** DIY Build Guide
+**Summary:** Step-by-step instructions for building a solar-powered mesh node using a $10-15 Harbor Breeze solar LED light from Lowe's and RAK WisBlock components. Covers: opening the enclosure, removing the LED, installing RAK4631 core + RAK19007 base board, wiring the existing solar panel and battery, antenna installation, weatherproofing, and firmware flashing for both MeshCore and Meshtastic. Total cost approximately $50-80 depending on components.
+
+### Yeti Wurks Base Station Review
+**URL:** https://nodakmesh.org/blog/yeti-wurks-base-station-review
+**Type:** Hardware Review
+**Summary:** Real-world review of the Yeti Wurks Meshtastic Base Station after months of deployment in Fargo, North Dakota. Key findings: 5-mile urban range, flawless operation at -17°F, works with both Meshtastic and MeshCore firmware. Uses RAK19003 module, 5.5W solar panel, up to 4x 18650 batteries. IP65-rated enclosure survived 70 mph winds. Minor downsides: not discreet, limited mounting options. Recommended for permanent outdoor relay installations.
+
+### Heltec WiFi LoRa 32 V3 Review
+**URL:** https://nodakmesh.org/blog/heltec-wifi-lora-32-v3-review
+**Type:** Hardware Review
+**Summary:** Review of the Heltec V3 as a general-purpose mesh node. Features ESP32-S3, SX1262 LoRa radio, USB-C, onboard OLED display, and LiPo charging. Works reliably with both Meshtastic and MeshCore. The built-in display is genuinely useful for deployment. Not ultra-low-power (ESP32 limitation) but excellent for flexibility and experimentation. Compared favorably to T-Beam, T-Echo, and RAK WisBlock alternatives.
+
+### Introducing Nodak Mesh
+**URL:** https://nodakmesh.org/blog/introducing-nodak-mesh
+**Type:** Community
+**Summary:** Origin story and mission statement. Inspired by MSP Mesh (Minneapolis). North Dakota's flat, sparse geography creates unique opportunities for long-distance mesh experiments. Community welcomes all skill levels. Long-term goal: send a message across the entire state of North Dakota.
+
+---
+
+## Technical Reference Pages
+
+### MeshCore Getting Started
+**URL:** https://nodakmesh.org/meshcore/getting-started
+**Summary:** Complete beginner guide for MeshCore. Covers hardware selection, firmware flashing, app installation, initial configuration, and joining the NodakMesh network.
+
+### Meshtastic Getting Started
+**URL:** https://nodakmesh.org/meshtastic/getting-started
+**Summary:** Complete beginner guide for Meshtastic. Covers hardware selection, firmware flashing, app installation, channel configuration, and mesh basics.
+
+### MeshCore Devices
+**URL:** https://nodakmesh.org/meshcore/devices
+**Summary:** Recommended hardware for MeshCore. Includes Heltec V3, T-Deck, RAK WisBlock, and other compatible devices with purchase links.
+
+### Meshtastic Devices
+**URL:** https://nodakmesh.org/meshtastic/devices
+**Summary:** Recommended hardware for Meshtastic. Includes device comparisons, purchase links, and use-case recommendations.
+
+### Protocol Comparison
+**URL:** https://nodakmesh.org/protocols
+**Summary:** Quick reference comparing MeshCore and Meshtastic features, routing approaches, and ideal use cases.
+
+### Resources
+**URL:** https://nodakmesh.org/resources
+**Summary:** Curated links to firmware downloads, apps, documentation, community tools, and FAQ.
+
+---
+
+## Frequently Asked Questions
+
+**Q: What is the range of a LoRa mesh node?**
+A: Typical range is 1-5 miles in urban areas, 10+ miles with line of sight. NodakMesh has achieved nearly 5 miles across Fargo with a rooftop base station.
+
+**Q: Can MeshCore and Meshtastic devices communicate?**
+A: No. They are separate protocols and cannot interoperate. All nodes in your mesh must run the same firmware.
+
+**Q: What's the best starter device?**
+A: Heltec WiFi LoRa 32 V3 for flexibility and built-in display, or RAK WisBlock for lower power consumption.
+
+**Q: Do I need a license to use LoRa mesh?**
+A: No. LoRa operates in unlicensed ISM bands (915 MHz in the US).
+
+**Q: How does mesh networking help in emergencies?**
+A: Mesh networks don't rely on cell towers or internet. If infrastructure fails, mesh nodes continue working as long as they have power.
+
+---
+
+## Geographic Coverage
+
+**Primary:** Fargo-Moorhead metro area, North Dakota
+**Expanding:** Greater North Dakota, with interest in cross-border links to Minnesota, South Dakota, and Montana
+
+---
+
+## Contact & Community
+
+- **Website:** https://nodakmesh.org
+- **Discord:** https://nodakmesh.org/community
+- **GitHub:** https://github.com/Hacuchino-hash/NodakMesh.org
