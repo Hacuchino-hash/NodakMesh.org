@@ -422,3 +422,54 @@ a.card:hover,
 .card-shine:hover::before {
   left: 100%;
 }
+
+/* Blog post images - constrained size */
+.prose img {
+  max-width: 400px;
+  height: auto;
+  display: block;
+  margin: 1.5rem auto;
+  border-radius: 8px;
+}
+
+/* Side-by-side image comparison */
+.prose .image-compare {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+.prose .image-compare img:first-child {
+  max-width: 450px;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: 0;
+}
+
+.prose .image-compare img:last-child {
+  max-width: 300px;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: 0;
+}
+
+/* Image captions in blog posts */
+.caption {
+  font-size: 0.65rem !important;
+  color: var(--color-text-muted) !important;
+  text-align: center;
+  margin-top: -0.5rem;
+  opacity: 0.7;
+  display: block;
+}
+
+.caption a {
+  color: var(--color-text-muted) !important;
+}

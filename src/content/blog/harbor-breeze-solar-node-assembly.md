@@ -38,7 +38,7 @@ To keep things simple and ensure compatibility, we'll use RAK Wireless WisBlock 
 **Harbor Breeze 60LM Solar LED Light** - The star of this project. Available at Lowe's (sometimes under item #SL1832). It's a 60-lumen solar floodlight in a black plastic housing, comes with a 5-6V solar panel and a 3.7V 1500 mAh Li-ion battery built-in. Approx. $10-15 (often on sale for ~$8).
 
 ![Harbor Breeze solar light](/images/blog/harbor-breeze-build/solar-light.avif)
-*The Harbor Breeze 60-lumen solar LED floodlight from Lowe's.*
+<span class="caption">The Harbor Breeze 60-lumen solar LED floodlight from Lowe's.</span>
 
 **RAK4631 WisBlock Core Module** - The main MCU + LoRa radio module. It's a Nordic nRF52840 microcontroller paired with an SX1262 LoRa transceiver (LoRaWAN/LoRa 915 MHz). We'll use it as the brains running Meshtastic or custom mesh firmware. Approx. $18-24.
 
@@ -79,7 +79,7 @@ On the back side of the solar panel (the top section of the light), locate the f
 Once opened, you'll see the internal components: a rechargeable 18650 battery (likely in a plastic holder) and a small circuit board for the original LED/charging circuit.
 
 ![Rear view of Harbor Breeze](/images/blog/harbor-breeze-build/rear-view.avif)
-*Inside the Harbor Breeze solar light after opening. Visible are the 3.7V 18650 battery and the original charge/controller board.*
+<span class="caption">Inside the Harbor Breeze solar light after opening. Visible are the 3.7V 18650 battery and the original charge/controller board.</span>
 
 ### Step 2: Remove the LED Spotlight
 
@@ -116,7 +116,7 @@ The RAK WisBlock base board with the core module is quite small (30 x 60 mm) and
 You can use a bit of adhesive (hot glue or double-sided foam tape) to secure it to the plastic housing. Position it such that the antenna pigtail cable can reach the RAK core's u.FL connector without strain.
 
 ![RAK internal installation](/images/blog/harbor-breeze-build/rak-internal.jpg)
-*RAK WisBlock installed inside the Harbor Breeze enclosure.*
+<span class="caption">RAK WisBlock installed inside the Harbor Breeze enclosure.</span>
 
 ### Step 6: Install the LoRa Antenna Cable
 
@@ -129,7 +129,7 @@ Double-check it's seated; a loose antenna cable can degrade signal. Once connect
 One of the advantages of using the RAK WisBlock base is that it has a built-in power management system designed for exactly this scenario. A Li-ion battery charged by a solar panel. We just need to hook the Harbor Breeze's panel and battery to the correct ports on the board.
 
 ![Wiring diagram](/images/blog/harbor-breeze-build/wiring-diagram.webp)
-*Wiring diagram for the Harbor Breeze solar node build. Credit: u/cowdog360*
+<span class="caption">Wiring diagram for the Harbor Breeze solar node build. Credit: u/cowdog360</span>
 
 ### Battery Connection
 
@@ -172,7 +172,7 @@ Check that the antenna pigtail cable isn't rubbing against sharp edges. If you a
 Also tuck any excess wire lengths away from the screw holes and gasket area so they won't get pinched when closing the lid.
 
 ![Internal assembly completed](/images/blog/harbor-breeze-build/internals-rak-installed.png)
-*Internal assembly completed. The RAK WisBlock base/core is installed and connected to the battery and solar panel. The u.FL to SMA cable is routed out for the LoRa antenna. A tidy layout helps with closing the case and long-term reliability. Credit: u/cowdog360*
+<span class="caption">Internal assembly completed. The RAK WisBlock base/core is installed and connected to the battery and solar panel. The u.FL to SMA cable is routed out for the LoRa antenna. A tidy layout helps with closing the case and long-term reliability. Credit: u/cowdog360</span>
 
 ### Close Up the Enclosure
 
@@ -195,7 +195,7 @@ The antenna being outside the enclosure will greatly improve range compared to a
 The bulkhead mount installed with a nut should be solid. If it wiggles, tighten the nut a bit more. Not too hard though, to avoid cracking the plastic. Make sure the sealant has filled the gaps.
 
 ![Completed build](/images/blog/harbor-breeze-build/completed-build-meshtastic.webp)
-*A completed Harbor Breeze solar mesh node ready for deployment. Credit: Meshtastic community*
+<span class="caption">A completed Harbor Breeze solar mesh node ready for deployment. Credit: Meshtastic community</span>
 
 ### Weatherproofing and Condensation Prevention
 
@@ -265,7 +265,7 @@ Put one node at a distance and try sending a test message, or check the mesh map
 The solar node should operate autonomously. Charging by day and running 24/7. Both MeshCore and Meshtastic nodes automatically sleep and conserve power when idle, so a charged 1500 mAh battery can last many days even without sun. With regular sunlight, the setup will stay charged indefinitely.
 
 ![A completed Harbor Breeze solar mesh node](/images/blog/harbor-breeze-build/completed-build-cowdog360.webp)
-*A completed Harbor Breeze solar mesh node deployed and ready for action. Credit: u/cowdog360*
+<span class="caption">A completed Harbor Breeze solar mesh node deployed and ready for action. Credit: u/cowdog360</span>
 
 ## Safety Notes
 
@@ -313,4 +313,4 @@ Enjoy your build, and welcome to the world of solar mesh networking!
 
 ---
 
-*This guide was informed by the MeshCore and Meshtastic community project notes and RAKwireless documentation. Build photos and wiring diagram credit: u/cowdog360 on Reddit and the mesh community.*
+<span class="caption">This guide was informed by the MeshCore and Meshtastic community project notes and RAKwireless documentation. Build photos and wiring diagram credit: u/cowdog360 on Reddit and the mesh community.</span>

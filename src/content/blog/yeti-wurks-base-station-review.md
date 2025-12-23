@@ -172,7 +172,7 @@ After months of real-world use, the Yeti Wurks Meshtastic Base Station has prove
 
 From nearly 5 miles of urban coverage across Fargo, to flawless winter operation, to seamless support for both Meshtastic and MeshCore, this base station delivered consistent, dependable performance.
 
-There are is are some minor considerations. The node isn't discreet out of the box, If it needs to be hidden there will be some effort on your end to camoflauge it. The only other consideration is the lack of mounting options. It would be fantastic to see a mounting base plate for walls or a strong magnetic mounting solution in the future. That said those are small tradeoffs for the capability it provides.
+There are some minor considerations. The node isn't discreet out of the box. If it needs to be hidden, there will be some effort on your end to camouflage it. The only other consideration is the lack of mounting options. It would be fantastic to see a mounting base plate for walls or a strong magnetic mounting solution in the future. That said those are small tradeoffs for the capability it provides.
 
 **If you're looking for a permanent, high-reliability mesh relay that can live outdoors year-round and just keep working, this base station is an easy recommendation.**
 

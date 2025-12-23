@@ -117,4 +117,4 @@ We're genuinely curious what a V4 might look like. Heltec has built something pr
 
 ---
 
-*Featured image courtesy of [Heltec Automation](https://heltec.org/project/wifi-lora-32-v3/). Case by [Muzi Works](https://muzi.works/).*
+<span class="caption">Featured image courtesy of [Heltec Automation](https://heltec.org/project/wifi-lora-32-v3/). Case by [Muzi Works](https://muzi.works/).</span>

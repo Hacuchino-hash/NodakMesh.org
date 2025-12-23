@@ -41,7 +41,7 @@ MeshCore approaches discovery very differently. Its philosophy of minimal networ
 For a user with a MeshCore handheld or paired device, the lack of automatic chatter means you won't see a list of nearby nodes pop up quickly (or at all) unless some specific action occurs. The MeshCore mobile app (or web app) typically has a Contacts or Discover screen where other nodes would appear – but initially this will be empty. In fact, the MeshCore app will explicitly show "No contacts" until discovery happens.
 
 ![MeshCore app showing empty contact list](/images/blog/meshcore-discovery/no-contacts.webp)
-*MeshCore app showing an empty contact list. Screenshot via [Michael Lynch](https://mtlynch.io/first-impressions-of-meshcore/).*
+<span class="caption">MeshCore app showing an empty contact list. Screenshot via [Michael Lynch](https://mtlynch.io/first-impressions-of-meshcore/).</span>
 
 This design reflects MeshCore's opt-in discovery: devices remain silent until they or someone else actively shares their identity.
 
@@ -90,7 +90,7 @@ Start by trying a message on the default public channel (often called "All" or s
 Open the MeshCore app's menu for Advertise (often accessible via a "+" or options menu on the contacts screen). You'll typically see options like Advert – Zero Hop and Advert – Flood.
 
 ![MeshCore advertise options menu](/images/blog/meshcore-discovery/advert-options.webp)
-*The MeshCore Advertise menu showing Zero Hop, Flood Routed, and To Clipboard options. Screenshot via [Michael Lynch](https://mtlynch.io/first-impressions-of-meshcore/).*
+<span class="caption">The MeshCore Advertise menu showing Zero Hop, Flood Routed, and To Clipboard options. Screenshot via [Michael Lynch](https://mtlynch.io/first-impressions-of-meshcore/).</span>
 
 **Start with Zero Hop:** This sends a one-time beacon of your device's identity to immediate neighbors only, and repeaters will not forward it. Zero Hop is polite on bandwidth and is great if you suspect others are directly in range. After doing this, watch your contact list – any device that hears your advert should appear (perhaps after a short delay for processing).
 
@@ -99,14 +99,14 @@ Open the MeshCore app's menu for Advertise (often accessible via a "+" or option
 *Note: The app might also offer "Advert to Clipboard," which simply copies your contact info (public key/address) to share with someone out-of-band (not needed for normal discovery).*
 
 ![MeshCore advert sent confirmation](/images/blog/meshcore-discovery/advert-sent.webp)
-*Confirmation that your advertisement was sent successfully. Screenshot via [Michael Lynch](https://mtlynch.io/first-impressions-of-meshcore/).*
+<span class="caption">Confirmation that your advertisement was sent successfully. Screenshot via [Michael Lynch](https://mtlynch.io/first-impressions-of-meshcore/).</span>
 
 ### 4. Have the Other Party Advertise (if possible)
 
 If you're coordinating with a friend or you got a public reply from someone, ask them to also send an Advert. Discovery is often mutual – your device might list others once they advertise, and vice versa. In many cases, both sides need each other's info exchanged for full two-way direct messaging. For example, after Device A advertises, Device B sees A in contacts. But A may not see B until B also advertises back. Once both have exchanged adverts, you'll each show up in the other's contact list, allowing direct encrypted messaging.
 
 ![MeshCore participants view with discovered contacts](/images/blog/meshcore-discovery/participants-view.webp)
-*Once contacts are discovered, they appear in the Participants view. Screenshot via [Michael Lynch](https://mtlynch.io/first-impressions-of-meshcore/).*
+<span class="caption">Once contacts are discovered, they appear in the Participants view. Screenshot via [Michael Lynch](https://mtlynch.io/first-impressions-of-meshcore/).</span>
 
 ### 5. Ping Known Repeaters (Advanced)
 
