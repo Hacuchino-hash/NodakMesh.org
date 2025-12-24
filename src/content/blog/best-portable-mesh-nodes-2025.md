@@ -121,7 +121,7 @@ No display means you need a phone to see messages. It's not a communicator—it'
 
 ## 3. RAK WisMesh Tag
 
-![RAK WisMesh Tag](/images/devices/rak-wisblock.png)
+![RAK WisMesh Tag](/images/devices/rak-wismesh-tag.webp)
 
 **A compact, power-efficient tag built for the mesh.**
 
@@ -129,17 +129,17 @@ No display means you need a phone to see messages. It's not a communicator—it'
 |------|---------|
 | **MCU** | Nordic nRF52840 |
 | **LoRa Chip** | Semtech SX1262 |
-| **GPS** | Optional (via expansion) |
-| **Battery** | Rechargeable LiPo (varies) |
-| **Size** | Small tag form factor |
+| **GPS** | Built-in AT6558R |
+| **Battery** | 1000mAh rechargeable |
+| **Size** | Badge/tag form factor (IP66) |
 | **Display** | None (LED indicators) |
-| **Price** | ~$35-50 |
+| **Price** | ~$50 |
 
 ### Why We Like It
 
-RAK has been building modular LoRa hardware for years, and the WisMesh Tag brings that expertise into a compact, mesh-ready package.
+RAK has been building modular LoRa hardware for years, and the WisMesh Tag brings that expertise into a rugged, field-ready package. Co-developed with the Meshtastic community, it's purpose-built for mesh networking.
 
-The nRF52840 is the same low-power chip used in the T1000-E, which means excellent battery efficiency. But unlike the SenseCAP, this uses the proven SX1262 LoRa chip that most of the mesh community knows well.
+The nRF52840 is the same low-power chip used in the T1000-E, which means excellent battery efficiency. Users report 2-3 days of battery life with GPS on. The IP66 rating means it handles rain and dust without issue.
 
 ### Firmware Support
 
@@ -150,13 +150,13 @@ The nRF52840 is the same low-power chip used in the T1000-E, which means excelle
 
 ### Best For
 
-- **Wearable mesh nodes** — Clip to a pack or lanyard
-- **Sensor nodes** — Add environmental sensors via expansion
-- **Budget-friendly entry** — Get on the mesh without breaking the bank
+- **Wearable mesh nodes** — Clip to a pack or lanyard with included attachment
+- **Outdoor use** — IP66 rated for weather resistance
+- **Tracking** — Built-in GPS with fast lock times
 
 ### Trade-offs
 
-Like the SenseCAP, no display means phone-dependent operation. GPS is optional and requires additional hardware.
+No display means phone-dependent operation for reading messages. Badge form factor is bulkier than the credit-card T1000-E.
 
 **Buy it:** [RAK Wireless Store](https://store.rakwireless.com/)
 
@@ -258,7 +258,7 @@ Larger than the T-Echo. The small OLED requires good eyesight. ESP32 power consu
 |--------|-----|---------|-----|---------|----------|
 | **T-Echo** | nRF52840 | E-Ink | Yes | 850mAh | Daily carry, hiking |
 | **SenseCAP T1000-E** | nRF52840 | None | Yes | 700mAh | Tracking, stealth |
-| **RAK WisMesh Tag** | nRF52840 | None | Optional | Varies | Wearable, sensors |
+| **RAK WisMesh Tag** | nRF52840 | None | Yes | 1000mAh | Wearable, outdoor |
 | **T-Deck Plus** | ESP32-S3 | 2.8" LCD | Yes | 3000mAh | Standalone comms |
 | **T-Beam Supreme** | ESP32-S3 | OLED | Yes | 18650 | Long trips, repeaters |
 
