@@ -2,6 +2,21 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+
+// Manufacturers with their device pages (folder names from GitHub)
+const manufacturers = [
+  { name: 'Overview', slug: 'hardware/devices/index' },
+  { name: 'RAK Wireless', slug: 'hardware/devices/rak-wireless/index' },
+  { name: 'LILYGO', slug: 'hardware/devices/lilygo/index' },
+  { name: 'Heltec', slug: 'hardware/devices/heltec-automation/index' },
+  { name: 'Seeed Studio', slug: 'hardware/devices/seeed-studio/index' },
+  { name: 'B&Q Consulting', slug: 'hardware/devices/b-and-q-consulting/index' },
+  { name: 'Elecrow', slug: 'hardware/devices/elecrow/index' },
+  { name: 'muzi works', slug: 'hardware/devices/muziworks/index' },
+  { name: 'Raspberry Pi', slug: 'hardware/devices/raspberrypi/index' },
+  { name: 'Linux Native', slug: 'hardware/devices/linux-native-hardware/index' },
+  { name: 'Community', slug: 'hardware/devices/community-supported/index' },
+];
 ---
 
 <Layout
@@ -11,76 +26,132 @@ import Footer from '../../components/Footer.astro';
 >
   <Header slot="header" />
 
-  <div class="pt-24 pb-16">
-    <section class="py-16">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <a href="/meshtastic" class="inline-flex items-center gap-2 text-[--color-secondary] hover:underline mb-4">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-          Back to Meshtastic
-        </a>
-        <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-6">
-          Meshtastic <span class="text-[--color-secondary]">Devices</span>
-        </h1>
-        <p class="text-xl text-[--color-text-secondary] leading-relaxed max-w-3xl">
-          Meshtastic and MeshCore run on the same hardware. Check out our
-          <a href="/meshcore/devices" class="text-[--color-accent] hover:underline">device recommendations</a>
-          page for detailed hardware information.
-        </p>
-      </div>
-    </section>
+  <div class="pt-24 pb-16 docs-bg">
 
-    <section class="py-8">
+    <section class="py-8 relative z-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="card p-8 text-center">
-          <svg class="w-16 h-16 text-[--color-accent] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-          <h2 class="text-2xl font-bold text-[--color-text-primary] mb-4">Same Hardware, Different Firmware</h2>
-          <p class="text-[--color-text-secondary] mb-6 max-w-2xl mx-auto">
-            The great thing about LoRa mesh devices is that they're firmware-agnostic.
-            You can flash Meshtastic or MeshCore on the same hardware. Our device recommendations
-            apply to both protocols.
-          </p>
-          <a href="/meshcore/devices" class="btn-primary inline-flex items-center gap-2">
-            View Device Recommendations
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        <!-- Header -->
+        <div class="mb-8">
+          <div class="flex items-center gap-2 text-[--color-text-muted] text-sm mb-4">
+            <a href="/meshtastic" class="hover:text-[--color-accent]">Meshtastic</a>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
-          </a>
+            <span>Devices</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-bold text-[--color-text-primary] mb-2">
+            Supported <span class="gradient-text">Devices</span>
+          </h1>
+          <p class="text-[--color-text-secondary]">
+            Official device documentation from Meshtastic, updated automatically.
+          </p>
         </div>
-      </div>
-    </section>
 
-    <section class="py-8">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-6">Quick Device List</h2>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div class="card p-4">
-            <h3 class="font-semibold text-[--color-text-primary]">Heltec V3</h3>
-            <p class="text-sm text-[--color-text-secondary]">Budget-friendly starter device</p>
-          </div>
-          <div class="card p-4">
-            <h3 class="font-semibold text-[--color-text-primary]">LilyGo T-Beam</h3>
-            <p class="text-sm text-[--color-text-secondary]">GPS included, great for tracking</p>
-          </div>
-          <div class="card p-4">
-            <h3 class="font-semibold text-[--color-text-primary]">RAK WisBlock</h3>
-            <p class="text-sm text-[--color-text-secondary]">Modular, perfect for solar builds</p>
-          </div>
-          <div class="card p-4">
-            <h3 class="font-semibold text-[--color-text-primary]">Station G2</h3>
-            <p class="text-sm text-[--color-text-secondary]">Premium build quality</p>
-          </div>
-          <div class="card p-4">
-            <h3 class="font-semibold text-[--color-text-primary]">Heltec Tracker</h3>
-            <p class="text-sm text-[--color-text-secondary]">Compact with GPS</p>
-          </div>
-          <div class="card p-4">
-            <h3 class="font-semibold text-[--color-text-primary]">LilyGo T-Echo</h3>
-            <p class="text-sm text-[--color-text-secondary]">E-ink display, best battery life</p>
-          </div>
+        <!-- Main Content -->
+        <div class="flex flex-col lg:flex-row gap-8">
+          <!-- Sidebar -->
+          <aside class="lg:w-64 flex-shrink-0">
+            <div class="card p-4 sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
+              <h3 class="text-xs font-semibold text-[--color-text-muted] mb-3 uppercase tracking-wider">Manufacturers</h3>
+              <nav class="space-y-1">
+                {manufacturers.map((mfr) => (
+                  <button
+                    data-page={mfr.slug}
+                    class="device-nav-btn w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]"
+                  >
+                    {mfr.name}
+                  </button>
+                ))}
+              </nav>
+
+              <div class="mt-6 pt-4 border-t border-[--color-border]">
+                <h3 class="text-xs font-semibold text-[--color-text-muted] mb-3 uppercase tracking-wider">More Hardware</h3>
+                <nav class="space-y-1">
+                  <a href="/meshtastic/antennas" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                    Antennas
+                  </a>
+                  <a href="/meshtastic/enclosures" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                    Enclosures
+                  </a>
+                </nav>
+              </div>
+
+              <div class="mt-4 pt-4 border-t border-[--color-border]">
+                <a
+                  href="https://meshtastic.org/docs/hardware/devices/"
+                  target="_blank"
+                  class="text-xs text-[--color-text-muted] hover:text-[--color-accent] flex items-center gap-1 mb-2"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  Full docs at meshtastic.org
+                </a>
+                <a
+                  href="https://github.com/meshtastic/meshtastic"
+                  target="_blank"
+                  class="text-xs text-[--color-text-muted] hover:text-[--color-accent] flex items-center gap-1"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  View on GitHub
+                </a>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Content -->
+          <main class="flex-1 min-w-0">
+            <div class="card p-6 lg:p-8">
+              <!-- View Original Button -->
+              <div id="view-original" class="hidden mb-4 pb-4 border-b border-[--color-border]">
+                <a
+                  id="original-link"
+                  href="#"
+                  target="_blank"
+                  class="inline-flex items-center gap-2 text-sm text-[--color-text-muted] hover:text-[--color-accent] transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  View original at meshtastic.org
+                </a>
+              </div>
+
+              <!-- Loading State -->
+              <div id="device-loading" class="flex items-center justify-center py-12">
+                <div class="flex items-center gap-3 text-[--color-text-muted]">
+                  <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <span>Loading device documentation...</span>
+                </div>
+              </div>
+
+              <!-- Error State -->
+              <div id="device-error" class="hidden py-12 text-center">
+                <svg class="w-12 h-12 text-[--color-error] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <p class="text-[--color-text-secondary] mb-2">Failed to load device documentation</p>
+                <p class="text-[--color-text-muted] text-sm mb-4">This page may not be available or the path may have changed.</p>
+                <div class="flex gap-3 justify-center">
+                  <button id="retry-btn" class="btn-secondary">Try Again</button>
+                  <a id="error-original-link" href="#" target="_blank" class="btn-primary">View on meshtastic.org</a>
+                </div>
+              </div>
+
+              <!-- Device Content -->
+              <div id="device-content" class="wiki-content hidden"></div>
+
+              <!-- Load Time -->
+              <div id="load-time" class="hidden mt-6 pt-4 border-t border-[--color-border] text-xs text-[--color-text-muted]">
+                Loaded in <span id="load-time-value">0</span>ms
+              </div>
+            </div>
+          </main>
         </div>
       </div>
     </section>
@@ -88,3 +159,513 @@ import Footer from '../../components/Footer.astro';
 
   <Footer slot="footer" />
 </Layout>
+
+<style is:global>
+  /* Docs Background */
+  .docs-bg {
+    background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+  }
+
+  /* Active nav button */
+  .device-nav-btn.active {
+    background: var(--color-accent-subtle);
+    color: var(--color-accent);
+  }
+
+  /* Wiki Content Styles - shared with wiki.astro */
+  .wiki-content h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .wiki-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .wiki-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .wiki-content h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .wiki-content p {
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+
+  .wiki-content a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .wiki-content a:hover {
+    text-decoration: underline;
+  }
+
+  .wiki-content a.internal-doc-link {
+    cursor: pointer;
+  }
+
+  .wiki-content ul, .wiki-content ol {
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .wiki-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .wiki-content code {
+    background: var(--color-bg-tertiary);
+    color: var(--color-accent);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-family: 'Monaco', 'Menlo', monospace;
+  }
+
+  .wiki-content pre {
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+  }
+
+  .wiki-content pre code {
+    background: transparent;
+    padding: 0;
+    color: var(--color-text-secondary);
+  }
+
+  .wiki-content blockquote {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .wiki-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+
+  .wiki-content th, .wiki-content td {
+    border: 1px solid var(--color-border);
+    padding: 0.75rem;
+    text-align: left;
+  }
+
+  .wiki-content th {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .wiki-content td {
+    color: var(--color-text-secondary);
+  }
+
+  .wiki-content img {
+    max-width: 100%;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .wiki-content hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 2rem 0;
+  }
+
+  /* Admonition styling */
+  .wiki-content .admonition {
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-bg-tertiary);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .wiki-content .admonition-note {
+    border-left-color: var(--color-accent);
+  }
+
+  .wiki-content .admonition-info {
+    border-left-color: #3b82f6;
+  }
+
+  .wiki-content .admonition-warning {
+    border-left-color: var(--color-warning);
+  }
+
+  .wiki-content .admonition-tip {
+    border-left-color: #10b981;
+  }
+
+  .wiki-content .admonition-caution {
+    border-left-color: #f59e0b;
+  }
+
+  .wiki-content .admonition-danger {
+    border-left-color: #ef4444;
+  }
+
+  .wiki-content .admonition strong {
+    color: var(--color-text-primary);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+</style>
+
+<script>
+  // Load marked.js from CDN
+  const markedScript = document.createElement('script');
+  markedScript.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+  document.head.appendChild(markedScript);
+
+  const DOCS_BASE = 'https://raw.githubusercontent.com/meshtastic/meshtastic/master/docs';
+  const MESHTASTIC_DOCS_URL = 'https://meshtastic.org/docs';
+  let currentPage = 'hardware/devices/index';
+
+  const loadingEl = document.getElementById('device-loading');
+  const errorEl = document.getElementById('device-error');
+  const contentEl = document.getElementById('device-content');
+  const loadTimeEl = document.getElementById('load-time');
+  const loadTimeValueEl = document.getElementById('load-time-value');
+  const retryBtn = document.getElementById('retry-btn');
+  const viewOriginalEl = document.getElementById('view-original');
+  const originalLinkEl = document.getElementById('original-link');
+  const errorOriginalLinkEl = document.getElementById('error-original-link');
+
+  // Map slug to meshtastic.org URL path
+  function getOriginalUrl(slug: string): string {
+    // Remove /index from the end and convert to URL
+    const path = slug.replace('/index', '').replace(/^hardware\//, 'hardware/');
+    return `${MESHTASTIC_DOCS_URL}/${path}/`;
+  }
+
+  function showLoading() {
+    loadingEl?.classList.remove('hidden');
+    errorEl?.classList.add('hidden');
+    contentEl?.classList.add('hidden');
+    loadTimeEl?.classList.add('hidden');
+    viewOriginalEl?.classList.add('hidden');
+  }
+
+  function showError() {
+    loadingEl?.classList.add('hidden');
+    errorEl?.classList.remove('hidden');
+    contentEl?.classList.add('hidden');
+    loadTimeEl?.classList.add('hidden');
+    viewOriginalEl?.classList.add('hidden');
+
+    if (errorOriginalLinkEl) {
+      errorOriginalLinkEl.setAttribute('href', getOriginalUrl(currentPage));
+    }
+  }
+
+  function showContent(html: string, loadTime: number) {
+    loadingEl?.classList.add('hidden');
+    errorEl?.classList.add('hidden');
+    contentEl?.classList.remove('hidden');
+    loadTimeEl?.classList.remove('hidden');
+    viewOriginalEl?.classList.remove('hidden');
+
+    if (contentEl) contentEl.innerHTML = html;
+    if (loadTimeValueEl) loadTimeValueEl.textContent = loadTime.toString();
+    if (originalLinkEl) {
+      originalLinkEl.setAttribute('href', getOriginalUrl(currentPage));
+    }
+
+    // Add click handlers to internal doc links
+    setupInternalLinks();
+  }
+
+  function cleanMdx(mdx: string, filterValue: string = ''): string {
+    // Remove frontmatter
+    mdx = mdx.replace(/^---[\s\S]*?---\n*/m, '');
+
+    // Remove import statements
+    mdx = mdx.replace(/^import\s+.*$/gm, '');
+
+    // Remove export statements
+    mdx = mdx.replace(/^export\s+.*$/gm, '');
+
+    // Convert :::admonition blocks to styled divs
+    const admonitionTypes = ['note', 'info', 'warning', 'tip', 'caution', 'danger'];
+    admonitionTypes.forEach(type => {
+      const regex = new RegExp(`:::${type}\\[?([^\\]]*)?\\]?\\s*([\\s\\S]*?):::`, 'g');
+      mdx = mdx.replace(regex, (_match, title, content) => {
+        const displayTitle = title || type.charAt(0).toUpperCase() + type.slice(1);
+        return `<div class="admonition admonition-${type}"><strong>${displayTitle}</strong>${content.trim()}</div>`;
+      });
+    });
+
+    // Handle Tabs/TabItem - extract content from each tab and display as sections
+    // First, extract TabItem contents with their labels
+    mdx = mdx.replace(/<Tabs[\s\S]*?values=\{\[([\s\S]*?)\]\}[\s\S]*?>([\s\S]*?)<\/Tabs>/g, (_match, valuesStr, tabsContent) => {
+      // Parse tab value->label mappings from the values array
+      // Match patterns like: {label: 'LoRa32 V4', value:'v4'}
+      const valueToLabel: Record<string, string> = {};
+      const mappingRegex = /\{\s*label:\s*['"]([^'"]+)['"]\s*,\s*value:\s*['"]([^'"]+)['"]\s*\}/g;
+      let mappingMatch;
+      while ((mappingMatch = mappingRegex.exec(valuesStr)) !== null) {
+        valueToLabel[mappingMatch[2]] = mappingMatch[1];
+      }
+      // Also try reverse order: {value: '...', label: '...'}
+      const reverseMappingRegex = /\{\s*value:\s*['"]([^'"]+)['"]\s*,\s*label:\s*['"]([^'"]+)['"]\s*\}/g;
+      while ((mappingMatch = reverseMappingRegex.exec(valuesStr)) !== null) {
+        valueToLabel[mappingMatch[1]] = mappingMatch[2];
+      }
+
+      // Extract content from each TabItem
+      // Note: some MDX has spaces around = like: <TabItem value = "t-deck">
+      const tabItemRegex = /<TabItem[^>]*value\s*=\s*['"]([^'"]+)['"][^>]*>([\s\S]*?)<\/TabItem>/g;
+      let result = '';
+      let tabMatch;
+      let matchedFilter = false;
+
+      while ((tabMatch = tabItemRegex.exec(tabsContent)) !== null) {
+        const tabValue = tabMatch[1];
+        const tabContent = tabMatch[2].trim();
+        // Look up the label for this value, fallback to value itself
+        const label = valueToLabel[tabValue] || tabValue;
+
+        // If filterValue is set, only show matching tab
+        if (filterValue) {
+          if (tabValue === filterValue) {
+            result = `\n\n# ${label}\n\n${tabContent}\n`;
+            matchedFilter = true;
+          }
+        } else {
+          // No filter - show all tabs as sections
+          result += `\n\n## ${label}\n\n${tabContent}\n\n---\n`;
+        }
+      }
+
+      // If filter was set but didn't match, show all tabs
+      if (filterValue && !matchedFilter) {
+        tabItemRegex.lastIndex = 0;
+        while ((tabMatch = tabItemRegex.exec(tabsContent)) !== null) {
+          const tabValue = tabMatch[1];
+          const tabContent = tabMatch[2].trim();
+          const label = valueToLabel[tabValue] || tabValue;
+          result += `\n\n## ${label}\n\n${tabContent}\n\n---\n`;
+        }
+      }
+
+      return result || tabsContent;
+    });
+
+    // Remove any remaining JSX components
+    mdx = mdx.replace(/<[A-Z][a-zA-Z]*[^>]*\/>/g, '');
+    mdx = mdx.replace(/<[A-Z][a-zA-Z]*[^>]*>[\s\S]*?<\/[A-Z][a-zA-Z]*>/g, '');
+
+    // Fix image paths - convert relative to absolute GitHub raw URLs
+    mdx = mdx.replace(/!\[([^\]]*)\]\(\/img\/hardware\/([^)]+)\)/g,
+      '![$1](https://meshtastic.org/img/hardware/$2)');
+
+    // Also handle relative paths like ./image.png
+    mdx = mdx.replace(/!\[([^\]]*)\]\(\.\/([^)]+)\)/g, (_match, alt, path) => {
+      const dir = currentPage.substring(0, currentPage.lastIndexOf('/'));
+      return `![${alt}](https://raw.githubusercontent.com/meshtastic/meshtastic/master/docs/${dir}/${path})`;
+    });
+
+    // Fix relative links to docs - mark them as internal
+    mdx = mdx.replace(/\[([^\]]+)\]\(\/docs\/([^)]+)\)/g, (_match, text, path) => {
+      const slug = convertPathToSlug(path);
+      return `<a href="#" class="internal-doc-link" data-slug="${slug}">${text}</a>`;
+    });
+
+    // Fix relative links within hardware docs
+    mdx = mdx.replace(/\[([^\]]+)\]\(\.\.\/([^)]+)\)/g, (_match, text, path) => {
+      const slug = `hardware/devices/${path.replace('.mdx', '').replace('.md', '')}`;
+      return `<a href="#" class="internal-doc-link" data-slug="${slug}">${text}</a>`;
+    });
+
+    // Fix same-directory relative links (handles ./path, ./path/, ./path/subpath/?query=param)
+    // Match: [text](./path) or [text](./path/) or [text](./path/subpath/?query=value)
+    // Preserve query params for tab filtering
+    // DON'T append /index - let loadDevicePage handle file vs folder detection
+    mdx = mdx.replace(/\[([^\]]+)\]\(\.\/([a-zA-Z0-9_\-\/]+?)\/?(\?[^)]*)?\)/g, (_match, text, path, query) => {
+      // Get parent directory (remove /index if present)
+      let currentDir = currentPage.replace(/\/index$/, '');
+      // Path can be nested (e.g., "sensecap/card-tracker") or simple (e.g., "r1-neo")
+      // Remove trailing slash from path if present
+      const cleanPath = path.replace(/\/$/, '');
+      // Preserve query string for tab filtering - don't add /index here
+      const slug = `${currentDir}/${cleanPath}${query || ''}`;
+      return `<a href="#" class="internal-doc-link" data-slug="${slug}">${text}</a>`;
+    });
+
+    return mdx;
+  }
+
+  function convertPathToSlug(path: string): string {
+    let slug = path.replace(/\/$/, '').replace(/\.mdx?$/, '');
+    return slug;
+  }
+
+  function setupInternalLinks() {
+    document.querySelectorAll('.internal-doc-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const slug = (link as HTMLElement).getAttribute('data-slug');
+        if (slug) {
+          loadDevicePage(slug);
+          window.history.pushState({ slug }, '', `#${slug}`);
+        }
+      });
+    });
+  }
+
+  async function loadDevicePage(slugWithQuery: string) {
+    showLoading();
+    // Extract query params before stripping
+    const queryMatch = slugWithQuery.match(/\?(.+)$/);
+    const queryString = queryMatch ? queryMatch[1] : '';
+    // Parse query to get filter value (e.g., "heltec=v3" -> "v3")
+    let filterValue = '';
+    if (queryString) {
+      const params = new URLSearchParams(queryString);
+      // Get the first param value (could be heltec=v3, mesh_node_=xxx, etc.)
+      for (const [, value] of params) {
+        filterValue = value;
+        break;
+      }
+    }
+    // Strip query strings and trailing slashes from slug
+    const slug = slugWithQuery.split('?')[0].replace(/\/$/, '').replace(/\/+$/, '');
+    currentPage = slug;
+
+    // Update active nav button
+    document.querySelectorAll('.device-nav-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-page') === slug);
+    });
+
+    const startTime = performance.now();
+
+    // Try multiple file extensions
+    const extensions = ['.mdx', '.md'];
+    let response: Response | null = null;
+
+    for (const ext of extensions) {
+      const url = `${DOCS_BASE}/${slug}${ext}`;
+      try {
+        response = await fetch(url);
+        if (response.ok) break;
+      } catch (e) {
+        // Continue to next extension
+      }
+    }
+
+    // If not found and doesn't end with index, try with /index
+    if (!response?.ok && !slug.endsWith('index')) {
+      for (const ext of extensions) {
+        const url = `${DOCS_BASE}/${slug}/index${ext}`;
+        try {
+          response = await fetch(url);
+          if (response.ok) {
+            currentPage = `${slug}/index`;
+            break;
+          }
+        } catch (e) {
+          // Continue
+        }
+      }
+    }
+
+    if (!response?.ok) {
+      showError();
+      return;
+    }
+
+    try {
+      let markdown = await response.text();
+      markdown = cleanMdx(markdown, filterValue);
+
+      const loadTime = Math.round(performance.now() - startTime);
+
+      // Wait for marked to load
+      const waitForMarked = () => {
+        return new Promise<void>((resolve) => {
+          const check = () => {
+            if ((window as any).marked) {
+              resolve();
+            } else {
+              setTimeout(check, 50);
+            }
+          };
+          check();
+        });
+      };
+
+      await waitForMarked();
+      const html = (window as any).marked.parse(markdown);
+      showContent(html, loadTime);
+
+      // Scroll to top of content
+      contentEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    } catch (error) {
+      console.error('Failed to parse device docs:', error);
+      showError();
+    }
+  }
+
+  // Handle back/forward navigation
+  window.addEventListener('popstate', (e) => {
+    if (e.state?.slug) {
+      loadDevicePage(e.state.slug);
+    }
+  });
+
+  // Initialize when marked is loaded
+  markedScript.onload = () => {
+    // Check if there's a hash in the URL
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      loadDevicePage(hash);
+    } else {
+      loadDevicePage('hardware/devices/index');
+    }
+  };
+
+  // Nav button clicks
+  document.querySelectorAll('.device-nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const page = btn.getAttribute('data-page');
+      if (page) {
+        loadDevicePage(page);
+        window.history.pushState({ slug: page }, '', `#${page}`);
+      }
+    });
+  });
+
+  // Retry button
+  retryBtn?.addEventListener('click', () => loadDevicePage(currentPage));
+</script>
