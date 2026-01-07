@@ -1,0 +1,194 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Coverage Map - NodakMesh"
+  description="View real-world mesh network coverage across North Dakota. See where nodes have been tested and contribute your own coverage data through wardriving."
+  keywords="NodakMesh coverage, mesh network map, LoRa coverage, wardrive, signal testing, North Dakota mesh coverage"
+>
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16">
+    <!-- Hero -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
+          <div>
+            <h1 class="text-3xl sm:text-4xl font-bold text-[--color-text-primary] mb-2">
+              Coverage <span class="gradient-text">Map</span>
+            </h1>
+            <p class="text-[--color-text-secondary] max-w-2xl">
+              Real-world mesh network coverage data collected by the NodakMesh community. See where our network reaches and help expand coverage by contributing your own data.
+            </p>
+          </div>
+          <a
+            href="https://coverage.ndme.sh/wardrive"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary inline-flex items-center gap-2 flex-shrink-0"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+            Contribute Coverage Data
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Embed -->
+    <section class="pb-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="card overflow-hidden">
+          <div class="aspect-[16/9] lg:aspect-[21/9] w-full">
+            <iframe
+              src="https://coverage.ndme.sh/"
+              class="w-full h-full border-0"
+              title="NodakMesh Coverage Map"
+              loading="lazy"
+              allow="geolocation"
+            ></iframe>
+          </div>
+        </div>
+        <p class="text-sm text-[--color-text-muted] mt-4 text-center">
+          <a href="https://coverage.ndme.sh/" target="_blank" rel="noopener noreferrer" class="hover:text-[--color-accent]">
+            Open full map in new tab
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- How to Contribute -->
+    <section class="py-12 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-8 text-center">How to Contribute Coverage Data</h2>
+
+        <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div class="card p-6 text-center">
+            <div class="w-12 h-12 rounded-full bg-[--color-accent]/10 flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-[--color-accent]">1</span>
+            </div>
+            <h3 class="font-semibold text-[--color-text-primary] mb-2">Go Wardriving</h3>
+            <p class="text-sm text-[--color-text-secondary]">
+              Take your mesh device on a drive, walk, or bike ride through your area with GPS enabled.
+            </p>
+          </div>
+
+          <div class="card p-6 text-center">
+            <div class="w-12 h-12 rounded-full bg-[--color-accent]/10 flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-[--color-accent]">2</span>
+            </div>
+            <h3 class="font-semibold text-[--color-text-primary] mb-2">Record Signal Data</h3>
+            <p class="text-sm text-[--color-text-secondary]">
+              Your device logs signal strength and location data as you move through the coverage area.
+            </p>
+          </div>
+
+          <div class="card p-6 text-center">
+            <div class="w-12 h-12 rounded-full bg-[--color-accent]/10 flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl font-bold text-[--color-accent]">3</span>
+            </div>
+            <h3 class="font-semibold text-[--color-text-primary] mb-2">Upload Your Data</h3>
+            <p class="text-sm text-[--color-text-secondary]">
+              Submit your coverage data through the wardrive portal to add it to the community map.
+            </p>
+          </div>
+        </div>
+
+        <div class="text-center mt-8">
+          <a
+            href="https://coverage.ndme.sh/wardrive"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary inline-flex items-center gap-2"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            Start Contributing
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Coverage Matters -->
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-8 text-center">Why Coverage Data Matters</h2>
+
+        <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div class="card p-6">
+            <h3 class="font-semibold text-[--color-text-primary] mb-2 flex items-center gap-2">
+              <svg class="w-5 h-5 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+              Plan New Node Locations
+            </h3>
+            <p class="text-sm text-[--color-text-secondary]">
+              Coverage data helps identify gaps in the network and optimal locations for new repeaters and nodes.
+            </p>
+          </div>
+
+          <div class="card p-6">
+            <h3 class="font-semibold text-[--color-text-primary] mb-2 flex items-center gap-2">
+              <svg class="w-5 h-5 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+              Verify Network Reliability
+            </h3>
+            <p class="text-sm text-[--color-text-secondary]">
+              Real-world testing shows where the network is strong and where improvements are needed.
+            </p>
+          </div>
+
+          <div class="card p-6">
+            <h3 class="font-semibold text-[--color-text-primary] mb-2 flex items-center gap-2">
+              <svg class="w-5 h-5 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              Build Community Knowledge
+            </h3>
+            <p class="text-sm text-[--color-text-secondary]">
+              Shared coverage data helps everyone understand what's possible with mesh networking in North Dakota.
+            </p>
+          </div>
+
+          <div class="card p-6">
+            <h3 class="font-semibold text-[--color-text-primary] mb-2 flex items-center gap-2">
+              <svg class="w-5 h-5 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              Emergency Preparedness
+            </h3>
+            <p class="text-sm text-[--color-text-secondary]">
+              Knowing where coverage exists helps communities prepare for situations when traditional communications fail.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-12">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-4">Ready to Help Map Coverage?</h2>
+        <p class="text-[--color-text-secondary] mb-6">
+          Every contribution helps build a more complete picture of mesh network coverage in North Dakota.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="https://coverage.ndme.sh/wardrive" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            Start Wardriving
+          </a>
+          <a href="/community" class="btn-secondary">
+            Join the Community
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>
