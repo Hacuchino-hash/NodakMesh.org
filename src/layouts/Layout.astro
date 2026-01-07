@@ -6,16 +6,18 @@ interface Props {
   description?: string;
   image?: string;
   keywords?: string;
+  breadcrumbs?: Array<{ name: string; href: string }>;
 }
 
 const {
   title,
   description = "North Dakota's community mesh network using MeshCore and Meshtastic. Connect off-grid across the Peace Garden State.",
   image,
-  keywords = "MeshCore, Meshtastic, LoRa, mesh network, North Dakota, off-grid communication, emergency communication"
+  keywords = "MeshCore, Meshtastic, LoRa, mesh network, North Dakota, off-grid communication, emergency communication",
+  breadcrumbs = []
 } = Astro.props;
 const canonicalURL = Astro.url.href;
-const ogImage = image ? new URL(image, Astro.site).href : new URL('/images/og-default.png', Astro.site).href;
+const ogImage = image ? new URL(image, Astro.site).href : new URL('/images/og-default.jpg', Astro.site).href;
 ---
 
 <!doctype html>
@@ -53,23 +55,46 @@ const ogImage = image ? new URL(image, Astro.site).href : new URL('/images/og-de
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
+    <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": "WebSite",
       "name": "NodakMesh",
       "url": "https://nodakmesh.org",
       "description": "North Dakota's community mesh network using MeshCore and Meshtastic. Connect off-grid across the Peace Garden State.",
-      "areaServed": {
-        "@type": "State",
-        "name": "North Dakota",
-        "containedInPlace": {
-          "@type": "Country",
-          "name": "United States"
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://nodakmesh.org/blog?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "NodakMesh",
+        "url": "https://nodakmesh.org",
+        "areaServed": {
+          "@type": "State",
+          "name": "North Dakota",
+          "containedInPlace": {
+            "@type": "Country",
+            "name": "United States"
+          }
         }
       }
-    }
-    </script>
+    })} />
+    {breadcrumbs.length > 0 && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": breadcrumbs.map((crumb, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "name": crumb.name,
+          "item": `https://nodakmesh.org${crumb.href}`
+        }))
+      })} />
+    )}
     <script defer src="https://a.ndme.sh/script.js" data-website-id="b943329f-10bd-4cb6-a382-28a22721388d"></script>
     <title>{title}</title>
   </head>
