@@ -1,0 +1,304 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// FAQ data organized by category
+const faqCategories = [
+  {
+    title: "Getting Started",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`,
+    color: "blue",
+    questions: [
+      {
+        q: "What is a mesh network?",
+        a: "A mesh network is a type of network where each device (node) can communicate with multiple other devices and relay messages for the network. If one path fails, messages automatically find another route. This makes mesh networks resilient and self-healing — perfect for off-grid communication."
+      },
+      {
+        q: "Do I need a license to use LoRa mesh devices?",
+        a: "No. LoRa devices operate in the unlicensed ISM bands (915 MHz in North America), so no amateur radio license or FCC certification is required for personal use. Anyone can buy a device and start using it immediately."
+      },
+      {
+        q: "What's the range of a LoRa mesh network?",
+        a: "Individual links typically range from 1-10+ miles depending on terrain, antenna placement, and obstructions. With line of sight (hilltop to hilltop or rooftop to rooftop), ranges of 20+ miles are possible. Since mesh networks relay messages through multiple nodes, the total network coverage can be much larger than any single link."
+      },
+      {
+        q: "What's the cheapest way to get started?",
+        a: "The most affordable entry point is a Heltec WiFi LoRa 32 V3 board (around $18-25) with a basic antenna. Flash it with Meshtastic or MeshCore firmware using the free web flasher, pair it with your phone via Bluetooth, and you're ready to go. Total cost: under $30."
+      },
+      {
+        q: "Should I start with Meshtastic or MeshCore?",
+        a: "For most beginners, we recommend starting with Meshtastic. It's been around longer, has more documentation, and is simpler to understand. Once you're comfortable with mesh concepts, you can explore MeshCore if you're interested in building larger, more structured networks. Both run on the same hardware, so you can always switch."
+      }
+    ]
+  },
+  {
+    title: "Hardware",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>`,
+    color: "green",
+    questions: [
+      {
+        q: "What hardware do I need?",
+        a: "At minimum, you need a LoRa-capable device with an antenna. Popular options include the Heltec WiFi LoRa 32 V3, LILYGO T-Beam, RAK WisBlock, or LILYGO T-Deck (if you want a standalone device with screen and keyboard). You'll also need a smartphone or computer to send messages and configure the device."
+      },
+      {
+        q: "What's the best device for beginners?",
+        a: "The Heltec WiFi LoRa 32 V3 is our top recommendation for beginners. It's affordable (~$20), widely available, has good firmware support, includes a small OLED screen, and works with both Meshtastic and MeshCore. It's a great all-around device for learning."
+      },
+      {
+        q: "Can I use mesh networking without a smartphone?",
+        a: "Yes! Devices like the LILYGO T-Deck and T-Pager have built-in screens and keyboards, allowing you to send and receive messages directly on the device. These are great for emergency kits or situations where you might not have phone battery."
+      },
+      {
+        q: "How important is antenna choice?",
+        a: "Very important. The antenna often matters more than the device itself. A cheap radio with a good antenna will outperform an expensive radio with a poor antenna. For best results, use a properly tuned antenna matched to 915 MHz, and place it as high as possible with clear line of sight."
+      },
+      {
+        q: "What's the difference between 915 MHz and 868 MHz devices?",
+        a: "These are different frequency bands used in different regions. North America uses 915 MHz (902-928 MHz ISM band), while Europe uses 868 MHz. Make sure you buy the correct regional variant for legal operation. Using the wrong frequency band may be illegal and will definitely not work well with local networks."
+      },
+      {
+        q: "Can I use solar power for my node?",
+        a: "Yes! Solar-powered nodes are popular for remote deployments. A small 5-6W solar panel with a LiPo battery can keep most LoRa nodes running indefinitely. The RAK WisBlock and some other boards have built-in solar charging circuits. Check out our Harbor Breeze Solar Node build guide for a DIY approach."
+      }
+    ]
+  },
+  {
+    title: "Meshtastic",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" /></svg>`,
+    color: "purple",
+    questions: [
+      {
+        q: "What is Meshtastic?",
+        a: "Meshtastic is open-source firmware that turns affordable LoRa devices into a mesh network for text messaging, GPS location sharing, and sensor data. It's been around since 2019 and has a large, active community. Messages are encrypted end-to-end and work without any internet or cell service."
+      },
+      {
+        q: "Is Meshtastic encrypted?",
+        a: "Yes. Meshtastic uses AES-256 encryption for all messages. Each channel has its own encryption key (PSK), and only nodes with the matching key can read the messages. The default public channel uses a known key, so for private communication, create a new channel with a custom key."
+      },
+      {
+        q: "What's the default channel and should I change it?",
+        a: "The default channel uses a publicly known encryption key, so anyone with Meshtastic can read messages on it. This is intentional — it lets newcomers find other users and test their devices. For private conversations, create a new channel with a custom encryption key and share it only with people you trust."
+      },
+      {
+        q: "What device role should I use?",
+        a: "Most users should use the default 'Client' role. Only use Router or Repeater roles if you have a well-placed, permanently powered node that genuinely improves coverage for others. Using Router incorrectly can actually hurt network performance. See our Device Roles guide for detailed recommendations."
+      },
+      {
+        q: "How many hops can a message take?",
+        a: "Meshtastic defaults to 3 hops and supports a maximum of 7. This is usually sufficient for personal use. More hops mean more latency and more network traffic, so higher values aren't always better."
+      },
+      {
+        q: "Why don't I see any other nodes?",
+        a: "If you don't see other nodes: (1) Make sure you're on the same channel preset as others (Long Fast is common), (2) Check that your region is set correctly (US for North America), (3) Ensure your antenna is connected — transmitting without an antenna can damage your radio, (4) Try moving to higher ground or outdoors. The mesh may simply not have any nodes in your area yet."
+      }
+    ]
+  },
+  {
+    title: "MeshCore",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>`,
+    color: "orange",
+    questions: [
+      {
+        q: "What is MeshCore?",
+        a: "MeshCore is a newer mesh networking firmware (launched 2025) that takes a different approach than Meshtastic. It uses 'controlled flooding' where only dedicated repeater nodes relay messages, while personal devices (companions) don't relay traffic. This makes networks more efficient and scalable."
+      },
+      {
+        q: "Can Meshtastic and MeshCore devices talk to each other?",
+        a: "No. Meshtastic and MeshCore are separate, incompatible firmware. A device running Meshtastic cannot communicate with a device running MeshCore, even though they may use the same hardware. Pick one platform for your network."
+      },
+      {
+        q: "What's the difference between Companion, Repeater, and Room Server?",
+        a: "Companion is your personal device that you carry — it doesn't relay other people's messages. Repeater is dedicated infrastructure that forwards messages through the network. Room Server stores messages for offline users and can also act as a repeater. Most users should flash Companion firmware; only deploy Repeaters if you're building network infrastructure."
+      },
+      {
+        q: "Why would I choose MeshCore over Meshtastic?",
+        a: "MeshCore is better suited for: (1) Larger networks with many users, (2) Planned infrastructure with dedicated repeaters, (3) Situations where network efficiency matters, (4) Store-and-forward messaging for offline users. Meshtastic is better for: Ad-hoc groups, mobile scenarios, simpler setup, and situations where you want any device to help relay."
+      },
+      {
+        q: "Does MeshCore support the same hardware as Meshtastic?",
+        a: "MeshCore supports many of the same devices (Heltec V3, T-Beam, RAK WisBlock, T-Deck, etc.) but not necessarily all of them. Check the MeshCore flasher at flasher.meshcore.co.uk for the current list of supported devices."
+      }
+    ]
+  },
+  {
+    title: "Network & Coverage",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+    color: "cyan",
+    questions: [
+      {
+        q: "How can I improve my range?",
+        a: "The three biggest factors are: (1) Antenna height — get your antenna as high as possible, ideally on a rooftop or elevated mount. (2) Antenna quality — use a properly tuned antenna for 915 MHz with good SWR. (3) Line of sight — minimize obstructions between you and other nodes. Even small improvements in height can dramatically increase range."
+      },
+      {
+        q: "What's causing poor signal in my area?",
+        a: "Common causes: buildings and terrain blocking line of sight, indoor operation (signals attenuate through walls), poor antenna placement (too low, near metal objects), or simply no other nodes in range. Try moving outdoors, going to higher ground, or improving your antenna setup."
+      },
+      {
+        q: "Should I set up a repeater/router?",
+        a: "Only if: (1) You have a good location with clear line of sight to areas that need coverage, (2) You can provide reliable power (preferably continuous, not battery), (3) The node will genuinely help others, not just yourself. Setting up infrastructure nodes in poor locations or without stable power often hurts more than it helps."
+      },
+      {
+        q: "How do I test my antenna?",
+        a: "Use a NanoVNA to measure SWR (Standing Wave Ratio). A good antenna should have SWR below 1.5:1 at 915 MHz. You can also use Meshtastic's built-in signal reporting (RSSI/SNR) to compare antennas in real-world tests with a distant node."
+      },
+      {
+        q: "Is there a NodakMesh network I can connect to?",
+        a: "NodakMesh is a growing community network in North Dakota. Coverage depends on where community members have deployed nodes. Check our coverage map and join our Discord to find out if there are nodes in your area or to coordinate deployment with others."
+      }
+    ]
+  },
+  {
+    title: "Troubleshooting",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+    color: "red",
+    questions: [
+      {
+        q: "My device won't flash. What's wrong?",
+        a: "Common issues: (1) Use Chrome or Edge browser — Firefox doesn't support Web Serial, (2) Make sure no other app is using the serial port, (3) Try a different USB cable — many cables are charge-only and don't have data lines, (4) Put the device in bootloader mode if required (usually holding BOOT button while pressing RESET), (5) Install the correct USB drivers for your device's chip (CP210x or CH340)."
+      },
+      {
+        q: "My phone won't connect via Bluetooth.",
+        a: "Try: (1) Make sure Bluetooth is enabled on both phone and device, (2) Unpair and re-pair the device, (3) Reset the device and try again, (4) Check that you're using the correct app (Meshtastic app for Meshtastic firmware, MeshCore app for MeshCore), (5) Some devices need a specific pairing PIN (often 123456)."
+      },
+      {
+        q: "Why is my battery draining so fast?",
+        a: "LoRa devices should last days on battery with normal use. Fast drain indicates: (1) Screen always on (enable screen timeout), (2) GPS continuously active (use smart position or disable when not needed), (3) Overly aggressive telemetry intervals, (4) Router/Repeater role instead of Client, (5) WiFi enabled when not needed. Optimize your settings for your use case."
+      },
+      {
+        q: "Messages aren't being delivered. What should I check?",
+        a: "Verify: (1) All nodes are on the same channel with the same encryption key, (2) Region settings match (should be US for North America), (3) Antennas are properly connected, (4) You're in range of at least one other node, (5) Hop limit is sufficient for the network topology. Try sending to the local broadcast first before testing distant nodes."
+      },
+      {
+        q: "I can see nodes but can't message them.",
+        a: "If you see nodes but messages fail: (1) Check that you're both on the same channel with matching encryption, (2) The path may be one-way — you can hear them but they can't hear you (asymmetric link), (3) Try reducing message length, (4) There may be packet collisions on a busy network. Seeing a node doesn't guarantee bidirectional communication."
+      }
+    ]
+  }
+];
+
+// Generate FAQ schema for SEO
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqCategories.flatMap(cat =>
+    cat.questions.map(q => ({
+      "@type": "Question",
+      "name": q.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": q.a
+      }
+    }))
+  )
+};
+
+const colorClasses: Record<string, { bg: string; text: string }> = {
+  blue: { bg: 'bg-blue-500/10', text: 'text-blue-400' },
+  green: { bg: 'bg-green-500/10', text: 'text-green-400' },
+  purple: { bg: 'bg-purple-500/10', text: 'text-purple-400' },
+  orange: { bg: 'bg-orange-500/10', text: 'text-orange-400' },
+  cyan: { bg: 'bg-cyan-500/10', text: 'text-cyan-400' },
+  red: { bg: 'bg-red-500/10', text: 'text-red-400' },
+};
+---
+
+<Layout
+  title="FAQ - Frequently Asked Questions About LoRa Mesh Networking | NodakMesh"
+  description="Common questions about LoRa mesh networks, Meshtastic, and MeshCore answered. Learn about getting started, hardware, range, encryption, troubleshooting, and more."
+  keywords="LoRa FAQ, Meshtastic questions, MeshCore FAQ, mesh network help, do I need a license for LoRa, how far does LoRa reach, Meshtastic troubleshooting"
+>
+  <Header slot="header" />
+
+  <!-- FAQ Schema for SEO -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <div class="pt-24 pb-16">
+    <!-- Hero -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-6">
+            Frequently Asked <span class="gradient-text">Questions</span>
+          </h1>
+          <p class="text-xl text-[--color-text-secondary] leading-relaxed mb-8">
+            Answers to common questions about LoRa mesh networking, Meshtastic, MeshCore, and building off-grid communication networks.
+          </p>
+
+          <!-- Quick Jump Links -->
+          <div class="flex flex-wrap gap-3">
+            {faqCategories.map(cat => (
+              <a
+                href={`#${cat.title.toLowerCase().replace(/\s+/g, '-')}`}
+                class="btn-secondary text-sm"
+              >
+                {cat.title}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Sections -->
+    {faqCategories.map(category => (
+      <section
+        id={category.title.toLowerCase().replace(/\s+/g, '-')}
+        class="py-12 scroll-mt-24"
+      >
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center gap-3 mb-8">
+            <div class={`w-10 h-10 rounded-lg ${colorClasses[category.color].bg} flex items-center justify-center ${colorClasses[category.color].text}`}>
+              <Fragment set:html={category.icon} />
+            </div>
+            <h2 class="text-2xl font-bold text-[--color-text-primary]">{category.title}</h2>
+          </div>
+
+          <div class="space-y-4">
+            {category.questions.map((item, index) => (
+              <details class="group card overflow-hidden">
+                <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-[--color-bg-tertiary]/50 transition-colors">
+                  <h3 class="font-semibold text-[--color-text-primary] pr-4">{item.q}</h3>
+                  <svg
+                    class="w-5 h-5 text-[--color-text-muted] flex-shrink-0 transition-transform group-open:rotate-180"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div class="px-6 pb-6 text-[--color-text-secondary] leading-relaxed border-t border-[--color-border]">
+                  <p class="pt-4">{item.a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <!-- Still Have Questions -->
+    <section class="py-12">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-4">Still Have Questions?</h2>
+        <p class="text-[--color-text-secondary] mb-6">
+          Can't find what you're looking for? Our community is happy to help.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="https://discord.gg/JUBrZepkaM" target="_blank" class="btn-primary inline-flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+            </svg>
+            Ask on Discord
+          </a>
+          <a href="/glossary" class="btn-secondary">
+            View Glossary
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>

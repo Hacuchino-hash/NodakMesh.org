@@ -4,6 +4,7 @@ import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import PostCard from '../../../components/blog/PostCard.astro';
+import { calculateReadingTime } from '../../../utils/readingTime';
 
 // Helper to slugify author names - must be defined before getStaticPaths
 const slugifyAuthor = (author: string): string => {
@@ -111,6 +112,7 @@ const authorPosts = allPosts
                 category={post.data.category}
                 slug={post.id}
                 image={post.data.image}
+                readingTime={calculateReadingTime(post.body)}
               />
             ))}
           </div>

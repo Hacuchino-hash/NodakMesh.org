@@ -1,0 +1,505 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Glossary terms organized by category
+const generalTerms = [
+  {
+    term: "LoRa",
+    definition: "Long Range. A wireless modulation technique that enables long-distance, low-power radio communication. LoRa operates in unlicensed ISM bands (915 MHz in North America, 868 MHz in Europe) and can achieve ranges of several kilometers with minimal power consumption.",
+    related: ["LoRaWAN", "ISM Band", "Chirp Spread Spectrum"]
+  },
+  {
+    term: "LoRaWAN",
+    definition: "Long Range Wide Area Network. A network protocol built on top of LoRa that defines how devices communicate with gateways and servers. LoRaWAN is designed for IoT applications and requires internet-connected gateways. Note: Meshtastic and MeshCore do NOT use LoRaWAN — they use LoRa directly in a peer-to-peer mesh configuration.",
+    related: ["LoRa", "Mesh Network"]
+  },
+  {
+    term: "Mesh Network",
+    definition: "A network topology where each node can relay data for other nodes, creating multiple paths for messages to travel. If one node fails, messages can route around it. This makes mesh networks resilient and self-healing.",
+    related: ["Hop", "Node", "Flood Routing"]
+  },
+  {
+    term: "Node",
+    definition: "A single device in a mesh network. In Meshtastic and MeshCore, a node is typically a small LoRa radio module that can send, receive, and relay messages.",
+    related: ["Mesh Network", "Repeater", "Client"]
+  },
+  {
+    term: "Hop",
+    definition: "A single transmission between two nodes. When a message travels through multiple nodes to reach its destination, each relay is called a hop. More hops mean longer potential range but also more latency.",
+    related: ["Hop Limit", "Mesh Network"]
+  },
+  {
+    term: "Hop Limit",
+    definition: "The maximum number of times a message can be relayed before it stops propagating. This prevents messages from bouncing around the network forever. Meshtastic defaults to 3 hops (max 7), while MeshCore supports up to 64 hops.",
+    related: ["Hop", "TTL"]
+  },
+  {
+    term: "TTL",
+    definition: "Time To Live. In networking, this usually refers to how many hops a packet can make before being discarded. In mesh networks, it's often synonymous with hop limit.",
+    related: ["Hop Limit", "Hop"]
+  },
+  {
+    term: "SWR",
+    definition: "Standing Wave Ratio. A measure of how well an antenna is matched to its transmission line and radio. An SWR of 1.0:1 is perfect (all power is radiated). SWR below 1.5:1 is excellent for mesh networking. SWR above 3:1 means significant power is being reflected back into the radio.",
+    related: ["Antenna", "dBi", "VSWR"]
+  },
+  {
+    term: "VSWR",
+    definition: "Voltage Standing Wave Ratio. Another way of expressing SWR, commonly used interchangeably. Measured using devices like a NanoVNA.",
+    related: ["SWR", "NanoVNA"]
+  },
+  {
+    term: "NanoVNA",
+    definition: "A small, affordable vector network analyzer used to measure antenna performance, including SWR, impedance, and resonant frequency. Essential tool for testing and tuning LoRa antennas.",
+    related: ["SWR", "Antenna"]
+  },
+  {
+    term: "dBi",
+    definition: "Decibels relative to isotropic. A measure of antenna gain compared to a theoretical perfect omnidirectional antenna. Higher dBi means the antenna focuses energy in a particular direction. A 3 dBi antenna is common for portable use; 5-6 dBi for base stations.",
+    related: ["Antenna", "dBm"]
+  },
+  {
+    term: "dBm",
+    definition: "Decibels relative to one milliwatt. A measure of absolute power. In LoRa, typical transmit power is around +20 to +22 dBm. Receiver sensitivity is around -130 to -140 dBm.",
+    related: ["RSSI", "SNR", "Link Budget"]
+  },
+  {
+    term: "RSSI",
+    definition: "Received Signal Strength Indicator. A measure of how strong a received signal is, expressed in dBm. Higher (less negative) is better. For example, -80 dBm is a strong signal, -120 dBm is weak.",
+    related: ["SNR", "dBm"]
+  },
+  {
+    term: "SNR",
+    definition: "Signal-to-Noise Ratio. The difference between the signal level and the background noise, measured in dB. Positive SNR means the signal is stronger than noise. LoRa can decode signals with negative SNR (below the noise floor), which is part of what makes it so long-range.",
+    related: ["RSSI", "Spreading Factor"]
+  },
+  {
+    term: "Spreading Factor",
+    definition: "A LoRa parameter (SF7-SF12) that determines how the signal is spread across the bandwidth. Higher spreading factors (SF12) travel farther and work better in noisy conditions but transmit slower. Lower spreading factors (SF7) are faster but shorter range. Meshtastic and MeshCore use presets that set this automatically.",
+    related: ["LoRa", "Bandwidth", "Airtime"]
+  },
+  {
+    term: "Bandwidth",
+    definition: "The width of the radio frequency channel used for transmission, typically 125 kHz, 250 kHz, or 500 kHz for LoRa. Wider bandwidth means faster data transfer but shorter range.",
+    related: ["Spreading Factor", "LoRa"]
+  },
+  {
+    term: "Airtime",
+    definition: "The amount of time a radio transmission occupies the channel. In shared spectrum, minimizing airtime is important to avoid collisions with other users. Higher spreading factors and longer messages increase airtime.",
+    related: ["Duty Cycle", "Spreading Factor"]
+  },
+  {
+    term: "Duty Cycle",
+    definition: "The percentage of time a device is allowed to transmit. In some regions (especially Europe), regulations limit LoRa duty cycle to 1% or less. This means for every second of transmission, you must wait 99 seconds before transmitting again.",
+    related: ["Airtime", "ISM Band"]
+  },
+  {
+    term: "ISM Band",
+    definition: "Industrial, Scientific, and Medical radio band. Unlicensed frequency bands that can be used without a ham radio license. For LoRa mesh networking, 915 MHz is used in North America, 868 MHz in Europe, and 923 MHz in some Asian countries.",
+    related: ["LoRa", "915 MHz", "868 MHz"]
+  },
+  {
+    term: "915 MHz",
+    definition: "The ISM band frequency used for LoRa in North America (902-928 MHz). This is the frequency Meshtastic and MeshCore nodes use in the US and Canada.",
+    related: ["ISM Band", "LoRa", "868 MHz"]
+  },
+  {
+    term: "Line of Sight",
+    definition: "A clear, unobstructed path between two antennas. LoRa works best with line of sight but can penetrate some obstacles. Elevating antennas (rooftops, hills, towers) dramatically improves range by achieving better line of sight.",
+    related: ["Fresnel Zone", "NLOS"]
+  },
+  {
+    term: "NLOS",
+    definition: "Non-Line-of-Sight. Communication where the direct path between antennas is blocked by buildings, terrain, or vegetation. LoRa can work in NLOS conditions but with reduced range.",
+    related: ["Line of Sight", "Fresnel Zone"]
+  },
+  {
+    term: "Fresnel Zone",
+    definition: "An elliptical area around the line of sight between two antennas. For best performance, this zone should be at least 60% clear of obstructions. Even without visible obstacles, ground reflections can interfere if antennas are too low.",
+    related: ["Line of Sight", "NLOS"]
+  },
+  {
+    term: "Antenna",
+    definition: "A device that converts electrical signals into radio waves (transmit) and vice versa (receive). Antenna choice significantly affects range and coverage. Common types for LoRa include whip, dipole, collinear, and Yagi antennas.",
+    related: ["dBi", "SWR", "Omnidirectional", "Directional"]
+  },
+  {
+    term: "Omnidirectional Antenna",
+    definition: "An antenna that radiates signal equally in all horizontal directions (360 degrees). Good for general coverage when you don't know where other nodes will be. Most LoRa antennas are omnidirectional.",
+    related: ["Directional Antenna", "dBi"]
+  },
+  {
+    term: "Directional Antenna",
+    definition: "An antenna that focuses signal in a specific direction, providing longer range in that direction but reduced coverage elsewhere. Yagi and panel antennas are examples. Useful for point-to-point links between distant nodes.",
+    related: ["Omnidirectional Antenna", "Yagi"]
+  },
+  {
+    term: "u.FL Connector",
+    definition: "A small, surface-mount RF connector used on most LoRa modules. Fragile and not rated for many connect/disconnect cycles. Usually connected to an SMA pigtail for external antennas.",
+    related: ["SMA Connector", "Pigtail"]
+  },
+  {
+    term: "SMA Connector",
+    definition: "SubMiniature version A. A threaded RF connector commonly used for external antennas. More durable than u.FL. Note: SMA and RP-SMA (Reverse Polarity) look similar but are not compatible.",
+    related: ["u.FL Connector", "RP-SMA"]
+  },
+  {
+    term: "ESP32",
+    definition: "A popular low-cost microcontroller with built-in WiFi and Bluetooth, made by Espressif. Many Meshtastic and MeshCore devices use ESP32 paired with a separate LoRa radio chip (SX1262 or SX1276).",
+    related: ["nRF52", "SX1262"]
+  },
+  {
+    term: "nRF52",
+    definition: "A family of low-power microcontrollers from Nordic Semiconductor with built-in Bluetooth. Used in devices like RAK WisBlock and LILYGO T-Echo. Known for excellent power efficiency compared to ESP32.",
+    related: ["ESP32", "RAK WisBlock"]
+  },
+  {
+    term: "SX1262",
+    definition: "A LoRa transceiver chip from Semtech. The newer, more efficient successor to the SX1276. Most modern Meshtastic/MeshCore devices use the SX1262 for better performance and lower power consumption.",
+    related: ["SX1276", "LoRa"]
+  },
+  {
+    term: "Firmware",
+    definition: "The software that runs on a device's microcontroller. Meshtastic and MeshCore are different firmware options that can be flashed onto compatible LoRa hardware. Firmware can usually be updated via USB or over-the-air.",
+    related: ["Flash", "OTA"]
+  },
+  {
+    term: "Flash",
+    definition: "To write firmware to a device's memory. This is typically done via USB using a web flasher or dedicated tool. Flashing new firmware replaces the existing software on the device.",
+    related: ["Firmware", "Web Flasher"]
+  },
+  {
+    term: "Web Flasher",
+    definition: "A browser-based tool for flashing firmware to devices without installing software. Both Meshtastic (flasher.meshtastic.org) and MeshCore (flasher.meshcore.co.uk) offer web flashers that work in Chrome/Edge browsers.",
+    related: ["Flash", "Firmware"]
+  },
+  {
+    term: "Encryption",
+    definition: "Encoding messages so only intended recipients can read them. Both Meshtastic and MeshCore support AES-256 encryption. Messages are encrypted end-to-end, meaning even relay nodes cannot read the content.",
+    related: ["PSK", "AES-256"]
+  },
+  {
+    term: "PSK",
+    definition: "Pre-Shared Key. A password or key that all nodes in a group must have to decrypt messages. In Meshtastic, this is set per channel. Nodes without the correct PSK cannot read encrypted traffic.",
+    related: ["Encryption", "Channel"]
+  },
+  {
+    term: "Channel",
+    definition: "In Meshtastic, a logical grouping of nodes that share the same encryption key and can communicate with each other. A single device can be on multiple channels simultaneously. Not to be confused with radio frequency channels.",
+    related: ["PSK", "Primary Channel"]
+  },
+  {
+    term: "Telemetry",
+    definition: "Sensor data broadcast by nodes, such as battery level, temperature, humidity, or GPS location. This data helps monitor device health and track locations but increases network traffic.",
+    related: ["Position", "Device Metrics"]
+  },
+  {
+    term: "Position",
+    definition: "GPS coordinates broadcast by a node. Enables features like distance calculation, map tracking, and location sharing. Can be disabled for privacy.",
+    related: ["Telemetry", "GPS"]
+  }
+];
+
+const meshtasticTerms = [
+  {
+    term: "Client",
+    definition: "The default Meshtastic device role. A client sends and receives messages and will rebroadcast messages for other nodes when needed. Most devices should use this role.",
+    related: ["Router", "Client Mute", "Device Role"]
+  },
+  {
+    term: "Client Mute",
+    definition: "A Meshtastic device role that sends and receives messages but never rebroadcasts for others. Use this when you have multiple nodes in the same location to avoid redundant transmissions.",
+    related: ["Client", "Client Hidden"]
+  },
+  {
+    term: "Client Hidden",
+    definition: "A Meshtastic device role for minimal presence on the network. Transmits only when necessary and doesn't broadcast telemetry. Good for privacy-conscious users.",
+    related: ["Client", "Client Mute"]
+  },
+  {
+    term: "Router",
+    definition: "A Meshtastic device role for dedicated relay nodes. Routers rebroadcast aggressively and prioritize relaying over personal use. Should only be used for well-placed infrastructure nodes with reliable power.",
+    related: ["Repeater", "Router_Late", "Client"]
+  },
+  {
+    term: "Router_Late",
+    definition: "A Meshtastic device role that waits before rebroadcasting, only stepping in if other nodes fail to relay. Good for backup coverage or gap-filling.",
+    related: ["Router", "Repeater"]
+  },
+  {
+    term: "Repeater",
+    definition: "A Meshtastic device role for silent relay nodes. Repeaters rebroadcast messages but don't announce their presence and may not appear in node lists. Used for public infrastructure.",
+    related: ["Router", "Router_Late"]
+  },
+  {
+    term: "Tracker",
+    definition: "A Meshtastic device role optimized for GPS position updates. Prioritizes location broadcasts for tracking people, vehicles, or assets.",
+    related: ["Position", "Lost and Found"]
+  },
+  {
+    term: "Sensor",
+    definition: "A Meshtastic device role for telemetry-focused nodes like weather stations. Prioritizes sensor data and often uses deep sleep between readings to conserve power.",
+    related: ["Telemetry", "Client"]
+  },
+  {
+    term: "TAK",
+    definition: "Team Awareness Kit. Military-derived situational awareness software (ATAK for Android, iTAK for iOS). Meshtastic has TAK device roles and plugins for integration with TAK applications.",
+    related: ["ATAK", "TAK_Tracker"]
+  },
+  {
+    term: "Primary Channel",
+    definition: "Channel 0 in Meshtastic, used for default communication and device administration. All nodes should have matching primary channel settings to communicate.",
+    related: ["Channel", "Secondary Channel"]
+  },
+  {
+    term: "Secondary Channel",
+    definition: "Additional channels (1-7) in Meshtastic that can have different encryption keys and purposes. Useful for creating private groups within a larger mesh.",
+    related: ["Primary Channel", "Channel"]
+  },
+  {
+    term: "Store and Forward",
+    definition: "A Meshtastic module that stores messages when recipients are offline and delivers them when they return to the network. Requires a node with the module enabled to act as a server.",
+    related: ["Module", "Router"]
+  },
+  {
+    term: "Module",
+    definition: "Optional features in Meshtastic that can be enabled or disabled, such as Store and Forward, Range Test, Serial communication, or Canned Messages.",
+    related: ["Store and Forward", "Range Test"]
+  },
+  {
+    term: "Range Test",
+    definition: "A Meshtastic module that sends test messages at regular intervals to measure network coverage and performance.",
+    related: ["Module", "SNR"]
+  },
+  {
+    term: "Node Info",
+    definition: "Information about a node including its name, hardware, firmware version, and role. Broadcast periodically so other nodes know who's on the network.",
+    related: ["Telemetry", "Node"]
+  },
+  {
+    term: "Flood Routing",
+    definition: "Meshtastic's message propagation method where messages are rebroadcast by multiple nodes to ensure delivery. Simple and resilient but can cause network congestion in large meshes.",
+    related: ["Mesh Network", "Hop Limit"]
+  },
+  {
+    term: "Long Fast",
+    definition: "A Meshtastic channel preset optimized for range. Uses slower data rates (higher spreading factor) to achieve maximum distance at the cost of speed.",
+    related: ["Short Fast", "Spreading Factor"]
+  },
+  {
+    term: "Short Fast",
+    definition: "A Meshtastic channel preset optimized for speed. Uses faster data rates (lower spreading factor) but with reduced range. Good for dense urban areas.",
+    related: ["Long Fast", "Spreading Factor"]
+  }
+];
+
+const meshcoreTerms = [
+  {
+    term: "Companion",
+    definition: "A MeshCore device role for personal nodes paired with a phone or computer. Companions send and receive messages but do NOT relay traffic for other users. This keeps the network efficient and saves battery.",
+    related: ["Repeater", "Room Server"]
+  },
+  {
+    term: "Repeater (MeshCore)",
+    definition: "A MeshCore device role for dedicated relay nodes. Repeaters forward messages between companions that can't reach each other directly. Use controlled flooding to efficiently route messages through the network. Should be placed in elevated locations with reliable power.",
+    related: ["Companion", "Room Server", "Controlled Flooding"]
+  },
+  {
+    term: "Room Server",
+    definition: "A MeshCore device role that stores messages for offline users. When someone reconnects, the room server delivers messages they missed. Can also function as a repeater ('room-peater' mode). Password protected by default.",
+    related: ["Companion", "Repeater"]
+  },
+  {
+    term: "Controlled Flooding",
+    definition: "MeshCore's routing algorithm where only repeaters forward messages (companions don't relay). This dramatically reduces network traffic compared to Meshtastic's full flood routing, allowing for larger, more efficient meshes.",
+    related: ["Flood Routing", "Repeater"]
+  },
+  {
+    term: "Advert",
+    definition: "A periodic announcement broadcast by MeshCore repeaters to let companions know they exist and can be used for routing. Adverts are sent infrequently to minimize network traffic.",
+    related: ["Repeater", "Controlled Flooding"]
+  },
+  {
+    term: "Contact",
+    definition: "In MeshCore, a known user you can exchange direct messages with. Contacts are discovered through the mesh and stored locally. MeshCore emphasizes direct messaging over broadcast channels.",
+    related: ["Discover", "Direct Message"]
+  },
+  {
+    term: "Discover",
+    definition: "The MeshCore feature for finding other users and devices on the network. The app has a Discover screen that shows repeaters and other companions in range.",
+    related: ["Contact", "Advert"]
+  },
+  {
+    term: "Direct Message",
+    definition: "A private message sent to a specific contact in MeshCore. Unlike broadcast messages, direct messages are encrypted specifically for the recipient and routed efficiently through the mesh.",
+    related: ["Contact", "Encryption"]
+  },
+  {
+    term: "Public Channel",
+    definition: "A broadcast channel in MeshCore where anyone can participate. Similar to Meshtastic channels but less commonly used since MeshCore emphasizes direct messaging.",
+    related: ["Direct Message", "Room Server"]
+  },
+  {
+    term: "EasySkyMesh",
+    definition: "A community project providing optimized MeshCore firmware builds with better power efficiency (8-10mA idle on repeaters), improved sensor support, and pre-configured board settings.",
+    related: ["Firmware", "Repeater"]
+  },
+  {
+    term: "MeshCore Flasher",
+    definition: "The official web-based tool for flashing MeshCore firmware at flasher.meshcore.co.uk. Supports companion, repeater, and room server builds for various hardware.",
+    related: ["Web Flasher", "Firmware"]
+  },
+  {
+    term: "MeshCore App",
+    definition: "The mobile application for interacting with MeshCore devices. Available for Android and iOS, also accessible via web at app.meshcore.nz. Used to send messages, discover contacts, and configure devices.",
+    related: ["Companion", "Contact"]
+  }
+];
+
+// Helper to create slug from term
+const slugify = (term: string) => term.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+---
+
+<Layout
+  title="Mesh Networking Glossary - LoRa, Meshtastic & MeshCore Terms | NodakMesh"
+  description="Complete glossary of LoRa mesh networking terminology. Learn definitions for SWR, RSSI, SNR, spreading factor, and more. Covers Meshtastic device roles and MeshCore concepts."
+  keywords="LoRa glossary, Meshtastic terms, MeshCore definitions, mesh network terminology, SWR definition, RSSI meaning, SNR explained, spreading factor, hop limit, device roles"
+>
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16">
+    <!-- Hero -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-6">
+            Mesh Networking <span class="gradient-text">Glossary</span>
+          </h1>
+          <p class="text-xl text-[--color-text-secondary] leading-relaxed mb-8">
+            A comprehensive guide to LoRa, Meshtastic, and MeshCore terminology. Whether you're new to mesh networking or looking up a specific term, this glossary has you covered.
+          </p>
+
+          <!-- Quick Jump Links -->
+          <div class="flex flex-wrap gap-3">
+            <a href="#general" class="btn-secondary text-sm">General / RF Terms</a>
+            <a href="#meshtastic" class="btn-secondary text-sm">Meshtastic</a>
+            <a href="#meshcore" class="btn-secondary text-sm">MeshCore</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- General Terms Section -->
+    <section id="general" class="py-12 scroll-mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
+            <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold text-[--color-text-primary]">General / RF Terms</h2>
+        </div>
+
+        <div class="grid gap-4">
+          {generalTerms.map(item => (
+            <div id={slugify(item.term)} class="card p-6 scroll-mt-24 hover:border-[--color-accent]/30 transition-colors">
+              <h3 class="text-lg font-bold text-[--color-text-primary] mb-2">{item.term}</h3>
+              <p class="text-[--color-text-secondary] leading-relaxed mb-3">{item.definition}</p>
+              {item.related && item.related.length > 0 && (
+                <div class="flex flex-wrap gap-2">
+                  <span class="text-xs text-[--color-text-muted]">Related:</span>
+                  {item.related.map(rel => (
+                    <a href={`#${slugify(rel)}`} class="text-xs text-[--color-accent] hover:underline">{rel}</a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Meshtastic Terms Section -->
+    <section id="meshtastic" class="py-12 scroll-mt-24 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
+            <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold text-[--color-text-primary]">Meshtastic Terms</h2>
+        </div>
+
+        <div class="grid gap-4">
+          {meshtasticTerms.map(item => (
+            <div id={slugify(item.term)} class="card p-6 scroll-mt-24 hover:border-[--color-accent]/30 transition-colors">
+              <h3 class="text-lg font-bold text-[--color-text-primary] mb-2">{item.term}</h3>
+              <p class="text-[--color-text-secondary] leading-relaxed mb-3">{item.definition}</p>
+              {item.related && item.related.length > 0 && (
+                <div class="flex flex-wrap gap-2">
+                  <span class="text-xs text-[--color-text-muted]">Related:</span>
+                  {item.related.map(rel => (
+                    <a href={`#${slugify(rel)}`} class="text-xs text-[--color-accent] hover:underline">{rel}</a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- MeshCore Terms Section -->
+    <section id="meshcore" class="py-12 scroll-mt-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center">
+            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold text-[--color-text-primary]">MeshCore Terms</h2>
+        </div>
+
+        <div class="grid gap-4">
+          {meshcoreTerms.map(item => (
+            <div id={slugify(item.term)} class="card p-6 scroll-mt-24 hover:border-[--color-accent]/30 transition-colors">
+              <h3 class="text-lg font-bold text-[--color-text-primary] mb-2">{item.term}</h3>
+              <p class="text-[--color-text-secondary] leading-relaxed mb-3">{item.definition}</p>
+              {item.related && item.related.length > 0 && (
+                <div class="flex flex-wrap gap-2">
+                  <span class="text-xs text-[--color-text-muted]">Related:</span>
+                  {item.related.map(rel => (
+                    <a href={`#${slugify(rel)}`} class="text-xs text-[--color-accent] hover:underline">{rel}</a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-12">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-4">Missing a Term?</h2>
+        <p class="text-[--color-text-secondary] mb-6">
+          If you've come across a term that's not in this glossary, let us know and we'll add it.
+        </p>
+        <a href="https://discord.gg/JUBrZepkaM" target="_blank" class="btn-primary inline-flex items-center gap-2">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+          </svg>
+          Suggest on Discord
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>

@@ -6,6 +6,7 @@ import Footer from '../../components/Footer.astro';
 import PostCard from '../../components/blog/PostCard.astro';
 import FeaturedPost from '../../components/blog/FeaturedPost.astro';
 import CategoryBadge from '../../components/blog/CategoryBadge.astro';
+import { calculateReadingTime } from '../../utils/readingTime';
 
 // Get all blog posts sorted by date
 const allPosts = await getCollection('blog');
@@ -68,6 +69,7 @@ const categories = ['reviews', 'news', 'guides', 'community'] as const;
               category={featuredPost.data.category}
               slug={featuredPost.id}
               image={featuredPost.data.image}
+              readingTime={calculateReadingTime(featuredPost.body)}
             />
           </div>
         )}
@@ -84,6 +86,7 @@ const categories = ['reviews', 'news', 'guides', 'community'] as const;
                 category={post.data.category}
                 slug={post.id}
                 image={post.data.image}
+                readingTime={calculateReadingTime(post.body)}
               />
             ))}
           </div>

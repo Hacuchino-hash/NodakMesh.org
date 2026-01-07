@@ -1,0 +1,26 @@
+import rss from '@astrojs/rss';
+import { getCollection } from 'astro:content';
+import type { APIContext } from 'astro';
+
+export async function GET(context: APIContext) {
+  const posts = await getCollection('blog');
+
+  const sortedPosts = posts.sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  );
+
+  return rss({
+    title: 'NodakMesh Blog',
+    description: 'Guides, tutorials, and news about LoRa mesh networking in North Dakota. Learn about Meshtastic, MeshCore, and building resilient off-grid communication networks.',
+    site: context.site ?? 'https://nodakmesh.org',
+    items: sortedPosts.map((post) => ({
+      title: post.data.title,
+      pubDate: post.data.date,
+      description: post.data.description,
+      link: `/blog/${post.id}/`,
+      categories: post.data.tags || [],
+      author: post.data.author,
+    })),
+    customData: `<language>en-us</language>`,
+  });
+}
