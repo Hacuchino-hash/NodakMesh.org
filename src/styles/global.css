@@ -473,3 +473,78 @@ a.card:hover,
 .caption a {
   color: var(--color-text-muted) !important;
 }
+
+/* ========================================
+   MOBILE OPTIMIZATIONS
+   ======================================== */
+
+/* Responsive prose images */
+@media (max-width: 480px) {
+  .prose img {
+    max-width: 100%;
+  }
+
+  .prose .image-compare {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .prose .image-compare img:first-child,
+  .prose .image-compare img:last-child {
+    max-width: 100%;
+  }
+}
+
+/* Tables - ensure horizontal scroll on mobile */
+.prose table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+
+.prose table th,
+.prose table td {
+  white-space: nowrap;
+  min-width: 100px;
+}
+
+@media (min-width: 768px) {
+  .prose table {
+    display: table;
+  }
+
+  .prose table th,
+  .prose table td {
+    white-space: normal;
+  }
+}
+
+/* Code blocks - horizontal scroll on mobile */
+.prose pre {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+.prose code {
+  word-break: break-word;
+}
+
+/* Inline code on mobile - allow wrapping */
+@media (max-width: 640px) {
+  .prose code:not(pre code) {
+    word-break: break-all;
+  }
+}
+
+/* Prevent horizontal overflow from any element */
+.prose {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Long URLs and text handling */
+.prose a {
+  word-break: break-word;
+}
