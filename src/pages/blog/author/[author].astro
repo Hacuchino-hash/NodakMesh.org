@@ -5,6 +5,11 @@ import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import PostCard from '../../../components/blog/PostCard.astro';
 
+// Helper to slugify author names - must be defined before getStaticPaths
+const slugifyAuthor = (author: string): string => {
+  return author.toLowerCase().replace(/\s+/g, '-');
+};
+
 // Define known authors with their info
 const authorInfo: Record<string, { name: string; bio: string; avatar?: string }> = {
   'nodakmesh-team': {
@@ -17,22 +22,20 @@ const authorInfo: Record<string, { name: string; bio: string; avatar?: string }>
   },
 };
 
-// Helper to slugify author names
-function slugifyAuthor(author: string): string {
-  return author.toLowerCase().replace(/\s+/g, '-');
-}
-
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
+
+  // Helper function defined inside getStaticPaths for Astro compilation
+  const slugify = (author: string): string => author.toLowerCase().replace(/\s+/g, '-');
 
   // Get unique authors
   const authors = [...new Set(posts.map(post => post.data.author).filter(Boolean))];
 
   return authors.map(author => ({
-    params: { author: slugifyAuthor(author || 'unknown') },
+    params: { author: slugify(author || 'unknown') },
     props: {
       authorName: author,
-      authorSlug: slugifyAuthor(author || 'unknown'),
+      authorSlug: slugify(author || 'unknown'),
     },
   }));
 }
