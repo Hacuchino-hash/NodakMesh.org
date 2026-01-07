@@ -2,6 +2,7 @@
 title: "What Is a LoRa Mesh Network? Beginner's Guide to Off-Grid Communication"
 description: "Learn what LoRa mesh networks are, how they work, and why they're perfect for off-grid communication. A complete beginner's guide to mesh networking without cell service or internet."
 date: 2025-12-20
+author: "Josh"
 category: "guides"
 featured: true
 ---

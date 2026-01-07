@@ -2,7 +2,7 @@
 title: "Budget Solar Meshtastic Node — Harbor Breeze Hack"
 description: "Transform a $10 Harbor Breeze solar garden light into a weatherproof, self-sustaining LoRa mesh node using RAK WisBlock components."
 date: 2025-12-18
-author: "NodakMesh Team"
+author: "Josh"
 category: "guides"
 tags: ["solar", "rak-wisblock", "outdoor", "weatherproofing", "harbor-breeze", "diy", "meshtastic"]
 image: "/images/blog/harbor-breeze-build/completed-build-cowdog360.webp"

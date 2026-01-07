@@ -2,7 +2,7 @@
 title: "Top 5 Portable Meshtastic & MeshCore Nodes to Carry in 2025"
 description: "Looking for the best portable mesh networking device? We break down the top 5 LoRa nodes for Meshtastic and MeshCore in 2025—from ultra-compact card trackers to full-featured handhelds with keyboards."
 date: 2025-12-24
-author: "NodakMesh Team"
+author: "Josh"
 category: "guides"
 tags: ["meshtastic", "meshcore", "portable", "lora", "best of 2025", "t-echo", "t-deck", "t-beam", "sensecap", "rak", "hardware", "buying guide"]
 image: "/images/devices/t-echo.jpg"

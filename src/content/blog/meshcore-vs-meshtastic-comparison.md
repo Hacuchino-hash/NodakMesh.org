@@ -2,6 +2,7 @@
 title: "MeshCore vs Meshtastic: Which LoRa Mesh Platform Is Right for You?"
 description: "A beginner-friendly comparison of MeshCore and Meshtastic. Learn the key differences in network design, speed, and use cases to choose the best off-grid mesh platform for your needs."
 date: 2025-12-20
+author: "Josh"
 category: "guides"
 featured: true
 ---

@@ -2,10 +2,10 @@
 title: "Introducing Nodak Mesh"
 description: "Nodak Mesh is a growing community of hobbyists, tinkerers, and curious newcomers building resilient mesh networks across North Dakota and beyond."
 date: 2025-12-17
-author: "NodakMesh Team"
+author: "Josh"
 category: "community"
 tags: ["community", "introduction", "meshtastic", "meshcore", "north-dakota"]
-image: "/images/og-default.png"
+image: "/images/og-default.jpg"
 featured: true
 ---
 
