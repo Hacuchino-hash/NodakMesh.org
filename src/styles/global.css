@@ -350,6 +350,13 @@ a.card:hover,
   animation: gradient-shift 6s ease-in-out infinite;
 }
 
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-text-animated {
+    animation: none;
+  }
+}
+
 /* Animated mesh canvas container */
 #mesh-canvas {
   position: absolute;
