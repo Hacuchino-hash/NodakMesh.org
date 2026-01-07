@@ -1,0 +1,292 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="MeshCore Enclosures & Cases - NodakMesh"
+  description="Enclosures and cases for MeshCore devices. Find 3D printable cases, weatherproof enclosures, and commercial options for your mesh nodes."
+  keywords="MeshCore enclosure, MeshCore case, 3D printed case, weatherproof enclosure, Heltec V3 case, RAK case, mesh node enclosure"
+>
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16">
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+          <div class="flex items-center gap-2 text-[--color-text-muted] text-sm mb-4">
+            <a href="/meshcore" class="hover:text-[--color-accent]">MeshCore</a>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <span>Enclosures</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-bold text-[--color-text-primary] mb-2">
+            Enclosures & <span class="gradient-text">Cases</span>
+          </h1>
+          <p class="text-[--color-text-secondary]">
+            Protect your MeshCore nodes with the right enclosure for your deployment.
+          </p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex flex-col lg:flex-row gap-8">
+          <!-- Sidebar -->
+          <aside class="lg:w-64 flex-shrink-0">
+            <div class="card p-4 sticky top-24">
+              <h3 class="text-xs font-semibold text-[--color-text-muted] mb-3 uppercase tracking-wider">On This Page</h3>
+              <nav class="space-y-1">
+                <a href="#3d-printed" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                  3D Printed Cases
+                </a>
+                <a href="#commercial" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                  Commercial Options
+                </a>
+                <a href="#weatherproof" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                  Weatherproof Enclosures
+                </a>
+                <a href="#diy" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                  DIY Solutions
+                </a>
+              </nav>
+
+              <div class="mt-6 pt-4 border-t border-[--color-border]">
+                <h3 class="text-xs font-semibold text-[--color-text-muted] mb-3 uppercase tracking-wider">More Hardware</h3>
+                <nav class="space-y-1">
+                  <a href="/meshcore/devices" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                    Devices
+                  </a>
+                  <a href="/meshcore/antennas" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                    Antennas
+                  </a>
+                </nav>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Content -->
+          <main class="flex-1 min-w-0">
+            <div class="space-y-8">
+
+              <!-- Info Banner -->
+              <div class="card p-4 bg-[--color-accent]/5 border-l-4 border-[--color-accent]">
+                <p class="text-sm text-[--color-text-secondary]">
+                  <strong class="text-[--color-text-primary]">Same devices, same enclosures.</strong> MeshCore runs on the same hardware as Meshtastic—any enclosure designed for a Heltec V3, RAK, or T-Beam works for MeshCore too. Search for "Meshtastic" cases to find the largest selection.
+                </p>
+              </div>
+
+              <!-- 3D Printed Cases -->
+              <section id="3d-printed" class="card p-6">
+                <h2 class="text-xl font-bold text-[--color-text-primary] mb-4 flex items-center gap-2">
+                  <svg class="w-6 h-6 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+                  </svg>
+                  3D Printed Cases
+                </h2>
+                <p class="text-[--color-text-secondary] mb-4">
+                  The community has created hundreds of 3D printable case designs. Here are the best places to find them:
+                </p>
+
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <a href="https://www.printables.com/search/models?q=meshtastic" target="_blank" class="block p-4 bg-[--color-bg-tertiary] rounded-lg hover:bg-[--color-bg-secondary] transition-colors">
+                    <h3 class="font-semibold text-[--color-text-primary] mb-1">Printables</h3>
+                    <p class="text-sm text-[--color-text-muted]">Large collection with ratings and remixes</p>
+                  </a>
+                  <a href="https://www.thingiverse.com/search?q=meshtastic" target="_blank" class="block p-4 bg-[--color-bg-tertiary] rounded-lg hover:bg-[--color-bg-secondary] transition-colors">
+                    <h3 class="font-semibold text-[--color-text-primary] mb-1">Thingiverse</h3>
+                    <p class="text-sm text-[--color-text-muted]">Classic 3D model repository</p>
+                  </a>
+                  <a href="https://thangs.com/search/meshtastic" target="_blank" class="block p-4 bg-[--color-bg-tertiary] rounded-lg hover:bg-[--color-bg-secondary] transition-colors">
+                    <h3 class="font-semibold text-[--color-text-primary] mb-1">Thangs</h3>
+                    <p class="text-sm text-[--color-text-muted]">Growing library of mesh node enclosures</p>
+                  </a>
+                  <a href="https://cults3d.com/en/search?q=meshtastic" target="_blank" class="block p-4 bg-[--color-bg-tertiary] rounded-lg hover:bg-[--color-bg-secondary] transition-colors">
+                    <h3 class="font-semibold text-[--color-text-primary] mb-1">Cults3D</h3>
+                    <p class="text-sm text-[--color-text-muted]">Premium and free designs</p>
+                  </a>
+                </div>
+
+                <div class="mt-4 p-4 bg-[--color-bg-secondary] rounded-lg border border-[--color-border]">
+                  <p class="text-sm text-[--color-text-secondary]">
+                    <strong class="text-[--color-text-primary]">Tip:</strong> Search for your specific board (e.g., "Heltec V3 case" or "RAK4631 enclosure") for the best results.
+                  </p>
+                </div>
+              </section>
+
+              <!-- Commercial Options -->
+              <section id="commercial" class="card p-6">
+                <h2 class="text-xl font-bold text-[--color-text-primary] mb-4 flex items-center gap-2">
+                  <svg class="w-6 h-6 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                  </svg>
+                  Commercial Options
+                </h2>
+                <p class="text-[--color-text-secondary] mb-4">
+                  Ready-made enclosures from vendors who specialize in mesh networking hardware:
+                </p>
+
+                <div class="space-y-4">
+                  <a href="https://muzi.works/" target="_blank" class="block p-4 bg-[--color-bg-tertiary] rounded-lg hover:bg-[--color-bg-secondary] transition-colors">
+                    <div class="flex justify-between items-start">
+                      <div>
+                        <h3 class="font-semibold text-[--color-text-primary] mb-1">Muzi Works</h3>
+                        <p class="text-sm text-[--color-text-muted]">High-quality injection molded cases for Heltec V3 and other boards. Designed for field use.</p>
+                      </div>
+                      <svg class="w-5 h-5 text-[--color-text-muted] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </div>
+                  </a>
+                  <a href="https://store.rokland.com/collections/meshtastic-accessories" target="_blank" class="block p-4 bg-[--color-bg-tertiary] rounded-lg hover:bg-[--color-bg-secondary] transition-colors">
+                    <div class="flex justify-between items-start">
+                      <div>
+                        <h3 class="font-semibold text-[--color-text-primary] mb-1">Rokland</h3>
+                        <p class="text-sm text-[--color-text-muted]">Cases, antennas, and complete kits for mesh deployments.</p>
+                      </div>
+                      <svg class="w-5 h-5 text-[--color-text-muted] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </div>
+                  </a>
+                  <a href="https://www.etsy.com/search?q=meshtastic+case" target="_blank" class="block p-4 bg-[--color-bg-tertiary] rounded-lg hover:bg-[--color-bg-secondary] transition-colors">
+                    <div class="flex justify-between items-start">
+                      <div>
+                        <h3 class="font-semibold text-[--color-text-primary] mb-1">Etsy</h3>
+                        <p class="text-sm text-[--color-text-muted]">Community makers selling 3D printed and custom cases.</p>
+                      </div>
+                      <svg class="w-5 h-5 text-[--color-text-muted] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </div>
+                  </a>
+                </div>
+              </section>
+
+              <!-- Weatherproof Enclosures -->
+              <section id="weatherproof" class="card p-6">
+                <h2 class="text-xl font-bold text-[--color-text-primary] mb-4 flex items-center gap-2">
+                  <svg class="w-6 h-6 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                  </svg>
+                  Weatherproof Enclosures
+                </h2>
+                <p class="text-[--color-text-secondary] mb-4">
+                  For outdoor repeaters and solar-powered nodes, you'll need an IP-rated enclosure:
+                </p>
+
+                <div class="overflow-x-auto">
+                  <table class="w-full text-sm">
+                    <thead>
+                      <tr class="border-b border-[--color-border]">
+                        <th class="text-left py-2 text-[--color-text-primary]">Type</th>
+                        <th class="text-left py-2 text-[--color-text-primary]">IP Rating</th>
+                        <th class="text-left py-2 text-[--color-text-primary]">Best For</th>
+                      </tr>
+                    </thead>
+                    <tbody class="text-[--color-text-secondary]">
+                      <tr class="border-b border-[--color-border]">
+                        <td class="py-2">Junction Box</td>
+                        <td class="py-2">IP65-IP68</td>
+                        <td class="py-2">Permanent outdoor installations</td>
+                      </tr>
+                      <tr class="border-b border-[--color-border]">
+                        <td class="py-2">Pelican/Harbor Freight</td>
+                        <td class="py-2">IP67</td>
+                        <td class="py-2">Portable rugged deployments</td>
+                      </tr>
+                      <tr class="border-b border-[--color-border]">
+                        <td class="py-2">PVC Pipe Cap</td>
+                        <td class="py-2">IP67+</td>
+                        <td class="py-2">DIY budget outdoor nodes</td>
+                      </tr>
+                      <tr>
+                        <td class="py-2">Ammo Can</td>
+                        <td class="py-2">Water resistant</td>
+                        <td class="py-2">Large solar + battery setups</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="mt-4 p-4 bg-[--color-warning]/10 rounded-lg border border-[--color-warning]/20">
+                  <p class="text-sm text-[--color-text-secondary]">
+                    <strong class="text-[--color-warning]">Important:</strong> Antenna feed-through is often the weak point. Use proper cable glands or waterproof SMA bulkhead connectors.
+                  </p>
+                </div>
+              </section>
+
+              <!-- DIY Solutions -->
+              <section id="diy" class="card p-6">
+                <h2 class="text-xl font-bold text-[--color-text-primary] mb-4 flex items-center gap-2">
+                  <svg class="w-6 h-6 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  DIY Solutions
+                </h2>
+                <p class="text-[--color-text-secondary] mb-4">
+                  Creative solutions from the community for budget-friendly enclosures:
+                </p>
+
+                <ul class="space-y-3 text-[--color-text-secondary]">
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span><strong class="text-[--color-text-primary]">Food containers:</strong> Takeout containers and Tupperware work for indoor use</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span><strong class="text-[--color-text-primary]">PVC pipe:</strong> 2-3" PVC with end caps makes excellent weatherproof tubes</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span><strong class="text-[--color-text-primary]">Electrical boxes:</strong> Standard junction boxes from hardware stores are IP-rated</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span><strong class="text-[--color-text-primary]">Altoids tins:</strong> Classic hacker enclosure for compact indoor nodes</span>
+                  </li>
+                </ul>
+              </section>
+
+              <!-- Quick Tips -->
+              <section class="card p-6 bg-gradient-to-r from-[--color-accent]/5 to-transparent border-l-4 border-[--color-accent]">
+                <h2 class="text-xl font-bold text-[--color-text-primary] mb-4">Enclosure Selection Tips</h2>
+                <ul class="space-y-2 text-[--color-text-secondary]">
+                  <li class="flex items-start gap-2">
+                    <span class="text-[--color-accent] font-bold">1.</span>
+                    <span>Consider heat dissipation—ESP32 boards can get warm under load</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-[--color-accent] font-bold">2.</span>
+                    <span>Leave room for battery expansion if using LiPo/18650 cells</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-[--color-accent] font-bold">3.</span>
+                    <span>External antenna connections are better than internal for range</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-[--color-accent] font-bold">4.</span>
+                    <span>Use silica gel packets in sealed outdoor enclosures to prevent condensation</span>
+                  </li>
+                </ul>
+              </section>
+
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>

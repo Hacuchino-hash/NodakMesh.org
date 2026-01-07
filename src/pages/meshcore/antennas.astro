@@ -1,0 +1,269 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="MeshCore Antennas - NodakMesh"
+  description="LoRa antenna guide for MeshCore mesh networks. Learn about antenna selection, testing, SWR measurements, and recommendations for 915MHz deployments."
+  keywords="MeshCore antenna, LoRa antenna, 915MHz antenna, mesh network antenna, SWR testing, antenna selection, MeshCore range"
+>
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16">
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+          <div class="flex items-center gap-2 text-[--color-text-muted] text-sm mb-4">
+            <a href="/meshcore" class="hover:text-[--color-accent]">MeshCore</a>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <span>Antennas</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-bold text-[--color-text-primary] mb-2">
+            LoRa <span class="gradient-text">Antennas</span>
+          </h1>
+          <p class="text-[--color-text-secondary]">
+            The right antenna is the single biggest factor in your MeshCore range and reliability.
+          </p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex flex-col lg:flex-row gap-8">
+          <!-- Sidebar -->
+          <aside class="lg:w-64 flex-shrink-0">
+            <div class="card p-4 sticky top-24">
+              <h3 class="text-xs font-semibold text-[--color-text-muted] mb-3 uppercase tracking-wider">On This Page</h3>
+              <nav class="space-y-1">
+                <a href="#basics" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                  Antenna Basics
+                </a>
+                <a href="#types" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                  Antenna Types
+                </a>
+                <a href="#recommendations" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                  Recommendations
+                </a>
+                <a href="#testing" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                  Testing & SWR
+                </a>
+                <a href="#placement" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                  Placement Tips
+                </a>
+              </nav>
+
+              <div class="mt-6 pt-4 border-t border-[--color-border]">
+                <h3 class="text-xs font-semibold text-[--color-text-muted] mb-3 uppercase tracking-wider">More Hardware</h3>
+                <nav class="space-y-1">
+                  <a href="/meshcore/devices" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                    Devices
+                  </a>
+                  <a href="/meshcore/enclosures" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
+                    Enclosures
+                  </a>
+                </nav>
+              </div>
+
+              <div class="mt-4 pt-4 border-t border-[--color-border]">
+                <a
+                  href="/meshtastic/antennas"
+                  class="text-xs text-[--color-text-muted] hover:text-[--color-accent] flex items-center gap-1"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                  Meshtastic antenna docs (detailed)
+                </a>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Content -->
+          <main class="flex-1 min-w-0">
+            <div class="space-y-8">
+
+              <!-- Info Banner -->
+              <div class="card p-4 bg-[--color-accent]/5 border-l-4 border-[--color-accent]">
+                <p class="text-sm text-[--color-text-secondary]">
+                  <strong class="text-[--color-text-primary]">Same hardware, same antennas.</strong> MeshCore and Meshtastic use identical LoRa radios and frequencies. Any antenna that works for Meshtastic works for MeshCore. For detailed specs and community test results, see the <a href="/meshtastic/antennas" class="text-[--color-accent] hover:underline">Meshtastic antenna documentation</a>.
+                </p>
+              </div>
+
+              <!-- Antenna Basics -->
+              <section id="basics" class="card p-6">
+                <h2 class="text-xl font-bold text-[--color-text-primary] mb-4 flex items-center gap-2">
+                  <svg class="w-6 h-6 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Antenna Basics
+                </h2>
+                <div class="space-y-4 text-[--color-text-secondary]">
+                  <p>
+                    Your antenna is the most important factor in range—more than transmit power, more than the device itself. A good antenna on a cheap radio will outperform a bad antenna on an expensive radio every time.
+                  </p>
+                  <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="p-4 bg-[--color-bg-tertiary] rounded-lg">
+                      <h3 class="font-semibold text-[--color-text-primary] mb-2">Frequency Match</h3>
+                      <p class="text-sm">In North America, use 915 MHz antennas. In Europe, use 868 MHz. Mismatched antennas waste power and reduce range.</p>
+                    </div>
+                    <div class="p-4 bg-[--color-bg-tertiary] rounded-lg">
+                      <h3 class="font-semibold text-[--color-text-primary] mb-2">Connector Types</h3>
+                      <p class="text-sm">Most devices use SMA connectors. Know the difference between SMA Male, SMA Female, RP-SMA Male, and RP-SMA Female.</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Antenna Types -->
+              <section id="types" class="card p-6">
+                <h2 class="text-xl font-bold text-[--color-text-primary] mb-4 flex items-center gap-2">
+                  <svg class="w-6 h-6 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                  </svg>
+                  Antenna Types
+                </h2>
+
+                <div class="space-y-4">
+                  <div class="p-4 bg-[--color-bg-tertiary] rounded-lg">
+                    <h3 class="font-semibold text-[--color-text-primary] mb-2">Stock "Rubber Duck" Antennas</h3>
+                    <p class="text-sm text-[--color-text-secondary] mb-2">The small antennas that come with most devices. Convenient but typically poor performers—often only 1-2 dBi gain.</p>
+                    <p class="text-sm text-[--color-text-muted]"><strong>Best for:</strong> Testing, indoor use, portable nodes where size matters more than range.</p>
+                  </div>
+
+                  <div class="p-4 bg-[--color-bg-tertiary] rounded-lg">
+                    <h3 class="font-semibold text-[--color-text-primary] mb-2">Upgraded Whip Antennas</h3>
+                    <p class="text-sm text-[--color-text-secondary] mb-2">Aftermarket antennas like the GIZONT or LINX series. Typically 3-5 dBi gain. Good balance of size and performance.</p>
+                    <p class="text-sm text-[--color-text-muted]"><strong>Best for:</strong> Handheld/portable use, mobile nodes, situations where you need a compact external antenna.</p>
+                  </div>
+
+                  <div class="p-4 bg-[--color-bg-tertiary] rounded-lg">
+                    <h3 class="font-semibold text-[--color-text-primary] mb-2">Fiberglass Omni Antennas</h3>
+                    <p class="text-sm text-[--color-text-secondary] mb-2">Larger outdoor antennas (1-3 feet). 5-8 dBi gain. Excellent for base stations and repeaters. Require mounting.</p>
+                    <p class="text-sm text-[--color-text-muted]"><strong>Best for:</strong> Rooftop repeaters, base stations, permanent outdoor installations.</p>
+                  </div>
+
+                  <div class="p-4 bg-[--color-bg-tertiary] rounded-lg">
+                    <h3 class="font-semibold text-[--color-text-primary] mb-2">Directional/Yagi Antennas</h3>
+                    <p class="text-sm text-[--color-text-secondary] mb-2">High-gain (8-12+ dBi) but focused in one direction. Great for point-to-point links between distant nodes.</p>
+                    <p class="text-sm text-[--color-text-muted]"><strong>Best for:</strong> Long-distance links, bridging gaps between mesh clusters, rural deployments.</p>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Recommendations -->
+              <section id="recommendations" class="card p-6">
+                <h2 class="text-xl font-bold text-[--color-text-primary] mb-4 flex items-center gap-2">
+                  <svg class="w-6 h-6 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Community Recommendations
+                </h2>
+
+                <div class="overflow-x-auto">
+                  <table class="w-full text-sm">
+                    <thead>
+                      <tr class="border-b border-[--color-border]">
+                        <th class="text-left py-2 text-[--color-text-primary]">Use Case</th>
+                        <th class="text-left py-2 text-[--color-text-primary]">Antenna</th>
+                        <th class="text-left py-2 text-[--color-text-primary]">Gain</th>
+                      </tr>
+                    </thead>
+                    <tbody class="text-[--color-text-secondary]">
+                      <tr class="border-b border-[--color-border]">
+                        <td class="py-2">Handheld/Portable</td>
+                        <td class="py-2">GIZONT 17cm 915MHz</td>
+                        <td class="py-2">~3 dBi</td>
+                      </tr>
+                      <tr class="border-b border-[--color-border]">
+                        <td class="py-2">Mobile/Vehicle</td>
+                        <td class="py-2">Laird MA9-5N</td>
+                        <td class="py-2">5 dBi</td>
+                      </tr>
+                      <tr class="border-b border-[--color-border]">
+                        <td class="py-2">Base Station</td>
+                        <td class="py-2">Alfa AOA-915-5ACM</td>
+                        <td class="py-2">5 dBi</td>
+                      </tr>
+                      <tr class="border-b border-[--color-border]">
+                        <td class="py-2">Repeater (High Gain)</td>
+                        <td class="py-2">Rokland 8 dBi Fiberglass</td>
+                        <td class="py-2">8 dBi</td>
+                      </tr>
+                      <tr>
+                        <td class="py-2">Point-to-Point</td>
+                        <td class="py-2">915 MHz Yagi</td>
+                        <td class="py-2">10+ dBi</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <p class="mt-4 text-sm text-[--color-text-muted]">
+                  For detailed specs, SWR test results, and purchase links, see the <a href="/meshtastic/antennas" class="text-[--color-accent] hover:underline">full antenna documentation</a>.
+                </p>
+              </section>
+
+              <!-- Testing -->
+              <section id="testing" class="card p-6">
+                <h2 class="text-xl font-bold text-[--color-text-primary] mb-4 flex items-center gap-2">
+                  <svg class="w-6 h-6 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                  Testing & SWR
+                </h2>
+
+                <div class="space-y-4 text-[--color-text-secondary]">
+                  <p>
+                    <strong class="text-[--color-text-primary]">SWR (Standing Wave Ratio)</strong> measures how well your antenna matches your radio. Lower is better:
+                  </p>
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>1.0-1.5:</strong> Excellent - minimal power loss</li>
+                    <li><strong>1.5-2.0:</strong> Good - acceptable for most uses</li>
+                    <li><strong>2.0-3.0:</strong> Marginal - noticeable performance loss</li>
+                    <li><strong>&gt;3.0:</strong> Poor - significant power reflected back</li>
+                  </ul>
+                  <p>
+                    You can test SWR with a NanoVNA (cheap network analyzer, ~$50). This is especially important for homemade antennas or when using adapters.
+                  </p>
+                </div>
+              </section>
+
+              <!-- Placement Tips -->
+              <section id="placement" class="card p-6 bg-gradient-to-r from-[--color-accent]/5 to-transparent border-l-4 border-[--color-accent]">
+                <h2 class="text-xl font-bold text-[--color-text-primary] mb-4">Placement Tips</h2>
+                <ul class="space-y-2 text-[--color-text-secondary]">
+                  <li class="flex items-start gap-2">
+                    <span class="text-[--color-accent] font-bold">1.</span>
+                    <span><strong class="text-[--color-text-primary]">Height is king.</strong> Every foot of elevation helps. Rooftops, poles, and high windows all improve range dramatically.</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-[--color-accent] font-bold">2.</span>
+                    <span><strong class="text-[--color-text-primary]">Line of sight matters.</strong> LoRa can penetrate obstacles, but clear paths are always better.</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-[--color-accent] font-bold">3.</span>
+                    <span><strong class="text-[--color-text-primary]">Keep the antenna vertical.</strong> Omni antennas are polarized—tilting them reduces range.</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-[--color-accent] font-bold">4.</span>
+                    <span><strong class="text-[--color-text-primary]">Avoid metal nearby.</strong> Metal objects near the antenna can detune it and create dead spots.</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-[--color-accent] font-bold">5.</span>
+                    <span><strong class="text-[--color-text-primary]">Use quality coax.</strong> Long cable runs need low-loss coax (LMR-400) or the cable eats your signal.</span>
+                  </li>
+                </ul>
+              </section>
+
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>

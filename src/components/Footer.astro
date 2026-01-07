@@ -1,4 +1,6 @@
 ---
+import NewsletterSignup from './NewsletterSignup.astro';
+
 const currentYear = new Date().getFullYear();
 
 const footerLinks = {
@@ -91,6 +93,13 @@ const footerLinks = {
             </li>
           ))}
         </ul>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="mt-12 pt-8 border-t border-[--color-border]">
+      <div class="max-w-md">
+        <NewsletterSignup variant="footer" />
       </div>
     </div>
 

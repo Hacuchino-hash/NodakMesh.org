@@ -1,0 +1,227 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Events data - can be moved to a content collection later
+const upcomingEvents: Array<{
+  title: string;
+  date: string;
+  time: string;
+  location: string;
+  description: string;
+  type: 'meetup' | 'workshop' | 'online' | 'deployment';
+  link?: string;
+}> = [
+  // Add events here as they're scheduled
+  // {
+  //   title: 'Fargo Mesh Meetup',
+  //   date: '2025-02-15',
+  //   time: '2:00 PM',
+  //   location: 'Fargo Public Library',
+  //   description: 'Monthly meetup to discuss mesh network expansion in the Fargo area.',
+  //   type: 'meetup',
+  //   link: 'https://discord.gg/JUBrZepkaM'
+  // },
+];
+
+const pastEvents: typeof upcomingEvents = [
+  // Add past events here for reference
+];
+
+const eventTypeStyles = {
+  meetup: { bg: 'bg-blue-500/10', text: 'text-blue-400', label: 'Meetup' },
+  workshop: { bg: 'bg-purple-500/10', text: 'text-purple-400', label: 'Workshop' },
+  online: { bg: 'bg-green-500/10', text: 'text-green-400', label: 'Online' },
+  deployment: { bg: 'bg-orange-500/10', text: 'text-orange-400', label: 'Deployment' },
+};
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+---
+
+<Layout
+  title="Events & Meetups - NodakMesh"
+  description="Join NodakMesh community events, meetups, and workshops across North Dakota. Learn about mesh networking and help expand the network."
+  keywords="NodakMesh events, mesh network meetup, North Dakota mesh, LoRa meetup, Meshtastic meetup, MeshCore workshop"
+>
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16">
+    <!-- Hero -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-6">
+            Events & <span class="gradient-text">Meetups</span>
+          </h1>
+          <p class="text-xl text-[--color-text-secondary] leading-relaxed">
+            Connect with the NodakMesh community in person. Join us for meetups, workshops, and deployment days across North Dakota.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-8">Upcoming Events</h2>
+
+        {upcomingEvents.length > 0 ? (
+          <div class="grid gap-6">
+            {upcomingEvents.map(event => (
+              <div class="card p-6 hover:border-[--color-accent]/50 transition-colors">
+                <div class="flex flex-col md:flex-row md:items-start gap-6">
+                  <!-- Date Badge -->
+                  <div class="flex-shrink-0 w-20 text-center">
+                    <div class="bg-[--color-accent]/10 rounded-lg p-3">
+                      <div class="text-2xl font-bold text-[--color-accent]">
+                        {new Date(event.date).getDate()}
+                      </div>
+                      <div class="text-xs text-[--color-text-muted] uppercase">
+                        {new Date(event.date).toLocaleDateString('en-US', { month: 'short' })}
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Event Details -->
+                  <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2">
+                      <span class={`px-2 py-1 rounded text-xs font-medium ${eventTypeStyles[event.type].bg} ${eventTypeStyles[event.type].text}`}>
+                        {eventTypeStyles[event.type].label}
+                      </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-[--color-text-primary] mb-2">
+                      {event.title}
+                    </h3>
+                    <p class="text-[--color-text-secondary] mb-4">
+                      {event.description}
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-sm text-[--color-text-muted]">
+                      <span class="flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {event.time}
+                      </span>
+                      <span class="flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {event.location}
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- Action -->
+                  {event.link && (
+                    <div class="flex-shrink-0">
+                      <a href={event.link} target="_blank" class="btn-primary">
+                        RSVP
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div class="card p-12 text-center">
+            <div class="w-16 h-16 rounded-full bg-[--color-bg-tertiary] flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-[--color-text-muted]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-2">No upcoming events</h3>
+            <p class="text-[--color-text-secondary] mb-6 max-w-md mx-auto">
+              We're planning our next community events. Join our Discord to be the first to know when new events are announced!
+            </p>
+            <a href="https://discord.gg/JUBrZepkaM" target="_blank" class="btn-primary inline-flex items-center gap-2">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+              </svg>
+              Join Discord
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- Event Types -->
+    <section class="py-12 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-8 text-center">Types of Events</h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="card p-6 text-center">
+            <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="font-semibold text-[--color-text-primary] mb-2">Meetups</h3>
+            <p class="text-sm text-[--color-text-secondary]">Casual gatherings to meet other mesh enthusiasts and share experiences.</p>
+          </div>
+
+          <div class="card p-6 text-center">
+            <div class="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            </div>
+            <h3 class="font-semibold text-[--color-text-primary] mb-2">Workshops</h3>
+            <p class="text-sm text-[--color-text-secondary]">Hands-on sessions for firmware flashing, antenna building, and more.</p>
+          </div>
+
+          <div class="card p-6 text-center">
+            <div class="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="font-semibold text-[--color-text-primary] mb-2">Online</h3>
+            <p class="text-sm text-[--color-text-secondary]">Virtual events for those who can't attend in person. Q&A sessions and demos.</p>
+          </div>
+
+          <div class="card p-6 text-center">
+            <div class="w-12 h-12 rounded-full bg-orange-500/10 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <h3 class="font-semibold text-[--color-text-primary] mb-2">Deployments</h3>
+            <p class="text-sm text-[--color-text-secondary]">Group efforts to install new nodes and expand network coverage.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Host an Event -->
+    <section class="py-12">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-4">Want to Host an Event?</h2>
+        <p class="text-[--color-text-secondary] mb-6">
+          Have a venue or idea for a meetup in your area? We'd love to help you organize it. Reach out on Discord or contact us directly.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="https://discord.gg/JUBrZepkaM" target="_blank" class="btn-primary">
+            Suggest on Discord
+          </a>
+          <a href="/contact" class="btn-secondary">
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>

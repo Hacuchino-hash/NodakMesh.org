@@ -1,0 +1,357 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Hardware data
+const devices = [
+  {
+    name: 'Heltec LoRa 32 V3',
+    manufacturer: 'Heltec',
+    price: '$18-25',
+    chip: 'ESP32-S3',
+    radio: 'SX1262',
+    display: '0.96" OLED',
+    battery: 'No (JST connector)',
+    gps: 'No',
+    buttons: '1',
+    bestFor: 'Budget nodes, beginners',
+    pros: ['Cheapest option', 'Good community support', 'USB-C'],
+    cons: ['No built-in battery', 'Small display'],
+    meshcore: true,
+    meshtastic: true,
+  },
+  {
+    name: 'LILYGO T-Beam Supreme',
+    manufacturer: 'LILYGO',
+    price: '$45-55',
+    chip: 'ESP32-S3',
+    radio: 'SX1262',
+    display: 'Optional OLED',
+    battery: '18650 holder',
+    gps: 'Yes (L76K)',
+    buttons: '2',
+    bestFor: 'Mobile/tracking use',
+    pros: ['Built-in GPS', '18650 battery slot', 'Expandable'],
+    cons: ['Higher cost', 'Larger size'],
+    meshcore: true,
+    meshtastic: true,
+  },
+  {
+    name: 'LILYGO T-Echo',
+    manufacturer: 'LILYGO',
+    price: '$55-65',
+    chip: 'nRF52840',
+    radio: 'SX1262',
+    display: '1.54" E-Ink',
+    battery: 'Built-in 850mAh',
+    gps: 'Yes (L76K)',
+    buttons: '3',
+    bestFor: 'Ultra low power',
+    pros: ['Best battery life', 'E-ink display', 'Compact'],
+    cons: ['Slow display refresh', 'Less community support'],
+    meshcore: true,
+    meshtastic: true,
+  },
+  {
+    name: 'LILYGO T-Deck',
+    manufacturer: 'LILYGO',
+    price: '$55-70',
+    chip: 'ESP32-S3',
+    radio: 'SX1262',
+    display: '2.8" LCD Touch',
+    battery: 'Built-in 1300mAh',
+    gps: 'Optional',
+    buttons: 'Keyboard + trackball',
+    bestFor: 'Standalone messenger',
+    pros: ['Full keyboard', 'Large touch display', 'All-in-one'],
+    cons: ['Higher power draw', 'Bulky'],
+    meshcore: true,
+    meshtastic: true,
+  },
+  {
+    name: 'RAK WisBlock (4631)',
+    manufacturer: 'RAK Wireless',
+    price: '$30-50',
+    chip: 'nRF52840',
+    radio: 'SX1262',
+    display: 'Optional module',
+    battery: 'JST connector',
+    gps: 'Optional module',
+    buttons: 'Optional',
+    bestFor: 'Custom builds, solar nodes',
+    pros: ['Ultra low power', 'Modular design', 'Pro quality'],
+    cons: ['Requires assembly', 'Higher learning curve'],
+    meshcore: true,
+    meshtastic: true,
+  },
+  {
+    name: 'Seeed Wio Tracker 1110',
+    manufacturer: 'Seeed Studio',
+    price: '$40-50',
+    chip: 'nRF52840',
+    radio: 'SX1262',
+    display: 'No',
+    battery: 'Built-in 400mAh',
+    gps: 'Yes',
+    buttons: '1',
+    bestFor: 'Asset tracking',
+    pros: ['Compact', 'Built-in sensors', 'Pre-enclosed'],
+    cons: ['No display', 'Small battery'],
+    meshcore: true,
+    meshtastic: true,
+  },
+];
+---
+
+<Layout
+  title="Hardware Comparison - NodakMesh"
+  description="Compare Meshtastic and MeshCore compatible devices side-by-side. Find the best LoRa hardware for your mesh network needs."
+  keywords="Meshtastic hardware comparison, MeshCore devices, Heltec V3 vs T-Beam, best LoRa device, mesh network hardware"
+>
+  <Header slot="header" />
+
+  <div class="pt-24 pb-16">
+    <!-- Hero -->
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-6">
+            Hardware <span class="gradient-text">Comparison</span>
+          </h1>
+          <p class="text-xl text-[--color-text-secondary] leading-relaxed">
+            Compare popular devices for MeshCore and Meshtastic. All devices listed work with both protocols.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Picks -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-xl font-bold text-[--color-text-primary] mb-6">Quick Recommendations</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="card p-4 border-l-4 border-[--color-accent]">
+            <p class="text-xs text-[--color-accent] font-medium mb-1">Best Budget</p>
+            <p class="font-semibold text-[--color-text-primary]">Heltec V3</p>
+            <p class="text-sm text-[--color-text-muted]">$18-25</p>
+          </div>
+          <div class="card p-4 border-l-4 border-blue-500">
+            <p class="text-xs text-blue-400 font-medium mb-1">Best All-Around</p>
+            <p class="font-semibold text-[--color-text-primary]">T-Beam Supreme</p>
+            <p class="text-sm text-[--color-text-muted]">$45-55</p>
+          </div>
+          <div class="card p-4 border-l-4 border-purple-500">
+            <p class="text-xs text-purple-400 font-medium mb-1">Best Battery Life</p>
+            <p class="font-semibold text-[--color-text-primary]">T-Echo / RAK</p>
+            <p class="text-sm text-[--color-text-muted]">nRF52840 based</p>
+          </div>
+          <div class="card p-4 border-l-4 border-orange-500">
+            <p class="text-xs text-orange-400 font-medium mb-1">Best Standalone</p>
+            <p class="font-semibold text-[--color-text-primary]">T-Deck</p>
+            <p class="text-sm text-[--color-text-muted]">Keyboard + display</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-xl font-bold text-[--color-text-primary] mb-6">Full Comparison</h2>
+
+        <div class="card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="bg-[--color-bg-tertiary] border-b border-[--color-border]">
+                  <th class="text-left py-3 px-4 font-semibold text-[--color-text-primary] sticky left-0 bg-[--color-bg-tertiary]">Device</th>
+                  <th class="text-left py-3 px-4 font-semibold text-[--color-text-primary]">Price</th>
+                  <th class="text-left py-3 px-4 font-semibold text-[--color-text-primary]">Chip</th>
+                  <th class="text-left py-3 px-4 font-semibold text-[--color-text-primary]">Display</th>
+                  <th class="text-left py-3 px-4 font-semibold text-[--color-text-primary]">Battery</th>
+                  <th class="text-left py-3 px-4 font-semibold text-[--color-text-primary]">GPS</th>
+                  <th class="text-left py-3 px-4 font-semibold text-[--color-text-primary]">Best For</th>
+                </tr>
+              </thead>
+              <tbody>
+                {devices.map((device, i) => (
+                  <tr class={`border-b border-[--color-border] ${i % 2 === 0 ? '' : 'bg-[--color-bg-tertiary]/30'}`}>
+                    <td class="py-3 px-4 sticky left-0 bg-[--color-bg-primary]">
+                      <div class="font-medium text-[--color-text-primary]">{device.name}</div>
+                      <div class="text-xs text-[--color-text-muted]">{device.manufacturer}</div>
+                    </td>
+                    <td class="py-3 px-4 text-[--color-text-secondary]">{device.price}</td>
+                    <td class="py-3 px-4">
+                      <span class={`text-xs px-2 py-0.5 rounded ${device.chip.includes('nRF') ? 'bg-purple-500/10 text-purple-400' : 'bg-blue-500/10 text-blue-400'}`}>
+                        {device.chip}
+                      </span>
+                    </td>
+                    <td class="py-3 px-4 text-[--color-text-secondary]">{device.display}</td>
+                    <td class="py-3 px-4 text-[--color-text-secondary]">{device.battery}</td>
+                    <td class="py-3 px-4">
+                      {device.gps === 'Yes' ? (
+                        <span class="text-green-400">Yes</span>
+                      ) : device.gps === 'No' ? (
+                        <span class="text-[--color-text-muted]">No</span>
+                      ) : (
+                        <span class="text-yellow-400">{device.gps}</span>
+                      )}
+                    </td>
+                    <td class="py-3 px-4 text-[--color-text-secondary]">{device.bestFor}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <p class="text-sm text-[--color-text-muted] mt-4">
+          All devices use the SX1262 LoRa radio and support both MeshCore and Meshtastic. Prices are approximate and may vary.
+        </p>
+      </div>
+    </section>
+
+    <!-- Detailed Cards -->
+    <section class="py-12 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-xl font-bold text-[--color-text-primary] mb-8">Device Details</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {devices.map(device => (
+            <div class="card p-6">
+              <div class="flex items-start justify-between mb-4">
+                <div>
+                  <h3 class="font-bold text-[--color-text-primary]">{device.name}</h3>
+                  <p class="text-sm text-[--color-text-muted]">{device.manufacturer}</p>
+                </div>
+                <span class="text-lg font-bold text-[--color-accent]">{device.price}</span>
+              </div>
+
+              <div class="flex gap-2 mb-4">
+                <span class={`text-xs px-2 py-0.5 rounded ${device.chip.includes('nRF') ? 'bg-purple-500/10 text-purple-400' : 'bg-blue-500/10 text-blue-400'}`}>
+                  {device.chip}
+                </span>
+                <span class="text-xs px-2 py-0.5 rounded bg-[--color-bg-tertiary] text-[--color-text-muted]">
+                  {device.radio}
+                </span>
+              </div>
+
+              <p class="text-sm text-[--color-text-secondary] mb-4">
+                <strong class="text-[--color-text-primary]">Best for:</strong> {device.bestFor}
+              </p>
+
+              <div class="space-y-2 text-sm">
+                <div>
+                  <span class="text-green-400 font-medium">Pros:</span>
+                  <ul class="text-[--color-text-secondary] ml-4">
+                    {device.pros.map(pro => (
+                      <li class="list-disc">{pro}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <span class="text-red-400 font-medium">Cons:</span>
+                  <ul class="text-[--color-text-secondary] ml-4">
+                    {device.cons.map(con => (
+                      <li class="list-disc">{con}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Chip Comparison -->
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-xl font-bold text-[--color-text-primary] mb-6">ESP32 vs nRF52840</h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="card p-6">
+            <h3 class="font-bold text-blue-400 mb-4 flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-blue-400"></span>
+              ESP32-S3
+            </h3>
+            <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+              <li class="flex items-start gap-2">
+                <span class="text-green-400">+</span>
+                More processing power and memory
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-400">+</span>
+                WiFi + Bluetooth connectivity
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-400">+</span>
+                Larger community and more examples
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">-</span>
+                Higher power consumption
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">-</span>
+                Less efficient deep sleep
+              </li>
+            </ul>
+            <p class="mt-4 text-xs text-[--color-text-muted]">
+              Best for: Base stations, nodes with power access, development
+            </p>
+          </div>
+
+          <div class="card p-6">
+            <h3 class="font-bold text-purple-400 mb-4 flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-purple-400"></span>
+              nRF52840
+            </h3>
+            <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+              <li class="flex items-start gap-2">
+                <span class="text-green-400">+</span>
+                Ultra-low power consumption
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-400">+</span>
+                Excellent deep sleep (microamps)
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-green-400">+</span>
+                Bluetooth Low Energy
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">-</span>
+                No WiFi
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-400">-</span>
+                Less processing power
+              </li>
+            </ul>
+            <p class="mt-4 text-xs text-[--color-text-muted]">
+              Best for: Battery-powered nodes, solar repeaters, portable devices
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-12">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-4">Ready to get started?</h2>
+        <p class="text-[--color-text-secondary] mb-6">
+          Check out our getting started guides for step-by-step setup instructions.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/meshcore/getting-started" class="btn-primary">MeshCore Guide</a>
+          <a href="/meshtastic/getting-started" class="btn-secondary">Meshtastic Guide</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer slot="footer" />
+</Layout>
