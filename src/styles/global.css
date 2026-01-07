@@ -469,11 +469,10 @@ a.card:hover,
 
 /* Image captions in blog posts */
 .caption {
-  font-size: 0.65rem !important;
+  font-size: 0.75rem !important;
   color: var(--color-text-muted) !important;
   text-align: center;
-  margin-top: -0.5rem;
-  opacity: 0.7;
+  margin-top: -0.25rem;
   display: block;
 }
 
@@ -554,4 +553,132 @@ a.card:hover,
 /* Long URLs and text handling */
 .prose a {
   word-break: break-word;
+}
+
+/* ========================================
+   INTERIOR PAGE AESTHETICS
+   ======================================== */
+
+/* Subtle dot grid pattern background - uses background-color with pattern overlay */
+.dot-grid-bg {
+  background-color: var(--color-bg-secondary);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Hexagon pattern background - mesh network vibe */
+.hex-grid-bg {
+  background-color: var(--color-bg-secondary);
+  background-image:
+    linear-gradient(30deg, rgba(255, 255, 255, 0.04) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.04) 87.5%, rgba(255, 255, 255, 0.04)),
+    linear-gradient(150deg, rgba(255, 255, 255, 0.04) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.04) 87.5%, rgba(255, 255, 255, 0.04)),
+    linear-gradient(30deg, rgba(255, 255, 255, 0.04) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.04) 87.5%, rgba(255, 255, 255, 0.04)),
+    linear-gradient(150deg, rgba(255, 255, 255, 0.04) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.04) 87.5%, rgba(255, 255, 255, 0.04)),
+    linear-gradient(60deg, rgba(255, 255, 255, 0.02) 25%, transparent 25.5%, transparent 75%, rgba(255, 255, 255, 0.02) 75%, rgba(255, 255, 255, 0.02)),
+    linear-gradient(60deg, rgba(255, 255, 255, 0.02) 25%, transparent 25.5%, transparent 75%, rgba(255, 255, 255, 0.02) 75%, rgba(255, 255, 255, 0.02));
+  background-size: 60px 105px;
+  background-position: 0 0, 0 0, 30px 52.5px, 30px 52.5px, 0 0, 30px 52.5px;
+}
+
+/* Subtle interior page hero with accent glow - matches homepage mesh-bg style */
+.hero-glow {
+  position: relative;
+  overflow: visible;
+}
+
+.hero-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse 120% 80% at 15% 50%, color-mix(in srgb, var(--color-accent) 22%, transparent) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 70% at 85% 60%, color-mix(in srgb, var(--color-accent) 12%, transparent) 0%, transparent 45%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Corner accent decoration */
+.corner-accent {
+  position: relative;
+}
+
+.corner-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  background:
+    linear-gradient(135deg, var(--color-accent) 0%, transparent 60%);
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.corner-accent::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  background:
+    linear-gradient(315deg, var(--color-accent) 0%, transparent 60%);
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* Gradient border for cards/sections */
+.gradient-border {
+  position: relative;
+  background: var(--color-bg-card);
+  border-radius: 12px;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, var(--color-accent), transparent 50%, var(--color-accent));
+  border-radius: 13px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+/* Accent line heading decoration */
+.accent-heading {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.accent-heading::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--color-accent), transparent);
+  border-radius: 2px;
+}
+
+/* Subtle noise texture overlay */
+.noise-overlay {
+  position: relative;
+}
+
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 1;
 }

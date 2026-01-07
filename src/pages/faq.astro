@@ -215,7 +215,7 @@ const colorClasses: Record<string, { bg: string; text: string }> = {
 
   <div class="pt-24 pb-16">
     <!-- Hero -->
-    <section class="py-16">
+    <section class="py-16 hero-glow">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl">
           <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-6">
@@ -241,7 +241,7 @@ const colorClasses: Record<string, { bg: string; text: string }> = {
     </section>
 
     <!-- FAQ Sections -->
-    {faqCategories.map(category => (
+    {faqCategories.map((category, idx) => (
       <section
         id={category.title.toLowerCase().replace(/\s+/g, '-')}
         class="py-12 scroll-mt-24"
