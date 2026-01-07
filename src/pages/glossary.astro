@@ -360,6 +360,34 @@ const meshcoreTerms = [
 
 // Helper to create slug from term
 const slugify = (term: string) => term.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+// Generate DefinedTermSet schema for SEO
+const glossarySchema = {
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "name": "Mesh Networking Glossary",
+  "description": "A comprehensive glossary of LoRa mesh networking terminology including Meshtastic and MeshCore terms.",
+  "hasDefinedTerm": [
+    ...generalTerms.map(item => ({
+      "@type": "DefinedTerm",
+      "name": item.term,
+      "description": item.definition,
+      "inDefinedTermSet": "https://nodakmesh.org/glossary"
+    })),
+    ...meshtasticTerms.map(item => ({
+      "@type": "DefinedTerm",
+      "name": item.term,
+      "description": item.definition,
+      "inDefinedTermSet": "https://nodakmesh.org/glossary"
+    })),
+    ...meshcoreTerms.map(item => ({
+      "@type": "DefinedTerm",
+      "name": item.term,
+      "description": item.definition,
+      "inDefinedTermSet": "https://nodakmesh.org/glossary"
+    }))
+  ]
+};
 ---
 
 <Layout
@@ -368,6 +396,9 @@ const slugify = (term: string) => term.toLowerCase().replace(/[^a-z0-9]+/g, '-')
   keywords="LoRa glossary, Meshtastic terms, MeshCore definitions, mesh network terminology, SWR definition, RSSI meaning, SNR explained, spreading factor, hop limit, device roles"
 >
   <Header slot="header" />
+
+  <!-- Glossary Schema for SEO -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(glossarySchema)} />
 
   <div class="pt-24 pb-16">
     <!-- Hero -->

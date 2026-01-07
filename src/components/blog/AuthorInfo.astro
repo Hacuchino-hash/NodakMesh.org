@@ -2,16 +2,23 @@
 interface Props {
   author: string;
   date: Date;
+  updated?: Date;
   readingTime?: number;
   showAvatar?: boolean;
 }
 
-const { author, date, readingTime, showAvatar = true } = Astro.props;
+const { author, date, updated, readingTime, showAvatar = true } = Astro.props;
 
 const authorSlug = author.toLowerCase().replace(/\s+/g, '-');
 const authorUrl = `/blog/author/${authorSlug}`;
 
 const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+const formattedUpdated = updated?.toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric'
@@ -30,6 +37,12 @@ const formattedDate = date.toLocaleDateString('en-US', {
     <a href={authorUrl} class="font-medium text-[--color-text-primary] hover:text-[--color-accent] transition-colors">{author}</a>
     <div class="flex items-center gap-2 text-[--color-text-muted]">
       <time datetime={date.toISOString()}>{formattedDate}</time>
+      {updated && formattedUpdated && (
+        <>
+          <span>·</span>
+          <span>Updated {formattedUpdated}</span>
+        </>
+      )}
       {readingTime && (
         <>
           <span>·</span>
