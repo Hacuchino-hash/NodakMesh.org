@@ -164,11 +164,11 @@ const howToSchema = isHarborBreezePost ? {
           <CategoryBadge category={post.data.category} size="md" />
         </div>
 
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[--color-text-primary] mb-6">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[--color-text-primary] mb-4 md:mb-6">
           {post.data.title}
         </h1>
 
-        <p class="text-xl text-[--color-text-secondary] mb-8">
+        <p class="text-base sm:text-lg md:text-xl text-[--color-text-secondary] mb-6 md:mb-8">
           {post.data.description}
         </p>
 
@@ -185,10 +185,10 @@ const howToSchema = isHarborBreezePost ? {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div class="grid lg:grid-cols-[1fr_280px] gap-12">
         <!-- Main Content -->
-        <div class="prose prose-invert prose-lg max-w-none
+        <div class="prose prose-invert prose-base md:prose-lg max-w-none
           prose-headings:text-[--color-text-primary] prose-headings:font-bold
-          prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-[--color-border]
-          prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+          prose-h2:text-xl prose-h2:md:text-2xl prose-h2:mt-8 prose-h2:md:mt-12 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-[--color-border]
+          prose-h3:text-lg prose-h3:md:text-xl prose-h3:mt-6 prose-h3:md:mt-8 prose-h3:mb-3
           prose-p:text-[--color-text-secondary] prose-p:leading-relaxed
           prose-a:text-[--color-accent] prose-a:no-underline hover:prose-a:underline
           prose-strong:text-[--color-text-primary]
