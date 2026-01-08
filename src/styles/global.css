@@ -430,13 +430,20 @@ a.card:hover,
   left: 100%;
 }
 
-/* Blog post images - constrained size */
+/* Blog post images - mobile-first responsive */
 .prose img {
-  max-width: 400px;
+  max-width: 100%;
+  width: auto;
   height: auto;
   display: block;
   margin: 1.5rem auto;
   border-radius: 8px;
+}
+
+@media (min-width: 640px) {
+  .prose img {
+    max-width: 500px;
+  }
 }
 
 /* Side-by-side image comparison */
@@ -485,11 +492,7 @@ a.card:hover,
    ======================================== */
 
 /* Responsive prose images */
-@media (max-width: 480px) {
-  .prose img {
-    max-width: 100%;
-  }
-
+@media (max-width: 639px) {
   .prose .image-compare {
     flex-direction: column;
     gap: 1rem;
