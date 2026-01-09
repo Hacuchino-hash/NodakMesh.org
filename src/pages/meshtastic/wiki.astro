@@ -516,6 +516,14 @@ const allPages = docCategories.flatMap(cat => cat.pages);
     });
   }
 
+  // Rewrite image URLs to point to meshtastic.org
+  function rewriteImageUrls(html: string): string {
+    // Match img src attributes that start with /img/ (relative paths)
+    return html.replace(/<img([^>]*?)src="(\/img\/[^"]+)"([^>]*?)>/g, (_match, before, src, after) => {
+      return `<img${before}src="https://meshtastic.org${src}"${after}>`;
+    });
+  }
+
   // Map slug to meshtastic.org URL path
   function getOriginalUrl(slug: string): string {
     // Convert our slug to meshtastic.org URL
@@ -743,6 +751,9 @@ const allPages = docCategories.flatMap(cat => cat.pages);
 
       // Add IDs to headings for anchor navigation and TOC
       html = addHeadingIds(html);
+
+      // Rewrite image URLs to load from meshtastic.org
+      html = rewriteImageUrls(html);
 
       showContent(html, loadTime);
 
