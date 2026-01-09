@@ -107,5 +107,55 @@ const ogImage = image ? new URL(image, Astro.site).href : new URL('/images/og-de
       <slot />
     </main>
     <slot name="footer" />
+
+    <!-- Back to Top Button -->
+    <button
+      id="back-to-top"
+      aria-label="Back to top"
+      class="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-green-600 text-white shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+      </svg>
+    </button>
+
+    <script>
+      const backToTop = document.getElementById('back-to-top');
+      const scrollThreshold = 300;
+
+      function toggleBackToTop() {
+        if (window.scrollY > scrollThreshold) {
+          backToTop?.classList.remove('opacity-0', 'invisible');
+          backToTop?.classList.add('opacity-100', 'visible');
+        } else {
+          backToTop?.classList.add('opacity-0', 'invisible');
+          backToTop?.classList.remove('opacity-100', 'visible');
+        }
+      }
+
+      // Check on scroll with throttling for performance
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            toggleBackToTop();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+
+      // Scroll to top on click
+      backToTop?.addEventListener('click', () => {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        });
+      });
+
+      // Check on page load (for refreshes mid-page)
+      toggleBackToTop();
+    </script>
   </body>
 </html>
