@@ -24,10 +24,9 @@ const sizeClasses = {
 ---
 
 <div class={`discord-widget inline-flex items-center gap-2 ${sizeClasses[size]} ${className}`} data-invite={DISCORD_INVITE}>
-  <span class="discord-online-dot w-2 h-2 rounded-full bg-green-500 animate-pulse hidden"></span>
+  <span class="discord-online-dot w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
   <span class="discord-member-count text-[--color-text-muted]">
-    <!-- Fallback text shown while loading or if API fails -->
-    <slot>Join our Discord community</slot>
+    <slot>85+ members</slot>
   </span>
 </div>
 

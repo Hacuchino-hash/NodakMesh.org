@@ -105,7 +105,7 @@ const allPages = docCategories.flatMap(cat => cat.pages);
               </div>
 
               {docCategories.map((category) => (
-                <div class="mb-4">
+                <div class="mb-4 wiki-category">
                   <h3 class="text-xs font-semibold text-[--color-text-muted] mb-2 uppercase tracking-wider">{category.name}</h3>
                   <nav class="space-y-1">
                     {category.pages.map((page) => (
@@ -437,7 +437,6 @@ const allPages = docCategories.flatMap(cat => cat.pages);
     wikiSearchEl.addEventListener('input', (e) => {
       const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
       const navBtns = document.querySelectorAll('.wiki-nav-btn');
-      const categories = document.querySelectorAll('aside .mb-4');
 
       navBtns.forEach(btn => {
         const name = btn.getAttribute('data-name') || '';
@@ -448,8 +447,8 @@ const allPages = docCategories.flatMap(cat => cat.pages);
         }
       });
 
-      // Hide empty categories
-      categories.forEach(cat => {
+      // Hide empty categories (only wiki-category divs, not search)
+      document.querySelectorAll('.wiki-category').forEach(cat => {
         const visibleBtns = cat.querySelectorAll('.wiki-nav-btn:not([style*="display: none"])');
         (cat as HTMLElement).style.display = visibleBtns.length > 0 ? '' : 'none';
       });
