@@ -447,11 +447,11 @@ const usChannels = [
               </div>
               <div class="bg-[--color-bg-tertiary] rounded-lg p-4">
                 <p class="text-sm text-[--color-text-muted] mb-1">Max Line-of-Sight Range</p>
-                <p class="text-2xl font-bold text-[--color-accent]"><span id="rangeKm">39.8</span> km / <span id="rangeMi">24.7</span> mi</p>
+                <p class="text-2xl font-bold text-[--color-accent]"><span id="rangeKm">92.8</span> km / <span id="rangeMi">57.7</span> mi</p>
               </div>
             </div>
             <p class="text-xs text-[--color-text-muted] mt-4">
-              * Based on free-space path loss at 915 MHz. Actual range depends on terrain, obstructions, weather, and spreading factor. Expect 30-50% of calculated range in typical conditions.
+              * Estimated range for good line-of-sight conditions with elevated antennas. Real-world range varies greatly based on terrain, obstructions, antenna height, and weather. Urban/suburban environments typically see 20-50% of this estimate.
             </p>
           </div>
         </div>
@@ -562,11 +562,16 @@ const usChannels = [
     // Link budget = TX power + TX gain + RX gain - RX sensitivity
     const linkBudget = txPower + txGain + rxGain - rxSensitivity;
 
-    // Free-space path loss formula: FSPL = 20*log10(d) + 20*log10(f) + 20*log10(4*pi/c)
-    // For 915 MHz: FSPL = 20*log10(d) + 31.52 (where d is in km)
-    // Solving for d: d = 10^((FSPL - 31.52) / 20)
-    const frequencyConstant = 31.52; // For 915 MHz
-    const rangeKm = Math.pow(10, (linkBudget - frequencyConstant) / 20);
+    // Free-space path loss formula: FSPL (dB) = 20*log10(d_km) + 20*log10(f_MHz) + 32.44
+    // For 915 MHz: 20*log10(915) + 32.44 = 59.23 + 32.44 = 91.67
+    // Solving for d: d = 10^((LinkBudget - 91.67) / 20)
+    const frequencyConstant = 91.67; // FSPL constant for 915 MHz
+    const theoreticalRangeKm = Math.pow(10, (linkBudget - frequencyConstant) / 20);
+
+    // Apply realistic derating: real-world is typically 1-5% of theoretical
+    // due to ground reflections, atmospheric absorption, obstacles, and Fresnel zone clearance
+    const realisticFactor = 0.02; // 2% of theoretical for "good LOS conditions"
+    const rangeKm = theoreticalRangeKm * realisticFactor;
     const rangeMi = rangeKm * 0.621371;
 
     if (linkBudgetEl) linkBudgetEl.textContent = linkBudget.toFixed(0);
