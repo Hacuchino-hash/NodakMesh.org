@@ -1,5 +1,5 @@
 ---
-title: "How to Test Your LoRa Antenna with a NanoVNA: Complete Beginner's Guide"
+title: "NanoVNA Antenna Testing Guide"
 description: "Learn how to use a NanoVNA (H or H4 models) to test and tune your 915 MHz LoRa antennas for Meshtastic and MeshCore. Step-by-step guide covering unboxing, calibration, SWR measurement, and interpreting results."
 date: 2026-01-07
 author: "Josh"

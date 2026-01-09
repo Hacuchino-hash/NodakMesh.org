@@ -1,5 +1,5 @@
 ---
-title: "Heltec WiFi LoRa 32 V3 Review: A Board We Keep Reaching For"
+title: "Heltec WiFi LoRa 32 V3 Review"
 description: "An in-depth review of the Heltec WiFi LoRa 32 V3 for Meshtastic and MeshCore mesh networking, based on real-world use across portable nodes, base stations, and fixed relays."
 date: 2025-12-17
 author: "Josh"

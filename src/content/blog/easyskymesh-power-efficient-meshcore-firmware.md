@@ -1,5 +1,5 @@
 ---
-title: "Power-Efficient MeshCore Firmware for Real LoRa Deployments"
+title: "EasySkyMesh: Power-Efficient MeshCore Firmware"
 description: "EasySkyMesh delivers custom MeshCore firmware optimized for power efficiency, achieving 8-10mA idle current on repeaters. Learn why this matters for solar-powered nodes, sensor networks, and long-term mesh deployments."
 date: 2026-01-05
 author: "Josh"

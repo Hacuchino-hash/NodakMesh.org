@@ -1,5 +1,5 @@
 ---
-title: "MeshCore Discovery Explained: Finding Contacts on Your Mesh Network"
+title: "MeshCore Device Discovery Explained"
 description: "Learn how device discovery differs between Meshtastic and MeshCore, why your contact list might be empty, and step-by-step instructions for finding other nodes on your mesh network."
 date: 2025-12-21
 author: "Josh"

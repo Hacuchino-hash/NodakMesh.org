@@ -1,5 +1,5 @@
 ---
-title: "Top 5 Portable Meshtastic & MeshCore Nodes to Carry in 2025"
+title: "Best Portable Mesh Nodes for 2025"
 description: "Looking for the best portable mesh networking device? We break down the top 5 LoRa nodes for Meshtastic and MeshCore in 2025—from ultra-compact card trackers to full-featured handhelds with keyboards."
 date: 2025-12-24
 author: "Josh"

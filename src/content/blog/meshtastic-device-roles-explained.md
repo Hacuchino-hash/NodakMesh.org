@@ -1,5 +1,5 @@
 ---
-title: "Meshtastic Device Roles Explained: Client, Router, Repeater and More"
+title: "Meshtastic Device Roles Explained"
 description: "A complete guide to all Meshtastic device roles. Learn what each role does, when to use it, and how incorrect role selection can harm mesh performance."
 date: 2025-12-18
 author: "Josh"

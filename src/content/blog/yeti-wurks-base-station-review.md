@@ -1,5 +1,5 @@
 ---
-title: "Yeti Wurks Meshtastic Base Station Review — Real-World Solar Mesh Performance"
+title: "Yeti Wurks Base Station Review"
 description: "Hands-on review of the Yeti Wurks Meshtastic Base Station, covering solar power, deployment, build quality, and real-world mesh performance in off-grid conditions."
 date: 2025-12-19
 author: "Josh"
