@@ -440,6 +440,12 @@ a.card:hover,
   border-radius: 8px;
 }
 
+/* Ensure prose container doesn't overflow on mobile */
+.prose {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 @media (min-width: 640px) {
   .prose img {
     max-width: 500px;

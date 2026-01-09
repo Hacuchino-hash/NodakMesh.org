@@ -147,7 +147,7 @@ const howToSchema = isHarborBreezePost ? {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
   )}
 
-  <article class="pt-24 pb-16">
+  <article class="pt-24 pb-16 overflow-x-hidden">
     <!-- Hero Header -->
     <header class="py-12 md:py-16 border-b border-[--color-border]">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -182,10 +182,10 @@ const howToSchema = isHarborBreezePost ? {
     </header>
 
     <!-- Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 overflow-hidden">
       <div class="grid lg:grid-cols-[1fr_280px] gap-12">
         <!-- Main Content -->
-        <div class="prose prose-invert prose-base md:prose-lg max-w-none
+        <div class="prose prose-invert prose-base md:prose-lg max-w-none min-w-0
           prose-headings:text-[--color-text-primary] prose-headings:font-bold
           prose-h2:text-xl prose-h2:md:text-2xl prose-h2:mt-8 prose-h2:md:mt-12 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-[--color-border]
           prose-h3:text-lg prose-h3:md:text-xl prose-h3:mt-6 prose-h3:md:mt-8 prose-h3:mb-3
@@ -193,9 +193,9 @@ const howToSchema = isHarborBreezePost ? {
           prose-a:text-[--color-accent] prose-a:no-underline hover:prose-a:underline
           prose-strong:text-[--color-text-primary]
           prose-code:text-[--color-accent] prose-code:bg-[--color-bg-tertiary] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
-          prose-pre:bg-[--color-bg-secondary] prose-pre:border prose-pre:border-[--color-border] prose-pre:rounded-lg
+          prose-pre:bg-[--color-bg-secondary] prose-pre:border prose-pre:border-[--color-border] prose-pre:rounded-lg prose-pre:overflow-x-auto
           prose-blockquote:border-l-[--color-accent] prose-blockquote:bg-[--color-bg-tertiary] prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:not-italic
-          prose-img:rounded-lg prose-img:shadow-lg
+          prose-img:rounded-lg prose-img:shadow-lg prose-img:max-w-full prose-img:h-auto
           prose-ul:text-[--color-text-secondary] prose-ol:text-[--color-text-secondary]
           prose-li:marker:text-[--color-accent]
         ">
