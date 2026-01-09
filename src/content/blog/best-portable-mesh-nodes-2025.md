@@ -273,7 +273,7 @@ All five devices work with **Meshtastic**. Most also work with **MeshCore**, tho
 
 If you're unsure, start with Meshtastic. You can always flash MeshCore later to compare.
 
-Check our [MeshCore vs Meshtastic comparison](/blog/meshcore-vs-meshtastic) for a deeper dive.
+Check our [MeshCore vs Meshtastic comparison](/blog/meshcore-vs-meshtastic-comparison) for a deeper dive.
 
 ---
 
@@ -309,4 +309,4 @@ Or explore local networks:
 
 ---
 
-*Prices and availability may vary. Links are provided for reference—we're not affiliated with any retailer. Got questions? Join our [Discord](/discord) or check our [Contact page](/about).*
+*Prices and availability may vary. Links are provided for reference—we're not affiliated with any retailer. Got questions? Join our [Discord](https://discord.gg/JUBrZepkaM) or check our [Contact page](/contact).*
