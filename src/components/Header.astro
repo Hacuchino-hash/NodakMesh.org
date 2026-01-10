@@ -2,7 +2,7 @@
 const navItems = [
   { name: 'Home', href: '/' },
   { name: 'Blog', href: '/blog' },
-  { name: 'MeshCore vs Meshtastic', href: '/protocols' },
+  { name: 'Compare', href: '/protocols' },
   {
     name: 'MeshCore',
     href: '/meshcore/getting-started',
@@ -43,9 +43,9 @@ const currentPath = Astro.url.pathname;
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-[--color-bg-primary]/90 backdrop-blur-md border-b border-[--color-border]">
   <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
+    <div class="flex items-center h-16">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-2 group flex-shrink-0">
+      <a href="/" class="flex items-center gap-2.5 group flex-shrink-0 mr-8">
         <svg class="h-8 w-8 text-[--color-accent]" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- Hexagon mesh pattern -->
           <path d="M16 2L28 9V23L16 30L4 23V9L16 2Z" stroke="currentColor" stroke-width="2" fill="none"/>
@@ -62,7 +62,7 @@ const currentPath = Astro.url.pathname;
       </a>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center gap-1" aria-label="Main navigation">
+      <nav class="hidden md:flex items-center gap-0.5 flex-1" aria-label="Main navigation">
         {navItems.map((item) => (
           <div class="relative group">
             <a
@@ -103,7 +103,7 @@ const currentPath = Astro.url.pathname;
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-btn"
-        class="md:hidden p-2 rounded-lg text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]"
+        class="md:hidden ml-auto p-2 rounded-lg text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]"
         aria-label="Open navigation menu"
         aria-expanded="false"
         aria-controls="mobile-menu"

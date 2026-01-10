@@ -1,0 +1,409 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageTitle = "Meshtastic Device Setup Guide";
+const pageDescription = "Complete guide to flashing and configuring Meshtastic firmware on your device. Includes DFU mode instructions, drivers, and post-flash configuration.";
+
+const devices = [
+  {
+    id: 'heltec-v3',
+    name: 'Heltec V3 / WiFi LoRa 32',
+    dfu: 'Hold BOOT button while plugging in USB, or hold BOOT and press RST',
+    driver: { name: 'CP210x', url: 'https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers' },
+    notes: 'Most popular starter device. No special mode needed for most flashing.',
+  },
+  {
+    id: 'heltec-v4',
+    name: 'Heltec V4 / Vision Master',
+    dfu: 'Hold BOOT button while plugging in USB, or hold BOOT and press RST',
+    driver: { name: 'CH340', url: 'https://www.wch-ic.com/downloads/CH341SER_ZIP.html' },
+    notes: 'Windows users MUST install CH340 driver first. Device won\'t be recognized without it.',
+  },
+  {
+    id: 'heltec-capsule',
+    name: 'Heltec Capsule Sensor V3',
+    dfu: 'Hold BOOT button while plugging in USB',
+    driver: { name: 'CP210x', url: 'https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers' },
+    notes: 'Ultra-compact tracker with GPS. Great for portable use.',
+  },
+  {
+    id: 'heltec-t114',
+    name: 'Heltec T114',
+    dfu: 'Double-tap the reset button quickly to enter bootloader mode',
+    driver: null,
+    notes: 'nRF52840-based device. Shows as USB drive when in bootloader mode.',
+  },
+  {
+    id: 'heltec-wireless-paper',
+    name: 'Heltec Wireless Paper',
+    dfu: 'Hold BOOT button while plugging in USB',
+    driver: { name: 'CP210x', url: 'https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers' },
+    notes: 'E-ink display - great for low-power solar setups.',
+  },
+  {
+    id: 't-beam',
+    name: 'LilyGo T-Beam',
+    dfu: 'Hold BOOT button while plugging in USB, or hold BOOT and press RST',
+    driver: { name: 'CP210x', url: 'https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers' },
+    notes: 'Has built-in GPS and 18650 battery holder. Great for mobile nodes.',
+  },
+  {
+    id: 't-deck',
+    name: 'LilyGo T-Deck',
+    dfu: 'Hold trackball button (press down on it) while plugging in USB',
+    driver: { name: 'CP210x', url: 'https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers' },
+    notes: 'MUST enter DFU mode to flash. Has keyboard and touchscreen for standalone use.',
+  },
+  {
+    id: 't-deck-plus',
+    name: 'LilyGo T-Deck Plus',
+    dfu: 'Hold trackball button (press down on it) while plugging in USB',
+    driver: { name: 'CP210x', url: 'https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers' },
+    notes: 'MUST enter DFU mode to flash. Upgraded version with better display.',
+  },
+  {
+    id: 't-pager',
+    name: 'LilyGo T-Pager',
+    dfu: 'Hold BOOT button while plugging in USB',
+    driver: { name: 'CP210x', url: 'https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers' },
+    notes: 'Compact pager-style device with keyboard.',
+  },
+  {
+    id: 't-echo',
+    name: 'LilyGo T-Echo',
+    dfu: 'Double-tap the reset button quickly to enter bootloader mode',
+    driver: null,
+    notes: 'nRF52840-based. Shows as USB drive in bootloader. E-ink display.',
+  },
+  {
+    id: 'rak-wisblock',
+    name: 'RAK WisBlock (RAK4631)',
+    dfu: 'Double-tap the reset button quickly to enter bootloader mode',
+    driver: null,
+    notes: 'nRF52840-based modular system. Shows as USB drive when in bootloader.',
+  },
+  {
+    id: 'rak-wismesh-pocket',
+    name: 'RAK WisMesh Pocket',
+    dfu: 'Double-tap the reset button quickly',
+    driver: null,
+    notes: 'Pre-built enclosed device. nRF52840-based.',
+  },
+  {
+    id: 'rak-wismesh-tag',
+    name: 'RAK WisMesh Tag',
+    dfu: 'Double-tap the reset button quickly',
+    driver: null,
+    notes: 'Ultra-compact tracker. nRF52840-based.',
+  },
+  {
+    id: 'wio-tracker',
+    name: 'Seeed Wio Tracker 1110',
+    dfu: 'Double-tap the reset button quickly to enter bootloader mode',
+    driver: null,
+    notes: 'nRF52840-based with GPS. Shows as USB drive in bootloader.',
+  },
+  {
+    id: 'station-g2',
+    name: 'Station G2',
+    dfu: 'Hold BOOT button while plugging in USB',
+    driver: { name: 'CP210x', url: 'https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers' },
+    notes: 'High-power base station. Great for home or repeater setups.',
+  },
+  {
+    id: 'nano-g2-ultra',
+    name: 'Nano G2 Ultra',
+    dfu: 'Hold BOOT button while plugging in USB',
+    driver: { name: 'CP210x', url: 'https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers' },
+    notes: 'Compact device with screen. Good balance of features.',
+  },
+  {
+    id: 't1000-e',
+    name: 'Seeed SenseCAP T1000-E',
+    dfu: 'Hold the button while plugging in USB',
+    driver: null,
+    notes: 'Ultra-compact credit-card sized tracker with GPS. Great for asset tracking.',
+  },
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <main class="pt-24 pb-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold mb-4">
+          <span class="text-[--color-text-primary]">Meshtastic</span>
+          <span class="gradient-text">Device Setup</span>
+        </h1>
+        <p class="text-xl text-[--color-text-secondary] max-w-2xl mx-auto">
+          Complete guide to flashing Meshtastic firmware on your device
+        </p>
+      </div>
+
+      <!-- IMPORTANT: Antenna Warning -->
+      <div class="bg-red-500/10 border-2 border-red-500/50 rounded-2xl p-6 mb-8">
+        <div class="flex items-start gap-4">
+          <svg class="w-8 h-8 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          <div>
+            <h3 class="text-lg font-bold text-red-400 mb-2">IMPORTANT: Attach Antenna Before Powering On!</h3>
+            <p class="text-[--color-text-secondary]">
+              <strong class="text-red-300">Always connect an antenna to your device BEFORE plugging in USB or turning it on.</strong>
+              Transmitting without an antenna can permanently damage the LoRa radio chip. Even a few seconds of transmission
+              without an antenna can cause irreversible damage. This applies to flashing AND normal use.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Start -->
+      <div class="bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/30 rounded-2xl p-8 mb-12">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-4">Quick Start</h2>
+        <ol class="space-y-3 text-[--color-text-secondary]">
+          <li class="flex gap-3">
+            <span class="flex-shrink-0 w-7 h-7 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">1</span>
+            <span><strong>Install drivers</strong> if needed (see device-specific section below)</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="flex-shrink-0 w-7 h-7 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">2</span>
+            <span><strong>Put device in DFU/bootloader mode</strong> (varies by device)</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="flex-shrink-0 w-7 h-7 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">3</span>
+            <span><strong>Open the web flasher</strong> in Chrome or Edge browser</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="flex-shrink-0 w-7 h-7 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">4</span>
+            <span><strong>Select your device</strong> and click Flash</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="flex-shrink-0 w-7 h-7 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">5</span>
+            <span><strong>Configure settings</strong> using the Meshtastic app (region, name, etc.)</span>
+          </li>
+        </ol>
+        <a
+          href="https://flasher.meshtastic.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          Open Meshtastic Web Flasher
+        </a>
+      </div>
+
+      <!-- Post-Flash Configuration -->
+      <div class="bg-[--color-bg-secondary] border border-[--color-border] rounded-2xl p-8 mb-12">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-4">Post-Flash Configuration</h2>
+        <p class="text-[--color-text-secondary] mb-6">After flashing, configure your device using the Meshtastic app:</p>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-[--color-bg-tertiary] rounded-xl p-5">
+            <h3 class="font-semibold text-[--color-text-primary] mb-3">Essential Settings</h3>
+            <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong>Region:</strong> US (United States) for 915 MHz</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong>Long Name:</strong> Your display name (e.g., "John's Node")</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong>Short Name:</strong> 4-character identifier</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong>Role:</strong> Client, Router, or Router_Client</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-[--color-bg-tertiary] rounded-xl p-5">
+            <h3 class="font-semibold text-[--color-text-primary] mb-3">Meshtastic Apps</h3>
+            <ul class="space-y-2 text-sm text-[--color-text-secondary]">
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"/>
+                </svg>
+                <span><strong>iOS:</strong> <a href="https://apps.apple.com/us/app/meshtastic/id1586432531" target="_blank" class="text-blue-400 hover:underline">App Store</a></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"/>
+                </svg>
+                <span><strong>Android:</strong> <a href="https://play.google.com/store/apps/details?id=com.geeksville.mesh" target="_blank" class="text-blue-400 hover:underline">Play Store</a></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"/>
+                </svg>
+                <span><strong>Web:</strong> <a href="https://client.meshtastic.org" target="_blank" class="text-blue-400 hover:underline">client.meshtastic.org</a></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl">
+          <p class="text-sm text-yellow-200">
+            <strong>US Users:</strong> Set region to "US" for 915 MHz. Default channel settings work great for connecting with other local mesh users!
+          </p>
+        </div>
+      </div>
+
+      <!-- Channel Configuration -->
+      <div class="bg-[--color-bg-secondary] border border-[--color-border] rounded-2xl p-8 mb-12">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-4">Channel Configuration</h2>
+
+        <div class="space-y-4 text-[--color-text-secondary]">
+          <p>Meshtastic uses channels to organize communication. Here's what you need to know:</p>
+
+          <div class="bg-[--color-bg-tertiary] rounded-xl p-5">
+            <h3 class="font-semibold text-[--color-text-primary] mb-3">Default Channel</h3>
+            <p class="text-sm mb-3">
+              All Meshtastic devices start on the default "LongFast" channel with a public encryption key.
+              This is great for testing and connecting with other nearby users.
+            </p>
+            <ul class="text-sm space-y-1">
+              <li><strong>Name:</strong> LongFast</li>
+              <li><strong>Modem Preset:</strong> Long Range / Fast</li>
+              <li><strong>Key:</strong> AQ== (public default key)</li>
+            </ul>
+          </div>
+
+          <div class="bg-[--color-bg-tertiary] rounded-xl p-5">
+            <h3 class="font-semibold text-[--color-text-primary] mb-3">Private Channels</h3>
+            <p class="text-sm mb-3">
+              For private communication, create a new channel with a custom encryption key.
+              Share the channel QR code or URL with people you want to communicate with.
+            </p>
+            <p class="text-sm text-[--color-text-muted]">
+              You can have up to 8 channels configured on a single device.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Device-Specific Instructions -->
+      <h2 class="text-2xl font-bold text-[--color-text-primary] mb-6">Device-Specific Instructions</h2>
+
+      <div class="space-y-4">
+        {devices.map((device) => (
+          <details class="group bg-[--color-bg-secondary] border border-[--color-border] rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-[--color-bg-tertiary] transition-colors">
+              <span class="font-semibold text-[--color-text-primary]">{device.name}</span>
+              <svg class="w-5 h-5 text-[--color-text-muted] group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-5 border-t border-[--color-border]">
+              <div class="pt-4 space-y-4">
+                <div>
+                  <h4 class="text-sm font-semibold text-[--color-text-secondary] uppercase tracking-wide mb-2">DFU / Bootloader Mode</h4>
+                  <p class="text-[--color-text-primary] bg-[--color-bg-tertiary] p-3 rounded-lg font-mono text-sm">{device.dfu}</p>
+                </div>
+
+                {device.driver && (
+                  <div>
+                    <h4 class="text-sm font-semibold text-[--color-text-secondary] uppercase tracking-wide mb-2">Required Driver</h4>
+                    <a
+                      href={device.driver.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                      Download {device.driver.name} Driver
+                    </a>
+                  </div>
+                )}
+
+                <div>
+                  <h4 class="text-sm font-semibold text-[--color-text-secondary] uppercase tracking-wide mb-2">Notes</h4>
+                  <p class="text-[--color-text-secondary]">{device.notes}</p>
+                </div>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <!-- Troubleshooting -->
+      <div class="mt-12 bg-[--color-bg-secondary] border border-[--color-border] rounded-2xl p-8">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-6">Troubleshooting</h2>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="font-semibold text-[--color-text-primary] mb-2">Device not detected?</h3>
+            <ul class="list-disc list-inside text-[--color-text-secondary] space-y-1 ml-2">
+              <li>Make sure you've installed the correct driver (see device section above)</li>
+              <li>Try a different USB cable - data cables look the same as charge-only cables</li>
+              <li>Try a different USB port, preferably USB 2.0</li>
+              <li>Make sure the device is in DFU/bootloader mode before connecting</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-semibold text-[--color-text-primary] mb-2">Flash fails or times out?</h3>
+            <ul class="list-disc list-inside text-[--color-text-secondary] space-y-1 ml-2">
+              <li>Close any other apps that might be using the serial port</li>
+              <li>Use Chrome or Edge browser (Firefox doesn't support Web Serial)</li>
+              <li>Try pressing the reset button and re-entering DFU mode</li>
+              <li>For nRF52 devices: Make sure you see it as a USB drive first</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-semibold text-[--color-text-primary] mb-2">Can't connect with app?</h3>
+            <ul class="list-disc list-inside text-[--color-text-secondary] space-y-1 ml-2">
+              <li>Make sure Bluetooth is enabled on your phone</li>
+              <li>Try restarting both the device and your phone</li>
+              <li>Check that the device shows "Bluetooth" or "BLE" on its screen</li>
+              <li>Try connecting via USB serial instead of Bluetooth</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-semibold text-[--color-text-primary] mb-2">Not seeing other nodes?</h3>
+            <ul class="list-disc list-inside text-[--color-text-secondary] space-y-1 ml-2">
+              <li>Verify you're on the same channel with the same encryption key</li>
+              <li>Check that the region is set correctly (US for North America)</li>
+              <li>Make sure modem presets match between devices</li>
+              <li>Nodes can take several minutes to appear after first boot</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Back to Devices -->
+      <div class="mt-8 text-center">
+        <a
+          href="/meshtastic/devices"
+          class="inline-flex items-center gap-2 text-[--color-text-secondary] hover:text-[--color-text-primary] transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Meshtastic Devices
+        </a>
+      </div>
+
+    </div>
+  </main>
+</Layout>
