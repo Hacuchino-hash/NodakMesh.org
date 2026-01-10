@@ -3,141 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-// Tool categories
-const flashers = [
-  {
-    name: "Meshtastic Web Flasher",
-    description: "Official browser-based firmware flasher for Meshtastic devices. Supports all major boards. Works in Chrome/Edge.",
-    url: "https://flasher.meshtastic.org",
-    icon: "meshtastic",
-    tags: ["Official", "Web-Based"]
-  },
-  {
-    name: "MeshCore Flasher",
-    description: "Flash Companion, Repeater, or Room Server firmware to your LoRa devices. Supports Heltec, T-Beam, T-Deck, RAK, and more.",
-    url: "https://flasher.meshcore.co.uk",
-    icon: "meshcore",
-    tags: ["Official", "Web-Based"]
-  },
-];
-
-const configTools = [
-  {
-    name: "MeshCore Config Generator",
-    description: "Generate QR codes and configuration links for MeshCore devices. Set channels, passwords, and network settings.",
-    url: "https://config.meshcore.dev",
-    icon: "config",
-    tags: ["Official", "QR Codes"]
-  },
-  {
-    name: "Meshtastic Web Client",
-    description: "Configure and use your Meshtastic device directly from the browser via Bluetooth, Serial, or HTTP.",
-    url: "https://client.meshtastic.org",
-    icon: "meshtastic",
-    tags: ["Official", "Web-Based"]
-  }
-];
-
-const mobileApps = [
-  {
-    name: "Meshtastic Android",
-    description: "Official Android app for Meshtastic. Connect via Bluetooth to send messages, view maps, and configure your device.",
-    url: "https://play.google.com/store/apps/details?id=com.geeksville.mesh",
-    icon: "android",
-    platform: "Android",
-    tags: ["Official"]
-  },
-  {
-    name: "Meshtastic iOS",
-    description: "Official iOS app for Meshtastic. Full-featured client for iPhone and iPad.",
-    url: "https://apps.apple.com/app/meshtastic/id1586432531",
-    icon: "apple",
-    platform: "iOS",
-    tags: ["Official"]
-  },
-  {
-    name: "MeshCore Android",
-    description: "Android app for MeshCore devices. Discover contacts, send direct messages, and manage repeaters.",
-    url: "https://play.google.com/store/apps/details?id=nz.meshcore.app",
-    icon: "android",
-    platform: "Android",
-    tags: ["Official"]
-  },
-  {
-    name: "MeshCore iOS",
-    description: "iOS app for MeshCore. Available on the App Store for iPhone and iPad.",
-    url: "https://apps.apple.com/app/meshcore/id6740261825",
-    icon: "apple",
-    platform: "iOS",
-    tags: ["Official"]
-  },
-  {
-    name: "MeshCore Web App",
-    description: "Browser-based MeshCore client. Works on any device with a modern browser.",
-    url: "https://app.meshcore.nz",
-    icon: "web",
-    platform: "Web",
-    tags: ["Official", "Web-Based"]
-  }
-];
-
-const developerTools = [
-  {
-    name: "Meshtastic Python CLI",
-    description: "Command-line interface for Meshtastic. Automate configuration, send messages, and build scripts.",
-    url: "https://github.com/meshtastic/python",
-    icon: "github",
-    tags: ["CLI", "Python"]
-  },
-  {
-    name: "meshcore.js",
-    description: "JavaScript library for MeshCore. Build web apps that communicate with MeshCore devices.",
-    url: "https://github.com/liamcottle/meshcore.js",
-    icon: "github",
-    tags: ["Library", "JavaScript"]
-  },
-  {
-    name: "meshcore-cli",
-    description: "Node.js CLI for MeshCore. Manage devices, send messages, and automate workflows from the terminal.",
-    url: "https://github.com/liamcottle/meshcore-cli",
-    icon: "github",
-    tags: ["CLI", "Node.js"]
-  },
-  {
-    name: "Meshtastic JS",
-    description: "JavaScript/TypeScript library for building Meshtastic-compatible applications.",
-    url: "https://github.com/meshtastic/js",
-    icon: "github",
-    tags: ["Library", "TypeScript"]
-  }
-];
-
-// US 915 MHz Channel Reference
+// US 915 MHz Band Reference - Common frequencies
 const usChannels = [
-  { num: 1, freq: 902.0, note: "Start of band" },
-  { num: 2, freq: 903.08, note: "" },
-  { num: 3, freq: 905.24, note: "" },
-  { num: 4, freq: 906.32, note: "" },
-  { num: 5, freq: 907.40, note: "" },
-  { num: 6, freq: 908.48, note: "" },
-  { num: 7, freq: 909.56, note: "" },
-  { num: 8, freq: 910.64, note: "" },
-  { num: 9, freq: 911.72, note: "" },
-  { num: 10, freq: 912.80, note: "" },
-  { num: 11, freq: 913.88, note: "" },
-  { num: 12, freq: 914.96, note: "" },
-  { num: 13, freq: 916.04, note: "" },
-  { num: 14, freq: 917.12, note: "" },
-  { num: 15, freq: 918.20, note: "" },
-  { num: 16, freq: 919.28, note: "" },
-  { num: 17, freq: 920.36, note: "Default MeshCore" },
-  { num: 18, freq: 921.44, note: "" },
-  { num: 19, freq: 922.52, note: "" },
-  { num: 20, freq: 923.60, note: "Default Meshtastic" },
-  { num: 21, freq: 924.68, note: "" },
-  { num: 22, freq: 925.76, note: "" },
-  { num: 23, freq: 926.84, note: "" },
-  { num: 24, freq: 927.92, note: "End of band" },
+  { num: "-", freq: 902.0, note: "Start of band" },
+  { num: "-", freq: 906.875, note: "Default Meshtastic (LongFast)" },
+  { num: "-", freq: 910.525, note: "Default MeshCore (US/CA)" },
+  { num: "-", freq: 915.0, note: "Center of band" },
+  { num: "-", freq: 928.0, note: "End of band" },
 ];
 ---
 
@@ -150,384 +22,320 @@ const usChannels = [
 
   <div class="pt-24 pb-16">
     <!-- Hero -->
-    <section class="py-16 hero-glow">
+    <section class="py-12 hero-glow">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl">
-          <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-6">
+          <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-4">
             Mesh Network <span class="gradient-text">Tools</span>
           </h1>
-          <p class="text-xl text-[--color-text-secondary] leading-relaxed mb-8">
-            Everything you need to flash, configure, and use your LoRa mesh devices. Flashers, apps, calculators, and reference charts all in one place.
+          <p class="text-xl text-[--color-text-secondary] leading-relaxed">
+            Flash firmware, calculate range, and find the right apps for your mesh devices.
           </p>
-
-          <!-- Quick Jump Links -->
-          <div class="flex flex-wrap gap-3">
-            <a href="#flashers" class="btn-secondary text-sm">Flashers</a>
-            <a href="#config" class="btn-secondary text-sm">Config Tools</a>
-            <a href="#apps" class="btn-secondary text-sm">Mobile Apps</a>
-            <a href="#calculator" class="btn-secondary text-sm">Range Calculator</a>
-            <a href="#channels" class="btn-secondary text-sm">Channel Reference</a>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- Flashers Section -->
-    <section id="flashers" class="py-12 scroll-mt-24">
+    <!-- Range Calculator - Featured at top -->
+    <section id="calculator" class="py-12 scroll-mt-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center gap-3 mb-8">
-          <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
-            <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </div>
-          <h2 class="text-2xl font-bold text-[--color-text-primary]">Firmware Flashers</h2>
-        </div>
-        <p class="text-[--color-text-secondary] mb-6 max-w-3xl">
-          Flash firmware to your LoRa devices directly from your browser. No software installation required—just use Chrome or Edge.
-        </p>
-
-        <div class="grid md:grid-cols-3 gap-6">
-          {flashers.map(tool => (
-            <a href={tool.url} target="_blank" rel="noopener" class="card p-6 hover:border-[--color-accent]/50 transition-all group">
-              <div class="flex items-start justify-between mb-4">
-                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
-                  <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                </div>
-                <svg class="w-5 h-5 text-[--color-text-muted] group-hover:text-[--color-accent] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        <div class="grid lg:grid-cols-2 gap-8 items-start">
+          <!-- Calculator -->
+          <div class="card p-6">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-10 h-10 rounded-lg bg-[--color-accent]/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-[--color-accent]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 class="font-semibold text-[--color-text-primary] mb-2 group-hover:text-[--color-accent] transition-colors">{tool.name}</h3>
-              <p class="text-sm text-[--color-text-secondary] mb-4">{tool.description}</p>
-              <div class="flex flex-wrap gap-2">
-                {tool.tags.map(tag => (
-                  <span class="text-xs px-2 py-1 rounded-full bg-[--color-bg-tertiary] text-[--color-text-muted]">{tag}</span>
-                ))}
+              <h2 class="text-xl font-bold text-[--color-text-primary]">LoRa Range Calculator</h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4 mb-6">
+              <div>
+                <label for="txPower" class="block text-sm font-medium text-[--color-text-primary] mb-1">
+                  TX Power (dBm)
+                </label>
+                <input type="number" id="txPower" value="22" min="0" max="30"
+                  class="w-full px-3 py-2 bg-[--color-bg-tertiary] border border-[--color-border] rounded-lg text-[--color-text-primary] focus:outline-none focus:border-[--color-accent]" />
+                <p class="text-xs text-[--color-text-muted] mt-1">Typical: 20-22 dBm</p>
               </div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
+              <div>
+                <label for="txGain" class="block text-sm font-medium text-[--color-text-primary] mb-1">
+                  TX Antenna (dBi)
+                </label>
+                <input type="number" id="txGain" value="3" min="0" max="20" step="0.5"
+                  class="w-full px-3 py-2 bg-[--color-bg-tertiary] border border-[--color-border] rounded-lg text-[--color-text-primary] focus:outline-none focus:border-[--color-accent]" />
+                <p class="text-xs text-[--color-text-muted] mt-1">Stock: 2-3 dBi</p>
+              </div>
+              <div>
+                <label for="rxGain" class="block text-sm font-medium text-[--color-text-primary] mb-1">
+                  RX Antenna (dBi)
+                </label>
+                <input type="number" id="rxGain" value="3" min="0" max="20" step="0.5"
+                  class="w-full px-3 py-2 bg-[--color-bg-tertiary] border border-[--color-border] rounded-lg text-[--color-text-primary] focus:outline-none focus:border-[--color-accent]" />
+                <p class="text-xs text-[--color-text-muted] mt-1">Base: 5-6 dBi</p>
+              </div>
+              <div>
+                <label for="rxSensitivity" class="block text-sm font-medium text-[--color-text-primary] mb-1">
+                  RX Sensitivity (dBm)
+                </label>
+                <input type="number" id="rxSensitivity" value="-137" min="-150" max="-100"
+                  class="w-full px-3 py-2 bg-[--color-bg-tertiary] border border-[--color-border] rounded-lg text-[--color-text-primary] focus:outline-none focus:border-[--color-accent]" />
+                <p class="text-xs text-[--color-text-muted] mt-1">SF12: -137 dBm</p>
+              </div>
+            </div>
 
-    <!-- Config Tools Section -->
-    <section id="config" class="py-12 scroll-mt-24 bg-[--color-bg-secondary]">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center gap-3 mb-8">
-          <div class="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
-            <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
+            <!-- Results -->
+            <div class="bg-[--color-bg-tertiary] rounded-lg p-4">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm text-[--color-text-muted]">Link Budget</span>
+                <span class="font-bold text-[--color-text-primary]"><span id="linkBudget">165</span> dB</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-[--color-text-muted]">Estimated Range</span>
+                <span class="text-xl font-bold text-[--color-accent]"><span id="rangeKm">92.8</span> km / <span id="rangeMi">57.7</span> mi</span>
+              </div>
+            </div>
+            <p class="text-xs text-[--color-text-muted] mt-3">
+              Good LOS with elevated antennas. Urban areas: expect 20-50% of this.
+            </p>
           </div>
-          <h2 class="text-2xl font-bold text-[--color-text-primary]">Configuration Tools</h2>
-        </div>
-        <p class="text-[--color-text-secondary] mb-6 max-w-3xl">
-          Configure your devices, generate QR codes, and manage settings without a mobile app.
-        </p>
 
-        <div class="grid md:grid-cols-2 gap-6">
-          {configTools.map(tool => (
-            <a href={tool.url} target="_blank" rel="noopener" class="card p-6 hover:border-[--color-accent]/50 transition-all group">
-              <div class="flex items-start justify-between mb-4">
-                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500/20 to-teal-500/20 flex items-center justify-center">
-                  <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                  </svg>
-                </div>
-                <svg class="w-5 h-5 text-[--color-text-muted] group-hover:text-[--color-accent] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          <!-- Channel Reference - Compact -->
+          <div class="card p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
-              <h3 class="font-semibold text-[--color-text-primary] mb-2 group-hover:text-[--color-accent] transition-colors">{tool.name}</h3>
-              <p class="text-sm text-[--color-text-secondary] mb-4">{tool.description}</p>
-              <div class="flex flex-wrap gap-2">
-                {tool.tags.map(tag => (
-                  <span class="text-xs px-2 py-1 rounded-full bg-[--color-bg-tertiary] text-[--color-text-muted]">{tag}</span>
-                ))}
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Mobile Apps Section -->
-    <section id="apps" class="py-12 scroll-mt-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center gap-3 mb-8">
-          <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center">
-            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <h2 class="text-2xl font-bold text-[--color-text-primary]">Mobile & Web Apps</h2>
-        </div>
-        <p class="text-[--color-text-secondary] mb-6 max-w-3xl">
-          Connect to your mesh device from your phone or browser. Send messages, view maps, and manage your network.
-        </p>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {mobileApps.map(app => (
-            <a href={app.url} target="_blank" rel="noopener" class="card p-6 hover:border-[--color-accent]/50 transition-all group">
-              <div class="flex items-start justify-between mb-4">
-                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
-                  {app.icon === 'android' && (
-                    <svg class="w-6 h-6 text-green-400" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M17.523 15.341c-.5 0-.91.41-.91.91s.41.91.91.91.91-.41.91-.91-.41-.91-.91-.91zm-11.046 0c-.5 0-.91.41-.91.91s.41.91.91.91.91-.41.91-.91-.41-.91-.91-.91zm11.405-6.02l1.96-3.392a.41.41 0 00-.147-.562.41.41 0 00-.562.147l-1.985 3.435A12.075 12.075 0 0012 8.07c-1.85 0-3.592.422-5.149 1.18L4.866 5.814a.41.41 0 00-.562-.147.41.41 0 00-.147.562l1.96 3.392A11.216 11.216 0 001 17.878h22c0-3.294-1.422-6.263-3.678-8.316l-.44-.241z"/>
-                    </svg>
-                  )}
-                  {app.icon === 'apple' && (
-                    <svg class="w-6 h-6 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                    </svg>
-                  )}
-                  {app.icon === 'web' && (
-                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                    </svg>
-                  )}
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="text-xs px-2 py-1 rounded-full bg-[--color-bg-tertiary] text-[--color-text-muted]">{app.platform}</span>
-                  <svg class="w-5 h-5 text-[--color-text-muted] group-hover:text-[--color-accent] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </div>
-              </div>
-              <h3 class="font-semibold text-[--color-text-primary] mb-2 group-hover:text-[--color-accent] transition-colors">{app.name}</h3>
-              <p class="text-sm text-[--color-text-secondary]">{app.description}</p>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Developer Tools Section -->
-    <section id="developer" class="py-12 scroll-mt-24 bg-[--color-bg-secondary]">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center gap-3 mb-8">
-          <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center">
-            <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-          </div>
-          <h2 class="text-2xl font-bold text-[--color-text-primary]">Developer Tools</h2>
-        </div>
-        <p class="text-[--color-text-secondary] mb-6 max-w-3xl">
-          Build your own mesh applications with these libraries and command-line tools.
-        </p>
-
-        <div class="grid md:grid-cols-2 gap-6">
-          {developerTools.map(tool => (
-            <a href={tool.url} target="_blank" rel="noopener" class="card p-6 hover:border-[--color-accent]/50 transition-all group">
-              <div class="flex items-start justify-between mb-4">
-                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-500/20 to-yellow-500/20 flex items-center justify-center">
-                  <svg class="w-6 h-6 text-orange-400" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                  </svg>
-                </div>
-                <svg class="w-5 h-5 text-[--color-text-muted] group-hover:text-[--color-accent] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </div>
-              <h3 class="font-semibold text-[--color-text-primary] mb-2 group-hover:text-[--color-accent] transition-colors">{tool.name}</h3>
-              <p class="text-sm text-[--color-text-secondary] mb-4">{tool.description}</p>
-              <div class="flex flex-wrap gap-2">
-                {tool.tags.map(tag => (
-                  <span class="text-xs px-2 py-1 rounded-full bg-[--color-bg-tertiary] text-[--color-text-muted]">{tag}</span>
-                ))}
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Range Calculator Section -->
-    <section id="calculator" class="py-12 scroll-mt-24 bg-[--color-bg-secondary]">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center gap-3 mb-8">
-          <div class="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center">
-            <svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <h2 class="text-2xl font-bold text-[--color-text-primary]">LoRa Range Calculator</h2>
-        </div>
-        <p class="text-[--color-text-secondary] mb-6 max-w-3xl">
-          Estimate your maximum line-of-sight range based on transmit power, antenna gain, and receiver sensitivity. Real-world range will be shorter due to terrain, buildings, and atmospheric conditions.
-        </p>
-
-        <div class="card p-6 max-w-2xl">
-          <div class="grid md:grid-cols-2 gap-6 mb-6">
-            <!-- TX Power -->
-            <div>
-              <label for="txPower" class="block text-sm font-medium text-[--color-text-primary] mb-2">
-                TX Power (dBm)
-              </label>
-              <input
-                type="number"
-                id="txPower"
-                value="22"
-                min="0"
-                max="30"
-                class="w-full px-4 py-2 bg-[--color-bg-tertiary] border border-[--color-border] rounded-lg text-[--color-text-primary] focus:outline-none focus:border-[--color-accent] focus:ring-1 focus:ring-[--color-accent]"
-              />
-              <p class="text-xs text-[--color-text-muted] mt-1">Typical: 20-22 dBm (100-160 mW)</p>
-            </div>
-
-            <!-- TX Antenna Gain -->
-            <div>
-              <label for="txGain" class="block text-sm font-medium text-[--color-text-primary] mb-2">
-                TX Antenna Gain (dBi)
-              </label>
-              <input
-                type="number"
-                id="txGain"
-                value="3"
-                min="0"
-                max="20"
-                step="0.5"
-                class="w-full px-4 py-2 bg-[--color-bg-tertiary] border border-[--color-border] rounded-lg text-[--color-text-primary] focus:outline-none focus:border-[--color-accent] focus:ring-1 focus:ring-[--color-accent]"
-              />
-              <p class="text-xs text-[--color-text-muted] mt-1">Stock antenna: 2-3 dBi</p>
-            </div>
-
-            <!-- RX Antenna Gain -->
-            <div>
-              <label for="rxGain" class="block text-sm font-medium text-[--color-text-primary] mb-2">
-                RX Antenna Gain (dBi)
-              </label>
-              <input
-                type="number"
-                id="rxGain"
-                value="3"
-                min="0"
-                max="20"
-                step="0.5"
-                class="w-full px-4 py-2 bg-[--color-bg-tertiary] border border-[--color-border] rounded-lg text-[--color-text-primary] focus:outline-none focus:border-[--color-accent] focus:ring-1 focus:ring-[--color-accent]"
-              />
-              <p class="text-xs text-[--color-text-muted] mt-1">Base station: 5-6 dBi</p>
-            </div>
-
-            <!-- RX Sensitivity -->
-            <div>
-              <label for="rxSensitivity" class="block text-sm font-medium text-[--color-text-primary] mb-2">
-                RX Sensitivity (dBm)
-              </label>
-              <input
-                type="number"
-                id="rxSensitivity"
-                value="-137"
-                min="-150"
-                max="-100"
-                class="w-full px-4 py-2 bg-[--color-bg-tertiary] border border-[--color-border] rounded-lg text-[--color-text-primary] focus:outline-none focus:border-[--color-accent] focus:ring-1 focus:ring-[--color-accent]"
-              />
-              <p class="text-xs text-[--color-text-muted] mt-1">SX1262 @ SF12: -137 dBm</p>
-            </div>
-          </div>
-
-          <!-- Results -->
-          <div class="border-t border-[--color-border] pt-6">
-            <div class="grid md:grid-cols-2 gap-4">
-              <div class="bg-[--color-bg-tertiary] rounded-lg p-4">
-                <p class="text-sm text-[--color-text-muted] mb-1">Link Budget</p>
-                <p class="text-2xl font-bold text-[--color-text-primary]"><span id="linkBudget">165</span> dB</p>
-              </div>
-              <div class="bg-[--color-bg-tertiary] rounded-lg p-4">
-                <p class="text-sm text-[--color-text-muted] mb-1">Max Line-of-Sight Range</p>
-                <p class="text-2xl font-bold text-[--color-accent]"><span id="rangeKm">92.8</span> km / <span id="rangeMi">57.7</span> mi</p>
+              <div>
+                <h2 class="text-xl font-bold text-[--color-text-primary]">US 915 MHz Channels</h2>
+                <p class="text-sm text-[--color-text-muted]">902-928 MHz ISM Band</p>
               </div>
             </div>
-            <p class="text-xs text-[--color-text-muted] mt-4">
-              * Estimated range for good line-of-sight conditions with elevated antennas. Real-world range varies greatly based on terrain, obstructions, antenna height, and weather. Urban/suburban environments typically see 20-50% of this estimate.
+
+            <div class="overflow-y-auto max-h-64 rounded-lg border border-[--color-border]">
+              <table class="w-full text-sm">
+                <thead class="sticky top-0 bg-[--color-bg-tertiary]">
+                  <tr>
+                    <th class="px-3 py-2 text-left font-semibold text-[--color-text-primary]">Ch</th>
+                    <th class="px-3 py-2 text-left font-semibold text-[--color-text-primary]">Freq (MHz)</th>
+                    <th class="px-3 py-2 text-left font-semibold text-[--color-text-primary]"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {usChannels.map((ch, idx) => (
+                    <tr class={`border-t border-[--color-border] ${ch.note.includes('Default') ? 'bg-[--color-accent]/10' : ''}`}>
+                      <td class="px-3 py-1.5 text-[--color-text-primary] font-mono">{ch.num}</td>
+                      <td class="px-3 py-1.5 text-[--color-text-secondary] font-mono">{ch.freq.toFixed(2)}</td>
+                      <td class="px-3 py-1.5">
+                        {ch.note && (
+                          <span class={`text-xs ${ch.note.includes('Default') ? 'text-[--color-accent] font-medium' : 'text-[--color-text-muted]'}`}>
+                            {ch.note}
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="text-xs text-[--color-text-muted] mt-3">
+              Meshtastic: 906.875 MHz (LongFast) • MeshCore: 910.525 MHz (US/CA)
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- US 915 MHz Channel Reference -->
-    <section id="channels" class="py-12 scroll-mt-24">
+    <!-- Quick Links Grid -->
+    <section class="py-12 bg-[--color-bg-secondary]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center gap-3 mb-8">
-          <div class="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center">
-            <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-          </div>
-          <h2 class="text-2xl font-bold text-[--color-text-primary]">US 915 MHz Channel Reference</h2>
-        </div>
-        <p class="text-[--color-text-secondary] mb-6 max-w-3xl">
-          The ISM band in North America spans 902-928 MHz. Meshtastic and MeshCore use a subset of channels within this range. This table shows the 500kHz-spaced channels used by LoRa mesh devices.
-        </p>
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-8 text-center">External Tools & Apps</h2>
 
-        <div class="card overflow-hidden">
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="bg-[--color-bg-tertiary] border-b border-[--color-border]">
-                  <th class="px-4 py-3 text-left font-semibold text-[--color-text-primary]">Channel</th>
-                  <th class="px-4 py-3 text-left font-semibold text-[--color-text-primary]">Frequency (MHz)</th>
-                  <th class="px-4 py-3 text-left font-semibold text-[--color-text-primary]">Notes</th>
-                </tr>
-              </thead>
-              <tbody>
-                {usChannels.map((ch, idx) => (
-                  <tr class={`border-b border-[--color-border] ${ch.note ? 'bg-[--color-accent]/5' : ''} ${idx % 2 === 0 ? '' : 'bg-[--color-bg-secondary]/30'}`}>
-                    <td class="px-4 py-3 text-[--color-text-primary] font-mono">{ch.num}</td>
-                    <td class="px-4 py-3 text-[--color-text-secondary] font-mono">{ch.freq.toFixed(2)}</td>
-                    <td class="px-4 py-3 text-[--color-text-muted]">
-                      {ch.note && (
-                        <span class={`text-xs px-2 py-1 rounded-full ${ch.note.includes('Default') ? 'bg-[--color-accent]/20 text-[--color-accent]' : 'bg-[--color-bg-tertiary] text-[--color-text-muted]'}`}>
-                          {ch.note}
-                        </span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <!-- Platform Tabs -->
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Meshtastic Column -->
+          <div>
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-green-500/10 flex items-center justify-center">
+                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-[--color-text-primary]">Meshtastic</h3>
+            </div>
 
-        <div class="mt-6 card p-4 bg-blue-500/5 border-blue-500/20">
-          <div class="flex gap-3">
-            <svg class="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <div class="text-sm text-[--color-text-secondary]">
-              <p class="font-medium text-[--color-text-primary] mb-1">Important Notes</p>
-              <ul class="list-disc list-inside space-y-1">
-                <li>All nodes in a mesh must use the same channel to communicate</li>
-                <li>Different spreading factors can be used on the same channel</li>
-                <li>Meshtastic defaults to channel 20 (923.60 MHz) with "Long Fast" preset</li>
-                <li>MeshCore defaults to channel 17 (920.36 MHz)</li>
-              </ul>
+            <div class="space-y-3">
+              <a href="https://flasher.meshtastic.org" target="_blank" rel="noopener" class="card p-4 flex items-center gap-4 hover:border-green-500/50 transition-colors group">
+                <div class="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium text-[--color-text-primary] group-hover:text-green-400 transition-colors">Web Flasher</p>
+                  <p class="text-sm text-[--color-text-muted] truncate">Flash firmware from your browser</p>
+                </div>
+                <svg class="w-4 h-4 text-[--color-text-muted] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+
+              <a href="https://client.meshtastic.org" target="_blank" rel="noopener" class="card p-4 flex items-center gap-4 hover:border-green-500/50 transition-colors group">
+                <div class="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium text-[--color-text-primary] group-hover:text-green-400 transition-colors">Web Client</p>
+                  <p class="text-sm text-[--color-text-muted] truncate">Configure via browser</p>
+                </div>
+                <svg class="w-4 h-4 text-[--color-text-muted] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+
+              <div class="flex gap-3">
+                <a href="https://play.google.com/store/apps/details?id=com.geeksville.mesh" target="_blank" rel="noopener" class="card p-3 flex-1 flex items-center gap-3 hover:border-green-500/50 transition-colors group">
+                  <svg class="w-6 h-6 text-green-400" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.523 15.341c-.5 0-.91.41-.91.91s.41.91.91.91.91-.41.91-.91-.41-.91-.91-.91zm-11.046 0c-.5 0-.91.41-.91.91s.41.91.91.91.91-.41.91-.91-.41-.91-.91-.91zm11.405-6.02l1.96-3.392a.41.41 0 00-.147-.562.41.41 0 00-.562.147l-1.985 3.435A12.075 12.075 0 0012 8.07c-1.85 0-3.592.422-5.149 1.18L4.866 5.814a.41.41 0 00-.562-.147.41.41 0 00-.147.562l1.96 3.392A11.216 11.216 0 001 17.878h22c0-3.294-1.422-6.263-3.678-8.316l-.44-.241z"/>
+                  </svg>
+                  <span class="font-medium text-[--color-text-primary] text-sm group-hover:text-green-400">Android</span>
+                </a>
+                <a href="https://apps.apple.com/app/meshtastic/id1586432531" target="_blank" rel="noopener" class="card p-3 flex-1 flex items-center gap-3 hover:border-green-500/50 transition-colors group">
+                  <svg class="w-6 h-6 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                  </svg>
+                  <span class="font-medium text-[--color-text-primary] text-sm group-hover:text-green-400">iOS</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- MeshCore Column -->
+          <div>
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-[--color-text-primary]">MeshCore</h3>
+            </div>
+
+            <div class="space-y-3">
+              <a href="https://flasher.meshcore.co.uk" target="_blank" rel="noopener" class="card p-4 flex items-center gap-4 hover:border-blue-500/50 transition-colors group">
+                <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium text-[--color-text-primary] group-hover:text-blue-400 transition-colors">Web Flasher</p>
+                  <p class="text-sm text-[--color-text-muted] truncate">Flash Companion, Repeater, or Room Server</p>
+                </div>
+                <svg class="w-4 h-4 text-[--color-text-muted] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+
+              <a href="https://config.meshcore.dev" target="_blank" rel="noopener" class="card p-4 flex items-center gap-4 hover:border-blue-500/50 transition-colors group">
+                <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium text-[--color-text-primary] group-hover:text-blue-400 transition-colors">Config Generator</p>
+                  <p class="text-sm text-[--color-text-muted] truncate">Generate QR codes & config links</p>
+                </div>
+                <svg class="w-4 h-4 text-[--color-text-muted] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+
+              <div class="flex gap-3">
+                <a href="https://play.google.com/store/apps/details?id=nz.meshcore.app" target="_blank" rel="noopener" class="card p-3 flex-1 flex items-center gap-3 hover:border-blue-500/50 transition-colors group">
+                  <svg class="w-6 h-6 text-green-400" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.523 15.341c-.5 0-.91.41-.91.91s.41.91.91.91.91-.41.91-.91-.41-.91-.91-.91zm-11.046 0c-.5 0-.91.41-.91.91s.41.91.91.91.91-.41.91-.91-.41-.91-.91-.91zm11.405-6.02l1.96-3.392a.41.41 0 00-.147-.562.41.41 0 00-.562.147l-1.985 3.435A12.075 12.075 0 0012 8.07c-1.85 0-3.592.422-5.149 1.18L4.866 5.814a.41.41 0 00-.562-.147.41.41 0 00-.147.562l1.96 3.392A11.216 11.216 0 001 17.878h22c0-3.294-1.422-6.263-3.678-8.316l-.44-.241z"/>
+                  </svg>
+                  <span class="font-medium text-[--color-text-primary] text-sm group-hover:text-blue-400">Android</span>
+                </a>
+                <a href="https://apps.apple.com/app/meshcore/id6740261825" target="_blank" rel="noopener" class="card p-3 flex-1 flex items-center gap-3 hover:border-blue-500/50 transition-colors group">
+                  <svg class="w-6 h-6 text-gray-400" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                  </svg>
+                  <span class="font-medium text-[--color-text-primary] text-sm group-hover:text-blue-400">iOS</span>
+                </a>
+                <a href="https://app.meshcore.nz" target="_blank" rel="noopener" class="card p-3 flex-1 flex items-center gap-3 hover:border-blue-500/50 transition-colors group">
+                  <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                  </svg>
+                  <span class="font-medium text-[--color-text-primary] text-sm group-hover:text-blue-400">Web</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- Developer Tools - Collapsed/Expandable -->
     <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <details class="card overflow-hidden group">
+          <summary class="p-6 cursor-pointer flex items-center justify-between hover:bg-[--color-bg-tertiary]/50 transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-[--color-text-primary]">Developer Tools</h3>
+                <p class="text-sm text-[--color-text-muted]">CLI tools & libraries for building mesh applications</p>
+              </div>
+            </div>
+            <svg class="w-5 h-5 text-[--color-text-muted] transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-6 pt-2 border-t border-[--color-border]">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+              <a href="https://github.com/meshtastic/python" target="_blank" rel="noopener" class="p-4 bg-[--color-bg-tertiary] rounded-lg hover:bg-[--color-border] transition-colors group">
+                <p class="font-medium text-[--color-text-primary] mb-1 group-hover:text-[--color-accent]">Meshtastic Python</p>
+                <p class="text-xs text-[--color-text-muted]">CLI & Python library</p>
+              </a>
+              <a href="https://github.com/meshtastic/js" target="_blank" rel="noopener" class="p-4 bg-[--color-bg-tertiary] rounded-lg hover:bg-[--color-border] transition-colors group">
+                <p class="font-medium text-[--color-text-primary] mb-1 group-hover:text-[--color-accent]">Meshtastic JS</p>
+                <p class="text-xs text-[--color-text-muted]">TypeScript library</p>
+              </a>
+              <a href="https://github.com/liamcottle/meshcore.js" target="_blank" rel="noopener" class="p-4 bg-[--color-bg-tertiary] rounded-lg hover:bg-[--color-border] transition-colors group">
+                <p class="font-medium text-[--color-text-primary] mb-1 group-hover:text-[--color-accent]">meshcore.js</p>
+                <p class="text-xs text-[--color-text-muted]">JavaScript library</p>
+              </a>
+              <a href="https://github.com/liamcottle/meshcore-cli" target="_blank" rel="noopener" class="p-4 bg-[--color-bg-tertiary] rounded-lg hover:bg-[--color-border] transition-colors group">
+                <p class="font-medium text-[--color-text-primary] mb-1 group-hover:text-[--color-accent]">meshcore-cli</p>
+                <p class="text-xs text-[--color-text-muted]">Node.js CLI</p>
+              </a>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-8">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-4">Need Help Getting Started?</h2>
-        <p class="text-[--color-text-secondary] mb-6">
-          Check out our guides for step-by-step instructions, or join the community to ask questions.
+        <p class="text-[--color-text-secondary] mb-4">
+          Need help getting started?
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/meshtastic/getting-started" class="btn-primary">
-            Meshtastic Guide
-          </a>
-          <a href="/meshcore/getting-started" class="btn-secondary">
-            MeshCore Guide
-          </a>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="/meshtastic/getting-started" class="btn-primary">Meshtastic Guide</a>
+          <a href="/meshcore/getting-started" class="btn-secondary">MeshCore Guide</a>
         </div>
       </div>
     </section>
@@ -557,13 +365,11 @@ const usChannels = [
 
     // Free-space path loss formula: FSPL (dB) = 20*log10(d_km) + 20*log10(f_MHz) + 32.44
     // For 915 MHz: 20*log10(915) + 32.44 = 59.23 + 32.44 = 91.67
-    // Solving for d: d = 10^((LinkBudget - 91.67) / 20)
-    const frequencyConstant = 91.67; // FSPL constant for 915 MHz
+    const frequencyConstant = 91.67;
     const theoreticalRangeKm = Math.pow(10, (linkBudget - frequencyConstant) / 20);
 
-    // Apply realistic derating: real-world is typically 1-5% of theoretical
-    // due to ground reflections, atmospheric absorption, obstacles, and Fresnel zone clearance
-    const realisticFactor = 0.02; // 2% of theoretical for "good LOS conditions"
+    // Apply realistic derating for good LOS conditions
+    const realisticFactor = 0.02;
     const rangeKm = theoreticalRangeKm * realisticFactor;
     const rangeMi = rangeKm * 0.621371;
 
@@ -572,11 +378,9 @@ const usChannels = [
     if (rangeMiEl) rangeMiEl.textContent = rangeMi.toFixed(1);
   }
 
-  // Add event listeners
   [txPowerInput, txGainInput, rxGainInput, rxSensitivityInput].forEach(input => {
     input?.addEventListener('input', calculateRange);
   });
 
-  // Initial calculation
   calculateRange();
 </script>

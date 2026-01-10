@@ -3,155 +3,1239 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 
-// Manufacturers with their device pages (folder names from GitHub)
-const manufacturers = [
-  { name: 'Overview', slug: 'hardware/devices/index' },
-  { name: 'RAK Wireless', slug: 'hardware/devices/rak-wireless/index' },
-  { name: 'LILYGO', slug: 'hardware/devices/lilygo/index' },
-  { name: 'Heltec', slug: 'hardware/devices/heltec-automation/index' },
-  { name: 'Seeed Studio', slug: 'hardware/devices/seeed-studio/index' },
-  { name: 'B&Q Consulting', slug: 'hardware/devices/b-and-q-consulting/index' },
-  { name: 'Elecrow', slug: 'hardware/devices/elecrow/index' },
-  { name: 'muzi works', slug: 'hardware/devices/muziworks/index' },
-  { name: 'Raspberry Pi', slug: 'hardware/devices/raspberrypi/index' },
-  { name: 'Linux Native', slug: 'hardware/devices/linux-native-hardware/linux-native-hardware' },
-  { name: 'Community', slug: 'hardware/devices/community-supported/index' },
+const devices = [
+  {
+    name: 'Heltec V3',
+    slug: 'heltec-v3',
+    image: '/images/devices/heltec-v3.png',
+    price: '$20-30',
+    features: ['ESP32-S3 + SX1262', '0.96" OLED display', 'WiFi & Bluetooth', 'Li-Po battery support'],
+    best: 'Best for beginners',
+    link: 'https://heltec.org/project/wifi-lora-32-v3/',
+  },
+  {
+    name: 'Heltec V4',
+    slug: 'heltec-v4',
+    image: '/images/devices/heltec-v4.png',
+    price: '$25-35',
+    features: ['28dBm high power output', 'Built-in 2.4G antenna', 'Protected OLED', 'Solar panel interface'],
+    best: 'Best power output',
+    link: 'https://heltec.org/project/wifi-lora-32-v4/',
+  },
+  {
+    name: 'LilyGo T-Beam',
+    slug: 't-beam',
+    image: '/images/devices/t-beam.jpg',
+    price: '$35-45',
+    features: ['Built-in GPS', '18650 battery holder', 'ESP32 + SX1262', 'Expandable design'],
+    best: 'Best for tracking',
+    link: 'https://lilygo.cc/products/t-beam',
+  },
+  {
+    name: 'LilyGo T-Deck',
+    slug: 't-deck',
+    image: '/images/devices/t-deck.jpg',
+    price: '$43-53',
+    features: ['QWERTY keyboard', '2.8" IPS touchscreen', 'Trackball navigation', 'Speaker & microphone'],
+    best: 'Best keyboard device',
+    link: 'https://lilygo.cc/products/t-deck',
+  },
+  {
+    name: 'LilyGo T-Deck Plus',
+    slug: 't-deck-plus',
+    image: '/images/devices/t-deck-plus.jpg',
+    price: '$65-85',
+    features: ['GPS included', '2000mAh battery', 'Full QWERTY keyboard', 'Pre-flashed Meshtastic'],
+    best: 'Best all-in-one',
+    link: 'https://lilygo.cc/products/t-deck-plus-meshtastic',
+  },
+  {
+    name: 'LilyGo T-Pager',
+    slug: 't-pager',
+    image: '/images/devices/t-pager.jpg',
+    price: '$80-90',
+    features: ['Compact pager form factor', '2.33" display', 'QWERTY + scroll wheel', 'GPS, NFC, IMU sensors'],
+    best: 'Best pocket device',
+    link: 'https://lilygo.cc/products/t-lora-pager-meshtastic',
+  },
+  {
+    name: 'LilyGo T-Echo',
+    slug: 't-echo',
+    image: '/images/devices/t-echo.jpg',
+    price: '$50-65',
+    features: ['E-ink display', 'nRF52840 ultra low power', 'GPS included', 'NFC capable'],
+    best: 'Best battery life',
+    link: 'https://lilygo.cc/products/t-echo-meshtastic',
+  },
+  {
+    name: 'Heltec T114',
+    slug: 'heltec-t114',
+    image: '/images/devices/heltec-t114.png',
+    price: '$30-45',
+    features: ['nRF52840 + SX1262', '1.14" TFT display', 'GPS module option', 'Solar panel ready'],
+    best: 'Best low power tracker',
+    link: 'https://heltec.org/project/mesh-node-t114/',
+  },
+  {
+    name: 'Seeed Wio Tracker',
+    slug: 'wio-tracker',
+    image: '/images/devices/wio-tracker.jpg',
+    price: '$50-70',
+    features: ['Rugged enclosed design', 'Built-in battery', 'OLED display', 'GPS included'],
+    best: 'Best rugged option',
+    link: 'https://www.seeedstudio.com/Wio-Tracker-L1-Pro-p-6454.html',
+  },
+  {
+    name: 'RAK WisBlock',
+    slug: 'rak-wisblock',
+    image: '/images/devices/rak-wisblock.png',
+    price: '$30-50',
+    features: ['Modular design', 'nRF52840 low power', 'Solar compatible', 'Professional quality'],
+    best: 'Best for repeaters',
+    link: 'https://store.rakwireless.com/products/wisblock-meshtastic-starter-kit',
+  },
+  {
+    name: 'SenseCAP T1000-E',
+    slug: 't1000-e',
+    image: '/images/devices/t1000-e.jpg',
+    price: '$35-45',
+    features: ['Credit card size', 'Waterproof IP65', 'Built-in GPS', 'Long-life battery'],
+    best: 'Best compact tracker',
+    link: 'https://www.seeedstudio.com/SenseCAP-Card-Tracker-T1000-E-for-Meshtastic-p-5913.html',
+  },
+  {
+    name: 'RAK WisMesh Pocket',
+    slug: 'rak-wismesh-pocket',
+    image: '/images/devices/wismesh-pocket.webp',
+    price: '$89',
+    features: ['Ready to use enclosed', '3200mAh battery', '1.3" OLED + GPS', 'Multiple colors'],
+    best: 'Best portable enclosed',
+    link: 'https://store.rakwireless.com/products/wismesh-pocket',
+  },
+  {
+    name: 'RAK WisMesh Tag',
+    slug: 'rak-wismesh-tag',
+    image: '/images/devices/rak-wismesh-tag.webp',
+    price: '$29',
+    features: ['Ultra compact tracker', 'Built-in GPS antenna', 'Rechargeable battery', 'Asset tracking'],
+    best: 'Best tiny tracker',
+    link: 'https://store.rakwireless.com/products/rak10701-field-tester-for-lorawan',
+  },
+  {
+    name: 'Station G2',
+    slug: 'station-g2',
+    image: '/images/devices/station-g2.jpg',
+    price: '$109',
+    features: ['36.5dBm (4.5W) output', 'Ultra-low noise LNA', 'USB-C PD power', 'ESP32-S3'],
+    best: 'Best base station',
+    link: 'https://shop.uniteng.com/product/meshtastic-mesh-device-station-edition/',
+  },
+  {
+    name: 'Nano G2 Ultra',
+    slug: 'nano-g2-ultra',
+    image: '/images/devices/nano-g2-ultra.jpg',
+    price: '$85-90',
+    features: ['nRF52840 low power', '1.3" OLED screen', 'Wideband 815-940MHz', '3.5 day battery life'],
+    best: 'Best portable premium',
+    link: 'https://shop.uniteng.com/product/meshtastic-mesh-device-nano-g2-ultra/',
+  },
+  {
+    name: 'Heltec Wireless Paper',
+    slug: 'wireless-paper',
+    image: '/images/devices/wireless-paper.webp',
+    price: '$15-25',
+    features: ['2.13" E-ink display', 'ESP32-S3 + SX1262', '20µA deep sleep', 'Ultra-thin design'],
+    best: 'Best e-ink display',
+    link: 'https://heltec.org/project/wireless-paper/',
+  },
+  {
+    name: 'Heltec Capsule Sensor',
+    slug: 'heltec-capsule',
+    image: '/images/devices/heltec-capsule.png',
+    price: '$7',
+    features: ['ESP32-C3 + SX1262', 'Ultra compact design', '10µA deep sleep', 'Stamp module form'],
+    best: 'Best for DIY projects',
+    link: 'https://heltec.org/project/ht-ct62/',
+  },
 ];
+
 ---
 
 <Layout
-  title="Meshtastic Devices - NodakMesh"
-  description="Recommended Meshtastic devices and hardware. Compare Heltec V3, T-Beam, T-Deck, RAK WisBlock and more LoRa mesh networking devices."
-  keywords="Meshtastic devices, Meshtastic hardware, best Meshtastic device, Heltec V3 Meshtastic, T-Beam, T-Deck, RAK WisBlock, LoRa devices, mesh radio"
+  title="Meshtastic Devices | NodakMesh"
+  description="Recommended Meshtastic devices and hardware. Compare Heltec V3, T-Beam, T-Deck, RAK WisBlock, Station G2 and more LoRa mesh networking devices."
+  keywords="Meshtastic devices, Meshtastic hardware, best Meshtastic device, Heltec V3 Meshtastic, T-Beam, T-Deck, RAK WisBlock, Station G2, LoRa devices, mesh radio"
 >
   <Header slot="header" />
 
-  <div class="pt-24 pb-16 docs-bg">
-
-    <section class="py-8 relative z-10">
+  <div class="pt-24 pb-16">
+    <!-- Hero -->
+    <section class="py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Header -->
-        <div class="mb-8">
-          <div class="flex items-center gap-2 text-[--color-text-muted] text-sm mb-4">
-            <a href="/meshtastic" class="hover:text-[--color-accent]">Meshtastic</a>
+        <div class="max-w-3xl">
+          <a href="/meshtastic/getting-started" class="inline-flex items-center gap-2 text-[--color-accent] hover:underline mb-4">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
-            <span>Devices</span>
-          </div>
-          <h1 class="text-3xl sm:text-4xl font-bold text-[--color-text-primary] mb-2">
-            Supported <span class="gradient-text">Devices</span>
+            Back to Meshtastic
+          </a>
+          <h1 class="text-4xl sm:text-5xl font-bold text-[--color-text-primary] mb-6">
+            Recommended <span class="gradient-text">Devices</span>
           </h1>
+          <p class="text-xl text-[--color-text-secondary] leading-relaxed mb-6">
+            Hardware recommendations for Meshtastic. All devices use LoRa 915 MHz for US operation.
+          </p>
+          <a
+            href="/meshtastic/setup"
+            class="inline-flex items-center gap-2 text-green-400 hover:text-green-300 font-medium transition-colors"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            View Complete Setup Guide (DFU mode, drivers, configuration)
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Flash CTA -->
+    <div class="py-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
+            <div class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <div>
+                <h3 class="font-semibold text-[--color-text-primary] mb-1">Ready to Flash?</h3>
+                <p class="text-[--color-text-secondary] text-sm">
+                  Use the Meshtastic Web Flasher to install firmware on your device. Works in Chrome/Edge browsers.
+                </p>
+              </div>
+            </div>
+            <a
+              href="https://flasher.meshtastic.org"
+              target="_blank"
+              rel="noopener"
+              class="btn-primary inline-flex items-center gap-2 whitespace-nowrap"
+            >
+              Open Web Flasher
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Important Note -->
+    <div class="py-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-[--color-accent]/10 border border-[--color-accent]/20 rounded-lg p-4">
+          <div class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <h3 class="font-semibold text-[--color-text-primary] mb-1">Important: Get the Right Frequency</h3>
+              <p class="text-[--color-text-secondary] text-sm">
+                For the US (including North Dakota), make sure to purchase the <strong>915 MHz (US)</strong> version of any device.
+                The 868 MHz (EU) version will not work properly with US mesh networks.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Devices Grid -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-8">Devices</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {devices.map((device) => (
+            <div class="card p-6">
+              <div class="flex items-start justify-between mb-4">
+                <div>
+                  <span class="text-xs text-[--color-accent] font-medium">{device.best}</span>
+                  <h3 class="text-xl font-semibold text-[--color-text-primary]">{device.name}</h3>
+                </div>
+                <span class="text-[--color-secondary] font-bold">{device.price}</span>
+              </div>
+
+              <div class="aspect-video bg-[--color-bg-tertiary] rounded-lg mb-4 overflow-hidden">
+                <img
+                  src={device.image}
+                  alt={device.name}
+                  class="w-full h-full object-contain p-2"
+                  loading="lazy"
+                />
+              </div>
+
+              <ul class="text-sm text-[--color-text-secondary] space-y-1 mb-4">
+                {device.features.map((feature) => (
+                  <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[--color-accent] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <div class="flex gap-2">
+                <a
+                  href={device.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 text-center py-2 px-4 bg-[--color-accent]/10 hover:bg-[--color-accent]/20 text-[--color-accent] rounded-lg text-sm font-medium transition-colors"
+                >
+                  Buy Now →
+                </a>
+                {device.slug && (
+                  <a
+                    href={`/setup/${device.slug}`}
+                    class="py-2 px-3 bg-green-500/10 hover:bg-green-500/20 text-green-400 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+                    title="Setup Guide"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    Setup
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Prebuilt Infrastructure Nodes -->
+    <section class="py-16 bg-gradient-to-r from-purple-500/5 to-green-500/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-[--color-text-primary] mb-2">Prebuilt Infrastructure Nodes</h2>
           <p class="text-[--color-text-secondary]">
-            Official device documentation from Meshtastic, updated automatically.
+            Ready-to-deploy solar-powered nodes for permanent installations. No assembly or flashing required - just mount and power on.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Yeti Wurks Base Station -->
+          <div class="card p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <span class="text-xs text-purple-400 font-medium">NodakMesh Tested</span>
+                <h3 class="text-xl font-semibold text-[--color-text-primary]">Yeti Wurks Base Station</h3>
+              </div>
+              <span class="text-[--color-secondary] font-bold">$99+</span>
+            </div>
+            <div class="aspect-video bg-[--color-bg-tertiary] rounded-lg mb-4 overflow-hidden">
+              <img src="/images/devices/yeti-wurks-base.jpg" alt="Yeti Wurks Meshtastic Base Station" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-sm text-[--color-text-secondary] space-y-1 mb-4">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                RAK WisBlock based, IP65 rated
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Pre-configured, ready to deploy
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                $99 base / $150 complete solar kit
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Works with MeshCore & Meshtastic
+              </li>
+            </ul>
+            <a href="https://www.yetiwurks.com/product/yeti-wurks-meshtastic-basestation/" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-4 bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 rounded-lg text-sm font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- RAK WisMesh Repeater -->
+          <div class="card p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <span class="text-xs text-green-400 font-medium">Professional Grade</span>
+                <h3 class="text-xl font-semibold text-[--color-text-primary]">RAK WisMesh Repeater</h3>
+              </div>
+              <span class="text-[--color-secondary] font-bold">$129</span>
+            </div>
+            <div class="aspect-video bg-[--color-bg-tertiary] rounded-lg mb-4 overflow-hidden">
+              <img src="/images/devices/wismesh-repeater.png" alt="RAK WisMesh Repeater" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-sm text-[--color-text-secondary] space-y-1 mb-4">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                5.2Ah battery, IP67 enclosure
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Universal solar battery compatible
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Pre-flashed with Meshtastic
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Professional mounting options
+              </li>
+            </ul>
+            <a href="https://store.rakwireless.com/products/wismesh-meshtastic-solar-repeater" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-4 bg-green-500/10 hover:bg-green-500/20 text-green-400 rounded-lg text-sm font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- SenseCAP Solar Node -->
+          <div class="card p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <span class="text-xs text-blue-400 font-medium">Best Value</span>
+                <h3 class="text-xl font-semibold text-[--color-text-primary]">SenseCAP Solar Node P1</h3>
+              </div>
+              <span class="text-[--color-secondary] font-bold">$69+</span>
+            </div>
+            <div class="aspect-video bg-[--color-bg-tertiary] rounded-lg mb-4 overflow-hidden">
+              <img src="/images/devices/sensecap-solar-p1.png" alt="SenseCAP Solar Node P1" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-sm text-[--color-text-secondary] space-y-1 mb-4">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Integrated solar panel & battery
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Ready in 5 minutes, no setup
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                P1-Pro adds GPS & 4x 18650
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Most affordable solar option
+              </li>
+            </ul>
+            <a href="https://www.seeedstudio.com/SenseCAP-Solar-Node-P1-Pro-for-Meshtastic-LoRa-p-6412.html" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-4 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 rounded-lg text-sm font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- Atlavox Beacon -->
+          <div class="card p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <span class="text-xs text-orange-400 font-medium">Dual Firmware</span>
+                <h3 class="text-xl font-semibold text-[--color-text-primary]">Atlavox Beacon</h3>
+              </div>
+              <span class="text-[--color-secondary] font-bold">$199</span>
+            </div>
+            <div class="aspect-video bg-[--color-bg-tertiary] rounded-lg mb-4 overflow-hidden">
+              <img src="/images/devices/atlavox-beacon.png" alt="Atlavox Beacon Solar Node" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-sm text-[--color-text-secondary] space-y-1 mb-4">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-orange-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                5W panel + 5000mAh LiPo
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-orange-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                RAK19007 WisBlock radio
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-orange-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Meshtastic & MeshCore ready
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-orange-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Less than 1 hour sun/day needed
+              </li>
+            </ul>
+            <a href="https://atlavox.com/products/atlavox-beacon-solar-meshtastic-node" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-4 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 rounded-lg text-sm font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- Yeti Wurks Solar Kit -->
+          <div class="card p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <span class="text-xs text-cyan-400 font-medium">Complete Kit</span>
+                <h3 class="text-xl font-semibold text-[--color-text-primary]">Yeti Wurks Solar Kit</h3>
+              </div>
+              <span class="text-[--color-secondary] font-bold">$150</span>
+            </div>
+            <div class="aspect-video bg-[--color-bg-tertiary] rounded-lg mb-4 overflow-hidden">
+              <img src="/images/devices/mesh-lab-solar.webp" alt="Yeti Wurks Complete Solar Kit" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-sm text-[--color-text-secondary] space-y-1 mb-4">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Base station + solar charger
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                5.5W solar panel included
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                IP65 weatherproof enclosure
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Off-grid ready deployment
+              </li>
+            </ul>
+            <a href="https://www.yetiwurks.com/product/yeti-wurks-meshtastic-basestation/" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-4 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 rounded-lg text-sm font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- PEAKmesh Solar Nodes -->
+          <div class="card p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <span class="text-xs text-pink-400 font-medium">Handcrafted USA</span>
+                <h3 class="text-xl font-semibold text-[--color-text-primary]">PEAKmesh Solar Nodes</h3>
+              </div>
+              <span class="text-[--color-secondary] font-bold">$99+</span>
+            </div>
+            <div class="aspect-video bg-[--color-bg-tertiary] rounded-lg mb-4 overflow-hidden">
+              <img src="/images/devices/peakmesh-birdhouse.jpg" alt="PEAKmesh Birdhouse Solar Meshtastic Node" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-sm text-[--color-text-secondary] space-y-1 mb-4">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-pink-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                RAK WisBlock based, dual solar panels
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-pink-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                30+ days runtime without sun
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-pink-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Works with MeshCore & Meshtastic
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-pink-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Stealthy: Birdhouse, tree-hang, magnetic
+              </li>
+            </ul>
+            <a href="https://www.etsy.com/shop/PeakMesh" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-4 bg-pink-500/10 hover:bg-pink-500/20 text-pink-400 rounded-lg text-sm font-medium transition-colors">
+              View on Etsy →
+            </a>
+          </div>
+
+          <!-- RAK WisMesh Repeater Mini -->
+          <div class="card p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <span class="text-xs text-emerald-400 font-medium">Compact Repeater</span>
+                <h3 class="text-xl font-semibold text-[--color-text-primary]">WisMesh Repeater Mini</h3>
+              </div>
+              <span class="text-[--color-secondary] font-bold">$69</span>
+            </div>
+            <div class="aspect-video bg-[--color-bg-tertiary] rounded-lg mb-4 overflow-hidden">
+              <img src="/images/devices/wismesh-mini.png" alt="RAK WisMesh Repeater Mini" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-sm text-[--color-text-secondary] space-y-1 mb-4">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Compact IP65 weatherproof design
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                2000mAh built-in battery
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                USB-C solar charging compatible
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Available on Rokland
+              </li>
+            </ul>
+            <a href="https://store.rokland.com/products/rak-wismesh-repeater-mini-us915-with-5dbi-antenna" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-4 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 rounded-lg text-sm font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommended Antennas -->
+    <section class="py-16 bg-[--color-bg-secondary]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-[--color-text-primary] mb-2">Recommended Antennas</h2>
+          <p class="text-[--color-text-secondary]">
+            Upgrading your antenna is often the single biggest improvement you can make to range. Stock antennas are usually 0-2 dBi - these replacements offer better performance.
           </p>
         </div>
 
-        <!-- Main Content -->
-        <div class="flex flex-col lg:flex-row gap-8">
-          <!-- Sidebar -->
-          <aside class="lg:w-64 flex-shrink-0">
-            <div class="card p-4 sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
-              <h3 class="text-xs font-semibold text-[--color-text-muted] mb-3 uppercase tracking-wider">Manufacturers</h3>
-              <nav class="space-y-1">
-                {manufacturers.map((mfr) => (
-                  <button
-                    data-page={mfr.slug}
-                    class="device-nav-btn w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]"
-                  >
-                    {mfr.name}
-                  </button>
-                ))}
-              </nav>
-
-              <div class="mt-6 pt-4 border-t border-[--color-border]">
-                <h3 class="text-xs font-semibold text-[--color-text-muted] mb-3 uppercase tracking-wider">More Hardware</h3>
-                <nav class="space-y-1">
-                  <a href="/meshtastic/antennas" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
-                    Antennas
-                  </a>
-                  <a href="/meshtastic/enclosures" class="block px-3 py-1.5 rounded-lg text-sm text-[--color-text-secondary] hover:text-[--color-text-primary] hover:bg-[--color-bg-tertiary]">
-                    Enclosures
-                  </a>
-                </nav>
+        <!-- Portable/Handheld Antennas -->
+        <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">Portable & Handheld</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <!-- Muzi Whip -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-green-400 font-medium">Best Value</span>
+                <h4 class="font-semibold text-[--color-text-primary]">Muzi Whip 17cm</h4>
               </div>
-
-              <div class="mt-4 pt-4 border-t border-[--color-border]">
-                <a
-                  href="https://meshtastic.org/docs/hardware/devices/"
-                  target="_blank"
-                  class="text-xs text-[--color-text-muted] hover:text-[--color-accent] flex items-center gap-1 mb-2"
-                >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                  Full docs at meshtastic.org
-                </a>
-                <a
-                  href="https://github.com/meshtastic/meshtastic"
-                  target="_blank"
-                  class="text-xs text-[--color-text-muted] hover:text-[--color-accent] flex items-center gap-1"
-                >
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                  </svg>
-                  View on GitHub
-                </a>
-              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$12</span>
             </div>
-          </aside>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/antennas/muzi-whip.jpg" alt="Muzi Whip 17cm Antenna" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 17cm flexible whip, 14g</li>
+              <li>• SWR 1.3 (98% efficiency)</li>
+              <li>• SMA Male connector</li>
+            </ul>
+            <a href="https://muzi.works/products/whip-antenna-17cm" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-green-500/10 hover:bg-green-500/20 text-green-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
 
-          <!-- Content -->
-          <main class="flex-1 min-w-0">
-            <div class="card p-6 lg:p-8">
-              <!-- View Original Button -->
-              <div id="view-original" class="hidden mb-4 pb-4 border-b border-[--color-border]">
-                <a
-                  id="original-link"
-                  href="#"
-                  target="_blank"
-                  class="inline-flex items-center gap-2 text-sm text-[--color-text-muted] hover:text-[--color-accent] transition-colors"
-                >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                  View original at meshtastic.org
-                </a>
+          <!-- MESHTAC Gooseneck -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-orange-400 font-medium">Tactical</span>
+                <h4 class="font-semibold text-[--color-text-primary]">MESHTAC Gooseneck</h4>
               </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$35</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/antennas/meshtac-gooseneck.png" alt="MESHTAC Gooseneck Tactical Antenna" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 4 dBi gain, 12" tall</li>
+              <li>• Bendable metal neck</li>
+              <li>• SMA Male, 915 MHz</li>
+            </ul>
+            <a href="https://store.rokland.com/products/meshtac-gooseneck-tactical-antenna-4-dbi-gain-sma-male-915-mhz-flexible-for-meshtastic-lora" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
 
-              <!-- Loading State -->
-              <div id="device-loading" class="flex items-center justify-center py-12">
-                <div class="flex items-center gap-3 text-[--color-text-muted]">
-                  <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  <span>Loading device documentation...</span>
-                </div>
+          <!-- MESHTAC Whip -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-blue-400 font-medium">Flexible</span>
+                <h4 class="font-semibold text-[--color-text-primary]">MESHTAC 2.5 dBi Whip</h4>
               </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$13</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/antennas/meshtac-whip.png" alt="MESHTAC 2.5 dBi Flexible Whip Antenna" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 2.5 dBi gain, 7.8" tall</li>
+              <li>• Soft flexible design</li>
+              <li>• SMA Male, 915 MHz</li>
+            </ul>
+            <a href="https://store.rokland.com/products/2-5-dbi-sma-male-915-mhz-soft-flexible-whip-antenna-for-t-beam-t-echo-other-lora" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
 
-              <!-- Error State -->
-              <div id="device-error" class="hidden py-12 text-center">
-                <svg class="w-12 h-12 text-[--color-error] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          <!-- ALFA 90° Elbow -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-purple-400 font-medium">Compact</span>
+                <h4 class="font-semibold text-[--color-text-primary]">ALFA 90° Elbow</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$12</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/antennas/alfa-elbow.png" alt="ALFA 90° Elbow Antenna" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 2 dBi gain, 7.7" tall</li>
+              <li>• 90° elbow connector</li>
+              <li>• SMA Male, 915 MHz</li>
+            </ul>
+            <a href="https://store.rokland.com/products/alfa-network-ars-915pr-2-dbi-sma-male-915-mhz-antenna-with-90-elbow-for-t-beam-t-echo-lora32" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+        </div>
+
+        <!-- Outdoor/Base Station Antennas -->
+        <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">Outdoor & Base Station</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+          <!-- ALFA 5 dBi Mini -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-green-400 font-medium">Compact Outdoor</span>
+                <h4 class="font-semibold text-[--color-text-primary]">ALFA 5 dBi Mini</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$18</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/antennas/alfa-5dbi-mini.png" alt="ALFA 5 dBi Mini Outdoor Antenna" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 5 dBi gain, 7" tall</li>
+              <li>• N-Male connector</li>
+              <li>• Weather resistant</li>
+            </ul>
+            <a href="https://store.rokland.com/products/alfa-aoa-915-5acm-5-dbi-omni-outdoor-915mhz-802-11ah-mini-antenna-for-lora-halow-application" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-green-500/10 hover:bg-green-500/20 text-green-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- RAK 5.8 dBi -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-blue-400 font-medium">Popular Choice</span>
+                <h4 class="font-semibold text-[--color-text-primary]">RAK 5.8 dBi Fiberglass</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$30-40</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/antennas/rak-5.8dbi.png" alt="RAK 5.8 dBi Fiberglass Antenna" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 5.8 dBi gain</li>
+              <li>• Fiberglass, weatherproof</li>
+              <li>• Includes U-bolt mount</li>
+            </ul>
+            <a href="https://store.rokland.com/products/rak-wireless-5-8-dbi-outdoor-black-fiberglass-helium-hotspot-antenna" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- 8 dBi Low Profile -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-orange-400 font-medium">High Gain</span>
+                <h4 class="font-semibold text-[--color-text-primary]">8 dBi Low Profile</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$38</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/antennas/8dbi-low-profile.png" alt="8 dBi Low Profile Outdoor Antenna" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 8 dBi gain, 25" tall</li>
+              <li>• N-Female connector</li>
+              <li>• 60 m/s wind rated</li>
+            </ul>
+            <a href="https://store.rokland.com/products/8-dbi-omni-outdoor-915mhz-fiberglass-antenna-for-lora-halow-application" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- 12 dBi Yagi -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-red-400 font-medium">Directional</span>
+                <h4 class="font-semibold text-[--color-text-primary]">ALFA 12 dBi Yagi</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$50+</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/antennas/alfa-yagi-12dbi.jpg" alt="ALFA 12 dBi Yagi Directional Antenna" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 12 dBi directional gain</li>
+              <li>• N-Female connector</li>
+              <li>• Point-to-point links</li>
+            </ul>
+            <a href="https://store.rokland.com/products/12-dbi-aya-9012-alfa-network-n-female-directional-yagi-outdoor-iot-915-mhz-antenna" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+        </div>
+
+        <!-- Antenna Tips -->
+        <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-5 mt-6">
+          <h4 class="font-semibold text-yellow-300 mb-2">Antenna Selection Tips</h4>
+          <ul class="text-sm text-[--color-text-secondary] space-y-1">
+            <li>• <strong>Higher dBi = narrower beam</strong> - 8+ dBi antennas focus energy horizontally, bad for hilly terrain</li>
+            <li>• <strong>Connector types:</strong> Most devices use SMA. Outdoor antennas often use N-type (need adapter cable)</li>
+            <li>• <strong>Placement matters more than gain</strong> - A 3 dBi antenna up high beats an 8 dBi in your basement</li>
+            <li>• <strong>Buy 915 MHz for US</strong> - 868 MHz antennas are for Europe and won't work as well here</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Batteries & Power -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-[--color-text-primary] mb-2">Batteries & Power</h2>
+          <p class="text-[--color-text-secondary]">
+            Quality batteries are essential for mesh nodes. Most devices use 18650 or 21700 cells, while compact trackers use LiPo packs.
+          </p>
+        </div>
+
+        <!-- Battery Warning -->
+        <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-8">
+          <div class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <div>
+              <h3 class="font-semibold text-red-400 mb-1">Warning: Avoid Amazon 18650/21700 Batteries</h3>
+              <p class="text-sm text-[--color-text-secondary]">
+                Most 18650 and 21700 batteries sold on Amazon are <strong class="text-red-400">counterfeit</strong>. They typically have false mAh ratings (a "5000mAh" cell may actually be 800mAh),
+                lack proper protection circuits, and can be fire hazards. Always buy from reputable battery-specific retailers like 18650 Battery Store, IMR Batteries, or Liion Wholesale.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 18650 Batteries -->
+        <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">18650 Cells (Protected)</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">For devices like T-Beam with 18650 battery holders. Protected cells include a circuit to prevent over-discharge and short circuits.</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <!-- Samsung 35E -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-green-400 font-medium">Best Value</span>
+                <h4 class="font-semibold text-[--color-text-primary]">Samsung 35E Protected</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$10</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/batteries/samsung-35e.jpg" alt="Samsung 35E 18650 3500mAh Protected Battery" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 3500mAh capacity, 8A max</li>
+              <li>• Protected button top</li>
+              <li>• Trusted Samsung quality</li>
+            </ul>
+            <a href="https://www.18650batterystore.com/products/samsung-35e-protected" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-green-500/10 hover:bg-green-500/20 text-green-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- Molicel M35A -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-blue-400 font-medium">High Current</span>
+                <h4 class="font-semibold text-[--color-text-primary]">Molicel M35A Protected</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$12</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/batteries/molicel-m35a.jpg" alt="Molicel M35A 18650 3500mAh Protected Battery" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 3500mAh capacity, 10A max</li>
+              <li>• Protected button top</li>
+              <li>• Premium Japanese cells</li>
+            </ul>
+            <a href="https://www.18650batterystore.com/products/molicel-m35a-protected-button-top-battery" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- Panasonic GA -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-purple-400 font-medium">Highest Capacity</span>
+                <h4 class="font-semibold text-[--color-text-primary]">Panasonic NCR18650GA</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$14</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/batteries/panasonic-ga.png" alt="Panasonic NCR18650GA 3450mAh Protected Battery" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 3450mAh capacity, 10A max</li>
+              <li>• Protected button top</li>
+              <li>• Panasonic quality</li>
+            </ul>
+            <a href="https://www.18650batterystore.com/products/panasonic-ncr18650ga-3450mah-battery-protected-button-top" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+        </div>
+
+        <!-- 21700 Batteries -->
+        <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">21700 Cells</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">Larger format with higher capacity. Used in some newer devices and DIY builds. Usually don't need protected versions for low-drain mesh devices.</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <!-- Samsung 50S -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-green-400 font-medium">Best Overall</span>
+                <h4 class="font-semibold text-[--color-text-primary]">Samsung 50S</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$8</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/batteries/samsung-50s.jpg" alt="Samsung 50S 21700 5000mAh Battery" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 5000mAh capacity, 25A max</li>
+              <li>• Flat top unprotected</li>
+              <li>• Industry standard cell</li>
+            </ul>
+            <a href="https://www.18650batterystore.com/products/samsung-50s-21700-5000mah-25a-battery" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-green-500/10 hover:bg-green-500/20 text-green-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- Molicel P50B -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-orange-400 font-medium">High Power</span>
+                <h4 class="font-semibold text-[--color-text-primary]">Molicel P50B</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$11</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/batteries/molicel-p50b.png" alt="Molicel P50B 21700 5000mAh Battery" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 5000mAh capacity, 50A max</li>
+              <li>• Ultra high discharge</li>
+              <li>• Premium performance</li>
+            </ul>
+            <a href="https://www.18650batterystore.com/products/molicel-21700-p50b-5000mah-50a-battery" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+        </div>
+
+        <!-- LiPo Batteries -->
+        <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">LiPo Battery Packs</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">Pre-wired lithium polymer packs for devices without battery holders. Check your device's connector type before ordering.</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <!-- 3000mAh JST PH 2.0 -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-green-400 font-medium">Most Compatible</span>
+                <h4 class="font-semibold text-[--color-text-primary]">3000mAh JST PH 2.0</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$11</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/batteries/lipo-3000mah.png" alt="3000mAh LiPo Battery with JST PH 2.0 Connector" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 3.7V 3000mAh (11.1Wh)</li>
+              <li>• JST PH 2.0 connector</li>
+              <li>• Fits Heltec, LilyGo, etc.</li>
+            </ul>
+            <a href="https://store.rokland.com/products/makerfocus-flat-3-7v-3000mah-rechargeable-lithium-polymer-11-1wh-battery-with-jst-type-ph-2-0-plug" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-green-500/10 hover:bg-green-500/20 text-green-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- 3200mAh 3-pin for RAK -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-blue-400 font-medium">For RAK Boards</span>
+                <h4 class="font-semibold text-[--color-text-primary]">3200mAh 3-Pin JST</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$15</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/batteries/lipo-3200mah-3pin.png" alt="3200mAh 3-Pin LiPo Battery for RAK19026" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 3.7V 3200mAh capacity</li>
+              <li>• 3-pin JST PH connector</li>
+              <li>• For RAK19026 & similar</li>
+            </ul>
+            <a href="https://store.rokland.com/products/specialty-3-pin-jst-ph-3-7v-3200mah-rechargeable-lithium-polymer-battery-for-rak19026" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- Rokland LiPo (multiple sizes) -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-orange-400 font-medium">Multiple Sizes</span>
+                <h4 class="font-semibold text-[--color-text-primary]">Rokland LiPo Packs</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$10-20</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/batteries/lipo-1100mah.png" alt="Rokland LiPo Battery Various Sizes" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 1100 / 2000 / 3000 / 4000 / 8000mAh</li>
+              <li>• Micro JST 1.25 connector</li>
+              <li>• For LilyGo, Heltec, & more</li>
+            </ul>
+            <a href="https://store.rokland.com/products/3-7v-1100mah-lithium-rechargeable-battery-1s-1c-lipo-battery-with-protection-board-with-micro-jst-1-25-plug" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- Muzi H1 Battery -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-purple-400 font-medium">For Muzi H1 Case</span>
+                <h4 class="font-semibold text-[--color-text-primary]">Muzi H1 Battery</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$8</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/batteries/muzi-h1-battery.jpg" alt="Muzi H1 1200mAh Battery for Heltec V3" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 3.7V 1200mAh (4.4Wh)</li>
+              <li>• 1.25mm Molex PicoBlade</li>
+              <li>• <strong class="text-purple-400">Perfect fit for Muzi H1 case</strong></li>
+            </ul>
+            <a href="https://muzi.works/products/h1-battery" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- Muzi H2T Battery -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-cyan-400 font-medium">For Muzi H2T Case</span>
+                <h4 class="font-semibold text-[--color-text-primary]">Muzi H2T Battery</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$13</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/batteries/muzi-h2t-battery.jpg" alt="Muzi H2T 2000mAh Battery" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 3.7V 2000mAh (8.1Wh)</li>
+              <li>• 1.25mm Molex PicoBlade</li>
+              <li>• <strong class="text-cyan-400">Perfect fit for Muzi H2T case</strong></li>
+            </ul>
+            <a href="https://muzi.works/products/h2t-battery" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+        </div>
+
+        <!-- Solar Panels & Charge Controllers -->
+        <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4">Solar Panels & Charge Controllers</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">For off-grid and solar-powered installations. Most mesh nodes need a 5-6V panel and an MPPT charge controller.</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- RAK Solar Panel -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-yellow-400 font-medium">Recommended</span>
+                <h4 class="font-semibold text-[--color-text-primary]">RAK Solar Panel 5V</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$25</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/power/rak-solar-panel.png" alt="RAK 5V Solar Panel for LoRa Nodes" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 5V/6V output options</li>
+              <li>• Designed for LoRa nodes</li>
+              <li>• Compact weatherproof</li>
+            </ul>
+            <a href="https://store.rokland.com/products/rak-solar-panels-920399" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- RAK19012 Charge Controller -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-green-400 font-medium">Best for RAK</span>
+                <h4 class="font-semibold text-[--color-text-primary]">RAK19012 Solar Module</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$15</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/power/rak19012.png" alt="RAK19012 USB LiPo Solar Power Slot Module" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• USB-C + solar + battery</li>
+              <li>• For WisBlock base boards</li>
+              <li>• Built-in charge controller</li>
+            </ul>
+            <a href="https://store.rokland.com/products/rak-usb-lipo-solar-power-slot-module-rak19012-pid-110088" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-green-500/10 hover:bg-green-500/20 text-green-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+
+          <!-- Taidacent MPPT Module -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-blue-400 font-medium">Budget Option</span>
+                <h4 class="font-semibold text-[--color-text-primary]">Taidacent MPPT Module</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$10</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden flex items-center justify-center">
+              <div class="text-center p-4">
+                <svg class="w-16 h-16 mx-auto text-blue-400/50 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
-                <p class="text-[--color-text-secondary] mb-2">Failed to load device documentation</p>
-                <p class="text-[--color-text-muted] text-sm mb-4">This page may not be available or the path may have changed.</p>
-                <div class="flex gap-3 justify-center">
-                  <button id="retry-btn" class="btn-secondary">Try Again</button>
-                  <a id="error-original-link" href="#" target="_blank" class="btn-primary">View on meshtastic.org</a>
-                </div>
-              </div>
-
-              <!-- Device Content -->
-              <div id="device-content" class="wiki-content hidden"></div>
-
-              <!-- Load Time -->
-              <div id="load-time" class="hidden mt-6 pt-4 border-t border-[--color-border] text-xs text-[--color-text-muted]">
-                Loaded in <span id="load-time-value">0</span>ms
+                <span class="text-xs text-[--color-text-muted]">MPPT Solar Charger</span>
               </div>
             </div>
-          </main>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• 1A charge current, MPPT</li>
+              <li>• 6V solar panel input</li>
+              <li>• DIY solar builds</li>
+            </ul>
+            <a href="https://www.amazon.com/Taidacent-Chargers-Battery-Controller-Charging/dp/B089ZVSQ4K" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+        </div>
+
+        <!-- Enclosures -->
+        <h3 class="text-xl font-semibold text-[--color-text-primary] mb-4 mt-12">Weatherproof Enclosures</h3>
+        <p class="text-sm text-[--color-text-secondary] mb-4">Protect your outdoor nodes from the elements. IP65+ rated enclosures keep water and dust out.</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Zulkit IP65 Enclosure -->
+          <div class="card p-5">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="text-xs text-green-400 font-medium">Best Value</span>
+                <h4 class="font-semibold text-[--color-text-primary]">Zulkit IP65 Enclosure</h4>
+              </div>
+              <span class="text-[--color-secondary] font-bold text-sm">$12</span>
+            </div>
+            <div class="aspect-square bg-[--color-bg-tertiary] rounded-lg mb-3 overflow-hidden">
+              <img src="/images/enclosures/zulkit-enclosure.jpg" alt="Zulkit IP65 Waterproof ABS Plastic Enclosure" class="w-full h-full object-contain p-2" loading="lazy" />
+            </div>
+            <ul class="text-xs text-[--color-text-secondary] space-y-1 mb-3">
+              <li>• IP65 waterproof & dustproof</li>
+              <li>• 150x100x70mm (5.9x3.9x2.8")</li>
+              <li>• Hinged lid, 2 cable glands</li>
+            </ul>
+            <a href="https://www.amazon.com/Zulkit-Dustproof-Waterproof-Electrical-150x100x70mm/dp/B08KY7VK8W" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2 px-3 bg-green-500/10 hover:bg-green-500/20 text-green-400 rounded-lg text-xs font-medium transition-colors">
+              Buy Now →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Buying Tips -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-[--color-text-primary] mb-8">Buying Tips</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="card p-6">
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-4">Where to Buy</h3>
+            <ul class="space-y-3 text-[--color-text-secondary]">
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                <span><strong>Amazon</strong> - Fast shipping, easy returns, but prices may be higher</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                <span><strong>AliExpress</strong> - Best prices, but 2-4 week shipping from China</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                <span><strong>Rokland</strong> - US-based, good selection, mesh-focused</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                <span><strong>Manufacturer Direct</strong> - RAK, LilyGo, Heltec official stores</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-accent] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                <span><strong>DigiKey</strong> - US-based, huge selection, fast shipping, professional-grade parts</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card p-6">
+            <h3 class="text-lg font-semibold text-[--color-text-primary] mb-4">What to Avoid</h3>
+            <ul class="space-y-3 text-[--color-text-secondary]">
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-error] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span>868 MHz (EU) versions - won't work in US</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-error] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span>Unknown brand clones - often poor quality radios</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-error] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span>Devices without SX1262/SX1276 LoRa chips</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[--color-error] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span>Used devices without testing (LoRa chips can degrade)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-[--color-text-secondary] mb-4">
+          Have questions about which device to buy? Ask in our Discord!
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="https://flasher.meshtastic.org" target="_blank" rel="noopener" class="btn-primary inline-flex items-center gap-2">
+            Flash Your Device
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </a>
+          <a href="/community" class="btn-secondary inline-flex items-center gap-2">
+            Join the Community
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+            </svg>
+          </a>
         </div>
       </div>
     </section>
@@ -159,513 +1243,3 @@ const manufacturers = [
 
   <Footer slot="footer" />
 </Layout>
-
-<style is:global>
-  /* Docs Background */
-  .docs-bg {
-    background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
-  }
-
-  /* Active nav button */
-  .device-nav-btn.active {
-    background: var(--color-accent-subtle);
-    color: var(--color-accent);
-  }
-
-  /* Wiki Content Styles - shared with wiki.astro */
-  .wiki-content h1 {
-    font-size: 1.875rem;
-    font-weight: 700;
-    color: var(--color-text-primary);
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .wiki-content h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--color-text-primary);
-    margin-top: 2rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .wiki-content h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--color-text-primary);
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .wiki-content h4 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--color-text-primary);
-    margin-top: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .wiki-content p {
-    color: var(--color-text-secondary);
-    margin-bottom: 1rem;
-    line-height: 1.7;
-  }
-
-  .wiki-content a {
-    color: var(--color-accent);
-    text-decoration: none;
-  }
-
-  .wiki-content a:hover {
-    text-decoration: underline;
-  }
-
-  .wiki-content a.internal-doc-link {
-    cursor: pointer;
-  }
-
-  .wiki-content ul, .wiki-content ol {
-    color: var(--color-text-secondary);
-    margin-bottom: 1rem;
-    padding-left: 1.5rem;
-  }
-
-  .wiki-content li {
-    margin-bottom: 0.5rem;
-  }
-
-  .wiki-content code {
-    background: var(--color-bg-tertiary);
-    color: var(--color-accent);
-    padding: 0.125rem 0.375rem;
-    border-radius: 0.25rem;
-    font-size: 0.875rem;
-    font-family: 'Monaco', 'Menlo', monospace;
-  }
-
-  .wiki-content pre {
-    background: var(--color-bg-tertiary);
-    border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    overflow-x: auto;
-    margin-bottom: 1rem;
-  }
-
-  .wiki-content pre code {
-    background: transparent;
-    padding: 0;
-    color: var(--color-text-secondary);
-  }
-
-  .wiki-content blockquote {
-    border-left: 3px solid var(--color-accent);
-    padding-left: 1rem;
-    margin: 1rem 0;
-    color: var(--color-text-muted);
-    font-style: italic;
-  }
-
-  .wiki-content table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1rem;
-  }
-
-  .wiki-content th, .wiki-content td {
-    border: 1px solid var(--color-border);
-    padding: 0.75rem;
-    text-align: left;
-  }
-
-  .wiki-content th {
-    background: var(--color-bg-tertiary);
-    color: var(--color-text-primary);
-    font-weight: 600;
-  }
-
-  .wiki-content td {
-    color: var(--color-text-secondary);
-  }
-
-  .wiki-content img {
-    max-width: 100%;
-    border-radius: 0.5rem;
-    margin: 1rem 0;
-  }
-
-  .wiki-content hr {
-    border: none;
-    border-top: 1px solid var(--color-border);
-    margin: 2rem 0;
-  }
-
-  /* Admonition styling */
-  .wiki-content .admonition {
-    border-left: 3px solid var(--color-accent);
-    background: var(--color-bg-tertiary);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    margin: 1rem 0;
-  }
-
-  .wiki-content .admonition-note {
-    border-left-color: var(--color-accent);
-  }
-
-  .wiki-content .admonition-info {
-    border-left-color: #3b82f6;
-  }
-
-  .wiki-content .admonition-warning {
-    border-left-color: var(--color-warning);
-  }
-
-  .wiki-content .admonition-tip {
-    border-left-color: #10b981;
-  }
-
-  .wiki-content .admonition-caution {
-    border-left-color: #f59e0b;
-  }
-
-  .wiki-content .admonition-danger {
-    border-left-color: #ef4444;
-  }
-
-  .wiki-content .admonition strong {
-    color: var(--color-text-primary);
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-</style>
-
-<script>
-  // Load marked.js from CDN
-  const markedScript = document.createElement('script');
-  markedScript.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
-  document.head.appendChild(markedScript);
-
-  const DOCS_BASE = 'https://raw.githubusercontent.com/meshtastic/meshtastic/master/docs';
-  const MESHTASTIC_DOCS_URL = 'https://meshtastic.org/docs';
-  let currentPage = 'hardware/devices/index';
-
-  const loadingEl = document.getElementById('device-loading');
-  const errorEl = document.getElementById('device-error');
-  const contentEl = document.getElementById('device-content');
-  const loadTimeEl = document.getElementById('load-time');
-  const loadTimeValueEl = document.getElementById('load-time-value');
-  const retryBtn = document.getElementById('retry-btn');
-  const viewOriginalEl = document.getElementById('view-original');
-  const originalLinkEl = document.getElementById('original-link');
-  const errorOriginalLinkEl = document.getElementById('error-original-link');
-
-  // Map slug to meshtastic.org URL path
-  function getOriginalUrl(slug: string): string {
-    // Remove /index from the end and convert to URL
-    const path = slug.replace('/index', '').replace(/^hardware\//, 'hardware/');
-    return `${MESHTASTIC_DOCS_URL}/${path}/`;
-  }
-
-  function showLoading() {
-    loadingEl?.classList.remove('hidden');
-    errorEl?.classList.add('hidden');
-    contentEl?.classList.add('hidden');
-    loadTimeEl?.classList.add('hidden');
-    viewOriginalEl?.classList.add('hidden');
-  }
-
-  function showError() {
-    loadingEl?.classList.add('hidden');
-    errorEl?.classList.remove('hidden');
-    contentEl?.classList.add('hidden');
-    loadTimeEl?.classList.add('hidden');
-    viewOriginalEl?.classList.add('hidden');
-
-    if (errorOriginalLinkEl) {
-      errorOriginalLinkEl.setAttribute('href', getOriginalUrl(currentPage));
-    }
-  }
-
-  function showContent(html: string, loadTime: number) {
-    loadingEl?.classList.add('hidden');
-    errorEl?.classList.add('hidden');
-    contentEl?.classList.remove('hidden');
-    loadTimeEl?.classList.remove('hidden');
-    viewOriginalEl?.classList.remove('hidden');
-
-    if (contentEl) contentEl.innerHTML = html;
-    if (loadTimeValueEl) loadTimeValueEl.textContent = loadTime.toString();
-    if (originalLinkEl) {
-      originalLinkEl.setAttribute('href', getOriginalUrl(currentPage));
-    }
-
-    // Add click handlers to internal doc links
-    setupInternalLinks();
-  }
-
-  function cleanMdx(mdx: string, filterValue: string = ''): string {
-    // Remove frontmatter
-    mdx = mdx.replace(/^---[\s\S]*?---\n*/m, '');
-
-    // Remove import statements
-    mdx = mdx.replace(/^import\s+.*$/gm, '');
-
-    // Remove export statements
-    mdx = mdx.replace(/^export\s+.*$/gm, '');
-
-    // Convert :::admonition blocks to styled divs
-    const admonitionTypes = ['note', 'info', 'warning', 'tip', 'caution', 'danger'];
-    admonitionTypes.forEach(type => {
-      const regex = new RegExp(`:::${type}\\[?([^\\]]*)?\\]?\\s*([\\s\\S]*?):::`, 'g');
-      mdx = mdx.replace(regex, (_match, title, content) => {
-        const displayTitle = title || type.charAt(0).toUpperCase() + type.slice(1);
-        return `<div class="admonition admonition-${type}"><strong>${displayTitle}</strong>${content.trim()}</div>`;
-      });
-    });
-
-    // Handle Tabs/TabItem - extract content from each tab and display as sections
-    // First, extract TabItem contents with their labels
-    mdx = mdx.replace(/<Tabs[\s\S]*?values=\{\[([\s\S]*?)\]\}[\s\S]*?>([\s\S]*?)<\/Tabs>/g, (_match, valuesStr, tabsContent) => {
-      // Parse tab value->label mappings from the values array
-      // Match patterns like: {label: 'LoRa32 V4', value:'v4'}
-      const valueToLabel: Record<string, string> = {};
-      const mappingRegex = /\{\s*label:\s*['"]([^'"]+)['"]\s*,\s*value:\s*['"]([^'"]+)['"]\s*\}/g;
-      let mappingMatch;
-      while ((mappingMatch = mappingRegex.exec(valuesStr)) !== null) {
-        valueToLabel[mappingMatch[2]] = mappingMatch[1];
-      }
-      // Also try reverse order: {value: '...', label: '...'}
-      const reverseMappingRegex = /\{\s*value:\s*['"]([^'"]+)['"]\s*,\s*label:\s*['"]([^'"]+)['"]\s*\}/g;
-      while ((mappingMatch = reverseMappingRegex.exec(valuesStr)) !== null) {
-        valueToLabel[mappingMatch[1]] = mappingMatch[2];
-      }
-
-      // Extract content from each TabItem
-      // Note: some MDX has spaces around = like: <TabItem value = "t-deck">
-      const tabItemRegex = /<TabItem[^>]*value\s*=\s*['"]([^'"]+)['"][^>]*>([\s\S]*?)<\/TabItem>/g;
-      let result = '';
-      let tabMatch;
-      let matchedFilter = false;
-
-      while ((tabMatch = tabItemRegex.exec(tabsContent)) !== null) {
-        const tabValue = tabMatch[1];
-        const tabContent = tabMatch[2].trim();
-        // Look up the label for this value, fallback to value itself
-        const label = valueToLabel[tabValue] || tabValue;
-
-        // If filterValue is set, only show matching tab
-        if (filterValue) {
-          if (tabValue === filterValue) {
-            result = `\n\n# ${label}\n\n${tabContent}\n`;
-            matchedFilter = true;
-          }
-        } else {
-          // No filter - show all tabs as sections
-          result += `\n\n## ${label}\n\n${tabContent}\n\n---\n`;
-        }
-      }
-
-      // If filter was set but didn't match, show all tabs
-      if (filterValue && !matchedFilter) {
-        tabItemRegex.lastIndex = 0;
-        while ((tabMatch = tabItemRegex.exec(tabsContent)) !== null) {
-          const tabValue = tabMatch[1];
-          const tabContent = tabMatch[2].trim();
-          const label = valueToLabel[tabValue] || tabValue;
-          result += `\n\n## ${label}\n\n${tabContent}\n\n---\n`;
-        }
-      }
-
-      return result || tabsContent;
-    });
-
-    // Remove any remaining JSX components
-    mdx = mdx.replace(/<[A-Z][a-zA-Z]*[^>]*\/>/g, '');
-    mdx = mdx.replace(/<[A-Z][a-zA-Z]*[^>]*>[\s\S]*?<\/[A-Z][a-zA-Z]*>/g, '');
-
-    // Fix image paths - convert relative to absolute GitHub raw URLs
-    mdx = mdx.replace(/!\[([^\]]*)\]\(\/img\/hardware\/([^)]+)\)/g,
-      '![$1](https://meshtastic.org/img/hardware/$2)');
-
-    // Also handle relative paths like ./image.png
-    mdx = mdx.replace(/!\[([^\]]*)\]\(\.\/([^)]+)\)/g, (_match, alt, path) => {
-      const dir = currentPage.substring(0, currentPage.lastIndexOf('/'));
-      return `![${alt}](https://raw.githubusercontent.com/meshtastic/meshtastic/master/docs/${dir}/${path})`;
-    });
-
-    // Fix relative links to docs - mark them as internal
-    mdx = mdx.replace(/\[([^\]]+)\]\(\/docs\/([^)]+)\)/g, (_match, text, path) => {
-      const slug = convertPathToSlug(path);
-      return `<a href="#" class="internal-doc-link" data-slug="${slug}">${text}</a>`;
-    });
-
-    // Fix relative links within hardware docs
-    mdx = mdx.replace(/\[([^\]]+)\]\(\.\.\/([^)]+)\)/g, (_match, text, path) => {
-      const slug = `hardware/devices/${path.replace('.mdx', '').replace('.md', '')}`;
-      return `<a href="#" class="internal-doc-link" data-slug="${slug}">${text}</a>`;
-    });
-
-    // Fix same-directory relative links (handles ./path, ./path/, ./path/subpath/?query=param)
-    // Match: [text](./path) or [text](./path/) or [text](./path/subpath/?query=value)
-    // Preserve query params for tab filtering
-    // DON'T append /index - let loadDevicePage handle file vs folder detection
-    mdx = mdx.replace(/\[([^\]]+)\]\(\.\/([a-zA-Z0-9_\-\/]+?)\/?(\?[^)]*)?\)/g, (_match, text, path, query) => {
-      // Get parent directory (remove /index if present)
-      let currentDir = currentPage.replace(/\/index$/, '');
-      // Path can be nested (e.g., "sensecap/card-tracker") or simple (e.g., "r1-neo")
-      // Remove trailing slash from path if present
-      const cleanPath = path.replace(/\/$/, '');
-      // Preserve query string for tab filtering - don't add /index here
-      const slug = `${currentDir}/${cleanPath}${query || ''}`;
-      return `<a href="#" class="internal-doc-link" data-slug="${slug}">${text}</a>`;
-    });
-
-    return mdx;
-  }
-
-  function convertPathToSlug(path: string): string {
-    let slug = path.replace(/\/$/, '').replace(/\.mdx?$/, '');
-    return slug;
-  }
-
-  function setupInternalLinks() {
-    document.querySelectorAll('.internal-doc-link').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const slug = (link as HTMLElement).getAttribute('data-slug');
-        if (slug) {
-          loadDevicePage(slug);
-          window.history.pushState({ slug }, '', `#${slug}`);
-        }
-      });
-    });
-  }
-
-  async function loadDevicePage(slugWithQuery: string) {
-    showLoading();
-    // Extract query params before stripping
-    const queryMatch = slugWithQuery.match(/\?(.+)$/);
-    const queryString = queryMatch ? queryMatch[1] : '';
-    // Parse query to get filter value (e.g., "heltec=v3" -> "v3")
-    let filterValue = '';
-    if (queryString) {
-      const params = new URLSearchParams(queryString);
-      // Get the first param value (could be heltec=v3, mesh_node_=xxx, etc.)
-      for (const [, value] of params) {
-        filterValue = value;
-        break;
-      }
-    }
-    // Strip query strings and trailing slashes from slug
-    const slug = slugWithQuery.split('?')[0].replace(/\/$/, '').replace(/\/+$/, '');
-    currentPage = slug;
-
-    // Update active nav button
-    document.querySelectorAll('.device-nav-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-page') === slug);
-    });
-
-    const startTime = performance.now();
-
-    // Try multiple file extensions
-    const extensions = ['.mdx', '.md'];
-    let response: Response | null = null;
-
-    for (const ext of extensions) {
-      const url = `${DOCS_BASE}/${slug}${ext}`;
-      try {
-        response = await fetch(url);
-        if (response.ok) break;
-      } catch (e) {
-        // Continue to next extension
-      }
-    }
-
-    // If not found and doesn't end with index, try with /index
-    if (!response?.ok && !slug.endsWith('index')) {
-      for (const ext of extensions) {
-        const url = `${DOCS_BASE}/${slug}/index${ext}`;
-        try {
-          response = await fetch(url);
-          if (response.ok) {
-            currentPage = `${slug}/index`;
-            break;
-          }
-        } catch (e) {
-          // Continue
-        }
-      }
-    }
-
-    if (!response?.ok) {
-      showError();
-      return;
-    }
-
-    try {
-      let markdown = await response.text();
-      markdown = cleanMdx(markdown, filterValue);
-
-      const loadTime = Math.round(performance.now() - startTime);
-
-      // Wait for marked to load
-      const waitForMarked = () => {
-        return new Promise<void>((resolve) => {
-          const check = () => {
-            if ((window as any).marked) {
-              resolve();
-            } else {
-              setTimeout(check, 50);
-            }
-          };
-          check();
-        });
-      };
-
-      await waitForMarked();
-      const html = (window as any).marked.parse(markdown);
-      showContent(html, loadTime);
-
-      // Scroll to top of content
-      contentEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    } catch (error) {
-      console.error('Failed to parse device docs:', error);
-      showError();
-    }
-  }
-
-  // Handle back/forward navigation
-  window.addEventListener('popstate', (e) => {
-    if (e.state?.slug) {
-      loadDevicePage(e.state.slug);
-    }
-  });
-
-  // Initialize when marked is loaded
-  markedScript.onload = () => {
-    // Check if there's a hash in the URL
-    const hash = window.location.hash.slice(1);
-    if (hash) {
-      loadDevicePage(hash);
-    } else {
-      loadDevicePage('hardware/devices/index');
-    }
-  };
-
-  // Nav button clicks
-  document.querySelectorAll('.device-nav-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const page = btn.getAttribute('data-page');
-      if (page) {
-        loadDevicePage(page);
-        window.history.pushState({ slug: page }, '', `#${page}`);
-      }
-    });
-  });
-
-  // Retry button
-  retryBtn?.addEventListener('click', () => loadDevicePage(currentPage));
-</script>
