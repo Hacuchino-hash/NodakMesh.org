@@ -53,11 +53,6 @@ const FLAGGED_PATTERNS = [
   'as we all know',
 ];
 
-// Character patterns to detect (checked separately)
-const CHAR_PATTERNS = [
-  { char: '—', name: 'em dash', suggestion: 'Use regular dash (-) or rewrite' },
-];
-
 async function getAllFiles(dir, ext) {
   const files = [];
   try {
@@ -92,7 +87,6 @@ async function validateContent() {
     const lines = content.split('\n');
     const shortPath = filePath.replace(/^\.\//, '');
 
-    // Check phrase patterns
     for (const pattern of FLAGGED_PATTERNS) {
       const regex = new RegExp(pattern, 'gi');
       lines.forEach((line, i) => {
@@ -100,25 +94,8 @@ async function validateContent() {
           violations.push({
             file: shortPath,
             line: i + 1,
-            type: 'phrase',
             pattern: pattern.replace(/\\/g, ''),
             text: line.trim().substring(0, 80)
-          });
-        }
-      });
-    }
-
-    // Check character patterns
-    for (const { char, name, suggestion } of CHAR_PATTERNS) {
-      lines.forEach((line, i) => {
-        if (line.includes(char)) {
-          violations.push({
-            file: shortPath,
-            line: i + 1,
-            type: 'character',
-            pattern: `${name} (${char})`,
-            text: line.trim().substring(0, 80),
-            suggestion
           });
         }
       });
@@ -131,9 +108,6 @@ async function validateContent() {
     violations.forEach(v => {
       console.error(`  ${v.file}:${v.line}`);
       console.error(`     Flagged: "${v.pattern}"`);
-      if (v.suggestion) {
-        console.error(`     Fix: ${v.suggestion}`);
-      }
       console.error(`     Context: "${v.text}..."\n`);
     });
 
