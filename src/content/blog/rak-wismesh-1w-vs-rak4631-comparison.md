@@ -1,11 +1,11 @@
 ---
 title: "RAK WisMesh 1W Booster vs RAK4631: Which WisBlock is Right for Your Mesh Network?"
 description: "Technical comparison of the RAK WisMesh 1W Booster Starter Kit (RAK10724) and RAK4631 WisBlock Core for LoRa mesh networking. Compare RF power, range, power consumption, and expandability."
-date: 2025-01-11
+date: 2026-01-11
 author: "Josh"
 category: "guides"
 tags: ["meshtastic", "meshcore", "rakwireless", "hardware", "comparison", "wisblock"]
-image: "/images/blog/rak-wismesh-1w-booster-kit.png"
+image: "/images/blog/rak4631-wisblock-core.png"
 featured: false
 ---
 

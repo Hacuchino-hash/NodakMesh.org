@@ -1,7 +1,7 @@
 ---
 title: "Introducing the RAK WisMesh 1W Booster Starter Kit (RAK10724)"
 description: "RAKwireless releases the WisMesh 1W Booster Starter Kit, a high-power Meshtastic-ready node featuring 1W (30 dBm) output, SX1262 transceiver, SKY66122 PA, and integrated SAW filter for extended range mesh networking."
-date: 2025-01-11
+date: 2026-01-11
 author: "Josh"
 category: "news"
 tags: ["news", "meshtastic", "rakwireless", "hardware", "high-power", "wisblock"]
