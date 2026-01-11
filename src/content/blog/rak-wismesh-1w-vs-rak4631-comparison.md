@@ -13,6 +13,8 @@ Choosing between RAKwireless WisBlock options for your LoRa mesh network? This c
 
 Both options work with popular mesh firmware including Meshtastic and MeshCore, so this comparison focuses on the hardware differences that matter regardless of which firmware you choose.
 
+![WisMesh 1W Booster Starter Kit](/images/blog/rak-wismesh-1w-booster-kit.png)
+
 ## Quick Comparison
 
 | Spec | WisMesh 1W Booster Kit | RAK4631 WisBlock |
@@ -60,6 +62,8 @@ The 8 dB difference between 22 dBm and 30 dBm is significant:
 In ideal conditions, each 6 dB increase roughly doubles theoretical range. The WisMesh 1W kit can potentially cover several times the distance of a standard RAK4631 node.
 
 ### Receiver Sensitivity
+
+![RAK13302 1W LoRa Module](/images/blog/rak-wismesh-1w-booster-module.png)
 
 The WisMesh 1W kit includes an LNA (Low Noise Amplifier) and SAW band-pass filter in the RAK13302 module. This cleans out-of-band noise and amplifies incoming signals, potentially improving receive performance compared to simple amplifier add-ons that can degrade RX sensitivity.
 
@@ -135,6 +139,8 @@ A mixed mesh with 1W and standard nodes works fine. They just have different cov
 
 Both leverage the WisBlock modular ecosystem.
 
+![WisMesh 1W Booster Kit Components](/images/blog/rak-wismesh-1w-booster-components.png)
+
 ### WisMesh 1W Kit (RAK19007 Base)
 
 - 1 core slot (RAK3401)
@@ -189,6 +195,8 @@ Both can add GPS (RAK12500), environmental sensors, displays (RAK1921 OLED), acc
 A basic RAK4631 + RAK19003 setup runs about $35-40, similar to the WisMesh 1W kit but with lower power output and consumption.
 
 ## Conclusion
+
+![WisMesh 1W Booster Assembled](/images/blog/rak-wismesh-1w-booster-assembled.png)
 
 The WisMesh 1W Booster Kit and RAK4631 WisBlock share the same foundation (nRF52840 MCU, SX1262 transceiver, WisBlock ecosystem) but serve different use cases. The 1W kit trades power efficiency and simplicity for raw RF output. The RAK4631 is the practical choice for most users with sufficient range, easy power management, and broad regional compatibility.
 
