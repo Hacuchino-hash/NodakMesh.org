@@ -7,7 +7,7 @@ category: "guides"
 featured: true
 ---
 
-Imagine sending a text message to your friend while hiking deep in the mountains—no cell service, no internet. That's what LoRa mesh networks do. This guide explains what they are, how they work, and why they matter for off-grid communication.
+Imagine sending a text message to your friend while hiking deep in the mountains-no cell service, no internet. That's what LoRa mesh networks do. This guide explains what they are, how they work, and why they matter for off-grid communication.
 
 ![LoRa mesh network devices](/images/blog/lora-mesh-intro/meshcore-off-grid.jpg)
 <span class="caption">LoRa mesh devices enable off-grid communication without cell towers or internet. Image via [CNX Software](https://www.cnx-software.com/).</span>
@@ -18,13 +18,13 @@ Imagine sending a text message to your friend while hiking deep in the mountains
 
 ## LoRa: Long-Range, Low-Power Radio
 
-LoRa (short for "Long Range") is a wireless technology known for exceptional range and minimal power usage. LoRa devices transmit small amounts of data (text messages or GPS coordinates) across several kilometers while using very little battery. Unlike walkie-talkies or ham radios, LoRa operates in unlicensed radio bands in most regions, so you don't need a special license. This makes it perfect for personal and hobby projects—affordable and accessible to anyone.
+LoRa (short for "Long Range") is a wireless technology known for exceptional range and minimal power usage. LoRa devices transmit small amounts of data (text messages or GPS coordinates) across several kilometers while using very little battery. Unlike walkie-talkies or ham radios, LoRa operates in unlicensed radio bands in most regions, so you don't need a special license. This makes it perfect for personal and hobby projects-affordable and accessible to anyone.
 
-The catch: LoRa sends data slowly and in tiny packets. You won't stream videos over LoRa, but it handles text messages, sensor readings, and location data well. Even with obstacles like trees or hills, LoRa signals often reach farther than Wi-Fi or Bluetooth. In open areas with line-of-sight (hilltop to hilltop), range of a few miles is common, and more under ideal conditions. LoRa lets you cover distance without draining your battery—crucial for off-grid use.
+The catch: LoRa sends data slowly and in tiny packets. You won't stream videos over LoRa, but it handles text messages, sensor readings, and location data well. Even with obstacles like trees or hills, LoRa signals often reach farther than Wi-Fi or Bluetooth. In open areas with line-of-sight (hilltop to hilltop), range of a few miles is common, and more under ideal conditions. LoRa lets you cover distance without draining your battery-crucial for off-grid use.
 
 ## What Is a Mesh Network?
 
-A mesh network is a network where each device (or "node") connects to multiple other devices, not just a single central hub. Messages hop from device to device to reach their destination. If one path is blocked or a node goes offline, the message tries another path. This self-healing design makes mesh networks robust—there's no single point of failure.
+A mesh network is a network where each device (or "node") connects to multiple other devices, not just a single central hub. Messages hop from device to device to reach their destination. If one path is blocked or a node goes offline, the message tries another path. This self-healing design makes mesh networks robust-there's no single point of failure.
 
 ![Mesh network map view](/images/blog/lora-mesh-intro/mesh-hop-diagram.webp)
 <span class="caption">A mesh network map showing nodes and their connections. Image via [Meshtastic](https://meshtastic.org/).</span>
@@ -37,7 +37,7 @@ Because mesh networks don't depend on any central cell tower or router, they're 
 
 LoRa mesh networks combine long-range capabilities with mesh networking resilience. Here are the key benefits:
 
-**Truly Off-Grid Operation:** LoRa mesh devices talk directly to each other. You don't need cell service, Wi-Fi, or satellites. Your network is completely independent and works anywhere—deep wilderness, during natural disasters, or at crowded events where cell networks are overloaded. If the internet or power grid goes down, your LoRa mesh keeps running.
+**Truly Off-Grid Operation:** LoRa mesh devices talk directly to each other. You don't need cell service, Wi-Fi, or satellites. Your network is completely independent and works anywhere-deep wilderness, during natural disasters, or at crowded events where cell networks are overloaded. If the internet or power grid goes down, your LoRa mesh keeps running.
 
 **Extended Range through Hops:** Each device in a LoRa mesh can forward messages for others. This hop-by-hop transmission extends your communication range. A message can travel miles by hopping through intermediate nodes. Even if any one link is limited (1-2 miles), multiple hops via other nodes can connect users much farther apart.
 
@@ -45,7 +45,7 @@ LoRa mesh networks combine long-range capabilities with mesh networking resilien
 
 **Privacy and Security:** LoRa mesh platforms like Meshtastic and MeshCore support encryption out of the box. Messages can be encrypted end-to-end, meaning outsiders can't easily eavesdrop on your off-grid conversations. Since your messages aren't going through any corporate server or cell tower, you control who's listening.
 
-**Cost-Effective:** Setting up a LoRa mesh is relatively inexpensive. The radios and devices are affordable (cheaper than satellite phones or long-range commercial radios). There are no monthly fees or subscriptions—once you have the gear, it's free to use your mesh network.
+**Cost-Effective:** Setting up a LoRa mesh is relatively inexpensive. The radios and devices are affordable (cheaper than satellite phones or long-range commercial radios). There are no monthly fees or subscriptions-once you have the gear, it's free to use your mesh network.
 
 ## Popular Uses for LoRa Mesh Networks
 

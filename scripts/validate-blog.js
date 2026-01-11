@@ -2,7 +2,10 @@
 import { readdir, readFile } from 'fs/promises';
 import { join } from 'path';
 
-const BLOG_DIR = './src/content/blog';
+const CONTENT_DIRS = [
+  './src/content/blog',
+  './src/pages',
+];
 
 // Low-quality writing patterns to detect
 const FLAGGED_PATTERNS = [
@@ -50,25 +53,72 @@ const FLAGGED_PATTERNS = [
   'as we all know',
 ];
 
-async function validateBlogPosts() {
-  const files = await readdir(BLOG_DIR);
-  const mdFiles = files.filter(f => f.endsWith('.md') && f !== 'blog-template.md');
+// Character patterns to detect (checked separately)
+const CHAR_PATTERNS = [
+  { char: '—', name: 'em dash', suggestion: 'Use regular dash (-) or rewrite' },
+];
+
+async function getAllFiles(dir, ext) {
+  const files = [];
+  try {
+    const entries = await readdir(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = join(dir, entry.name);
+      if (entry.isDirectory()) {
+        files.push(...await getAllFiles(fullPath, ext));
+      } else if (ext.some(e => entry.name.endsWith(e))) {
+        files.push(fullPath);
+      }
+    }
+  } catch (e) {
+    // Directory doesn't exist, skip
+  }
+  return files;
+}
+
+async function validateContent() {
+  let allFiles = [];
+  for (const dir of CONTENT_DIRS) {
+    allFiles.push(...await getAllFiles(dir, ['.md', '.astro']));
+  }
+
+  // Filter out template files
+  allFiles = allFiles.filter(f => !f.includes('blog-template.md'));
 
   let violations = [];
 
-  for (const file of mdFiles) {
-    const content = await readFile(join(BLOG_DIR, file), 'utf-8');
+  for (const filePath of allFiles) {
+    const content = await readFile(filePath, 'utf-8');
     const lines = content.split('\n');
+    const shortPath = filePath.replace(/^\.\//, '');
 
+    // Check phrase patterns
     for (const pattern of FLAGGED_PATTERNS) {
       const regex = new RegExp(pattern, 'gi');
       lines.forEach((line, i) => {
         if (regex.test(line)) {
           violations.push({
-            file,
+            file: shortPath,
             line: i + 1,
+            type: 'phrase',
             pattern: pattern.replace(/\\/g, ''),
             text: line.trim().substring(0, 80)
+          });
+        }
+      });
+    }
+
+    // Check character patterns
+    for (const { char, name, suggestion } of CHAR_PATTERNS) {
+      lines.forEach((line, i) => {
+        if (line.includes(char)) {
+          violations.push({
+            file: shortPath,
+            line: i + 1,
+            type: 'character',
+            pattern: `${name} (${char})`,
+            text: line.trim().substring(0, 80),
+            suggestion
           });
         }
       });
@@ -81,6 +131,9 @@ async function validateBlogPosts() {
     violations.forEach(v => {
       console.error(`  ${v.file}:${v.line}`);
       console.error(`     Flagged: "${v.pattern}"`);
+      if (v.suggestion) {
+        console.error(`     Fix: ${v.suggestion}`);
+      }
       console.error(`     Context: "${v.text}..."\n`);
     });
 
@@ -88,10 +141,10 @@ async function validateBlogPosts() {
     process.exit(1);
   }
 
-  console.log(`Checked ${mdFiles.length} blog posts - all passed.\n`);
+  console.log(`Checked ${allFiles.length} content files - all passed.\n`);
 }
 
-validateBlogPosts().catch(err => {
+validateContent().catch(err => {
   console.error('Validation error:', err.message);
   process.exit(1);
 });

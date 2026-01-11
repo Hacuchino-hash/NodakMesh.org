@@ -15,7 +15,7 @@ So what's the difference? This comparison breaks down how Meshtastic and MeshCor
 
 **Meshtastic** is the older and more widely adopted platform. Started in 2019 by an open-source community, Meshtastic has grown into a popular choice for hikers, outdoor enthusiasts, and hobbyists. It turns small LoRa gadgets into a "walkie-talkie" style mesh: everyone can send/receive messages, and all devices help relay messages for each other. Meshtastic is known for being simple and great for ad-hoc situations (friends on a ski trip, neighbors during a power outage).
 
-**MeshCore** is a newer project (launched in 2025) with a different philosophy. While it has the same basic goal—off-grid LoRa messaging—MeshCore's design focuses on structured, scalable networks. It introduces specialized device roles (more on that below) to make large networks more efficient. MeshCore is being adopted by folks building bigger or more permanent mesh setups (community meshes covering a neighborhood or town) with an emphasis on reliability and controlled routing.
+**MeshCore** is a newer project (launched in 2025) with a different philosophy. While it has the same basic goal-off-grid LoRa messaging-MeshCore's design focuses on structured, scalable networks. It introduces specialized device roles (more on that below) to make large networks more efficient. MeshCore is being adopted by folks building bigger or more permanent mesh setups (community meshes covering a neighborhood or town) with an emphasis on reliability and controlled routing.
 
 **Important:** Meshtastic and MeshCore are **not compatible** with each other. A device running Meshtastic can't directly talk to a device running MeshCore, even though both use LoRa radios. You'll pick one platform and use it for all your nodes.
 
@@ -28,7 +28,7 @@ The biggest difference between Meshtastic and MeshCore is how messages are route
 
 ### Meshtastic: Flood-Style Routing
 
-Every node in a Meshtastic network can act as a router. When you send a message, all nearby devices pick it up and forward it, then those devices forward it further. Meshtastic uses a "flooding" approach—messages propagate by bouncing through multiple ordinary nodes.
+Every node in a Meshtastic network can act as a router. When you send a message, all nearby devices pick it up and forward it, then those devices forward it further. Meshtastic uses a "flooding" approach-messages propagate by bouncing through multiple ordinary nodes.
 
 A message might hop device → device → device until reaching the recipient. This makes Meshtastic networks very dynamic. If nodes move around (a group of hikers spreads out), the network re-routes through whichever nodes are available.
 
@@ -40,15 +40,15 @@ MeshCore takes a more controlled approach. By default, only specific nodes calle
 
 Think of it like a highway system: repeaters are the main junctions that move traffic long-distance, and companion devices are local streets that don't carry through-traffic. If you send a message on MeshCore and the destination isn't in direct radio range, the message must go through one or more repeaters to get delivered.
 
-Repeaters use a controlled flooding algorithm to pass messages efficiently, without involving every device. This dramatically reduces unnecessary transmissions—your personal device isn't being used as a relay for everyone else's messages. This leads to faster delivery and less radio congestion. The downside: MeshCore really needs those dedicated repeater nodes in place to cover large distances, whereas Meshtastic can sometimes get by with just user nodes.
+Repeaters use a controlled flooding algorithm to pass messages efficiently, without involving every device. This dramatically reduces unnecessary transmissions-your personal device isn't being used as a relay for everyone else's messages. This leads to faster delivery and less radio congestion. The downside: MeshCore really needs those dedicated repeater nodes in place to cover large distances, whereas Meshtastic can sometimes get by with just user nodes.
 
-**Summary:** Meshtastic is a true peer-to-peer mesh where any node can relay messages—great for spontaneous, moving networks. MeshCore is a hybrid where end-user nodes talk to repeaters, and repeaters talk to other repeaters. More structured, more efficient if you plan your network with well-placed repeaters.
+**Summary:** Meshtastic is a true peer-to-peer mesh where any node can relay messages-great for spontaneous, moving networks. MeshCore is a hybrid where end-user nodes talk to repeaters, and repeaters talk to other repeaters. More structured, more efficient if you plan your network with well-placed repeaters.
 
 ## Message Hops and Range
 
 Because of these different designs, there are differences in how far messages can hop:
 
-- **Meshtastic** by default limits messages to 3 hops (configurable up to 7). Usually plenty for personal use—imagine a chain of 3-7 devices relaying a message. But if you wanted to cover an entire city with dozens of hops, Meshtastic might hit a limit.
+- **Meshtastic** by default limits messages to 3 hops (configurable up to 7). Usually plenty for personal use-imagine a chain of 3-7 devices relaying a message. But if you wanted to cover an entire city with dozens of hops, Meshtastic might hit a limit.
 
 - **MeshCore** can handle up to 64 hops. This gives headroom if you're trying to stretch across a widespread area with multiple repeaters.
 
@@ -88,18 +88,18 @@ Meshtastic has apps for Android, iOS, and a web interface. The app shows all nod
 
 ## When to Choose Each
 
-Both are excellent—they just have different strengths.
+Both are excellent-they just have different strengths.
 
 ### Choose Meshtastic if:
 
 - **Casual personal use or small groups:** Something for weekend hikes, bike rides, skiing trips, or experimenting around your neighborhood. Very plug-and-play: flash the devices, install the app, start chatting.
-- **Your group is mobile:** Meshtastic shines when your group is moving or mesh membership constantly changes. Every device extends the network on the fly—ideal for ad-hoc situations.
+- **Your group is mobile:** Meshtastic shines when your group is moving or mesh membership constantly changes. Every device extends the network on the fly-ideal for ad-hoc situations.
 - **You value community support:** Being around longer, Meshtastic has a large community and lots of documentation. Many guides and ready-made devices available.
 - **Open-source matters:** Meshtastic is fully open-source, whereas some parts of MeshCore's ecosystem are proprietary.
 
 ### Choose MeshCore if:
 
-- **Planned networks and fixed installations:** If your goal is covering a larger area with infrastructure—a community mesh across a town, or coverage throughout a big rural property—MeshCore might fit better.
+- **Planned networks and fixed installations:** If your goal is covering a larger area with infrastructure-a community mesh across a town, or coverage throughout a big rural property-MeshCore might fit better.
 - **You can deploy dedicated repeaters:** Place a few repeater nodes in strategic spots (high on a roof or hill) and your handheld devices will have a strong backbone to route messages.
 - **You need store-and-forward:** MeshCore's Room Server feature stores messages when recipients are offline and delivers them later. Meshtastic doesn't have this built-in.
 - **Network efficiency matters:** For larger deployments, MeshCore's quieter network and controlled routing handle more users more reliably.
@@ -108,11 +108,11 @@ Both are excellent—they just have different strengths.
 
 MeshCore uses three distinct device roles. Unlike Meshtastic where every device can relay by default, MeshCore separates user devices from infrastructure.
 
-**Companion** — Your personal device paired with a phone or computer. Companions send and receive your messages but do not relay other people's traffic. This saves battery and keeps the airwaves clear.
+**Companion** - Your personal device paired with a phone or computer. Companions send and receive your messages but do not relay other people's traffic. This saves battery and keeps the airwaves clear.
 
-**Repeater** — A dedicated relay node that forwards messages between devices that can't reach each other directly. Repeaters use smart routing and typically run on continuous power (solar or USB). Place them high to maximize coverage.
+**Repeater** - A dedicated relay node that forwards messages between devices that can't reach each other directly. Repeaters use smart routing and typically run on continuous power (solar or USB). Place them high to maximize coverage.
 
-**Room Server** — A message store that holds messages for offline users. When someone's out of range, the room server keeps their messages until they reconnect. Room servers can also act as repeaters ("room-peater" mode). They're password-protected by default (change it from "hello").
+**Room Server** - A message store that holds messages for offline users. When someone's out of range, the room server keeps their messages until they reconnect. Room servers can also act as repeaters ("room-peater" mode). They're password-protected by default (change it from "hello").
 
 | Role | Purpose | Relays? | Stores? |
 |------|---------|---------|---------|
@@ -133,11 +133,11 @@ Both platforms support standalone devices with built-in screens and keyboards, s
 
 <span class="caption">Left: T-Deck running Meshtastic ([Jeff Geerling](https://www.jeffgeerling.com/)). Right: T-Deck running MeshCore ([Michael Lynch](https://mtlynch.io/)).</span>
 
-A standalone option is useful for emergencies when your phone battery dies or you want a dedicated mesh radio. The T-Deck includes a physical keyboard, trackball, and touchscreen—though the user experience differs between firmwares.
+A standalone option is useful for emergencies when your phone battery dies or you want a dedicated mesh radio. The T-Deck includes a physical keyboard, trackball, and touchscreen-though the user experience differs between firmwares.
 
 ## Final Thoughts
 
-There's no one "best" platform—it depends on your needs. Many beginners start with Meshtastic to get familiar with LoRa mesh basics because it's straightforward and well-documented. If you later find you need more scale or want to experiment with structured networks, you can explore MeshCore.
+There's no one "best" platform-it depends on your needs. Many beginners start with Meshtastic to get familiar with LoRa mesh basics because it's straightforward and well-documented. If you later find you need more scale or want to experiment with structured networks, you can explore MeshCore.
 
 The good news: both run on similar affordable hardware, so you're not locked in by your device. Just remember that all nodes in your mesh must run the same platform's firmware to talk to each other.
 

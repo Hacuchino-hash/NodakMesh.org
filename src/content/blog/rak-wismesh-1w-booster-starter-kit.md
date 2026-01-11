@@ -17,23 +17,23 @@ The kit includes the RAK3401 core module (nRF52840 MCU), the RAK13302 1W LoRa ra
 
 ## A High-Power Addition to the WisBlock Family
 
-If you know WisBlock, you know it's modular. Base board, core module, optional sensors—all snap together. The WisMesh 1W kit follows that pattern: a RAK3401 core (nRF52840 with BLE) paired with the RAK13302 LoRa transceiver, mounted on the RAK19007 base board. Together they make a Meshtastic-compatible node with serious range. Think of it as the long-distance option in the WisBlock lineup—more power draw, but much better reach.
+If you know WisBlock, you know it's modular. Base board, core module, optional sensors-all snap together. The WisMesh 1W kit follows that pattern: a RAK3401 core (nRF52840 with BLE) paired with the RAK13302 LoRa transceiver, mounted on the RAK19007 base board. Together they make a Meshtastic-compatible node with serious range. Think of it as the long-distance option in the WisBlock lineup-more power draw, but much better reach.
 
 ![WisMesh 1W Booster Kit Components](/images/blog/rak-wismesh-1w-booster-components.png)
 
-The base board has multiple expansion slots. Want a weather station that also relays messages? Add sensor modules. Need GPS tracking? Snap in a GPS module. No soldering. The 1W kit isn't a closed box—it's a platform you can build on.
+The base board has multiple expansion slots. Want a weather station that also relays messages? Add sensor modules. Need GPS tracking? Snap in a GPS module. No soldering. The 1W kit isn't a closed box-it's a platform you can build on.
 
 ## What Makes It Different
 
-Most LoRa mesh nodes (including the RAK4631) transmit at 100-160 mW (20-22 dBm). Fine for around town, but limiting in open country or hilly terrain. The WisMesh kit pushes 1 watt (30 dBm). That's nearly 10x the power. You can cover several times the distance—think valley-scale coverage from a single node instead of neighborhood-scale.
+Most LoRa mesh nodes (including the RAK4631) transmit at 100-160 mW (20-22 dBm). Fine for around town, but limiting in open country or hilly terrain. The WisMesh kit pushes 1 watt (30 dBm). That's nearly 10x the power. You can cover several times the distance-think valley-scale coverage from a single node instead of neighborhood-scale.
 
 ![1W RF Chain Architecture](/images/blog/rak-wismesh-1w-booster-rf-chain.png)
 
-RAK didn't just bolt on a stronger amp. The RAK13302 module includes a Skyworks SKY66122 power amplifier plus an integrated SAW filter and LNA for the receiver. This matters because many high-power LoRa setups blast out signals but can't hear replies—the amp desensitizes the receiver. The filtered front-end here keeps receive sensitivity strong even at 1W output. You get better transmission and better reception.
+RAK didn't just bolt on a stronger amp. The RAK13302 module includes a Skyworks SKY66122 power amplifier plus an integrated SAW filter and LNA for the receiver. This matters because many high-power LoRa setups blast out signals but can't hear replies-the amp desensitizes the receiver. The filtered front-end here keeps receive sensitivity strong even at 1W output. You get better transmission and better reception.
 
 ![RAK13302 1W LoRa Module](/images/blog/rak-wismesh-1w-booster-module.png)
 
-The nRF52840 MCU is a known quantity—it's in plenty of IoT devices and handles Meshtastic well. BLE support for phone configuration, enough flash and RAM for complex firmware, low power when idle. The kit ships with Meshtastic pre-loaded, so you can power it on and start messaging immediately.
+The nRF52840 MCU is a known quantity-it's in plenty of IoT devices and handles Meshtastic well. BLE support for phone configuration, enough flash and RAM for complex firmware, low power when idle. The kit ships with Meshtastic pre-loaded, so you can power it on and start messaging immediately.
 
 ## vs. Standard RAK4631 Nodes
 
@@ -45,7 +45,7 @@ RAK4631: ~100 mW (20 dBm). WisMesh 1W: 1000 mW (30 dBm). That's the main event. 
 
 ### Receiver Performance
 
-The WisMesh kit has a dedicated SAW filter and LNA. Standard nodes don't. The RAK4631's receiver is decent, but the WisMesh kit picks up weaker signals. Important in mesh networks—no point in shouting if you can't hear the reply.
+The WisMesh kit has a dedicated SAW filter and LNA. Standard nodes don't. The RAK4631's receiver is decent, but the WisMesh kit picks up weaker signals. Important in mesh networks-no point in shouting if you can't hear the reply.
 
 ### Architecture
 
@@ -53,7 +53,7 @@ The RAK4631 integrates the LoRa transceiver into the core module. The WisMesh ki
 
 ### Power Requirements
 
-Standard nodes sip power from a 3.3V supply. The 1W module needs more—it can't run from 3.3V alone. Use USB, a Li-Ion battery, or solar with battery backup. The base board supports all three. At 1W, expect higher current draw during transmission, so plan your power budget accordingly.
+Standard nodes sip power from a 3.3V supply. The 1W module needs more-it can't run from 3.3V alone. Use USB, a Li-Ion battery, or solar with battery backup. The base board supports all three. At 1W, expect higher current draw during transmission, so plan your power budget accordingly.
 
 Setup is still straightforward. Same Meshtastic app, same web interface. The extra power happens automatically.
 
@@ -65,11 +65,11 @@ RAK built this for outdoor deployments. The RAK19007 base has USB-C for power an
 
 The base board has four expansion slots. Add GPS for location tracking, environmental sensors for monitoring, or an OLED display for on-site status. All WisBlock modules use standard connectors, so mixing and matching is easy. Start with a basic mesh node, add capabilities as needed.
 
-The physical build is solid. RAK includes screws to secure the modules—important if you're mounting this somewhere it'll get bumped around. The RF design handles heat from the PA properly.
+The physical build is solid. RAK includes screws to secure the modules-important if you're mounting this somewhere it'll get bumped around. The RF design handles heat from the PA properly.
 
 ## Firmware Support
 
-Meshtastic works now. RAKwireless ships the kit with it pre-installed, and the official Meshtastic project has a dedicated firmware target for the RAK3401+RAK13302 combo. Use the standard apps (Android, iOS, web) to configure it. Your 1W node talks to regular nodes just fine—it just reaches further.
+Meshtastic works now. RAKwireless ships the kit with it pre-installed, and the official Meshtastic project has a dedicated firmware target for the RAK3401+RAK13302 combo. Use the standard apps (Android, iOS, web) to configure it. Your 1W node talks to regular nodes just fine-it just reaches further.
 
 MeshCore doesn't support this hardware yet (as of January 2025). The nRF52840 + SX1262 foundation is common enough that support will probably come eventually. For now, Meshtastic is the option.
 

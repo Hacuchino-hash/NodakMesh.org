@@ -12,7 +12,7 @@ const faqCategories = [
     questions: [
       {
         q: "What is a mesh network?",
-        a: "A mesh network is a type of network where each device (node) can communicate with multiple other devices and relay messages for the network. If one path fails, messages automatically find another route. This makes mesh networks resilient and self-healing — perfect for off-grid communication."
+        a: "A mesh network is a type of network where each device (node) can communicate with multiple other devices and relay messages for the network. If one path fails, messages automatically find another route. This makes mesh networks resilient and self-healing - perfect for off-grid communication."
       },
       {
         q: "Do I need a license to use LoRa mesh devices?",
@@ -78,7 +78,7 @@ const faqCategories = [
       },
       {
         q: "What's the default channel and should I change it?",
-        a: "The default channel uses a publicly known encryption key, so anyone with Meshtastic can read messages on it. This is intentional — it lets newcomers find other users and test their devices. For private conversations, create a new channel with a custom encryption key and share it only with people you trust."
+        a: "The default channel uses a publicly known encryption key, so anyone with Meshtastic can read messages on it. This is intentional - it lets newcomers find other users and test their devices. For private conversations, create a new channel with a custom encryption key and share it only with people you trust."
       },
       {
         q: "What device role should I use?",
@@ -90,7 +90,7 @@ const faqCategories = [
       },
       {
         q: "Why don't I see any other nodes?",
-        a: "If you don't see other nodes: (1) Make sure you're on the same channel preset as others (Long Fast is common), (2) Check that your region is set correctly (US for North America), (3) Ensure your antenna is connected — transmitting without an antenna can damage your radio, (4) Try moving to higher ground or outdoors. The mesh may simply not have any nodes in your area yet."
+        a: "If you don't see other nodes: (1) Make sure you're on the same channel preset as others (Long Fast is common), (2) Check that your region is set correctly (US for North America), (3) Ensure your antenna is connected - transmitting without an antenna can damage your radio, (4) Try moving to higher ground or outdoors. The mesh may simply not have any nodes in your area yet."
       }
     ]
   },
@@ -109,7 +109,7 @@ const faqCategories = [
       },
       {
         q: "What's the difference between Companion, Repeater, and Room Server?",
-        a: "Companion is your personal device that you carry — it doesn't relay other people's messages. Repeater is dedicated infrastructure that forwards messages through the network. Room Server stores messages for offline users and can also act as a repeater. Most users should flash Companion firmware; only deploy Repeaters if you're building network infrastructure."
+        a: "Companion is your personal device that you carry - it doesn't relay other people's messages. Repeater is dedicated infrastructure that forwards messages through the network. Room Server stores messages for offline users and can also act as a repeater. Most users should flash Companion firmware; only deploy Repeaters if you're building network infrastructure."
       },
       {
         q: "Why would I choose MeshCore over Meshtastic?",
@@ -128,7 +128,7 @@ const faqCategories = [
     questions: [
       {
         q: "How can I improve my range?",
-        a: "The three biggest factors are: (1) Antenna height — get your antenna as high as possible, ideally on a rooftop or elevated mount. (2) Antenna quality — use a properly tuned antenna for 915 MHz with good SWR. (3) Line of sight — minimize obstructions between you and other nodes. Even small improvements in height can dramatically increase range."
+        a: "The three biggest factors are: (1) Antenna height - get your antenna as high as possible, ideally on a rooftop or elevated mount. (2) Antenna quality - use a properly tuned antenna for 915 MHz with good SWR. (3) Line of sight - minimize obstructions between you and other nodes. Even small improvements in height can dramatically increase range."
       },
       {
         q: "What's causing poor signal in my area?",
@@ -155,7 +155,7 @@ const faqCategories = [
     questions: [
       {
         q: "My device won't flash. What's wrong?",
-        a: "Common issues: (1) Use Chrome or Edge browser — Firefox doesn't support Web Serial, (2) Make sure no other app is using the serial port, (3) Try a different USB cable — many cables are charge-only and don't have data lines, (4) Put the device in bootloader mode if required (usually holding BOOT button while pressing RESET), (5) Install the correct USB drivers for your device's chip (CP210x or CH340)."
+        a: "Common issues: (1) Use Chrome or Edge browser - Firefox doesn't support Web Serial, (2) Make sure no other app is using the serial port, (3) Try a different USB cable - many cables are charge-only and don't have data lines, (4) Put the device in bootloader mode if required (usually holding BOOT button while pressing RESET), (5) Install the correct USB drivers for your device's chip (CP210x or CH340)."
       },
       {
         q: "My phone won't connect via Bluetooth.",
@@ -171,7 +171,7 @@ const faqCategories = [
       },
       {
         q: "I can see nodes but can't message them.",
-        a: "If you see nodes but messages fail: (1) Check that you're both on the same channel with matching encryption, (2) The path may be one-way — you can hear them but they can't hear you (asymmetric link), (3) Try reducing message length, (4) There may be packet collisions on a busy network. Seeing a node doesn't guarantee bidirectional communication."
+        a: "If you see nodes but messages fail: (1) Check that you're both on the same channel with matching encryption, (2) The path may be one-way - you can hear them but they can't hear you (asymmetric link), (3) Try reducing message length, (4) There may be packet collisions on a busy network. Seeing a node doesn't guarantee bidirectional communication."
       }
     ]
   }

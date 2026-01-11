@@ -9,7 +9,7 @@ featured: true
 
 A LoRa repeater idling at 8-10mA changes everything about what's possible with MeshCore.
 
-If you're building a MeshCore mesh network, you already know the hard truth: the mesh doesn't live or die on features—it lives or dies on **repeaters**. Repeaters are the backbone. They're also the part that gets you into trouble when power draw, heat, sleep behavior, or board quirks turn your "set it and forget it" plan into "why am I climbing a roof again?"
+If you're building a MeshCore mesh network, you already know the hard truth: the mesh doesn't live or die on features-it lives or dies on **repeaters**. Repeaters are the backbone. They're also the part that gets you into trouble when power draw, heat, sleep behavior, or board quirks turn your "set it and forget it" plan into "why am I climbing a roof again?"
 
 That's why [EasySkyMesh](https://github.com/IoTThinks/EasySkyMesh) is worth paying attention to.
 
@@ -18,7 +18,7 @@ This isn't a new mesh protocol. It's **MeshCore firmware with custom, deployment
 - **Releases:** [github.com/IoTThinks/EasySkyMesh/releases](https://github.com/IoTThinks/EasySkyMesh/releases)
 - **Repository:** [github.com/IoTThinks/EasySkyMesh](https://github.com/IoTThinks/EasySkyMesh)
 
-For those unfamiliar: [MeshCore](/meshcore) is open-source firmware for building LoRa mesh networks with structured routing—repeaters forward traffic while client devices don't rebroadcast, making it efficient for larger deployments. EasySkyMesh builds on that foundation with power optimizations that matter in the field.
+For those unfamiliar: [MeshCore](/meshcore) is open-source firmware for building LoRa mesh networks with structured routing-repeaters forward traffic while client devices don't rebroadcast, making it efficient for larger deployments. EasySkyMesh builds on that foundation with power optimizations that matter in the field.
 
 ---
 
@@ -26,7 +26,7 @@ For those unfamiliar: [MeshCore](/meshcore) is open-source firmware for building
 
 A MeshCore network that works on your desk is easy.
 
-A MeshCore network that works in the field is harder, because repeaters get installed where they're useful—not where they're convenient. Rooflines, towers, tree lines, ridge tops. And once you place repeaters where they *should* be placed, you need them to stay alive.
+A MeshCore network that works in the field is harder, because repeaters get installed where they're useful-not where they're convenient. Rooflines, towers, tree lines, ridge tops. And once you place repeaters where they *should* be placed, you need them to stay alive.
 
 That makes idle current the most important number you can optimize.
 
@@ -37,7 +37,7 @@ Not because it's fun to chase milliamps, but because it determines whether you c
 - Remote sensor networks without constant maintenance
 - Multi-repeater coverage without becoming a full-time battery swapping service
 
-EasySkyMesh treats that reality as the main event. It doesn't just claim power improvements—it shows measurements.
+EasySkyMesh treats that reality as the main event. It doesn't just claim power improvements-it shows measurements.
 
 ---
 
@@ -67,7 +67,7 @@ MeshCore provides the core routing behavior. That's the foundation.
 
 What EasySkyMesh contributes is the unglamorous work that makes MeshCore easier to deploy at scale: release packaging, board-specific tuning, power-saving options, and a strong emphasis on sensor network use cases.
 
-The release notes aren't "minor refactor" fluff—they address real operational pain points. Recent releases mention:
+The release notes aren't "minor refactor" fluff-they address real operational pain points. Recent releases mention:
 
 - Fixing temperature handling for BME280/BME680 (using sensor temperature when available rather than MCU temp)
 - Improving MCU temperature accuracy on ESP32 boards by sampling multiple times and averaging
@@ -108,7 +108,7 @@ A successful MeshCore deployment usually has three layers:
 Mounted in high-signal locations. These do the heavy lifting: forwarding packets and keeping the mesh connected. They are the nodes you optimize power for first, because they're the ones you don't want to touch.
 
 **Clients / sensor nodes:**
-Nodes that generate traffic—messages, GPS beacons, sensor readings. They benefit from power savings too, but they're typically easier to reach than a rooftop repeater.
+Nodes that generate traffic-messages, GPS beacons, sensor readings. They benefit from power savings too, but they're typically easier to reach than a rooftop repeater.
 
 **Gateways (optional):**
 Only needed if you want internet integration, dashboards, logging, or remote visibility. The mesh itself doesn't require the internet. Treat gateways as enhancement, not dependency.
@@ -141,7 +141,7 @@ GPS beaconing for teams, vehicles, or equipment moving through areas with no cov
 Street lights, meters, tanks, pumps, gates. The kind of rural or industrial telemetry where running cable is expensive and cellular subscriptions scale badly.
 
 **Emergency and contingency networks:**
-Storm response, events, remote operations—any scenario where you want communications that don't depend on a carrier network.
+Storm response, events, remote operations-any scenario where you want communications that don't depend on a carrier network.
 
 These are all cases where power efficiency and stability are not "nice-to-have." They're the requirement.
 
@@ -149,7 +149,7 @@ These are all cases where power efficiency and stability are not "nice-to-have."
 
 ## The open-source ecosystem angle
 
-MeshCore is one of those projects where the core is impressive—but what makes it *real* is when you start seeing deployment-oriented firmware builds emerge around it.
+MeshCore is one of those projects where the core is impressive-but what makes it *real* is when you start seeing deployment-oriented firmware builds emerge around it.
 
 That's what EasySkyMesh represents:
 
@@ -184,10 +184,10 @@ Everything gets easier after that.
 
 ## Support the creator
 
-Work like this—power optimization, sensor fixes, board tuning, packaging releases—takes time and patience. If you want to support the developer behind EasySkyMesh:
+Work like this-power optimization, sensor fixes, board tuning, packaging releases-takes time and patience. If you want to support the developer behind EasySkyMesh:
 
 **[Buy Me a Coffee: buymeacoffee.com/iotthinks](https://www.buymeacoffee.com/iotthinks)**
 
 ---
 
-*This post highlights community work on MeshCore firmware. NodakMesh is not affiliated with EasySkyMesh or IoTThinks—we're just excited to see this kind of deployment-focused development happening in the ecosystem.*
+*This post highlights community work on MeshCore firmware. NodakMesh is not affiliated with EasySkyMesh or IoTThinks-we're just excited to see this kind of deployment-focused development happening in the ecosystem.*

@@ -14,7 +14,7 @@ You bought a fancy antenna for your mesh node. How do you know if it's actually 
 ![NanoVNA H4 kit with calibration standards and cables](/images/blog/nanovna-antenna-testing/nanovna-calibration-screen.png)
 *A typical NanoVNA kit includes the device, calibration standards (the small gold connectors), and SMA cables.*
 
-The **NanoVNA** (Vector Network Analyzer) is a sub-$50 tool that tells you exactly how well your antenna is performing at 915 MHz—the frequency used by Meshtastic and MeshCore in the US. No more guessing. No more "this antenna feels better."
+The **NanoVNA** (Vector Network Analyzer) is a sub-$50 tool that tells you exactly how well your antenna is performing at 915 MHz-the frequency used by Meshtastic and MeshCore in the US. No more guessing. No more "this antenna feels better."
 
 This guide walks you through everything: unboxing, calibration, measuring your antenna, and understanding the results. Whether you have a NanoVNA-H, NanoVNA-H4, or NanoVNA-F, the process is nearly identical.
 
@@ -30,9 +30,9 @@ This guide walks you through everything: unboxing, calibration, measuring your a
 
 A Vector Network Analyzer measures how radio frequency signals behave when they hit your antenna. Specifically, it tells you:
 
-- **SWR (Standing Wave Ratio)** — How much power actually goes into the antenna vs. how much bounces back
-- **Impedance** — Whether your antenna matches the 50-ohm standard used by your radio
-- **Resonant frequency** — The frequency where your antenna works best
+- **SWR (Standing Wave Ratio)** - How much power actually goes into the antenna vs. how much bounces back
+- **Impedance** - Whether your antenna matches the 50-ohm standard used by your radio
+- **Resonant frequency** - The frequency where your antenna works best
 
 For mesh networking, we care most about SWR at 915 MHz. A lower SWR means more of your transmit power actually radiates instead of reflecting back into your radio.
 
@@ -57,7 +57,7 @@ For testing LoRa antennas at 915 MHz, **any of these will work**. The H4 and F m
 Most NanoVNA kits include:
 
 - The NanoVNA device itself
-- **Calibration standards** (Open, Short, Load) — these are critical
+- **Calibration standards** (Open, Short, Load) - these are critical
 - Two SMA cables
 - USB-C cable for charging and PC connection
 - Sometimes a carrying case
@@ -74,16 +74,16 @@ The calibration standards are small metal connectors that screw onto the NanoVNA
 
 Your NanoVNA has two SMA ports:
 
-- **CH0 (Port 1)** — This is where you connect your antenna for basic testing
-- **CH1 (Port 2)** — Used for transmission measurements (not needed for antenna testing)
+- **CH0 (Port 1)** - This is where you connect your antenna for basic testing
+- **CH1 (Port 2)** - Used for transmission measurements (not needed for antenna testing)
 
 For SWR and impedance measurements, you only need **CH0**.
 
 ## Step 1: Power On and Basic Setup
 
-1. **Charge the device** — Use the USB-C port. Most NanoVNAs have built-in batteries.
+1. **Charge the device** - Use the USB-C port. Most NanoVNAs have built-in batteries.
 
-2. **Power on** — Press and hold the power button (usually the jog wheel or a dedicated button).
+2. **Power on** - Press and hold the power button (usually the jog wheel or a dedicated button).
 
 3. **Set your frequency range:**
    - Tap the screen or use the jog wheel to access the menu
@@ -164,7 +164,7 @@ Now the fun part:
 
 2. **Connect your antenna to the cable**
    - If your antenna has an SMA connector, you might need an adapter
-   - Watch out for **RP-SMA** (reverse polarity) — this is common on LoRa antennas
+   - Watch out for **RP-SMA** (reverse polarity) - this is common on LoRa antennas
 
 3. **Read the results**
 
@@ -172,8 +172,8 @@ Now the fun part:
 *The NanoVNA display showing an SWR trace. The dip in the yellow line indicates where the antenna is best matched. Photo: [BARK](https://bark.org.za/simple-step-by-step-using-the-nano-vna-h4-to-measure-swr/)*
 
 Look at the marker reading at 915 MHz. You'll see:
-- **SWR value** — Lower is better
-- **Impedance** — Closer to 50 ohms is better
+- **SWR value** - Lower is better
+- **Impedance** - Closer to 50 ohms is better
 
 ## Step 5: Interpreting Your Results
 
@@ -186,25 +186,25 @@ Look at the marker reading at 915 MHz. You'll see:
 | **2.0 - 3.0** | Marginal. You're losing some power, but it'll work. |
 | **3.0+** | Poor. Significant power loss. Investigate the cause. |
 
-For mesh networking, **SWR under 2.0 at 915 MHz is perfectly fine**. Don't chase perfection—an SWR of 1.2 vs 1.5 won't make a noticeable difference in range.
+For mesh networking, **SWR under 2.0 at 915 MHz is perfectly fine**. Don't chase perfection-an SWR of 1.2 vs 1.5 won't make a noticeable difference in range.
 
 ### What If Your SWR is High?
 
 Common causes:
 
-1. **Wrong frequency** — Your antenna might be tuned for 868 MHz (European LoRa) instead of 915 MHz
-2. **Bad connector** — Damaged SMA or loose connection
-3. **Cheap antenna** — Some "915 MHz" antennas are just relabeled 868 MHz units
-4. **Missing ground plane** — Many antennas need a metal surface beneath them
-5. **Cable loss** — Long or cheap coax can throw off readings
+1. **Wrong frequency** - Your antenna might be tuned for 868 MHz (European LoRa) instead of 915 MHz
+2. **Bad connector** - Damaged SMA or loose connection
+3. **Cheap antenna** - Some "915 MHz" antennas are just relabeled 868 MHz units
+4. **Missing ground plane** - Many antennas need a metal surface beneath them
+5. **Cable loss** - Long or cheap coax can throw off readings
 
 ### Finding Resonant Frequency
 
 Look at where the SWR dip occurs on the graph. That's your antenna's resonant frequency.
 
-- **Dip at 915 MHz** — Perfect
-- **Dip below 915 MHz** — Antenna is "long" (physically or electrically)
-- **Dip above 915 MHz** — Antenna is "short"
+- **Dip at 915 MHz** - Perfect
+- **Dip below 915 MHz** - Antenna is "long" (physically or electrically)
+- **Dip above 915 MHz** - Antenna is "short"
 
 Some antennas are adjustable. If yours has a tuning element, you can try to shift the resonance to 915 MHz.
 
@@ -238,7 +238,7 @@ The antenna's performance changes based on what's around it. For accurate result
 - Test with the same cable you'll use in deployment
 - Test with the antenna in its final mounting position if possible
 - Test away from metal objects (except intended ground planes)
-- Your body affects readings—step back after pressing "sweep"
+- Your body affects readings-step back after pressing "sweep"
 
 ### Document Your Results
 
@@ -252,12 +252,12 @@ SWR tells you about efficiency, not directionality or total radiated power.
 
 ## Common Mistakes to Avoid
 
-1. **Not calibrating** — Biggest source of bad readings
-2. **Calibrating at the wrong frequency** — Always calibrate for your test range
-3. **Using adapters carelessly** — Every adapter adds loss and potential error
-4. **Testing indoors surrounded by metal** — Reflections skew results
-5. **Touching the antenna during measurement** — Your hand changes the antenna's properties
-6. **Ignoring RP-SMA** — Many LoRa devices use reverse polarity SMA. Check your connectors.
+1. **Not calibrating** - Biggest source of bad readings
+2. **Calibrating at the wrong frequency** - Always calibrate for your test range
+3. **Using adapters carelessly** - Every adapter adds loss and potential error
+4. **Testing indoors surrounded by metal** - Reflections skew results
+5. **Touching the antenna during measurement** - Your hand changes the antenna's properties
+6. **Ignoring RP-SMA** - Many LoRa devices use reverse polarity SMA. Check your connectors.
 
 ## Summary: The Quick Version
 
@@ -273,9 +273,9 @@ That's it. Five steps to know if your antenna is working.
 
 ## Where to Buy
 
-- **NanoVNA-H4** — Available on Amazon, AliExpress, and ham radio retailers (~$50-70)
-- **NanoVNA-F** — Similar price, metal case version
-- **Original NanoVNA-H** — Budget option (~$30-50)
+- **NanoVNA-H4** - Available on Amazon, AliExpress, and ham radio retailers (~$50-70)
+- **NanoVNA-F** - Similar price, metal case version
+- **Original NanoVNA-H** - Budget option (~$30-50)
 
 Look for kits that include calibration standards. Some ultra-cheap units skip these, and you'll need to buy them separately.
 
@@ -288,4 +288,4 @@ Look for kits that include calibration standards. Some ultra-cheap units skip th
 **Image Credits:**
 - Calibration standards photo: [Mario Hellmich](https://www.mariohellmich.de/projects/sma-cal-kit/sma-cal-kit.html)
 - NanoVNA screen photos: [Boland Amateur Radio Klub (BARK)](https://bark.org.za/simple-step-by-step-using-the-nano-vna-h4-to-measure-swr/)
-- NanoVNA is open-source hardware—support the developers by buying from reputable sellers.
+- NanoVNA is open-source hardware-support the developers by buying from reputable sellers.

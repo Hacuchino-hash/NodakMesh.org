@@ -80,13 +80,13 @@ We mounted the unit approximately three stories high with good line-of-sight. In
 - East-to-west across Fargo, North Dakota
 - Through a dense urban environment
 
-This wasn't a best-case fluke — it was repeatable performance through buildings, trees, and city interference.
+This wasn't a best-case fluke - it was repeatable performance through buildings, trees, and city interference.
 
 Running Meshtastic, the node functioned as an always-on router, dramatically reducing dead zones and improving message delivery for all handheld nodes in the mesh. Once installed, overall network stability improved immediately.
 
 We also flashed MeshCore onto the same hardware. The transition was seamless, and the device performed just as well as a MeshCore repeater, handling multi-hop routing without issues. The hardware clearly supports both firmware ecosystems without compromise.
 
-> **The value here isn't speed — it's reliability.** Latency and throughput behaved exactly as expected for LoRa: short delays measured in seconds, but consistent delivery even at the edge of usable range.
+> **The value here isn't speed - it's reliability.** Latency and throughput behaved exactly as expected for LoRa: short delays measured in seconds, but consistent delivery even at the edge of usable range.
 
 ## Battery Life and Solar Power Performance
 
@@ -157,12 +157,12 @@ For advanced users, the USB-C passthrough allows firmware updates or flashing Me
 
 The Yeti Wurks base station is best suited for scenarios that benefit from reliable, always-on mesh coverage:
 
-- **Permanent Mesh Backbone** — Fixed Meshtastic or MeshCore relay extending handheld coverage
-- **Emergency & Backup Communications** — Solar-powered messaging during outages
-- **Urban or Community Mesh Networks** — Proven multi-mile coverage through city environments
-- **Rural Properties & Farms** — Reliable communication between distant buildings or personnel
-- **Search, Rescue, and Field Operations** — Encrypted channels and ATAK integration
-- **Off-Grid Monitoring** — Low-bandwidth telemetry and sensor relay
+- **Permanent Mesh Backbone** - Fixed Meshtastic or MeshCore relay extending handheld coverage
+- **Emergency & Backup Communications** - Solar-powered messaging during outages
+- **Urban or Community Mesh Networks** - Proven multi-mile coverage through city environments
+- **Rural Properties & Farms** - Reliable communication between distant buildings or personnel
+- **Search, Rescue, and Field Operations** - Encrypted channels and ATAK integration
+- **Off-Grid Monitoring** - Low-bandwidth telemetry and sensor relay
 
 Each of these benefits from the same strengths: long range, low power draw, solar autonomy, and reliability.
 
