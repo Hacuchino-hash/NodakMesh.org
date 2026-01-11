@@ -164,6 +164,17 @@ const devices = [
     link: 'https://heltec.org/project/ht-ct62/',
     setup: 'Requires soldering and external antenna. For advanced users.',
   },
+  {
+    name: 'RAK WisMesh 1W Booster',
+    slug: 'rak-wismesh-1w',
+    image: '/images/devices/rak-wismesh-1w.png',
+    price: '$39',
+    features: ['30dBm (1W) output', 'nRF52840 + SX1262', 'SKY66122 PA + SAW filter', 'WisBlock expandable'],
+    best: 'Best high power',
+    link: 'https://store.rakwireless.com/products/wismesh-1w-booster-starter-kit',
+    setup: 'MeshCore firmware not yet released. Meshtastic supported. Check back for updates.',
+    comingSoon: true,
+  },
 ];
 
 ---
@@ -266,7 +277,12 @@ const devices = [
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {devices.map((device) => (
-            <div class="card p-6">
+            <div class={`card p-6 ${device.comingSoon ? 'border-yellow-500/30' : ''}`}>
+              {device.comingSoon && (
+                <div class="bg-yellow-500/10 text-yellow-400 text-xs font-medium px-2 py-1 rounded mb-3 inline-block">
+                  MeshCore Firmware Coming Soon
+                </div>
+              )}
               <div class="flex items-start justify-between mb-4">
                 <div>
                   <span class="text-xs text-[--color-accent] font-medium">{device.best}</span>

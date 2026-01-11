@@ -439,6 +439,60 @@ export const deviceData = {
       docs: 'https://docs.rakwireless.com/Product-Categories/WisBlock/',
     },
   },
+  'rak-wismesh-1w': {
+    name: 'RAK WisMesh 1W Booster',
+    image: '/images/devices/rak-wismesh-1w.png',
+    chip: 'nRF52840 (RAK3401) + SX1262 + SKY66122 PA',
+    price: '$39',
+    dfu: {
+      method: 'Double-Tap Reset (UF2 Bootloader)',
+      steps: [
+        'Connect the WisBlock base board via USB-C',
+        'Quickly double-tap the RESET button on the RAK19007 base board',
+        'Device will appear as a USB drive',
+        'Web flasher should now detect the device',
+        'Select RAK3401 firmware variant for Meshtastic',
+      ],
+      alternative: 'Ensure RAK3401 core and RAK13302 1W module are properly seated',
+    },
+    driver: {
+      name: 'None Required',
+      needed: 'nRF52840 appears as USB mass storage in bootloader mode',
+      windows: 'No driver required',
+      mac: 'No driver required',
+      linux: 'No driver required',
+    },
+    flasher: {
+      meshcore: 'Not yet available',
+      meshtastic: 'https://flasher.meshtastic.org',
+    },
+    postFlash: {
+      meshcore: [
+        'MeshCore firmware not yet available for RAK3401/WisMesh 1W',
+        'Check flasher.meshcore.co.uk for future updates',
+        'Use Meshtastic in the meantime',
+      ],
+      meshtastic: [
+        'Device reboots with Meshtastic firmware',
+        'Connect via Bluetooth using Meshtastic app',
+        'Set region to US (915 MHz)',
+        'TX power configurable up to 30 dBm (1W)',
+        'Requires 5V power source for full 1W output',
+      ],
+    },
+    tips: [
+      '1W (30 dBm) output for maximum range',
+      'Integrated SAW filter and LNA for clean RF',
+      'Requires 5V power (USB or battery) for full power',
+      'WisBlock modular design allows expansion',
+      'Ships with Meshtastic pre-installed',
+      'MeshCore firmware expected in future updates',
+    ],
+    links: {
+      buy: 'https://store.rakwireless.com/products/wismesh-1w-booster-starter-kit',
+      docs: 'https://docs.rakwireless.com/Product-Categories/WisBlock/',
+    },
+  },
   'wio-tracker': {
     name: 'Seeed Wio Tracker 1110',
     image: '/images/devices/wio-tracker.jpg',
