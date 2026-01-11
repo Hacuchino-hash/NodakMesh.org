@@ -9,7 +9,7 @@ image: "/images/blog/rak-wismesh-1w-booster-kit.png"
 featured: false
 ---
 
-RAKwireless has released the **WisMesh 1W Booster Starter Kit**, a new high-power entry point into Meshtastic mesh networking that's generating genuine excitement in the community.
+RAKwireless now offers the **WisMesh 1W Booster Starter Kit**, a high-power option for Meshtastic mesh networking. At $39, it's one of the more affordable ways to get a 1W (30 dBm) capable node.
 
 ![RAK WisMesh 1W Booster Starter Kit](/images/blog/rak-wismesh-1w-booster-kit.png)
 
@@ -20,9 +20,11 @@ The kit comes as a complete package ready for assembly:
 - **RAK19007 WisBlock Base Board** - The foundation with 4 sensor slots, battery charging, solar panel connector, and USB-C connectivity
 - **RAK3401 WisBlock Core** - Powered by the Nordic nRF52840 microcontroller
 - **RAK13302 1W LoRa Module** - The star of the show with SX1262 transceiver, SKY66122 PA, and integrated SAW filter
-- **2x 900 MHz LoRa Antennas** - Both SMA and IPEX options included
-- **USB-C Cable** - For programming and charging
-- **Screws and Standoffs** - Everything needed for assembly
+- **900 MHz LoRa Antennas** - SMA rubber antenna + PCB antenna with IPEX-to-SMA adapter cable
+- **WiFi/BLE PCB Antenna** - For wireless connectivity
+- **USB Cable** - For programming and charging
+- **2x 5V Supply Cables** - For external power options
+- **Screws and Quick Start Guide** - Everything needed for assembly
 
 ![RAK WisMesh 1W Booster Kit Components](/images/blog/rak-wismesh-1w-booster-components.png)
 
@@ -53,7 +55,7 @@ The RAK13302 is the key component that enables the high-power output. It combine
 |------|--------|
 | **Processor** | Nordic nRF52840 (ARM Cortex-M4F) |
 | **Flash** | 1MB |
-| **SRAM** | 256KB |
+| **SRAM** | 348KB |
 | **Interfaces** | UART, I2C, SPI, ADC, GPIO |
 
 ### RF (RAK13302 Module)
@@ -86,11 +88,11 @@ The WisMesh 1W Booster Starter Kit is available at **$39 USD** from the [RAKwire
 
 ## Why This Matters
 
-For mesh network builders, particularly those working across rural or sparsely populated areas, transmit power is often the limiting factor for reliable node-to-node communication. Having a reasonably-priced, high-power option with quality RF components (SX1262 + SKY66122 + SAW filter) directly from a reputable manufacturer like RAKwireless gives the community another solid tool in the toolbox.
+For mesh network builders working across rural or sparsely populated areas, transmit power can be a limiting factor for reliable node-to-node communication. Having a high-power option with quality RF components (SX1262 + SKY66122 + SAW filter) at $39 from an established manufacturer like RAKwireless is a solid addition to the available hardware options.
 
-The WisBlock ecosystem also means this kit can be expanded with GPS modules, environmental sensors, displays, and various enclosure options.
+The WisBlock ecosystem also means this kit can be expanded with GPS modules, environmental sensors, displays, and various enclosure options from RAK's extensive catalog.
 
-It's exciting to see manufacturers continuing to invest in the Meshtastic ecosystem with purpose-built, high-performance hardware at accessible price points. For those of us building mesh networks in challenging environments, more options like this are always welcome.
+It's good to see continued investment in Meshtastic-compatible hardware at accessible price points. For those building mesh networks in challenging RF environments, more high-power options are always welcome.
 
 ---
 
