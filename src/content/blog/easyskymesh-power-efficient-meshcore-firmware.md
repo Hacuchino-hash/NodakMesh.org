@@ -127,7 +127,7 @@ That's why custom firmware builds like this matter. They take the abstract promi
 
 ---
 
-## Use cases where this becomes a game changer
+## Where Low-Power Repeaters Matter
 
 When your backbone repeaters can run long-term, MeshCore supports deployments like:
 

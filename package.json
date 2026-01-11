@@ -5,11 +5,12 @@
   "description": "NodakMesh - North Dakota's community mesh network website",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "validate": "node scripts/validate-blog.js",
+    "build": "node scripts/validate-blog.js && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "indexnow": "node scripts/indexnow.js",
-    "deploy": "astro build && node scripts/indexnow.js"
+    "deploy": "node scripts/validate-blog.js && astro build && node scripts/indexnow.js"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.14",

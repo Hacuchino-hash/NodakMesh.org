@@ -58,7 +58,7 @@ In practice, when you first set up two MeshCore devices, you might notice they d
 
 ### Why MeshCore Does This
 
-By not constantly announcing every device, MeshCore dramatically cuts down on background traffic. This makes a big difference in larger networks – it avoids the "chatter" that can clog the air in Meshtastic when dozens of nodes frequently broadcast status. The trade-off is a slightly more manual discovery process. The benefit is efficiency and speed: MeshCore networks often feel snappier and handle dense usage better because nodes aren't busy relaying non-stop status updates. One community observation is that MeshCore "feels considerably faster" in message delivery with default settings, whereas Meshtastic can be tuned but is slower by default. In short, MeshCore values opt-in visibility—you only show up on others' devices when needed—versus Meshtastic's always-on visibility model.
+By not constantly announcing every device, MeshCore dramatically cuts down on background traffic. This makes a big difference in larger networks – it avoids the "chatter" that can clog the air in Meshtastic when dozens of nodes frequently broadcast status. The trade-off is a slightly more manual discovery process. The benefit is efficiency and speed: MeshCore networks often feel snappier and handle dense usage better because nodes aren't busy relaying non-stop status updates. One community observation is that MeshCore "feels considerably faster" in message delivery with default settings, whereas Meshtastic can be tuned but is slower by default. MeshCore values opt-in visibility—you only show up on others' devices when needed—versus Meshtastic's always-on visibility model.
 
 ## Why Your MeshCore Device Isn't Finding Others (Yet)
 
@@ -143,7 +143,7 @@ Switching from Meshtastic to MeshCore involves a bit of a mindset shift. Meshtas
 
 For a new MeshCore user, the key takeaway is: don't assume "no contacts" means no one is there. It might just mean you need to introduce yourself (advertise) or listen longer. Once you perform that initial handshake, MeshCore devices are quite capable of maintaining communication and will remember contacts. From that point on, your MeshCore will know those peers and can communicate directly and quickly.
 
-In summary, if you find yourself wondering "Where is everyone?" after booting up MeshCore, remember to take the initiative:
+If you find yourself wondering "Where is everyone?" after booting up MeshCore, remember to take the initiative:
 
 - Check your settings
 - Send out a friendly beacon (advert)
