@@ -114,8 +114,6 @@ EU868 typically limits EIRP to 14-27 dBm depending on sub-band and duty cycle re
 
 ## Firmware Support
 
-Both platforms work with popular LoRa mesh firmware options:
-
 ### Meshtastic
 
 - **WisMesh 1W Kit:** Uses `firmware-rak3401-...` builds (controls external PA)
@@ -124,11 +122,12 @@ Both platforms work with popular LoRa mesh firmware options:
 
 ### MeshCore
 
-- Both the nRF52840-based RAK3401 and RAK4631 are supported
-- Check the MeshCore flasher for compatible firmware builds
-- The RAK4631 is a well-established MeshCore platform
+- **RAK4631:** Fully supported with firmware available in the MeshCore flasher
+- **WisMesh 1W Kit (RAK3401):** No MeshCore firmware support at the time of writing
 
-Both firmwares offer similar core features: BLE configuration, mesh routing, encryption, and position sharing (with GPS module). The nRF52840 MCU provides Bluetooth 5.0 for mobile app connectivity on both platforms.
+If you plan to run MeshCore, the RAK4631 is currently the better choice. The WisMesh 1W kit is Meshtastic-only for now.
+
+Both Meshtastic builds offer the same core features: BLE configuration, mesh routing, encryption, and position sharing (with GPS module). The nRF52840 MCU provides Bluetooth 5.0 for mobile app connectivity.
 
 A mixed mesh with 1W and standard nodes works fine. They just have different coverage footprints.
 
@@ -162,6 +161,7 @@ Both can add GPS (RAK12500), environmental sensors, displays (RAK1921 OLED), acc
 
 ### Choose WisMesh 1W Booster Kit if:
 
+- You are running Meshtastic (no MeshCore support currently)
 - You are in the US/Canada/Australia (900 MHz regions)
 - Maximum range is your priority
 - You are building infrastructure nodes or remote sensors
@@ -170,6 +170,7 @@ Both can add GPS (RAK12500), environmental sensors, displays (RAK1921 OLED), acc
 
 ### Choose RAK4631 WisBlock if:
 
+- You want flexibility to run Meshtastic or MeshCore
 - You need a portable, battery-efficient node
 - You are in Europe or other regions with lower power limits
 - Standard range (hundreds of meters to a few km) is sufficient
