@@ -1,15 +1,17 @@
 ---
 title: "RAK WisMesh 1W Booster vs RAK4631: Which WisBlock is Right for Your Mesh Network?"
-description: "Technical comparison of the RAK WisMesh 1W Booster Starter Kit (RAK10724) and RAK4631 WisBlock Core for Meshtastic. Compare RF power, range, power consumption, and expandability."
+description: "Technical comparison of the RAK WisMesh 1W Booster Starter Kit (RAK10724) and RAK4631 WisBlock Core for LoRa mesh networking. Compare RF power, range, power consumption, and expandability."
 date: 2025-01-11
 author: "Josh"
 category: "guides"
-tags: ["meshtastic", "rakwireless", "hardware", "comparison", "wisblock"]
+tags: ["meshtastic", "meshcore", "rakwireless", "hardware", "comparison", "wisblock"]
 image: "/images/blog/rak-wismesh-1w-booster-kit.png"
 featured: false
 ---
 
-Choosing between RAKwireless WisBlock options for Meshtastic? This comparison breaks down the technical differences between the **WisMesh 1W Booster Starter Kit (RAK10724)** and a standard **RAK4631 WisBlock Core** setup.
+Choosing between RAKwireless WisBlock options for your LoRa mesh network? This comparison breaks down the technical differences between the **WisMesh 1W Booster Starter Kit (RAK10724)** and a standard **RAK4631 WisBlock Core** setup.
+
+Both options work with popular mesh firmware including Meshtastic and MeshCore, so this comparison focuses on the hardware differences that matter regardless of which firmware you choose.
 
 ## Quick Comparison
 
@@ -36,7 +38,7 @@ The WisMesh 1W kit uses a **two-module approach**:
 
 ![WisMesh 1W RF Chain](/images/blog/rak-wismesh-1w-booster-rf-chain.png)
 
-The RF signal path flows: nRF52840 MCU → SX1262 transceiver → SAW filter → SKY66122 PA → antenna. This architecture allows for the 1W output while maintaining receiver sensitivity through the integrated LNA and filtering.
+The RF signal path flows: nRF52840 MCU to SX1262 transceiver to SAW filter to SKY66122 PA to antenna. This architecture allows for the 1W output while maintaining receiver sensitivity through the integrated LNA and filtering.
 
 ### RAK4631 WisBlock Core
 
@@ -44,7 +46,7 @@ The RAK4631 is a **single-module solution** with the nRF52840 MCU and SX1262 LoR
 
 ![RAK4631 WisBlock Core](/images/blog/rak4631-wisblock-core.png)
 
-The RF chain is simpler: nRF52840 → SX1262 → basic matching network → antenna. Maximum output is 22 dBm using the SX1262's internal PA boost mode.
+The RF chain is simpler: nRF52840 to SX1262 to basic matching network to antenna. Maximum output is 22 dBm using the SX1262's internal PA boost mode.
 
 ## RF Performance
 
@@ -61,7 +63,7 @@ In ideal conditions, each 6 dB increase roughly doubles theoretical range. The W
 
 The WisMesh 1W kit includes an LNA (Low Noise Amplifier) and SAW band-pass filter in the RAK13302 module. This cleans out-of-band noise and amplifies incoming signals, potentially improving receive performance compared to simple amplifier add-ons that can degrade RX sensitivity.
 
-The RAK4631 relies on the SX1262's internal receiver, which achieves around -137 to -140 dBm sensitivity at SF12—already quite good for most applications.
+The RAK4631 relies on the SX1262's internal receiver, which achieves around -137 to -140 dBm sensitivity at SF12. This is already quite good for most applications.
 
 ## Power Requirements
 
@@ -88,13 +90,13 @@ This is one of the most important practical differences.
 
 Pushing 1W of RF from a small module generates heat. The SKY66122 PA in the WisMesh kit will warm up during transmission.
 
-For typical Meshtastic usage (bursty, low duty cycle messaging), this isn't a problem. However:
+For typical mesh usage (bursty, low duty cycle messaging), this is not a problem. However:
 
 - Avoid continuous high-power transmissions
-- Don't enclose the 1W kit in a tight, unventilated box at max power
+- Do not enclose the 1W kit in a tight, unventilated box at max power
 - Consider duty cycle if sending frequent messages
 
-The RAK4631 at 22 dBm generates negligible heat—around 0.3-0.4W during TX, easily dissipated by the board itself.
+The RAK4631 at 22 dBm generates negligible heat, around 0.3-0.4W during TX, easily dissipated by the board itself.
 
 ## Regulatory Compliance
 
@@ -104,22 +106,31 @@ Both devices operate in the 902-928 MHz ISM band. The US allows up to 1W (30 dBm
 
 ### Europe (CE) and Other Regions
 
-The RAK13302 module is **tuned for 900 MHz only**. It is not designed for EU 868 MHz use—attempting to use it at 868 MHz would result in poor performance.
+The RAK13302 module is **tuned for 900 MHz only**. It is not designed for EU 868 MHz use. Attempting to use it at 868 MHz would result in poor performance.
 
 EU868 typically limits EIRP to 14-27 dBm depending on sub-band and duty cycle requirements. The RAK4631's 22 dBm max is within or near these limits and is available in regional variants (RAK4631-H for 779-923 MHz, RAK4631-L for 433-470 MHz).
 
 **For non-US users:** The WisMesh 1W kit is primarily a US/Canada/Australia product. If used elsewhere, output must be reduced in firmware to meet local regulations.
 
-## Meshtastic Firmware
+## Firmware Support
 
-Both platforms are fully supported by Meshtastic firmware with different builds:
+Both platforms work with popular LoRa mesh firmware options:
+
+### Meshtastic
 
 - **WisMesh 1W Kit:** Uses `firmware-rak3401-...` builds (controls external PA)
 - **RAK4631:** Uses standard `firmware-rak4631-...` builds
+- Both ship with Meshtastic pre-flashed from RAKwireless
 
-Both ship with Meshtastic pre-flashed. Functionally identical features—BLE configuration, mesh routing, encryption, position sharing (with GPS module). The nRF52840 MCU provides Bluetooth 5.0 for mobile app connectivity on both.
+### MeshCore
 
-A mixed mesh with 1W and standard nodes works fine—they just have different coverage footprints.
+- Both the nRF52840-based RAK3401 and RAK4631 are supported
+- Check the MeshCore flasher for compatible firmware builds
+- The RAK4631 is a well-established MeshCore platform
+
+Both firmwares offer similar core features: BLE configuration, mesh routing, encryption, and position sharing (with GPS module). The nRF52840 MCU provides Bluetooth 5.0 for mobile app connectivity on both platforms.
+
+A mixed mesh with 1W and standard nodes works fine. They just have different coverage footprints.
 
 ## Expandability
 
@@ -141,7 +152,7 @@ Both leverage the WisBlock modular ecosystem.
 
 ### RAK4631 on RAK19003 Mini Base
 
-- Smaller footprint (30 × 35mm)
+- Smaller footprint (30 x 35mm)
 - 1 core slot + 2 general slots
 - Good for size-constrained builds
 
@@ -151,19 +162,19 @@ Both can add GPS (RAK12500), environmental sensors, displays (RAK1921 OLED), acc
 
 ### Choose WisMesh 1W Booster Kit if:
 
-- You're in the US/Canada/Australia (900 MHz regions)
+- You are in the US/Canada/Australia (900 MHz regions)
 - Maximum range is your priority
-- You're building infrastructure nodes or remote sensors
+- You are building infrastructure nodes or remote sensors
 - You have adequate power (USB, solar, large batteries)
-- You're covering rural/sparse areas where every dB matters
+- You are covering rural or sparse areas where every dB matters
 
 ### Choose RAK4631 WisBlock if:
 
 - You need a portable, battery-efficient node
-- You're in Europe or other regions with lower power limits
+- You are in Europe or other regions with lower power limits
 - Standard range (hundreds of meters to a few km) is sufficient
 - You want a simpler power setup
-- You're building multiple nodes on a budget
+- You are building multiple nodes on a budget
 
 ## Pricing
 
@@ -174,14 +185,14 @@ Both can add GPS (RAK12500), environmental sensors, displays (RAK1921 OLED), acc
 | RAK19007 Base Board | $15 |
 | RAK19003 Mini Base | $10 |
 
-A basic RAK4631 + RAK19003 setup runs about $35-40—similar to the WisMesh 1W kit but with lower power output and consumption.
+A basic RAK4631 + RAK19003 setup runs about $35-40, similar to the WisMesh 1W kit but with lower power output and consumption.
 
 ## Conclusion
 
-The WisMesh 1W Booster Kit and RAK4631 WisBlock share the same foundation (nRF52840 MCU, SX1262 transceiver, WisBlock ecosystem) but serve different use cases. The 1W kit trades power efficiency and simplicity for raw RF output. The RAK4631 is the practical choice for most users—sufficient range, easy power management, and broad regional compatibility.
+The WisMesh 1W Booster Kit and RAK4631 WisBlock share the same foundation (nRF52840 MCU, SX1262 transceiver, WisBlock ecosystem) but serve different use cases. The 1W kit trades power efficiency and simplicity for raw RF output. The RAK4631 is the practical choice for most users with sufficient range, easy power management, and broad regional compatibility.
 
-Both integrate seamlessly with Meshtastic and the WisBlock expansion ecosystem, so you're not locked into a dead end with either choice.
+Both integrate seamlessly with Meshtastic, MeshCore, and the WisBlock expansion ecosystem, so you are not locked into a dead end with either choice.
 
 ---
 
-*Ready to get started? Check out our [Meshtastic Getting Started Guide](/meshtastic/getting-started) or browse [compatible devices](/meshtastic/devices).*
+*Ready to get started? Check out our [Meshtastic Getting Started Guide](/meshtastic/getting-started), [MeshCore Getting Started Guide](/meshcore/getting-started), or browse [compatible devices](/meshtastic/devices).*
