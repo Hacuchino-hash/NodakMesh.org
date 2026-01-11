@@ -123,9 +123,9 @@ EU868 typically limits EIRP to 14-27 dBm depending on sub-band and duty cycle re
 ### MeshCore
 
 - **RAK4631:** Fully supported with firmware available in the MeshCore flasher
-- **WisMesh 1W Kit (RAK3401):** No MeshCore firmware support at the time of writing
+- **WisMesh 1W Kit (RAK3401):** Not yet supported (January 2025)
 
-If you plan to run MeshCore, the RAK4631 is currently the better choice. The WisMesh 1W kit is Meshtastic-only for now.
+If you plan to run MeshCore today, the RAK4631 is currently the better choice. However, MeshCore support for the RAK3401/WisMesh 1W kit is likely coming in the future given the hardware compatibility. We will update this section when support becomes available.
 
 Both Meshtastic builds offer the same core features: BLE configuration, mesh routing, encryption, and position sharing (with GPS module). The nRF52840 MCU provides Bluetooth 5.0 for mobile app connectivity.
 
@@ -161,7 +161,7 @@ Both can add GPS (RAK12500), environmental sensors, displays (RAK1921 OLED), acc
 
 ### Choose WisMesh 1W Booster Kit if:
 
-- You are running Meshtastic (no MeshCore support currently)
+- You are running Meshtastic (MeshCore support expected in the future)
 - You are in the US/Canada/Australia (900 MHz regions)
 - Maximum range is your priority
 - You are building infrastructure nodes or remote sensors
@@ -170,7 +170,7 @@ Both can add GPS (RAK12500), environmental sensors, displays (RAK1921 OLED), acc
 
 ### Choose RAK4631 WisBlock if:
 
-- You want flexibility to run Meshtastic or MeshCore
+- You want to run MeshCore today (or flexibility for both firmwares)
 - You need a portable, battery-efficient node
 - You are in Europe or other regions with lower power limits
 - Standard range (hundreds of meters to a few km) is sufficient
