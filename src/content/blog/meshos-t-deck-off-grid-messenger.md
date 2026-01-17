@@ -13,7 +13,7 @@ No cell towers. No internet. No phone in your pocket. MeshOS is new firmware tha
 
 ![MeshOS chat interface on T-Deck](/images/blog/meshos-t-deck/t-deck-meshcore-ui.jpg)
 
-The T-Deck has the hardware: ESP32-S3, SX1262 LoRa radio, physical keyboard, 2.8-inch screen. Until now, MeshCore users still needed a phone app to send messages. MeshOS by Andy Kirby cuts that cord. Type on the keyboard, hit send, and your message travels over LoRa through the mesh network. Miles of range, completely internet-free.
+The T-Deck has the hardware: ESP32-S3, SX1262 LoRa radio, physical keyboard, 2.8-inch screen. MeshOS by Andy Kirby puts a polished standalone interface on top of MeshCore. Type on the keyboard, hit send, and your message travels over LoRa through the mesh network. Miles of range, completely internet-free.
 
 ## What MeshOS Actually Does
 
