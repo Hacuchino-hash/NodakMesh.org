@@ -5,13 +5,13 @@ date: 2026-01-17
 author: "Josh"
 category: "news"
 tags: ["meshcore", "meshos", "t-deck", "lilygo", "standalone", "firmware", "off-grid", "lora"]
-image: "/images/blog/meshos-t-deck/t-deck-plus-hero.jpg"
+image: "/images/blog/meshos-t-deck/t-deck-meshcore-ui.jpg"
 featured: true
 ---
 
 No cell towers. No internet. No phone in your pocket. MeshOS is new firmware that turns the LilyGO T-Deck into a fully standalone off-grid messenger.
 
-![LilyGO T-Deck Plus](/images/blog/meshos-t-deck/t-deck-plus-hero.jpg)
+![MeshOS chat interface on T-Deck](/images/blog/meshos-t-deck/t-deck-meshcore-ui.jpg)
 
 The T-Deck has the hardware: ESP32-S3, SX1262 LoRa radio, physical keyboard, 2.8-inch screen. Until now, MeshCore users still needed a phone app to send messages. MeshOS by Andy Kirby cuts that cord. Type on the keyboard, hit send, and your message travels over LoRa through the mesh network. Miles of range, completely internet-free.
 
@@ -27,7 +27,7 @@ MeshOS is embedded firmware that runs MeshCore's mesh protocol directly on the T
 
 The T-Deck becomes a self-contained mesh node. Power it on, and you're on the network.
 
-![T-Deck running MeshOS](/images/blog/meshos-t-deck/t-deck-meshcore-ui.jpg)
+![MeshOS main menu](/images/blog/meshos-t-deck/t-deck-meshcore-menu.jpg)
 
 ## The Interface
 
@@ -45,11 +45,15 @@ MeshOS includes utilities you'd normally need a computer for:
 
 **Last Heard List** - Shows recent stations with signal strength, distance, and approximate location. Quick way to see who's active nearby.
 
+![MeshOS last heard list](/images/blog/meshos-t-deck/t-deck-lastheard.jpg)
+
 **Mesh Signal Meter** - Like cell signal bars, but for mesh coverage. Shows when you last heard a repeater and which one.
 
 **Trace Route** - Follow your message's path through the mesh. See each hop and signal quality at every step.
 
 **Noise Floor Monitor** - Live graph of RF background noise. Useful for diagnosing why messages aren't getting through.
+
+![MeshOS noise floor monitor](/images/blog/meshos-t-deck/t-deck-noisefloor.jpg)
 
 **Repeater Admin** - If you run your own repeater and have the credentials, you can sync its clock, check stats, and trigger adverts directly from the T-Deck. No laptop required.
 
@@ -59,11 +63,15 @@ The T-Deck Plus has built-in GPS. MeshOS uses it to plot your position on an off
 
 You can see other nodes and repeaters on the map if they've shared their coordinates. Pan and zoom with the trackball or touchscreen. The UK view apparently has a special outline that shows active nodes in real time (the developers are UK-based).
 
+![MeshOS GPS map](/images/blog/meshos-t-deck/t-deck-meshcore-map.jpg)
+
 Higher zoom levels require the paid registration key, but the basic map works without it.
 
 ## The Terminal
 
 For anyone who wants to dig deeper, MeshOS includes a full MeshCore terminal on the device. Every packet, every routing decision, every acknowledgment scrolls by in a color-coded log. You can enter commands, log into remote repeaters (if you have admin rights), and watch the mesh work in real time.
+
+![MeshOS terminal](/images/blog/meshos-t-deck/t-deck-terminal.jpg)
 
 The terminal output also mirrors to USB serial, so you can use a computer keyboard if you prefer.
 
