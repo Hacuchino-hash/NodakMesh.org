@@ -27,7 +27,7 @@ MeshOS is embedded firmware that runs MeshCore's mesh protocol directly on the T
 
 The T-Deck becomes a self-contained mesh node. Power it on, and you're on the network.
 
-![T-Deck running MeshCore](/images/blog/meshos-t-deck/t-deck-meshcore-ui.webp)
+![T-Deck running MeshOS](/images/blog/meshos-t-deck/t-deck-meshcore-ui.jpg)
 
 ## The Interface
 
