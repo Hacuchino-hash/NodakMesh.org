@@ -67,20 +67,6 @@ For anyone who wants to dig deeper, MeshOS includes a full MeshCore terminal on 
 
 The terminal output also mirrors to USB serial, so you can use a computer keyboard if you prefer.
 
-## Hardware: T-Deck vs T-Deck Plus
-
-| Spec | T-Deck | T-Deck Plus |
-|------|--------|-------------|
-| MCU | ESP32-S3 | ESP32-S3 |
-| LoRa | SX1262 | SX1262 |
-| Screen | 2.8" LCD 320x240 | 2.8" LCD 320x240 |
-| GPS | No | Yes |
-| Battery | ~1000mAh | 2000mAh |
-| SD Card | No | Yes |
-| Touch | Optional | Yes |
-
-The Plus is the better choice for MeshOS. Built-in GPS means your position shows on the map automatically. The larger battery lasts longer. And the SD card slot lets you update firmware without connecting to a computer.
-
 ## Getting Started
 
 **Flash the firmware:** Use the [MeshCore Web Flasher](https://flasher.meshcore.co.uk/) or download the binary and flash via esptool. Takes a few minutes over USB. Make sure you pick the right frequency (915 MHz for US, 868 MHz for EU).
