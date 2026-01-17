@@ -59,9 +59,9 @@ MeshOS includes utilities you'd normally need a computer for:
 
 ## GPS and Mapping
 
-The T-Deck Plus has built-in GPS. MeshOS uses it to plot your position on an offline world map. The map includes major city names and multiple zoom levels, all stored in the firmware. No external tile downloads needed.
+The T-Deck Plus has built-in GPS (the standard T-Deck does not). MeshOS uses it to plot your position on an offline world map. The map includes major city names and multiple zoom levels, all stored in the firmware. No external tile downloads needed.
 
-You can see other nodes and repeaters on the map if they've shared their coordinates. Pan and zoom with the trackball or touchscreen. The UK view apparently has a special outline that shows active nodes in real time (the developers are UK-based).
+You can see other nodes and repeaters on the map if they've shared their coordinates. Pan and zoom with the trackball or touchscreen. The UK view includes a detailed outline showing active nodes in real time.
 
 ![MeshOS GPS map](/images/blog/meshos-t-deck/t-deck-meshcore-map.jpg)
 
@@ -86,7 +86,7 @@ The terminal output also mirrors to USB serial, so you can use a computer keyboa
 
 After that, send an advert so others can see you, and start messaging.
 
-**Optional registration:** Basic features are free. For £8 GBP, you can unlock deeper map zoom and remote repeater administration over RF. The license is tied to your device's serial number.
+**Optional registration:** Basic features are free. For £8, you can unlock deeper map zoom and remote repeater administration over RF. The license is tied to your device's serial number.
 
 ## What This Means
 
@@ -94,7 +94,7 @@ The T-Deck was already a capable piece of hardware. MeshOS makes it useful witho
 
 For field work, emergencies, or anywhere you don't want to depend on a smartphone, this is a significant upgrade. You get the full MeshCore network in a device that fits in a cargo pocket and runs all day on battery.
 
-If you've had a T-Deck sitting around waiting for better standalone firmware, this is it.
+If you've got a T-Deck and want a polished standalone MeshCore experience, this is worth checking out.
 
 ---
 
